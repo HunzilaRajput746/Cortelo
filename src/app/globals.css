@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #07090E;
+  --surface: #0F131D;
+  --surface2: #161C2B;
+  --text: #F2F0EA;
+  --text-muted: #8C94A6;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(45, 212, 167, 0.4);
+  --mint: #2DD4A7;
+  --glass: rgba(15, 19, 29, 0.75);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: clip;
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.glass-panel {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+}
+
+.glass-panel:hover {
+  border-color: var(--border-hover);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #07090E;
+}
+::-webkit-scrollbar-thumb {
+  background: #25304A;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2DD4A7;
+}
+
+/* Fluid Focus Visible */
+*:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 2px;
+}

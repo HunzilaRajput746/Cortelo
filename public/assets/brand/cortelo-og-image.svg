@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#07090E"/>
+  
+  <g opacity="0.12" stroke="#25304A" stroke-width="1">
+    <line x1="80" y1="0" x2="80" y2="630"/>
+    <line x1="1120" y1="0" x2="1120" y2="630"/>
+    <line x1="0" y1="80" x2="1200" y2="80"/>
+    <line x1="0" y1="550" x2="1200" y2="550"/>
+  </g>
+
+  <!-- Mark -->
+  <g transform="translate(120, 150)">
+    <path d="M110 40 C90 25 60 25 40 45 C20 65 20 95 40 115 C60 135 90 135 110 120" 
+          stroke="#2DD4A7" 
+          stroke-width="15" 
+          stroke-linecap="round" />
+    <circle cx="77" cy="80" r="12" fill="#F2F0EA" />
+  </g>
+
+  <text x="120" y="370" fill="#F2F0EA" font-family="Plus Jakarta Sans, -apple-system, sans-serif" font-size="72" font-weight="800" letter-spacing="-0.04em">CORTELO</text>
+  <text x="120" y="430" fill="#2DD4A7" font-family="Plus Jakarta Sans, sans-serif" font-size="34" font-weight="600">Systems of Intelligence.</text>
+  <text x="120" y="480" fill="#A3AABB" font-family="Geist Mono, monospace" font-size="18" max-width="800">Bespoke AI Agents &bull; Neural Architectures &bull; Resilient Software</text>
+
+  <!-- Founders info -->
+  <text x="120" y="580" fill="#F2F0EA" font-family="Geist Mono, monospace" font-size="15">Hunzila Nisar (Founder) &bull; Mahreen Hashir (Co-Founder)</text>
+</svg>
+
