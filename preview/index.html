@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axiora — Intelligence, engineered.</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"Geist Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              ink: '#0A0F1C',
+              paper: '#F6F4EE',
+              surfaceDark: '#111829',
+              surfaceLight: '#FFFFFF',
+              surfaceSubtleDark: '#172036',
+              surfaceSubtleLight: '#EEEBE3',
+              borderDark: '#25304A',
+              borderLight: '#D9D5CA',
+              mint: '#2DD4A7',
+              emerald: '#0FA68A',
+              mutedDark: '#A3AABB',
+              mutedLight: '#4A5163',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg: #F6F4EE;
+      --surface: #FFFFFF;
+      --surface-subtle: #EEEBE3;
+      --text: #0A0F1C;
+      --text-muted: #4A5163;
+      --border: #D9D5CA;
+      --accent: #0FA68A;
+      --accent-text: #FFFFFF;
+    }
+    html.dark {
+      --bg: #0A0F1C;
+      --surface: #111829;
+      --surface-subtle: #172036;
+      --text: #F2F0EA;
+      --text-muted: #A3AABB;
+      --border: #25304A;
+      --accent: #2DD4A7;
+      --accent-text: #04201A;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: clip;
+      transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Smooth sliding transitions */
+    .slide-panel {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Fluid Drawer */
+    #drawerBackdrop {
+      transition: opacity 0.3s ease;
+    }
+    #drawerContent {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Architectural Line Drawing */
+    .cad-line {
+      stroke-dasharray: 6;
+      animation: cadDash 25s linear infinite;
+    }
+    @keyframes cadDash {
+      to {
+        stroke-dashoffset: -100;
+      }
+    }
+    /* Smooth focus rings */
+    *:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body class="min-h-screen selection:bg-[#2DD4A7]/20 selection:text-white">
+
+  <!-- Floating 4K Controls Bar -->
+  <div class="fixed bottom-6 right-6 z-50 flex items-center gap-2 p-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] shadow-2xl backdrop-blur-md">
+    <button id="themeToggleBtn" class="flex items-center gap-2 px-3.5 py-1.5 text-xs font-mono font-medium rounded-full bg-[var(--surface-subtle)] hover:border-[var(--border)] transition-all">
+      <span id="themeToggleLabel">☀️ Paper Mode</span>
+    </button>
+    <button onclick="openDrawer()" class="px-4 py-1.5 text-xs font-mono font-semibold rounded-full bg-[var(--accent)] text-[var(--accent-text)] hover:opacity-90 active:scale-95 transition-all">
+      Consult Architecture
+    </button>
+  </div>
+
+  <!-- Slide-in Architecture Drawer -->
+  <div id="architectureDrawer" class="fixed inset-0 z-50 pointer-events-none">
+    <div id="drawerBackdrop" onclick="closeDrawer()" class="absolute inset-0 bg-black/60 opacity-0 transition-opacity"></div>
+    <div id="drawerContent" class="absolute top-0 right-0 bottom-0 w-full max-w-lg bg-[var(--surface)] border-l border-[var(--border)] p-8 overflow-y-auto transform translate-x-full shadow-2xl flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between pb-6 border-b border-[var(--border)]">
+          <div class="flex items-center gap-3">
+            <svg class="w-6 h-6" viewBox="0 0 32 32" fill="none">
+              <path d="M6 26L16 6L26 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="16" cy="18" r="3" fill="var(--accent)"/>
+            </svg>
+            <span class="font-bold text-lg tracking-tight">Architecture Consultation</span>
+          </div>
+          <button onclick="closeDrawer()" class="text-xs font-mono px-2.5 py-1 rounded border border-[var(--border)] hover:bg-[var(--surface-subtle)]">
+            ESC &times;
+          </button>
+        </div>
+
+        <div class="py-6 space-y-6">
+          <div>
+            <span class="text-xs font-mono text-[var(--accent)] uppercase tracking-wider">Direct Access</span>
+            <h3 class="text-xl font-bold mt-1">Speak directly with senior system architects.</h3>
+            <p class="text-sm text-[var(--text-muted)] mt-2 leading-relaxed">
+              No sales representatives. We audit your technical requirements, model choices, data schemas, and latency budgets on call 01.
+            </p>
+          </div>
+
+          <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-mono text-[var(--text-muted)] mb-1">Your Name</label>
+              <input type="text" required placeholder="Alex Mercer" class="w-full h-11 px-3.5 rounded bg-[var(--surface-subtle)] border border-[var(--border)] text-sm focus:border-[var(--accent)] outline-none transition-colors">
+            </div>
+            <div>
+              <label class="block text-xs font-mono text-[var(--text-muted)] mb-1">Work Email</label>
+              <input type="email" required placeholder="alex@company.com" class="w-full h-11 px-3.5 rounded bg-[var(--surface-subtle)] border border-[var(--border)] text-sm focus:border-[var(--accent)] outline-none transition-colors">
+            </div>
+            <div>
+              <label class="block text-xs font-mono text-[var(--text-muted)] mb-1">Architecture Focus</label>
+              <select class="w-full h-11 px-3.5 rounded bg-[var(--surface-subtle)] border border-[var(--border)] text-sm focus:border-[var(--accent)] outline-none transition-colors">
+                <option>Multi-Agent Systems & Tool Orchestration</option>
+                <option>Custom ML Model Fine-Tuning & Evaluation</option>
+                <option>Enterprise RAG & Grounded Knowledge Systems</option>
+                <option>High-Throughput Full-Stack Infrastructure</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-mono text-[var(--text-muted)] mb-1">Current Problem / Latency Target</label>
+              <textarea rows="3" placeholder="e.g. Processing 50k documents daily with P99 < 150ms..." class="w-full p-3 rounded bg-[var(--surface-subtle)] border border-[var(--border)] text-sm focus:border-[var(--accent)] outline-none transition-colors"></textarea>
+            </div>
+            <button type="submit" class="w-full h-12 rounded bg-[var(--accent)] text-[var(--accent-text)] font-semibold text-sm hover:opacity-95 transition-opacity">
+              Request Technical Assessment
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="pt-6 border-t border-[var(--border)] text-xs text-[var(--text-muted)] font-mono flex justify-between items-center">
+        <span>Confidential &bull; NDA Enforced</span>
+        <span>Axiora Engineering</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Sticky Navigation -->
+  <header class="sticky top-0 z-40 w-full h-[72px] border-b border-[var(--border)] bg-[var(--bg)]/90 backdrop-blur-md">
+    <div class="max-w-[1280px] h-full mx-auto px-6 flex items-center justify-between">
+      
+      <!-- Monolithic Logo -->
+      <a href="#" class="flex items-center gap-3">
+        <svg class="w-7 h-7 text-[var(--text)]" viewBox="0 0 32 32" fill="none">
+          <path d="M6 26L16 6L26 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="16" cy="18" r="3.2" fill="var(--accent)"/>
+        </svg>
+        <span class="text-xl font-bold tracking-tight text-[var(--text)]">Axiora</span>
+      </a>
+
+      <!-- Primary Nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--text-muted)]">
+        <a href="#services" class="hover:text-[var(--text)] transition-colors">Services</a>
+        <a href="#systems" class="hover:text-[var(--text)] transition-colors">Systems</a>
+        <a href="#work" class="hover:text-[var(--text)] transition-colors">Case Studies</a>
+        <a href="#process" class="hover:text-[var(--text)] transition-colors">Process</a>
+        <a href="#faq" class="hover:text-[var(--text)] transition-colors">FAQ</a>
+      </nav>
+
+      <!-- Action -->
+      <div class="flex items-center gap-4">
+        <button onclick="openDrawer()" class="h-10 px-5 rounded bg-[var(--surface-subtle)] border border-[var(--border)] text-xs font-mono font-semibold hover:border-[var(--text)] transition-all">
+          Consult Architecture
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION (4K Ultra-Clean Architectural Presentation) -->
+    <section class="relative pt-20 pb-24 md:pt-28 md:pb-32 border-b border-[var(--border)]">
+      <div class="max-w-[1280px] mx-auto px-6">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          <!-- Left Column -->
+          <div class="lg:col-span-7">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded border border-[var(--border)] bg-[var(--surface-subtle)] mb-8">
+              <span class="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Enterprise AI & Software Engineering</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl font-bold tracking-tight text-[var(--text)] leading-[1.05] mb-6">
+              We engineer AI systems that do real work.
+            </h1>
+
+            <p class="text-lg sm:text-xl text-[var(--text-muted)] leading-relaxed max-w-[620px] mb-10">
+              A senior studio designing, training, and deploying enterprise-grade models, autonomous agents, and resilient full-stack platforms. Built for scale, verified by benchmarks.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4">
+              <button onclick="openDrawer()" class="h-12 px-7 rounded bg-[var(--accent)] text-[var(--accent-text)] font-semibold text-sm hover:opacity-95 transition-opacity">
+                Consult Architecture
+              </button>
+              <a href="#work" class="h-12 px-7 rounded border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] font-semibold text-sm hover:border-[var(--text)] transition-colors flex items-center">
+                Explore Case Studies
+              </a>
+            </div>
+
+            <!-- Architectural Metric Row -->
+            <div class="grid grid-cols-3 gap-4 mt-14 pt-8 border-t border-[var(--border)]">
+              <div>
+                <div class="text-2xl font-bold font-mono text-[var(--text)]">P99 &lt; 42ms</div>
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wide mt-1">Inference Latency</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold font-mono text-[var(--accent)]">99.8%</div>
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wide mt-1">Schema Precision</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold font-mono text-[var(--text)]">0%</div>
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wide mt-1">Breaking Regressions</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column (Architectural CAD Engine Blueprint) -->
+          <div class="lg:col-span-5">
+            <div class="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-2xl relative overflow-hidden">
+              <div class="flex items-center justify-between pb-4 mb-5 border-b border-[var(--border)]">
+                <span class="text-xs font-mono text-[var(--text-muted)] tracking-wider uppercase">System Schematic &bull; Core Engine</span>
+                <span class="text-xs font-mono text-[var(--accent)] font-semibold">Active Pipeline</span>
+              </div>
+
+              <!-- High Precision SVG Blueprint Schematic -->
+              <svg class="w-full h-auto text-[var(--border)]" viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer Grid Frames -->
+                <rect x="10" y="10" width="380" height="260" rx="8" stroke="currentColor" stroke-width="1"/>
+                <line x1="10" y1="50" x2="390" y2="50" stroke="currentColor" stroke-width="1"/>
+                <line x1="130" y1="50" x2="130" y2="270" stroke="currentColor" stroke-width="1"/>
+                <line x1="270" y1="50" x2="270" y2="270" stroke="currentColor" stroke-width="1"/>
+
+                <!-- Ingestion Stage -->
+                <rect x="25" y="70" width="90" height="50" rx="4" fill="var(--surface-subtle)" stroke="currentColor" stroke-width="1"/>
+                <text x="35" y="92" fill="var(--text)" font-family="Geist Mono" font-size="10" font-weight="600">INGESTION</text>
+                <text x="35" y="108" fill="var(--text-muted)" font-family="Geist Mono" font-size="8">Batch + Stream</text>
+
+                <rect x="25" y="140" width="90" height="50" rx="4" fill="var(--surface-subtle)" stroke="currentColor" stroke-width="1"/>
+                <text x="35" y="162" fill="var(--text)" font-family="Geist Mono" font-size="10" font-weight="600">VECTORS</text>
+                <text x="35" y="178" fill="var(--text-muted)" font-family="Geist Mono" font-size="8">Hybrid Index</text>
+
+                <!-- Processing Core -->
+                <rect x="145" y="100" width="110" height="100" rx="6" fill="var(--surface-subtle)" stroke="var(--accent)" stroke-width="1.5"/>
+                <text x="160" y="135" fill="var(--accent)" font-family="Geist Mono" font-size="11" font-weight="bold">AI ENGINE</text>
+                <text x="160" y="155" fill="var(--text)" font-family="Geist Mono" font-size="9">Agent Cluster</text>
+                <text x="160" y="175" fill="var(--text-muted)" font-family="Geist Mono" font-size="8">CoT Validation</text>
+
+                <!-- Connecting CAD Bus Lines -->
+                <path d="M115 95 H145" stroke="var(--accent)" stroke-width="1.5" class="cad-line"/>
+                <path d="M115 165 H145" stroke="var(--accent)" stroke-width="1.5" class="cad-line"/>
+                <path d="M255 150 H285" stroke="var(--accent)" stroke-width="1.5" class="cad-line"/>
+
+                <!-- Verification & Deploy Stage -->
+                <rect x="285" y="70" width="90" height="50" rx="4" fill="var(--surface-subtle)" stroke="currentColor" stroke-width="1"/>
+                <text x="295" y="92" fill="var(--text)" font-family="Geist Mono" font-size="10" font-weight="600">VERIFY</text>
+                <text x="295" y="108" fill="var(--text-muted)" font-family="Geist Mono" font-size="8">Zod Guardrails</text>
+
+                <rect x="285" y="140" width="90" height="50" rx="4" fill="var(--surface-subtle)" stroke="currentColor" stroke-width="1"/>
+                <text x="295" y="162" fill="var(--text)" font-family="Geist Mono" font-size="10" font-weight="600">EGRESS</text>
+                <text x="295" y="178" fill="var(--text-muted)" font-family="Geist Mono" font-size="8">Sub-50ms Bus</text>
+
+                <!-- Live Signal Readout -->
+                <rect x="25" y="215" width="350" height="40" rx="4" fill="var(--surface-subtle)" stroke="currentColor" stroke-width="1"/>
+                <text x="40" y="238" fill="var(--text-muted)" font-family="Geist Mono" font-size="9">SYSTEM TELEMETRY: 48,200 REQ/SEC &bull; MEMORY: NOMINAL &bull; DRIFT: 0.00%</text>
+              </svg>
+
+              <!-- Footer Details -->
+              <div class="mt-4 pt-3 border-t border-[var(--border)] flex justify-between items-center text-xs font-mono text-[var(--text-muted)]">
+                <span>Infrastructure: AWS / GCP</span>
+                <span>Type Safety: Strict</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MONOCHROME TECH STRIP -->
+    <section class="py-10 border-b border-[var(--border)] bg-[var(--surface)]">
+      <div class="max-w-[1280px] mx-auto px-6">
+        <div class="flex flex-wrap items-center justify-between gap-6 opacity-60 text-xs font-mono font-semibold tracking-wider">
+          <span>PYTORCH</span>
+          <span>LANGCHAIN</span>
+          <span>NEXT.JS APP ROUTER</span>
+          <span>POSTGRESQL</span>
+          <span>DOCKER</span>
+          <span>AMAZON WEB SERVICES</span>
+          <span>GOOGLE CLOUD</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDING SERVICES TABS (Interactive Sliding Panes) -->
+    <section id="services" class="py-24 border-b border-[var(--border)]">
+      <div class="max-w-[1280px] mx-auto px-6">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent)] font-semibold">Technical Disciplines &bull; 01</span>
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--text)] mt-2">
+              Capabilities designed for production deployment.
+            </h2>
+          </div>
+          <p class="text-sm text-[var(--text-muted)] max-w-sm">
+            Select a discipline to inspect its architectural specifications, delivery scope, and verified SLAs.
+          </p>
+        </div>
+
+        <!-- Sliding Tabs Bar -->
+        <div class="flex overflow-x-auto gap-2 p-1 rounded-lg border border-[var(--border)] bg-[var(--surface-subtle)] mb-8 scrollbar-none">
+          <button onclick="switchTab(0)" id="tabBtn0" class="tab-btn px-5 py-2.5 rounded text-xs font-mono font-semibold transition-all bg-[var(--surface)] text-[var(--text)] shadow-sm">
+            01 AI Automation & Agents
+          </button>
+          <button onclick="switchTab(1)" id="tabBtn1" class="tab-btn px-5 py-2.5 rounded text-xs font-mono font-medium text-[var(--text-muted)] hover:text-[var(--text)] transition-all">
+            02 Machine Learning
+          </button>
+          <button onclick="switchTab(2)" id="tabBtn2" class="tab-btn px-5 py-2.5 rounded text-xs font-mono font-medium text-[var(--text-muted)] hover:text-[var(--text)] transition-all">
+            03 Generative AI & RAG
+          </button>
+          <button onclick="switchTab(3)" id="tabBtn3" class="tab-btn px-5 py-2.5 rounded text-xs font-mono font-medium text-[var(--text-muted)] hover:text-[var(--text)] transition-all">
+            04 Full-Stack Platforms
+          </button>
+          <button onclick="switchTab(4)" id="tabBtn4" class="tab-btn px-5 py-2.5 rounded text-xs font-mono font-medium text-[var(--text-muted)] hover:text-[var(--text)] transition-all">
+            05 Data Pipelines & MLOps
+          </button>
+        </div>
+
+        <!-- Tab Content Panes -->
+        <div class="p-8 md:p-12 rounded-xl border border-[var(--border)] bg-[var(--surface)] relative min-h-[380px] flex flex-col justify-between">
+          
+          <!-- Pane 0 -->
+          <div id="pane0" class="tab-pane space-y-6">
+            <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 pb-6 border-b border-[var(--border)]">
+              <div>
+                <span class="text-xs font-mono text-[var(--accent)] font-semibold">Flagship Studio Discipline</span>
+                <h3 class="text-2xl font-bold text-[var(--text)] mt-1">Autonomous Multi-Agent Systems</h3>
+              </div>
+              <div class="text-right">
+                <div class="text-sm font-mono font-bold text-[var(--text)]">Production SLA</div>
+                <div class="text-xs font-mono text-[var(--accent)]">99.9% Task Completion</div>
+              </div>
+            </div>
+            <p class="text-base text-[var(--text-muted)] max-w-3xl leading-relaxed">
+              We design and orchestrate multi-agent autonomous swarms capable of complex reasoning, state management, parallel tool calling, and human-in-the-loop validation. Replacing fragile rule-based automation with deterministic, verified agents.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Architecture</div>
+                <div class="text-sm font-semibold text-[var(--text)]">Hierarchical Swarm + Central Policy</div>
+              </div>
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Safety</div>
+                <div class="text-sm font-semibold text-[var(--text)]">Deterministic Zod Guardrails</div>
+              </div>
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Timeline</div>
+                <div class="text-sm font-semibold text-[var(--text)]">4 to 6 Weeks to Production</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pane 1 -->
+          <div id="pane1" class="tab-pane hidden space-y-6">
+            <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 pb-6 border-b border-[var(--border)]">
+              <div>
+                <span class="text-xs font-mono text-[var(--accent)] font-semibold">Statistical Learning</span>
+                <h3 class="text-2xl font-bold text-[var(--text)] mt-1">Custom Machine Learning & Deep Learning</h3>
+              </div>
+              <div class="text-right">
+                <div class="text-sm font-mono font-bold text-[var(--text)]">Target Benchmark</div>
+                <div class="text-xs font-mono text-[var(--accent)]">&gt; 98.5% F1-Score</div>
+              </div>
+            </div>
+            <p class="text-base text-[var(--text-muted)] max-w-3xl leading-relaxed">
+              Custom model architecture, data preprocessing pipelines, loss optimization, and precision training on enterprise proprietary datasets. From tabular forecasting to computer vision and signal processing.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Frameworks</div>
+                <div class="text-sm font-semibold text-[var(--text)]">PyTorch &bull; Hugging Face &bull; ONNX</div>
+              </div>
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Serving</div>
+                <div class="text-sm font-semibold text-[var(--text)]">Triton Inference Server</div>
+              </div>
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Hardware</div>
+                <div class="text-sm font-semibold text-[var(--text)]">NVIDIA TensorRT Optimized</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pane 2 -->
+          <div id="pane2" class="tab-pane hidden space-y-6">
+            <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 pb-6 border-b border-[var(--border)]">
+              <div>
+                <span class="text-xs font-mono text-[var(--accent)] font-semibold">Cognitive Architecture</span>
+                <h3 class="text-2xl font-bold text-[var(--text)] mt-1">Generative AI, RAG & LLM Engineering</h3>
+              </div>
+              <div class="text-right">
+                <div class="text-sm font-mono font-bold text-[var(--text)]">Hallucination Rate</div>
+                <div class="text-xs font-mono text-[var(--accent)]">0.00% Zero-Tolerance</div>
+              </div>
+            </div>
+            <p class="text-base text-[var(--text-muted)] max-w-3xl leading-relaxed">
+              Production Retrieval-Augmented Generation (RAG) with hybrid lexical-vector search, semantic reranking, contextual chunking, and verifiable citation back-linking. No ungrounded hallucinations.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Vector Engines</div>
+                <div class="text-sm font-semibold text-[var(--text)]">Qdrant &bull; pgvector &bull; Pinecone</div>
+              </div>
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Evaluation</div>
+                <div class="text-sm font-semibold text-[var(--text)]">RAGAS &bull; Automated Regression Benches</div>
+              </div>
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Cost Optimization</div>
+                <div class="text-sm font-semibold text-[var(--text)]">Prompt Caching &bull; Speculative Decoding</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pane 3 -->
+          <div id="pane3" class="tab-pane hidden space-y-6">
+            <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 pb-6 border-b border-[var(--border)]">
+              <div>
+                <span class="text-xs font-mono text-[var(--accent)] font-semibold">User Experience</span>
+                <h3 class="text-2xl font-bold text-[var(--text)] mt-1">Full-Stack Web & Mobile Platforms</h3>
+              </div>
+              <div class="text-right">
+                <div class="text-sm font-mono font-bold text-[var(--text)]">Lighthouse Target</div>
+                <div class="text-xs font-mono text-[var(--accent)]">&ge; 98 Performance</div>
+              </div>
+            </div>
+            <p class="text-base text-[var(--text-muted)] max-w-3xl leading-relaxed">
+              Enterprise Next.js (App Router) and React Native frontends built with strict TypeScript, server components, and rigorous state management. Clean, accessible, resilient software interfaces.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Stack</div>
+                <div class="text-sm font-semibold text-[var(--text)]">Next.js 15 &bull; TypeScript &bull; Tailwind</div>
+              </div>
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Security</div>
+                <div class="text-sm font-semibold text-[var(--text)]">OWASP ASVS L2 &bull; SSRF Guard</div>
+              </div>
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Architecture</div>
+                <div class="text-sm font-semibold text-[var(--text)]">Server Actions &bull; Edge Middleware</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pane 4 -->
+          <div id="pane4" class="tab-pane hidden space-y-6">
+            <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 pb-6 border-b border-[var(--border)]">
+              <div>
+                <span class="text-xs font-mono text-[var(--accent)] font-semibold">Operations</span>
+                <h3 class="text-2xl font-bold text-[var(--text)] mt-1">Data Pipelines & Continuous MLOps</h3>
+              </div>
+              <div class="text-right">
+                <div class="text-sm font-mono font-bold text-[var(--text)]">Throughput</div>
+                <div class="text-xs font-mono text-[var(--accent)]">High-Volume Streaming</div>
+              </div>
+            </div>
+            <p class="text-base text-[var(--text-muted)] max-w-3xl leading-relaxed">
+              Automated model deployment CI/CD, data drift detection, continuous model retraining loops, and distributed Kafka/Flink or Spark data pipelines running on isolated enterprise VPCs.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Telemetry</div>
+                <div class="text-sm font-semibold text-[var(--text)]">Prometheus &bull; Grafana &bull; Sentry</div>
+              </div>
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Registry</div>
+                <div class="text-sm font-semibold text-[var(--text)]">MLflow &bull; AWS SageMaker</div>
+              </div>
+              <div class="p-4 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                <div class="text-xs font-mono text-[var(--text-muted)] uppercase mb-1">Orchestration</div>
+                <div class="text-sm font-semibold text-[var(--text)]">Kubernetes &bull; Temporal &bull; Airflow</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Action -->
+          <div class="pt-8 border-t border-[var(--border)] flex justify-between items-center">
+            <span class="text-xs font-mono text-[var(--text-muted)]">Fixed-scope sprints &bull; Milestone payments</span>
+            <button onclick="openDrawer()" class="text-xs font-mono font-semibold text-[var(--accent)] hover:underline flex items-center gap-1">
+              Request Scope & Timeline &rarr;
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SLIDING CASE STUDIES CAROUSEL -->
+    <section id="work" class="py-24 border-b border-[var(--border)] bg-[var(--surface)]">
+      <div class="max-w-[1280px] mx-auto px-6">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent)] font-semibold">Evidence &bull; 02</span>
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--text)] mt-2">
+              Verified outcomes, measured in production.
+            </h2>
+          </div>
+          
+          <!-- Slider Navigation Buttons -->
+          <div class="flex items-center gap-3">
+            <button onclick="prevSlide()" aria-label="Previous" class="w-10 h-10 rounded border border-[var(--border)] bg-[var(--surface-subtle)] flex items-center justify-center hover:border-[var(--text)] transition-colors">
+              &larr;
+            </button>
+            <button onclick="nextSlide()" aria-label="Next" class="w-10 h-10 rounded border border-[var(--border)] bg-[var(--surface-subtle)] flex items-center justify-center hover:border-[var(--text)] transition-colors">
+              &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Slider Carousel Container -->
+        <div class="relative overflow-hidden">
+          <div id="carouselTrack" class="carousel-track flex gap-6">
+            
+            <!-- Slide 1 -->
+            <div class="min-w-full md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] p-8 rounded-xl border border-[var(--border)] bg-[var(--bg)] flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-center mb-6">
+                  <span class="text-[11px] font-mono uppercase px-2.5 py-0.5 rounded border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)]">
+                    Client Project
+                  </span>
+                  <span class="text-xs font-mono text-[var(--accent)]">Fintech</span>
+                </div>
+                <h3 class="text-xl font-bold text-[var(--text)] mb-3">Enterprise Regulatory Extraction Engine</h3>
+                <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-6">
+                  Autonomous parsing and verified entity extraction across 150,000+ quarterly statutory filings with zero hallucination guardrails.
+                </p>
+              </div>
+              <div class="pt-6 border-t border-[var(--border)] grid grid-cols-2 gap-4">
+                <div>
+                  <div class="text-xs font-mono text-[var(--text-muted)]">Accuracy</div>
+                  <div class="text-lg font-bold font-mono text-[var(--text)]">99.4% Verified</div>
+                </div>
+                <div>
+                  <div class="text-xs font-mono text-[var(--text-muted)]">P95 Latency</div>
+                  <div class="text-lg font-bold font-mono text-[var(--accent)]">180ms</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="min-w-full md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] p-8 rounded-xl border border-[var(--border)] bg-[var(--bg)] flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-center mb-6">
+                  <span class="text-[11px] font-mono uppercase px-2.5 py-0.5 rounded border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)]">
+                    Founder Project
+                  </span>
+                  <span class="text-xs font-mono text-[var(--accent)]">DevOps & LLM</span>
+                </div>
+                <h3 class="text-xl font-bold text-[var(--text)] mb-3">Autonomous Code Refactor Harness</h3>
+                <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-6">
+                  Multi-agent software harness orchestrating codebase refactors, dependency migrations, and automated regression test suites.
+                </p>
+              </div>
+              <div class="pt-6 border-t border-[var(--border)] grid grid-cols-2 gap-4">
+                <div>
+                  <div class="text-xs font-mono text-[var(--text-muted)]">Throughput</div>
+                  <div class="text-lg font-bold font-mono text-[var(--text)]">4.2x Faster</div>
+                </div>
+                <div>
+                  <div class="text-xs font-mono text-[var(--text-muted)]">Regression</div>
+                  <div class="text-lg font-bold font-mono text-[var(--accent)]">0% Breaking</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="min-w-full md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] p-8 rounded-xl border border-[var(--border)] bg-[var(--bg)] flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-center mb-6">
+                  <span class="text-[11px] font-mono uppercase px-2.5 py-0.5 rounded border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)]">
+                    Client Project
+                  </span>
+                  <span class="text-xs font-mono text-[var(--accent)]">Logistics</span>
+                </div>
+                <h3 class="text-xl font-bold text-[var(--text)] mb-3">Graph Neural Dispatch Optimization</h3>
+                <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-6">
+                  Graph neural network forecasting metropolitan transport congestion with dynamic re-routing running on AWS ECS clusters.
+                </p>
+              </div>
+              <div class="pt-6 border-t border-[var(--border)] grid grid-cols-2 gap-4">
+                <div>
+                  <div class="text-xs font-mono text-[var(--text-muted)]">Fuel Savings</div>
+                  <div class="text-lg font-bold font-mono text-[var(--text)]">-22% Cost</div>
+                </div>
+                <div>
+                  <div class="text-xs font-mono text-[var(--text-muted)]">Scale</div>
+                  <div class="text-lg font-bold font-mono text-[var(--accent)]">2M+ Trips/Mo</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="min-w-full md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] p-8 rounded-xl border border-[var(--border)] bg-[var(--bg)] flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-center mb-6">
+                  <span class="text-[11px] font-mono uppercase px-2.5 py-0.5 rounded border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)]">
+                    Client Project
+                  </span>
+                  <span class="text-xs font-mono text-[var(--accent)]">Healthcare</span>
+                </div>
+                <h3 class="text-xl font-bold text-[var(--text)] mb-3">HIPAA-Compliant Diagnostic Assistant</h3>
+                <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-6">
+                  Private on-premise LLM fine-tuned on clinical notes with zero external API data transmission and full audit logging.
+                </p>
+              </div>
+              <div class="pt-6 border-t border-[var(--border)] grid grid-cols-2 gap-4">
+                <div>
+                  <div class="text-xs font-mono text-[var(--text-muted)]">Compliance</div>
+                  <div class="text-lg font-bold font-mono text-[var(--text)]">HIPAA Audit Pass</div>
+                </div>
+                <div>
+                  <div class="text-xs font-mono text-[var(--text-muted)]">Recall</div>
+                  <div class="text-lg font-bold font-mono text-[var(--accent)]">99.1%</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Slider Indicator -->
+        <div class="flex items-center justify-between mt-8 pt-6 border-t border-[var(--border)] text-xs font-mono text-[var(--text-muted)]">
+          <div class="flex items-center gap-2">
+            <span id="slideCounter">Slide 1 of 4</span>
+          </div>
+          <div>Drag or use arrows to slide through case studies</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROCESS ROADMAP (4 Structured Stages) -->
+    <section id="process" class="py-24 border-b border-[var(--border)]">
+      <div class="max-w-[1280px] mx-auto px-6">
+        
+        <div class="mb-16">
+          <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent)] font-semibold">Delivery Framework &bull; 03</span>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--text)] mt-2">
+            Transparent, milestone-driven execution.
+          </h2>
+          <p class="text-sm text-[var(--text-muted)] mt-2 max-w-lg">
+            No endless discovery retainers. Every build follows four structured milestones with verified acceptance tests.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          
+          <div class="p-6 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex flex-col justify-between">
+            <div>
+              <div class="text-xs font-mono text-[var(--accent)] font-bold mb-4">MILESTONE 01</div>
+              <h3 class="text-lg font-bold text-[var(--text)] mb-2">Technical Discovery</h3>
+              <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                Data pipeline auditing, schema mapping, model selection benchmarks, and precise latency budget definitions.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-[var(--border)] text-[11px] font-mono text-[var(--text-muted)]">
+              Week 1 &bull; Architectural Blueprint
+            </div>
+          </div>
+
+          <div class="p-6 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex flex-col justify-between">
+            <div>
+              <div class="text-xs font-mono text-[var(--accent)] font-bold mb-4">MILESTONE 02</div>
+              <h3 class="text-lg font-bold text-[var(--text)] mb-2">Core Engine & Training</h3>
+              <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                Model training, fine-tuning, vector indexing, deterministic guardrail setup, and automated evaluation benchmark runs.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-[var(--border)] text-[11px] font-mono text-[var(--text-muted)]">
+              Weeks 2–3 &bull; Staging Benchmarks
+            </div>
+          </div>
+
+          <div class="p-6 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex flex-col justify-between">
+            <div>
+              <div class="text-xs font-mono text-[var(--accent)] font-bold mb-4">MILESTONE 03</div>
+              <h3 class="text-lg font-bold text-[var(--text)] mb-2">Platform Integration</h3>
+              <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                Next.js / React Native interface integration, OWASP ASVS L2 security hardening, SSRF guards, and client portal deployment.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-[var(--border)] text-[11px] font-mono text-[var(--text-muted)]">
+              Weeks 4–5 &bull; Full Integration
+            </div>
+          </div>
+
+          <div class="p-6 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex flex-col justify-between">
+            <div>
+              <div class="text-xs font-mono text-[var(--accent)] font-bold mb-4">MILESTONE 04</div>
+              <h3 class="text-lg font-bold text-[var(--text)] mb-2">Handover & Telemetry</h3>
+              <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                Production deployment on your private tenant, Prometheus/Sentry monitoring setup, documentation, and full IP handover.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-[var(--border)] text-[11px] font-mono text-[var(--text-muted)]">
+              Week 6 &bull; 100% IP Ownership
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ ACCORDION -->
+    <section id="faq" class="py-24 border-b border-[var(--border)] bg-[var(--surface)]">
+      <div class="max-w-[800px] mx-auto px-6">
+        
+        <div class="text-center mb-16">
+          <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent)] font-semibold">Terms & Assurance</span>
+          <h2 class="text-3xl font-bold tracking-tight text-[var(--text)] mt-2">
+            Frequently Asked Questions
+          </h2>
+        </div>
+
+        <div class="space-y-4">
+          
+          <details class="group p-6 rounded-xl border border-[var(--border)] bg-[var(--bg)] cursor-pointer">
+            <summary class="flex justify-between items-center font-bold text-base text-[var(--text)] select-none">
+              <span>What are your typical project timelines?</span>
+              <span class="text-[var(--text-muted)] group-open:rotate-180 transition-transform font-mono text-sm">&darr;</span>
+            </summary>
+            <p class="mt-4 text-sm text-[var(--text-muted)] leading-relaxed">
+              Technical discovery takes 1 week. Complete production systems (AI models, pipelines, and full-stack interfaces) typically take 4 to 8 weeks depending on model complexity, integrations, and compliance benchmarks.
+            </p>
+          </details>
+
+          <details class="group p-6 rounded-xl border border-[var(--border)] bg-[var(--bg)] cursor-pointer">
+            <summary class="flex justify-between items-center font-bold text-base text-[var(--text)] select-none">
+              <span>Who owns the intellectual property and model weights?</span>
+              <span class="text-[var(--text-muted)] group-open:rotate-180 transition-transform font-mono text-sm">&darr;</span>
+            </summary>
+            <p class="mt-4 text-sm text-[var(--text-muted)] leading-relaxed">
+              You own 100% of all intellectual property, source code, dataset transformations, prompts, and trained model checkpoints from day one. Everything is deployed directly to your private cloud infrastructure.
+            </p>
+          </details>
+
+          <details class="group p-6 rounded-xl border border-[var(--border)] bg-[var(--bg)] cursor-pointer">
+            <summary class="flex justify-between items-center font-bold text-base text-[var(--text)] select-none">
+              <span>What is your pricing and engagement model?</span>
+              <span class="text-[var(--text-muted)] group-open:rotate-180 transition-transform font-mono text-sm">&darr;</span>
+            </summary>
+            <p class="mt-4 text-sm text-[var(--text-muted)] leading-relaxed">
+              We operate exclusively on fixed-scope milestone deliverables or monthly dedicated engineering retainers. You receive clear cost boundaries with zero surprise billing.
+            </p>
+          </details>
+
+          <details class="group p-6 rounded-xl border border-[var(--border)] bg-[var(--bg)] cursor-pointer">
+            <summary class="flex justify-between items-center font-bold text-base text-[var(--text)] select-none">
+              <span>How do you handle confidential enterprise data?</span>
+              <span class="text-[var(--text-muted)] group-open:rotate-180 transition-transform font-mono text-sm">&darr;</span>
+            </summary>
+            <p class="mt-4 text-sm text-[var(--text-muted)] leading-relaxed">
+              We execute mutual non-disclosure agreements before inspecting any project material. All training and inference environments operate within isolated VPCs, with no data ever shared with third-party public training corpora.
+            </p>
+          </details>
+
+          <details class="group p-6 rounded-xl border border-[var(--border)] bg-[var(--bg)] cursor-pointer">
+            <summary class="flex justify-between items-center font-bold text-base text-[var(--text)] select-none">
+              <span>What post-launch maintenance is included?</span>
+              <span class="text-[var(--text-muted)] group-open:rotate-180 transition-transform font-mono text-sm">&darr;</span>
+            </summary>
+            <p class="mt-4 text-sm text-[var(--text-muted)] leading-relaxed">
+              Every deployment includes 30 days of comprehensive post-launch telemetry monitoring, bug fixes, and performance tuning, with optional SLA-backed retainer packages for continuous model retraining.
+            </p>
+          </details>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EXECUTIVE CTA BANNER -->
+    <section class="py-24">
+      <div class="max-w-[1280px] mx-auto px-6">
+        <div class="p-12 md:p-16 rounded-2xl border border-[var(--border)] bg-[var(--surface)] text-center relative overflow-hidden shadow-2xl">
+          <div class="max-w-2xl mx-auto">
+            <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent)] font-semibold">Architectural Consultation</span>
+            <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-[var(--text)] mt-3 mb-6">
+              Ready to engineer your AI advantage?
+            </h2>
+            <p class="text-base text-[var(--text-muted)] mb-8 leading-relaxed">
+              Schedule a 30-minute technical evaluation with our engineering team. We'll review your architecture, calculate latency budgets, and provide an honest assessment.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button onclick="openDrawer()" class="h-12 px-8 rounded bg-[var(--accent)] text-[var(--accent-text)] font-semibold text-sm hover:opacity-95 transition-opacity w-full sm:w-auto">
+                Consult Architecture
+              </button>
+              <a href="mailto:hello@axiora.ai" class="text-xs font-mono text-[var(--text-muted)] hover:text-[var(--text)] underline">
+                or email hello@axiora.ai
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-16 border-t border-[var(--border)] bg-[var(--bg)] text-xs">
+    <div class="max-w-[1280px] mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12">
+        <div class="flex items-center gap-3">
+          <svg class="w-6 h-6 text-[var(--text)]" viewBox="0 0 32 32" fill="none">
+            <path d="M6 26L16 6L26 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="16" cy="18" r="3.2" fill="var(--accent)"/>
+          </svg>
+          <span class="font-bold text-base tracking-tight text-[var(--text)]">Axiora</span>
+          <span class="text-[var(--text-muted)] font-mono ml-3">&bull; Intelligence, engineered.</span>
+        </div>
+
+        <div class="flex flex-wrap gap-8 font-mono text-[var(--text-muted)]">
+          <a href="#services" class="hover:text-[var(--text)]">Services</a>
+          <a href="#work" class="hover:text-[var(--text)]">Case Studies</a>
+          <a href="#process" class="hover:text-[var(--text)]">Process</a>
+          <a href="#faq" class="hover:text-[var(--text)]">FAQ</a>
+          <a href="mailto:security@axiora.ai" class="hover:text-[var(--text)]">security.txt</a>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-[var(--border)] flex flex-col sm:flex-row justify-between items-center text-[var(--text-muted)] font-mono gap-4">
+        <div>&copy; 2026 Axiora Studio. All rights reserved. Full IP transfer upon completion.</div>
+        <div>Zero vibe-coding standard &bull; ASVS L2 Targeted</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Scripts (Slider, Tabs, Drawer, Theme) -->
+  <script>
+    // Theme Switcher
+    const htmlEl = document.documentElement;
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeLabel = document.getElementById('themeToggleLabel');
+
+    function syncThemeButton() {
+      if (htmlEl.classList.contains('dark')) {
+        themeLabel.textContent = '☀️ Paper Mode';
+      } else {
+        themeLabel.textContent = '🌙 Dark Mode';
+      }
+    }
+
+    themeBtn.addEventListener('click', () => {
+      htmlEl.classList.toggle('dark');
+      syncThemeButton();
+    });
+    syncThemeButton();
+
+    // Drawer Controls
+    const drawer = document.getElementById('architectureDrawer');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+    const drawerContent = document.getElementById('drawerContent');
+
+    function openDrawer() {
+      drawer.classList.remove('pointer-events-none');
+      drawerBackdrop.classList.remove('opacity-0');
+      drawerBackdrop.classList.add('opacity-100');
+      drawerContent.classList.remove('translate-x-full');
+      drawerContent.classList.add('translate-x-0');
+    }
+
+    function closeDrawer() {
+      drawerBackdrop.classList.remove('opacity-100');
+      drawerBackdrop.classList.add('opacity-0');
+      drawerContent.classList.remove('translate-x-0');
+      drawerContent.classList.add('translate-x-full');
+      setTimeout(() => {
+        drawer.classList.add('pointer-events-none');
+      }, 300);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert('Technical request received. Our senior system architects will contact you within 1 business day.');
+      closeDrawer();
+    }
+
+    // Sliding Services Tabs
+    function switchTab(index) {
+      for (let i = 0; i < 5; i++) {
+        const btn = document.getElementById(`tabBtn${i}`);
+        const pane = document.getElementById(`pane${i}`);
+        if (i === index) {
+          btn.className = "tab-btn px-5 py-2.5 rounded text-xs font-mono font-semibold transition-all bg-[var(--surface)] text-[var(--text)] shadow-sm";
+          pane.classList.remove('hidden');
+        } else {
+          btn.className = "tab-btn px-5 py-2.5 rounded text-xs font-mono font-medium text-[var(--text-muted)] hover:text-[var(--text)] transition-all";
+          pane.classList.add('hidden');
+        }
+      }
+    }
+
+    // Sliding Carousel
+    let currentSlide = 0;
+    const totalSlides = 4;
+    const track = document.getElementById('carouselTrack');
+    const counter = document.getElementById('slideCounter');
+
+    function updateCarousel() {
+      const isMobile = window.innerWidth < 768;
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+      
+      let stepPercent = 100;
+      if (!isMobile && isTablet) stepPercent = 50;
+      if (!isMobile && !isTablet) stepPercent = 33.333;
+
+      track.style.transform = `translateX(-${currentSlide * (stepPercent + 2)}%)`;
+      counter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+  </script>
+</body>
+</html>
