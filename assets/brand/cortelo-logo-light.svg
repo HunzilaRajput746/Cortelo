@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <!-- Mark -->
+  <g transform="translate(10, 10)">
+    <path d="M44 16 C36 10 24 10 16 18 C8 26 8 38 16 46 C24 54 36 54 44 48" 
+          stroke="#0FA68A" 
+          stroke-width="6.5" 
+          stroke-linecap="round" />
+    <circle cx="31" cy="32" r="5" fill="#0A0F1C" />
+  </g>
+  <!-- Wordmark -->
+  <text x="82" y="52" fill="#0A0F1C" font-family="Plus Jakarta Sans, -apple-system, sans-serif" font-size="34" font-weight="800" letter-spacing="-0.04em">CORTELO</text>
+  <text x="84" y="68" fill="#4A5163" font-family="Geist Mono, monospace" font-size="9" letter-spacing="0.22em" font-weight="600">SYSTEMS OF INTELLIGENCE</text>
+</svg>
