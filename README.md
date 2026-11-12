@@ -1,60 +1,49 @@
-# Cortelo — Systems of Intelligence
+# Cortelo Systems — Autonomous AI & Software Engineering Studio
 
-> An elite independent artificial intelligence and software engineering studio.  
-> Directed by **Hunzila Nisar** (Founder & Lead AI Architect) & **Mahreen Hashir** (Co-Founder & Head of Systems).
-
----
-
-## 1. Overview & Capabilities
-Cortelo designs, trains, and deploys mission-critical enterprise AI systems and full-stack software platforms:
-- **Autonomous Multi-Agent Swarms**: Hierarchical swarms with deterministic guardrails.
-- **Custom Machine Learning**: Domain models trained on proprietary data with Triton serving.
-- **Generative AI & LLMs**: Zero-hallucination RAG architectures with hybrid vector search.
-- **Enterprise Full-Stack**: Next.js 15 App Router platforms with strict TypeScript.
-- **Continuous MLOps**: Streaming data pipelines, drift detection, and automated retraining loops.
+> High-throughput autonomous multi-agent systems, custom sales CRMs, self-hosted VPS cloud infrastructure, and 60fps full-stack engineering.
 
 ---
 
-## 2. Tech Stack
-- **Framework**: Next.js 15 (App Router, Server Components)
-- **Language**: TypeScript (Strict Mode)
-- **Styling**: Tailwind CSS + Glassmorphism & Custom Design Tokens
-- **Icons**: Lucide React
-- **Motion & Shader**: Framer Motion + HTML5 Canvas Ambient Particle Fluid
-- **Fonts**: Plus Jakarta Sans & Geist Mono
-- **Deployment**: Vercel / Cloudflare Edge
+## 🏛️ Executive Leadership & Engineering Roster
+
+- **Hunzila Nisar** — Founder & Lead AI Systems Architect
+  - Portfolio: [devhunzila.site](https://devhunzila.site)
+  - LinkedIn: [Hunzila Nisar](https://linkedin.com/in/hunzila-nisar-ai)
+  - WhatsApp: `+92 318 6326746`
+  - Distinction: BSc in Artificial Intelligence (A+ Grade), NAVTTC AI Certification
+- **Mahreen Hashir** — Co-Founder & Head of Systems (ASVS L2 Security & MLOps)
+- **Umar Attique** — Senior AI Systems Engineer (RAG & Model Fine-Tuning)
+- **Hamdan** — Lead Full-Stack & UI/UX Developer (Next.js 15 & React 19)
+- **Bilal Tariq** — DevOps & Cloud VPS Architect (Oracle Cloud & Tailscale)
+- **Ayesha Malik** — Lead Product & UX Designer
+- **Daniyal Khan** — Machine Learning & Computer Vision Specialist
+- **Zainab Raza** — Workflow Automation & n8n Specialist
+- **Farhan Siddiqui** — Performance Growth & Funnel Strategist
+- **Sarah Jenkins** — Enterprise QA & Verification Lead
+- **Alex Rivera** — Backend & Distributed Systems Engineer
 
 ---
 
-## 3. Local Development
+## 🔒 100% Intellectual Property Guarantee
+
+Upon final milestone sign-off, **100% of all source code, models, configurations, and deployment pipelines** are transferred directly to your organization. Cortelo imposes zero recurring per-seat licensing fees.
+
+---
+
+## ⚡ Tech Stack
+
+- **Frontend**: Next.js 15 (App Router), React 19, Tailwind CSS, Framer Motion, Lucide Icons
+- **Backend**: Node.js, Express, FastAPI, Python
+- **AI / ML**: PyTorch, LangGraph, Llama-3.3, Qdrant, scikit-learn
+- **Infrastructure**: Oracle Cloud VPS, Linux (Ubuntu/Debian), Docker, Tailscale Mesh VPN, self-hosted n8n
+
+---
+
+## 🛠️ Local Development
+
 ```bash
-# 1. Install dependencies
 npm install
-
-# 2. Run local development server
 npm run dev
-
-# 3. Build optimized production bundle
-npm run build
-
-# 4. Start production server
-npm run start
 ```
 
----
-
-## 4. Brand & Assets
-Brand assets are stored under `assets/brand/`:
-- `cortelo-mark.svg`: Geometric 'C' mark with solid decision node.
-- `cortelo-logo-dark.svg`: Horizontal logo on Obsidian dark.
-- `cortelo-logo-light.svg`: Horizontal logo on Paper light.
-- `favicon.svg`: High-resolution vector browser icon.
-- `cortelo-banner-linkedin.svg`: 1584 x 396 px official company banner.
-- `cortelo-og-image.svg`: 1200 x 630 px social share / OpenGraph card.
-
----
-
-## 5. Security & IP Policy
-- **Intellectual Property**: 100% of custom code, dataset transformations, model checkpoints, and prompts are assigned to the client upon milestone payment.
-- **Zero Public Training**: Client data is never used to train public or foundation models.
-- **Security Reporting**: See `SECURITY.md` or contact `security@cortelo.ai`.
+Visit [http://localhost:3000](http://localhost:3000)
