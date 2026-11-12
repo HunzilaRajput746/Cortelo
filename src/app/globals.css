@@ -55,3 +55,13 @@ body {
   outline-offset: 2px;
 }
 
+
+
+/* Conversion Glass & Neon Utilities */
+.neon-mint-glow {
+  box-shadow: 0 0 30px rgba(45, 212, 167, 0.25);
+}
+
+.text-glow-mint {
+  text-shadow: 0 0 20px rgba(45, 212, 167, 0.4);
+}
