@@ -18,9 +18,8 @@ export default function FAQAccordion() {
         return (
           <div
             key={index}
-            className={`glass-panel rounded-2xl border transition-all ${
-              isOpen ? "border-cortelo-mint/40 bg-[#0F131D]/90" : "border-cortelo-border bg-[#0F131D]/60"
-            }`}
+            className={`glass-panel rounded-2xl border transition-all ${isOpen ? "border-cortelo-mint/40 bg-[#0F131D]/90" : "border-cortelo-border bg-[#0F131D]/60"
+              }`}
           >
             <button
               onClick={() => toggle(index)}
@@ -30,9 +29,8 @@ export default function FAQAccordion() {
                 {faq.q}
               </span>
               <ChevronDown
-                className={`w-5 h-5 text-cortelo-muted shrink-0 transition-transform duration-300 ${
-                  isOpen ? "rotate-180 text-cortelo-mint" : ""
-                }`}
+                className={`w-5 h-5 text-cortelo-muted shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-cortelo-mint" : ""
+                  }`}
               />
             </button>
             {isOpen && (
