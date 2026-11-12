@@ -55,12 +55,12 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
 
   return (
     <div className="glass-panel rounded-2xl p-8 sm:p-12 border border-cortelo-mint/30 bg-gradient-to-br from-[#0B0F19] to-[#07090E] relative overflow-hidden shadow-2xl">
-      
+
       {/* Decorative gradient radial */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cortelo-mint/5 rounded-full filter blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 space-y-8">
-        
+
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 pb-6 border-b border-cortelo-border">
           <div>
@@ -89,22 +89,20 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
                 <button
                   key={item.id}
                   onClick={() => togglePillar(item.label)}
-                  className={`p-4 rounded-xl border text-left flex items-center justify-between gap-3 transition-all ${
-                    active
+                  className={`p-4 rounded-xl border text-left flex items-center justify-between gap-3 transition-all ${active
                       ? "border-cortelo-mint bg-cortelo-mint/10 text-cortelo-text shadow-[0_0_15px_rgba(45,212,167,0.2)]"
                       : "border-cortelo-border bg-cortelo-surface/80 text-cortelo-muted hover:border-cortelo-border/80 hover:text-cortelo-text"
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center gap-3">
                     <Icon className={`w-4 h-4 ${active ? "text-cortelo-mint" : "text-cortelo-muted"}`} />
                     <span className="text-xs font-mono font-medium">{item.label}</span>
                   </div>
                   <div
-                    className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${
-                      active
+                    className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${active
                         ? "border-cortelo-mint bg-cortelo-mint text-black"
                         : "border-cortelo-border"
-                    }`}
+                      }`}
                   >
                     {active && <Check className="w-3 h-3 stroke-[3]" />}
                   </div>
@@ -116,7 +114,7 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
 
         {/* Step 2 & 3: Timeline & Infrastructure */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-          
+
           {/* Target Timeline */}
           <div className="space-y-3">
             <label className="text-xs font-mono uppercase tracking-wider text-cortelo-muted block">
@@ -127,11 +125,10 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
                 <button
                   key={time}
                   onClick={() => setSelectedTimeline(time)}
-                  className={`w-full p-3 rounded-xl border text-left text-xs font-mono transition-all flex items-center justify-between ${
-                    selectedTimeline === time
+                  className={`w-full p-3 rounded-xl border text-left text-xs font-mono transition-all flex items-center justify-between ${selectedTimeline === time
                       ? "border-cortelo-mint bg-cortelo-mint/10 text-cortelo-text"
                       : "border-cortelo-border bg-cortelo-surface/60 text-cortelo-muted hover:border-cortelo-border/80"
-                  }`}
+                    }`}
                 >
                   <span>{time}</span>
                   {selectedTimeline === time && <Check className="w-3.5 h-3.5 text-cortelo-mint" />}
@@ -150,11 +147,10 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
                 <button
                   key={opt}
                   onClick={() => setSelectedHosting(opt)}
-                  className={`w-full p-3 rounded-xl border text-left text-xs font-mono transition-all flex items-center justify-between ${
-                    selectedHosting === opt
+                  className={`w-full p-3 rounded-xl border text-left text-xs font-mono transition-all flex items-center justify-between ${selectedHosting === opt
                       ? "border-cortelo-mint bg-cortelo-mint/10 text-cortelo-text"
                       : "border-cortelo-border bg-cortelo-surface/60 text-cortelo-muted hover:border-cortelo-border/80"
-                  }`}
+                    }`}
                 >
                   <span>{opt}</span>
                   {selectedHosting === opt && <Check className="w-3.5 h-3.5 text-cortelo-mint" />}
@@ -193,3 +189,4 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
     </div>
   );
 }
+
