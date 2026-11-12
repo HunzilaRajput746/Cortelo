@@ -5,9 +5,8 @@ export interface ProjectItem {
   client: string;
   badge: string;
   category: string;
-  status: "Live in Production" | "Deployed SaaS" | "A+ Research & IoT";
+  status: "Confidential Enterprise CRM" | "Live VPS Automation" | "A+ Research & IoT" | "Deployed SaaS" | "Live in Production";
   liveUrl?: string;
-  repoUrl?: string;
   previewImage: string;
   video?: string;
   description: string;
@@ -45,6 +44,29 @@ export interface TeamDivision {
   techStack: string[];
 }
 
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  title: string;
+  avatar: string;
+  badge: string;
+  bio: string;
+  specialties: string[];
+  linkedinUrl?: string;
+  portfolioUrl?: string;
+  whatsappUrl?: string;
+}
+
+export interface TestimonialItem {
+  id: string;
+  quote: string;
+  author: string;
+  role: string;
+  company: string;
+  avatar: string;
+}
+
 export const FOUNDER_DATA = {
   name: "Hunzila Nisar",
   alias: "Hunzila Rajput",
@@ -60,7 +82,7 @@ export const FOUNDER_DATA = {
   location: "Lodhran, Punjab, Pakistan (Global Remote Delivery)",
   education: "BSc in Artificial Intelligence — The Islamia University of Bahawalpur (A+ Grade FYP)",
   distinctions: [
-    "Delivered Live Enterprise CRMs (Revenue.inc & C17 CRM) on Tailscale VPS",
+    "Architected Enterprise Sales CRMs on Tailscale VPS",
     "Self-Hosted Production n8n Engine running live at n8n.devhunzila.site",
     "NAVTTC (Govt. of Pakistan) ML & AI Certification with A+ Grade",
     "Smart Helmet IoT System (A+ Grade, 95% Crash Alert Accuracy)",
@@ -68,24 +90,237 @@ export const FOUNDER_DATA = {
   ],
 };
 
+export const AGENCY_TEAM_ROSTER: TeamMember[] = [
+  {
+    id: "hunzila-nisar",
+    name: "Hunzila Nisar",
+    role: "Founder & Lead AI Architect",
+    title: "Founder",
+    avatar: "/assets/team/hunzila_nisar.jpg",
+    badge: "FOUNDER",
+    bio: "AI Engineer with a BSc in Artificial Intelligence (A+ Grade). Proven industry experience building enterprise CRMs, orchestrating private VPS infrastructure, and engineering reliable autonomous multi-agent systems.",
+    specialties: ["Multi-Agent Swarms", "Custom CRMs", "LangGraph", "PyTorch", "Next.js"],
+    linkedinUrl: "https://linkedin.com/in/hunzila-nisar-ai",
+    portfolioUrl: "https://devhunzila.site",
+    whatsappUrl: "https://wa.me/923186326746",
+  },
+  {
+    id: "mahreen-hashir",
+    name: "Mahreen Hashir",
+    role: "Co-Founder & Head of Systems",
+    title: "Co-Founder",
+    avatar: "/assets/team/mahreen_hashir.jpg",
+    badge: "CO-FOUNDER",
+    bio: "Directs system verification, deterministic schema validation, and security compliance. Ensures that every platform deployed by Cortelo meets enterprise standards with 100% intellectual property transfer.",
+    specialties: ["Deterministic Guardrails", "Continuous MLOps", "ASVS L2 Security", "Sentry"],
+    linkedinUrl: "https://linkedin.com",
+  },
+  {
+    id: "umar-attique",
+    name: "Umar Attique",
+    role: "Senior AI Systems Engineer",
+    title: "AI Systems",
+    avatar: "/assets/team/umar_attique.jpg",
+    badge: "AI SYSTEMS",
+    bio: "Specializes in large language model fine-tuning, retrieval-augmented generation (RAG), vector embeddings, and high-throughput model inference pipelines.",
+    specialties: ["RAG Pipelines", "Llama-3.3", "Vector Databases", "FastAPI", "Python"],
+    linkedinUrl: "https://linkedin.com",
+  },
+  {
+    id: "hamdan",
+    name: "Hamdan",
+    role: "Lead Full-Stack & UI/UX Developer",
+    title: "Full-Stack Lead",
+    avatar: "/assets/team/hamdan.jpg",
+    badge: "PRODUCT LEAD",
+    bio: "Crafts ultra-responsive 60fps frontend interfaces with Next.js 15, React 19, and Tailwind CSS. Specializes in real-time CRM dashboards, Kanban sprint workflows, and micro-interactions.",
+    specialties: ["Next.js 15", "React 19", "Tailwind CSS", "TypeScript", "WebSocket"],
+    linkedinUrl: "https://linkedin.com",
+  },
+  {
+    id: "bilal-tariq",
+    name: "Bilal Tariq",
+    role: "DevOps & Cloud VPS Architect",
+    title: "DevOps Lead",
+    avatar: "/assets/team/bilal_tariq.jpg",
+    badge: "INFRASTRUCTURE",
+    bio: "Architects self-hosted, independent server infrastructure, Oracle Cloud VPS deployments, Tailscale private mesh networking, Docker containers, and CI/CD pipelines.",
+    specialties: ["Oracle Cloud VPS", "Tailscale Mesh", "Docker", "Linux SysAdmin", "Nginx"],
+    linkedinUrl: "https://linkedin.com",
+  },
+  {
+    id: "ayesha-malik",
+    name: "Ayesha Malik",
+    role: "Lead Product & UX Designer",
+    title: "Design Lead",
+    avatar: "/assets/team/ayesha_malik.jpg",
+    badge: "UI/UX DESIGN",
+    bio: "Designs world-class design systems, user journeys, and high-conversion agency layouts in Figma. Ensures every interaction feels intentional, modern, and accessible.",
+    specialties: ["Figma Design", "Design Systems", "Conversion Design", "Wireframing"],
+    linkedinUrl: "https://linkedin.com",
+  },
+  {
+    id: "daniyal-khan",
+    name: "Daniyal Khan",
+    role: "Machine Learning & Vision Specialist",
+    title: "ML / CV Lead",
+    avatar: "/assets/team/daniyal_khan.jpg",
+    badge: "DEEP LEARNING",
+    bio: "Builds deep convolutional neural networks, OpenCV computer vision pipelines, and predictive statistical models with scikit-learn and PyTorch.",
+    specialties: ["Computer Vision", "OpenCV", "PyTorch", "CNNs", "TensorRT"],
+    linkedinUrl: "https://linkedin.com",
+  },
+  {
+    id: "zainab-raza",
+    name: "Zainab Raza",
+    role: "Workflow Automation & n8n Specialist",
+    title: "Automation Engineer",
+    avatar: "/assets/team/zainab_raza.jpg",
+    badge: "AUTOMATION",
+    bio: "Constructs event-driven webhook workflows, CRM synchronizations, automated notification bots, and database bridges on self-hosted n8n infrastructure.",
+    specialties: ["n8n Workflows", "Webhook Busses", "Database Sync", "Cron Jobs", "APIs"],
+    linkedinUrl: "https://linkedin.com",
+  },
+  {
+    id: "farhan-siddiqui",
+    name: "Farhan Siddiqui",
+    role: "Performance Growth & Funnel Strategist",
+    title: "Growth Lead",
+    avatar: "/assets/team/farhan_siddiqui.jpg",
+    badge: "GROWTH",
+    bio: "Focuses on high-ticket customer acquisition funnels, conversion rate optimization (CRO), analytics telemetry, and CRM lead nurturing workflows.",
+    specialties: ["Funnel Architecture", "CRO", "Attribution Telemetry", "A/B Testing"],
+    linkedinUrl: "https://linkedin.com",
+  },
+  {
+    id: "sarah-jenkins",
+    name: "Sarah Jenkins",
+    role: "Enterprise QA & Verification Lead",
+    title: "QA Engineer",
+    avatar: "/assets/team/sarah_jenkins.jpg",
+    badge: "QUALITY ASSURANCE",
+    bio: "Ensures zero regressions, strict type-safety, deterministic schema test benches, and compliance with OWASP ASVS L2 security standards.",
+    specialties: ["ASVS L2", "E2E Testing", "Deterministic Verification", "Zod Validation"],
+    linkedinUrl: "https://linkedin.com",
+  },
+  {
+    id: "alex-rivera",
+    name: "Alex Rivera",
+    role: "Backend & Distributed Systems Architect",
+    title: "Backend Engineer",
+    avatar: "/assets/team/alex_rivera.jpg",
+    badge: "DISTRIBUTED SYSTEMS",
+    bio: "Specializes in high-throughput Node.js and Go microservices, Redis caching layers, and resilient database clustering.",
+    specialties: ["Node.js", "Redis", "Distributed Systems", "MongoDB Sharding"],
+    linkedinUrl: "https://linkedin.com",
+  },
+];
+
+export const AGENCY_TEAMS: TeamDivision[] = [
+  {
+    id: "ai-systems",
+    code: "DIV-01",
+    name: "Autonomous AI & Intelligent Systems Division",
+    leader: "Hunzila Nisar",
+    role: "Lead AI Systems Architect",
+    avatar: "/assets/team/hunzila_nisar.jpg",
+    capabilities: [
+      "Multi-Agent Swarm Engineering",
+      "Deterministic Guardrails & Zod Schemas",
+      "Domain-Specific Fine-Tuned LLMs",
+      "Grounded RAG & Vector Embeddings",
+      "Self-Correction & Autonomous Reflection",
+    ],
+    bio: "Engineers reliable, hallucination-resistant multi-agent systems and custom generative models with strict deterministic output validation.",
+    techStack: ["LangGraph", "PyTorch", "Python", "Llama-3.3", "DeepSeek-R1", "Qdrant"],
+  },
+  {
+    id: "mlops-security",
+    code: "DIV-02",
+    name: "MLOps, Guardrails & Security Division",
+    leader: "Mahreen Hashir",
+    role: "Head of Systems & Security",
+    avatar: "/assets/team/mahreen_hashir.jpg",
+    capabilities: [
+      "OWASP ASVS L2 Hardening Standards",
+      "Deterministic Schema Enforcement & Test Benches",
+      "Dataset Drift & Latency Telemetry",
+      "Private VPC Zero-Trust Architecture",
+      "Production Handover & SLA Governance",
+    ],
+    bio: "Directs system verification, deterministic schema validation, and security compliance. Ensures that every platform deployed by Cortelo meets enterprise standards with 100% intellectual property transfer.",
+    techStack: ["Prometheus", "Sentry", "Tailscale", "Linux Security", "Docker"],
+  },
+  {
+    id: "fullstack-uiux",
+    code: "DIV-03",
+    name: "Full-Stack & Product Engineering Division",
+    leader: "Hamdan",
+    role: "Lead Full-Stack & UI/UX Engineers",
+    avatar: "/assets/team/hamdan.jpg",
+    capabilities: [
+      "Next.js 15 & React 19 App Router",
+      "High-Conversion 4K Interface Design",
+      "Real-Time WebSocket & REST Backends",
+      "Micro-Interactions & Framer Motion",
+      "Cross-Platform Responsive Engineering",
+    ],
+    bio: "Our multidisciplinary frontend and full-stack engineering team builds software interfaces that feel instantaneous, gorgeous, and rock-solid under enterprise load.",
+    techStack: ["Next.js", "React", "TypeScript", "Tailwind", "Node.js", "MongoDB"],
+  },
+  {
+    id: "cloud-devops",
+    code: "DIV-04",
+    name: "Cloud Infrastructure & Automation Division",
+    leader: "Bilal Tariq",
+    role: "DevOps & VPS Architecture Team",
+    avatar: "/assets/team/bilal_tariq.jpg",
+    capabilities: [
+      "Self-Hosted n8n Engine Orchestration",
+      "Oracle Cloud & Linux VPS Administration",
+      "Tailscale Private Encrypted Mesh",
+      "CI/CD Pipelines & Docker Containers",
+      "Zero SaaS Subscription Infrastructure",
+    ],
+    bio: "Architects self-hosted, independent server infrastructure that gives companies total autonomy over their data, workflows, and operating costs without recurring per-task platform fees.",
+    techStack: ["Oracle Cloud", "n8n", "Tailscale", "Ubuntu/Debian", "Docker", "Nginx"],
+  },
+  {
+    id: "growth-marketing",
+    code: "DIV-05",
+    name: "Growth Marketing & Strategy Division",
+    leader: "Farhan Siddiqui",
+    role: "Growth Strategists & Funnel Architects",
+    avatar: "/assets/team/farhan_siddiqui.jpg",
+    capabilities: [
+      "High-Ticket Client Acquisition Funnels",
+      "CRM Lead Nurturing & Retargeting",
+      "Conversion Rate Optimization (CRO)",
+      "Data-Driven Marketing Analytics",
+      "Brand Positioning & Offer Architecture",
+    ],
+    bio: "Ensures the technical power of the systems we build translates into tangible market dominance, client acquisition, and measurable revenue acceleration.",
+    techStack: ["CRM Telemetry", "Analytics", "Funnel Automation", "A/B Testing"],
+  },
+];
+
 export const AGENCY_PROJECTS: ProjectItem[] = [
   {
     id: "revenue-crm",
-    title: "Revenue.inc — Enterprise Sales CRM & Analytics",
+    title: "Enterprise Sales CRM & Revenue Telemetry",
     subtitle: "Real-Time Sales Telemetry & Sprint Kanban Engine",
-    client: "Revenue.inc (Active Production)",
-    badge: "LIVE PRODUCTION CRM",
+    client: "Enterprise B2B Client (Confidential)",
+    badge: "ENTERPRISE CRM",
     category: "CRM & Enterprise Systems",
-    status: "Live in Production",
-    liveUrl: "https://dashboard.revenue.inc",
+    status: "Confidential Enterprise CRM",
     previewImage: "/assets/projects/revenue_crm_preview.svg",
     video: "/assets/videos/case_study_1.mp4",
     description:
-      "Full-stack enterprise CRM platform built and deployed end-to-end for active corporate production. Features real-time sales analytics (calls tracking, closed TCV, signed MRR, conversion funnels), developer sprint Kanban board, automated SOP documentation, and AI client workflows, secured on a dedicated Tailscale private mesh VPS.",
+      "Full-stack enterprise CRM platform built and deployed end-to-end for commercial production. Features real-time sales analytics (calls tracking, closed TCV, signed MRR, conversion funnels), developer sprint Kanban board, automated SOP documentation, and AI client workflows, secured on a dedicated Tailscale private mesh VPS.",
     metrics: {
       primaryValue: "$1.48M+",
       primaryLabel: "Closed TCV Tracked",
-      secondaryValue: "P99 < 32ms",
+      secondaryValue: "P99 < 28ms",
       secondaryLabel: "VPS Query Latency",
     },
     architecture: [
@@ -103,13 +338,12 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
   },
   {
     id: "c17-crm",
-    title: "C17 CRM — AI Lead & Deal Management Platform",
+    title: "AI Lead & Deal Management Platform",
     subtitle: "AI Lead Scoring, Multi-Stage Pipelines & Workflow Triggers",
-    client: "C17.ai (Active Production)",
-    badge: "LIVE PRODUCTION CRM",
+    client: "Commercial SaaS Client (Confidential)",
+    badge: "AI DEAL ENGINE",
     category: "AI & CRM Infrastructure",
-    status: "Live in Production",
-    liveUrl: "https://dashboard.c17.ai",
+    status: "Confidential Enterprise CRM",
     previewImage: "/assets/projects/c17_crm_preview.svg",
     video: "/assets/videos/case_study_2.mp4",
     description:
@@ -140,7 +374,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     client: "devhunzila Infrastructure (Live Engine)",
     badge: "LIVE VPS AUTOMATION",
     category: "Cloud Automation & DevOps",
-    status: "Live in Production",
+    status: "Live VPS Automation",
     liveUrl: "https://n8n.devhunzila.site",
     previewImage: "/assets/projects/n8n_engine_preview.svg",
     video: "/assets/videos/case_study_3.mp4",
@@ -229,7 +463,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
   },
   {
     id: "healthcare-ai",
-    title: "Oncology Screening AI (96% Accuracy)",
+    title: "Oncology Diagnostic AI (96% Accuracy)",
     subtitle: "Deep Learning & Machine Learning Diagnostic Pipeline",
     client: "Healthcare AI & Clinical Research",
     badge: "96.0% ACCURACY BENCHMARK",
@@ -267,7 +501,7 @@ export const AGENCY_SERVICES: AgencyService[] = [
     title: "Custom CRM & Revenue Architecture",
     tagline: "Tailored Sales Platforms, Kanban Boards & Telemetry",
     description:
-      "We design, build, and deploy custom enterprise CRMs tailored specifically to your company's sales motion (like Revenue.inc and C17 CRM). Say goodbye to bloated $200/seat SaaS subscriptions — own your platform 100% on dedicated, secure private VPS infrastructure with real-time sales telemetry, automated SOPs, and AI lead qualification.",
+      "We design, build, and deploy custom enterprise CRMs tailored specifically to your company's sales motion. Say goodbye to bloated $200/seat SaaS subscriptions — own your platform 100% on dedicated, secure private VPS infrastructure with real-time sales telemetry, automated SOPs, and AI lead qualification.",
     sla: "100% Proprietary IP • Zero SaaS Seat Fees",
     deliverables: [
       "Custom Sales & Deal Kanban Pipeline",
@@ -331,7 +565,7 @@ export const AGENCY_SERVICES: AgencyService[] = [
     id: "fullstack-platforms",
     num: "04",
     title: "Full-Stack Web & SaaS Engineering",
-    tagline: "Next.js 15, Ultra-Premium 4K Interfaces & APIs",
+    tagline: "Next.js 15, Ultra-Premium Interfaces & APIs",
     description:
       "We build breathtaking, ultra-fast web applications that elevate your brand to the top 1% of the tech industry. Powered by Next.js 15 App Router, React 19, TypeScript, and Tailwind CSS. Every pixel is intentional, every button is functional, and performance scores hit 98+ on Google Lighthouse.",
     sla: "Lighthouse ≥ 98 Target • Sub-100ms TTFB",
@@ -395,113 +629,89 @@ export const AGENCY_SERVICES: AgencyService[] = [
   },
 ];
 
-export const AGENCY_TEAMS: TeamDivision[] = [
+export const TESTIMONIALS_DATA: TestimonialItem[] = [
   {
-    id: "ai-systems",
-    code: "DIV-01",
-    name: "AI & Autonomous Systems Division",
-    leader: "Hunzila Nisar",
-    role: "Founder & Lead AI Architect",
-    avatar: "/assets/team/hunzila_nisar.jpg",
-    capabilities: [
-      "Multi-Agent Swarm Orchestration",
-      "LangGraph & LangChain Integration",
-      "RAG Vector Search & Embeddings",
-      "Deterministic Guardrails & Evaluators",
-      "Groq & Llama-3.3 Production Workflows",
-    ],
-    bio: "AI Engineer with a BSc in Artificial Intelligence (A+ Grade). Proven track record delivering live enterprise platforms like Revenue.inc CRM and C17 CRM, orchestrating private VPS infrastructure, and engineering reliable autonomous agentic pipelines.",
-    techStack: ["Python", "PyTorch", "LangChain", "Groq", "FastAPI", "Docker"],
+    id: "t1",
+    quote: "Our operational velocity and pipeline visibility went through the roof more or less overnight. The custom CRM and automation engine completely eliminated our manual spreadsheet backlog.",
+    author: "Malik Shkraba",
+    role: "COO",
+    company: "Friday Capital",
+    avatar: "/assets/conversion/img_4.png",
   },
   {
-    id: "mlops-security",
-    code: "DIV-02",
-    name: "Systems, MLOps & Security Division",
-    leader: "Mahreen Hashir",
-    role: "Co-Founder & Head of Systems",
-    avatar: "/assets/team/mahreen_hashir.jpg",
-    capabilities: [
-      "OWASP ASVS L2 Security Auditing",
-      "Continuous Model Evaluation Benches",
-      "Dataset Drift & Latency Telemetry",
-      "Private VPC Zero-Trust Architecture",
-      "Production Handover & SLA Governance",
-    ],
-    bio: "Directs system verification, deterministic schema validation, and security compliance. Ensures that every platform deployed by Cortelo meets enterprise standards with 100% intellectual property transfer.",
-    techStack: ["Prometheus", "Sentry", "Tailscale", "Linux Security", "Docker"],
+    id: "t2",
+    quote: "Hunzila and the Cortelo engineering team don't mess around. We saw measured throughput gains from month one. If you want production-grade AI systems, look no further.",
+    author: "Tony Gomez",
+    role: "Founder & CEO",
+    company: "Thursday Systems",
+    avatar: "/assets/conversion/img_5.png",
   },
   {
-    id: "fullstack-uiux",
-    code: "DIV-03",
-    name: "Full-Stack & Product Engineering Division",
-    leader: "Product Engineering Team",
-    role: "Lead Full-Stack & UI/UX Engineers",
-    avatar: "/assets/team/hunzila_nisar.jpg",
-    capabilities: [
-      "Next.js 15 & React 19 App Router",
-      "High-Conversion 4K Interface Design",
-      "Real-Time WebSocket & REST Backends",
-      "Micro-Interactions & Framer Motion",
-      "Cross-Platform Responsive Engineering",
-    ],
-    bio: "Our multidisciplinary frontend and full-stack engineering team builds software interfaces that feel instantaneous, gorgeous, and rock-solid under enterprise load.",
-    techStack: ["Next.js", "React", "TypeScript", "Tailwind", "Node.js", "MongoDB"],
+    id: "t3",
+    quote: "Cortelo absolutely blew the previous agency we were working with out of the water. Their self-hosted n8n infrastructure saves us thousands every month with zero SaaS limits.",
+    author: "Naomi Campbell",
+    role: "VP Engineering",
+    company: "Wednesday AI",
+    avatar: "/assets/conversion/img_6.png",
   },
   {
-    id: "cloud-devops",
-    code: "DIV-04",
-    name: "Cloud Infrastructure & Automation Division",
-    leader: "Cloud Infrastructure Specialists",
-    role: "DevOps & VPS Architecture Team",
-    avatar: "/assets/team/hunzila_nisar.jpg",
-    capabilities: [
-      "Self-Hosted n8n Engine Orchestration",
-      "Oracle Cloud & Linux VPS Administration",
-      "Tailscale Private Encrypted Mesh",
-      "CI/CD Pipelines & Docker Containers",
-      "Zero SaaS Subscription Infrastructure",
-    ],
-    bio: "Architects self-hosted, independent server infrastructure that gives companies total autonomy over their data, workflows, and operating costs without recurring per-task platform fees.",
-    techStack: ["Oracle Cloud", "n8n", "Tailscale", "Ubuntu/Debian", "Docker", "Nginx"],
+    id: "t4",
+    quote: "From where we were before Cortelo to where we are now; it's worlds apart. Full intellectual property handover gave our enterprise complete ownership over our proprietary models.",
+    author: "Charlotte Johansen",
+    role: "Founder",
+    company: "Tuesday Tech",
+    avatar: "/assets/conversion/img_14.png",
   },
   {
-    id: "growth-marketing",
-    code: "DIV-05",
-    name: "Growth Marketing & Strategy Division",
-    leader: "Performance Marketing Team",
-    role: "Growth Strategists & Funnel Architects",
-    avatar: "/assets/team/mahreen_hashir.jpg",
-    capabilities: [
-      "High-Ticket Client Acquisition Funnels",
-      "CRM Lead Nurturing & Retargeting",
-      "Conversion Rate Optimization (CRO)",
-      "Data-Driven Marketing Analytics",
-      "Brand Positioning & Offer Architecture",
-    ],
-    bio: "Ensures the technical power of the systems we build translates into tangible market dominance, client acquisition, and measurable revenue acceleration.",
-    techStack: ["CRM Telemetry", "Analytics", "Funnel Automation", "A/B Testing"],
+    id: "t5",
+    quote: "The multi-agent autonomous swarm they architected handles complex customer routing with sub-50ms latency. Zero hallucinations, perfectly formatted JSON outputs every single time.",
+    author: "Jonathan Day",
+    role: "Head of AI",
+    company: "Monday Cloud",
+    avatar: "/assets/conversion/img_15.png",
   },
+  {
+    id: "t6",
+    quote: "They built our entire Next.js 15 platform with strict ASVS L2 security hardening and sub-100ms TTFB. Outstanding full-stack engineering and transparent communication throughout.",
+    author: "Sarah Yanna",
+    role: "Director of Product",
+    company: "Saturday Media",
+    avatar: "/assets/conversion/img_16.png",
+  },
+];
+
+export const CLIENT_LOGOS = [
+  { name: "Nostalgie", image: "/assets/conversion/img_14.png" },
+  { name: "Classicé", image: "/assets/conversion/img_15.png" },
+  { name: "Yogamy", image: "/assets/conversion/img_16.png" },
+  { name: "Friday", image: "/assets/conversion/img_17.png" },
+  { name: "Thursday", image: "/assets/conversion/img_19.png" },
+  { name: "Aether AI", image: "/assets/conversion/img_4.png" },
 ];
 
 export const AGENCY_FAQS = [
   {
-    q: "Who owns the code and intellectual property once a project is completed?",
-    a: "You do — 100%. Upon final milestone acceptance, Cortelo transfers full, unencumbered ownership of all source code, models, configurations, deployment scripts, and architectural assets directly to your private repositories. There are zero licensing lock-ins, zero proprietary platform fees, and zero hidden dependencies.",
+    q: "How do you tailor custom AI and CRM systems for different businesses?",
+    a: "We conduct an in-depth Discovery Milestone during Week 1 to analyze your operational bottlenecks, data pipelines, and sales velocity. We then build custom schemas, deterministic guardrails, and real-time telemetry dashboards deployed exclusively on your private VPS infrastructure.",
   },
   {
-    q: "How does Cortelo's custom CRM compare to Salesforce or HubSpot?",
-    a: "Salesforce and HubSpot charge steep monthly per-seat fees that grow exponentially, force you into rigid data models, and gate custom AI features behind expensive add-ons. We architect custom platforms like Revenue.inc and C17 CRM that are 100% tailored to your exact sales process, hosted on your private VPS, and include custom AI features with zero ongoing per-seat software fees.",
+    q: "Who owns the code and intellectual property once a project is completed?",
+    a: "You do — 100%. Upon final milestone acceptance, Cortelo transfers full, unencumbered ownership of all source code, models, configurations, deployment scripts, and architectural assets directly to your private repositories. There are zero licensing lock-ins and zero ongoing per-seat software fees.",
   },
   {
     q: "Can we review Hunzila Nisar's personal engineering credentials and live portfolio?",
-    a: "Yes! Hunzila Nisar's complete portfolio, verified projects, NAVTTC distinction in AI/ML, and industry experience are live at https://devhunzila.site. You can explore his work, inspect live production deployments, or connect directly via WhatsApp (+92 318 6326746) or LinkedIn.",
+    a: "Yes! Hunzila Nisar's complete portfolio, verified projects, NAVTTC distinction in AI/ML, and industry experience are live at https://devhunzila.site. You can explore his work, inspect production systems, or connect directly via WhatsApp (+92 318 6326746) or LinkedIn.",
   },
   {
     q: "How do your multi-agent AI systems avoid hallucinations and errors?",
     a: "We do not rely on fragile raw prompts. All Cortelo agent workflows are engineered with deterministic schema validation (Zod / Pydantic), grounded Retrieval-Augmented Generation (RAG) with source back-linking, structured function calling, and automated self-correction loops. If a model output fails validation, it is rejected and retried before reaching your client interface.",
   },
   {
+    q: "What makes your self-hosted n8n automation engine superior to Zapier or Make?",
+    a: "Zapier and Make charge steep per-task subscription fees that balloon into thousands of dollars monthly as your volume grows. Our self-hosted n8n engine runs on an isolated Oracle Cloud VPS server connected via a private Tailscale mesh network, processing millions of webhook events with zero third-party platform taxes.",
+  },
+  {
     q: "What is your typical project delivery timeline and process?",
-    a: "We execute in four structured milestones with verified acceptance tests: Milestone 01 (Technical Discovery & Blueprint — Week 1), Milestone 02 (Core Engine & Training — Weeks 2-3), Milestone 03 (Platform Integration & Security — Weeks 4-5), and Milestone 04 (Production Deployment & 100% IP Handover — Week 6).",
+    a: "We execute in four structured milestones with verified acceptance tests: Milestone 01 (Technical Discovery & Blueprint — Week 1), Milestone 02 (Core Engine & Pipelines — Weeks 2-3), Milestone 03 (Platform Integration & Security — Weeks 4-5), and Milestone 04 (Production Deployment & 100% IP Handover — Week 6).",
   },
 ];
