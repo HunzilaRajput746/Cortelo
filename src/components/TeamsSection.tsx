@@ -32,7 +32,7 @@ export default function TeamsSection({ onInitiateProject }: TeamsSectionProps) {
 
   return (
     <div className="space-y-12">
-      
+
       {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
@@ -57,11 +57,10 @@ export default function TeamsSection({ onInitiateProject }: TeamsSectionProps) {
             <button
               key={team.id}
               onClick={() => setSelectedDiv(idx)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono font-semibold transition-all whitespace-nowrap ${
-                isSelected
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono font-semibold transition-all whitespace-nowrap ${isSelected
                   ? "bg-cortelo-mint text-black shadow-[0_0_20px_rgba(45,212,167,0.3)]"
                   : "text-cortelo-muted hover:text-cortelo-text hover:bg-white/5"
-              }`}
+                }`}
             >
               <Icon className="w-3.5 h-3.5" />
               <span>{team.code}</span>
@@ -73,12 +72,12 @@ export default function TeamsSection({ onInitiateProject }: TeamsSectionProps) {
 
       {/* Selected Division Detailed Showcase Card */}
       <div className="glass-panel rounded-2xl p-8 sm:p-12 border border-cortelo-border relative overflow-hidden bg-gradient-to-br from-[#0F131D] to-[#07090E]">
-        
+
         {/* Subtle Specular Ambient Glow */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-cortelo-mint/5 rounded-full filter blur-[100px] pointer-events-none" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
-          
+
           {/* Left Column: Leader & Bio */}
           <div className="lg:col-span-5 space-y-6">
             <div className="flex items-center gap-4">
@@ -168,3 +167,4 @@ export default function TeamsSection({ onInitiateProject }: TeamsSectionProps) {
     </div>
   );
 }
+
