@@ -24,3 +24,4 @@
   - GourmetOS SaaS (Next.js 14)
   - Healthcare AI Oncology Screening (96% Accuracy)
 - Agency: Cortelo — Full-Stack AI & Systems Engineering Studio with 5 specialized divisions (AI Systems, MLOps/Security, Full-Stack Product, Cloud DevOps, Growth Marketing).
+
