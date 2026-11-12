@@ -29,7 +29,7 @@ export default function ProjectDetailModal({
 
       {/* Modal Card */}
       <div className="relative z-10 w-full max-w-4xl max-h-[90vh] glass-panel rounded-2xl border border-cortelo-mint/30 shadow-[0_0_60px_rgba(45,212,167,0.15)] overflow-hidden flex flex-col bg-[#0B0F19]/95 text-cortelo-text animate-in zoom-in-95 duration-200">
-        
+
         {/* Header Bar */}
         <div className="flex items-center justify-between px-6 sm:px-8 py-5 border-b border-cortelo-border/70 bg-[#07090E]/80">
           <div className="flex items-center gap-3">
@@ -52,7 +52,7 @@ export default function ProjectDetailModal({
 
         {/* Modal Scrollable Body */}
         <div className="p-6 sm:p-8 overflow-y-auto space-y-6">
-          
+
           {/* Visual Preview / Mockup */}
           <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-cortelo-border bg-[#07090E] shadow-2xl">
             <Image
@@ -62,7 +62,7 @@ export default function ProjectDetailModal({
               className="object-cover"
               priority
             />
-            {project.status === "Live in Production" && (
+            {(project.status === "Live in Production" || project.status === "Confidential Enterprise CRM" || project.status === "Live VPS Automation") && (
               <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-cortelo-mint/50 flex items-center gap-2 text-[11px] font-mono text-cortelo-mint">
                 <span className="w-2 h-2 rounded-full bg-cortelo-mint animate-pulse" />
                 Live on VPS Infrastructure
@@ -196,3 +196,4 @@ export default function ProjectDetailModal({
     </div>
   );
 }
+
