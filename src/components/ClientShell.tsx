@@ -1,9 +1,9 @@
-import WhatsAppFloat from "./WhatsAppFloat";
-import BackToTop from "./BackToTop";
-import CookieNotice from "./CookieNotice";
 "use client";
 
 import React, { useState, createContext, useContext } from "react";
+import WhatsAppFloat from "./WhatsAppFloat";
+import BackToTop from "./BackToTop";
+import CookieNotice from "./CookieNotice";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ProjectDrawer from "./ProjectDrawer";
