@@ -1,67 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg: #07090E;
-  --surface: #0F131D;
-  --surface2: #161C2B;
-  --text: #F2F0EA;
-  --text-muted: #8C94A6;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(45, 212, 167, 0.4);
-  --mint: #2DD4A7;
-  --glass: rgba(15, 19, 29, 0.75);
+  --bg: #000000;
+  --surface: #0D0D0D;
+  --surface2: #141414;
+  --surface3: #1C1C1C;
+  --text: #FCFCFA;
+  --text-muted: rgba(255, 255, 255, 0.56);
+  --border: rgba(255, 255, 255, 0.10);
+  --border-hover: rgba(255, 69, 51, 0.40);
+  --flame: #FF4533;
+  --flame-hover: #FF220E;
+  --mint: #FF4533;
+  --emerald: #FF220E;
+  --glass: rgba(13, 13, 13, 0.85);
+  --font-serif: 'Instrument Serif', Georgia, serif;
 }
 
 body {
   background-color: var(--bg);
   color: var(--text);
   overflow-x: clip;
-  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
+/* Exact Conversion Font Styles */
+.font-instrument {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0em;
+}
+
+/* Exact Conversion Button Styles */
+.btn-primary,
+.btn-conversion-primary {
+  background-color: #FF4533;
+  color: #FFFFFF;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0px 0px 0px 1px rgba(255, 69, 51, 0.25), 0 0 25px rgba(255, 69, 51, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:hover,
+.btn-conversion-primary:hover {
+  background-color: #FF220E;
+  box-shadow: 0px 0px 0px 1px rgba(255, 69, 51, 0.45), 0 0 35px rgba(255, 69, 51, 0.55);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active,
+.btn-conversion-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary,
+.btn-conversion-secondary {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover,
+.btn-conversion-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active,
+.btn-conversion-secondary:active {
+  transform: scale(0.97);
+}
+
+/* Conversion Glass Card */
 .glass-panel {
-  background: var(--glass);
+  background: rgba(13, 13, 13, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border);
+  transition: border-color 0.3s ease, background 0.3s ease;
 }
 
 .glass-panel:hover {
-  border-color: var(--border-hover);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Custom Scrollbar */
+/* Rotating Conic Gradient Animations (Conversion Style) */
+.conic-flame-orb {
+  background: conic-gradient(red 0deg, #ff001a 54.8deg, #00a6ff 106.7deg, #4797ff 162deg, #04f 252deg, #ff8000 306deg, red 360deg);
+  filter: blur(80px);
+  border-radius: 500px;
+  will-change: transform;
+}
+
+.conic-warm-orb {
+  background: conic-gradient(#ffd9ad 0deg, #139ce5 180deg, #fd864d 360deg);
+  filter: blur(75px);
+  border-radius: 500px;
+  will-change: transform;
+}
+
+/* Custom Sleek Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #07090E;
+  background: #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: #25304A;
-  border-radius: 3px;
+  background: #1c1c1c;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2DD4A7;
+  background: #FF4533;
 }
 
-/* Fluid Focus Visible */
+/* Accessibility Focus Ring */
 *:focus-visible {
-  outline: 2px solid var(--mint);
+  outline: 2px solid #FF4533;
   outline-offset: 2px;
 }
 
-
-
-/* Conversion Glass & Neon Utilities */
-.neon-mint-glow {
-  box-shadow: 0 0 30px rgba(45, 212, 167, 0.25);
+/* Glow Helpers */
+.neon-mint-glow,
+.neon-flame-glow {
+  box-shadow: 0 0 30px rgba(255, 69, 51, 0.3);
 }
 
-.text-glow-mint {
-  text-shadow: 0 0 20px rgba(45, 212, 167, 0.4);
+.text-glow-mint,
+.text-glow-flame {
+  text-shadow: 0 0 20px rgba(255, 69, 51, 0.4);
 }
