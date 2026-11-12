@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ExternalLink, User, Sparkles, MessageSquare } from "lucide-react";
+import { ExternalLink, User, MessageSquare } from "lucide-react";
 import { FOUNDER_DATA } from "@/lib/agencyData";
 
 interface NavbarProps {
@@ -16,19 +16,19 @@ export default function Navbar({ onOpenDrawer, onOpenFounderModal }: NavbarProps
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { label: "01 Systems", href: "/#systems" },
-    { label: "02 Work & CRMs", href: "/#work" },
-    { label: "03 Teams", href: "/#teams" },
-    { label: "04 Scope Blueprint", href: "/#blueprint" },
-    { label: "05 Process", href: "/process" },
-    { label: "06 Contact", href: "/contact" },
+    { label: "About", href: "/about" },
+    { label: "Services", href: "/#services" },
+    { label: "Results", href: "/#results" },
+    { label: "Process", href: "/#process" },
+    { label: "Team", href: "/#team" },
+    { label: "FAQs", href: "/#faq" },
   ];
 
   return (
     <header className="fixed top-4 left-0 right-0 z-40 max-w-[1440px] mx-auto px-4 sm:px-8 pointer-events-none">
       <div className="flex items-center justify-between pointer-events-auto">
-        
-        {/* Left: CORTELO Brand Mark Pill */}
+
+        {/* Left: Brand Mark */}
         <div className="flex items-center gap-3">
           <Link
             href="/"
@@ -38,15 +38,15 @@ export default function Navbar({ onOpenDrawer, onOpenFounderModal }: NavbarProps
             <span>CORTELO</span>
           </Link>
 
-          {/* Operational Status Ticker (Desktop) */}
+          {/* Operational Status (Desktop) */}
           <div className="hidden xl:flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cortelo-border/50 bg-[#07090E]/60 backdrop-blur-md text-[11px] font-mono text-cortelo-muted">
             <span className="w-1.5 h-1.5 rounded-full bg-cortelo-mint animate-pulse" />
-            <span>OPERATIONAL &bull; PKT (UTC+5)</span>
+            <span>AI SYSTEMS STUDIO &bull; PKT (UTC+5)</span>
           </div>
         </div>
 
-        {/* Center: Coordinates Navigation */}
-        <nav className="hidden lg:flex items-center gap-6 px-6 py-2.5 rounded-full border border-cortelo-border/60 bg-[#0B0F19]/80 backdrop-blur-md text-xs font-mono tracking-wider">
+        {/* Center: Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-7 px-7 py-2.5 rounded-full border border-cortelo-border/60 bg-[#0B0F19]/80 backdrop-blur-md text-xs font-medium tracking-wide">
           {navItems.map((item) => (
             <Link
               key={item.label}
@@ -58,18 +58,18 @@ export default function Navbar({ onOpenDrawer, onOpenFounderModal }: NavbarProps
           ))}
         </nav>
 
-        {/* Right: Founder Portfolio Pill & Initiate Project CTA */}
+        {/* Right: Founder Portfolio Pill & Book a call CTA */}
         <div className="flex items-center gap-2.5 sm:gap-3">
-          
+
           {/* Founder Portfolio Button */}
           <button
             onClick={onOpenFounderModal}
-            className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-full border border-cortelo-border/70 bg-[#0B0F19]/80 backdrop-blur-md text-cortelo-text hover:border-cortelo-mint hover:text-cortelo-mint text-xs font-mono transition-all shadow-md group"
+            className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-full border border-cortelo-border/70 bg-[#0B0F19]/80 backdrop-blur-md text-cortelo-text hover:border-cortelo-mint hover:text-cortelo-mint text-xs font-mono transition-all shadow-md group cursor-pointer"
             title="Inspect Founder Hunzila Nisar's Verified Portfolio & Credentials"
           >
             <User className="w-3.5 h-3.5 text-cortelo-mint group-hover:scale-110 transition-transform" />
             <span className="hidden sm:inline">Founder Portfolio</span>
-            <span className="sm:hidden">Portfolio</span>
+            <span className="sm:hidden">Founder</span>
           </button>
 
           {/* Direct WhatsApp CTA */}
@@ -78,18 +78,18 @@ export default function Navbar({ onOpenDrawer, onOpenFounderModal }: NavbarProps
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 text-xs font-mono transition-all"
-            title="Chat directly on WhatsApp"
+            title="Chat directly with founder on WhatsApp"
           >
             <MessageSquare className="w-3.5 h-3.5" />
             <span className="hidden md:inline">WhatsApp</span>
           </a>
 
-          {/* Initiate Project Pill */}
+          {/* Book a call Pill */}
           <button
             onClick={onOpenDrawer}
-            className="px-4 sm:px-5 py-2 rounded-full bg-cortelo-mint text-black font-bold text-xs uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all shadow-[0_0_20px_rgba(45,212,167,0.35)]"
+            className="px-4 sm:px-5 py-2 rounded-full bg-cortelo-mint text-black font-bold text-xs uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all shadow-[0_0_20px_rgba(45,212,167,0.35)] cursor-pointer"
           >
-            Initiate Project
+            Book a call
           </button>
 
           {/* Mobile hamburger */}
@@ -117,13 +117,13 @@ export default function Navbar({ onOpenDrawer, onOpenFounderModal }: NavbarProps
               <span className="text-cortelo-mint">&rarr;</span>
             </Link>
           ))}
-          
+
           <button
             onClick={() => {
               setMobileMenuOpen(false);
               onOpenFounderModal();
             }}
-            className="py-2 text-left text-cortelo-mint flex items-center justify-between border-b border-cortelo-border/40"
+            className="py-2 text-left text-cortelo-mint flex items-center justify-between border-b border-cortelo-border/40 cursor-pointer"
           >
             <span>Founder Portfolio (devhunzila.site)</span>
             <ExternalLink className="w-3.5 h-3.5" />
