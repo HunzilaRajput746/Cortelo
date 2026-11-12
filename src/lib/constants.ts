@@ -4,8 +4,8 @@ export const AGENCY_CONFIG = {
   tagline: "Autonomous AI & Intelligent Systems Studio",
   url: "https://cortelo.ai",
   contact: {
-    phone: "+92 318 6326746",
-    whatsapp: "https://wa.me/923186326746",
+    phone: "Available upon inquiry",
+    whatsapp: "/contact",
     email: "hunzilanisar746@gmail.com",
     agencyEmail: "hello@cortelo.ai",
     fiverr: "https://fiverr.com/huzaifae3742",

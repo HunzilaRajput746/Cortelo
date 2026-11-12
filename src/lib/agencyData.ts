@@ -75,8 +75,8 @@ export const FOUNDER_DATA = {
   fiverrUrl: "https://fiverr.com/huzaifae3742",
   githubUrl: "https://github.com/HunzilaRajput746",
   linkedinUrl: "https://linkedin.com/in/hunzila-nisar-ai",
-  whatsappUrl: "https://wa.me/923186326746",
-  phone: "+92 318 6326746",
+  whatsappUrl: "/contact",
+  phone: "Available upon inquiry",
   email: "hunzilanisar746@gmail.com",
   agencyEmail: "hello@cortelo.ai",
   location: "Lodhran, Punjab, Pakistan (Global Remote Delivery)",
@@ -102,7 +102,7 @@ export const AGENCY_TEAM_ROSTER: TeamMember[] = [
     specialties: ["Multi-Agent Swarms", "Custom CRMs", "LangGraph", "PyTorch", "Next.js"],
     linkedinUrl: "https://linkedin.com/in/hunzila-nisar-ai",
     portfolioUrl: "https://devhunzila.site",
-    whatsappUrl: "https://wa.me/923186326746",
+    whatsappUrl: "/contact",
   },
   {
     id: "mahreen-hashir",
@@ -700,7 +700,7 @@ export const AGENCY_FAQS = [
   },
   {
     q: "Can we review Hunzila Nisar's personal engineering credentials and live portfolio?",
-    a: "Yes! Hunzila Nisar's complete portfolio, verified projects, NAVTTC distinction in AI/ML, and industry experience are live at https://devhunzila.site. You can explore his work, inspect production systems, or connect directly via WhatsApp (+92 318 6326746) or LinkedIn.",
+    a: "Yes! Hunzila Nisar's complete portfolio, verified projects, NAVTTC distinction in AI/ML, and industry experience are live at https://devhunzila.site. You can explore his work, inspect production systems, or connect directly via email (hunzilanisar746@gmail.com) or LinkedIn.",
   },
   {
     q: "How do your multi-agent AI systems avoid hallucinations and errors?",
