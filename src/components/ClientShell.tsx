@@ -16,9 +16,9 @@ interface ShellContextType {
 }
 
 const ShellContext = createContext<ShellContextType>({
-  openDrawer: () => {},
-  openFounderModal: () => {},
-  openProjectModal: () => {},
+  openDrawer: () => { },
+  openFounderModal: () => { },
+  openProjectModal: () => { },
 });
 
 export const useAgencyShell = () => useContext(ShellContext);
