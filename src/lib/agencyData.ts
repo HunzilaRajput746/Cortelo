@@ -337,14 +337,14 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     ],
   },
   {
-    id: "c17-crm",
+    id: "deal-engine",
     title: "AI Lead & Deal Management Platform",
     subtitle: "AI Lead Scoring, Multi-Stage Pipelines & Workflow Triggers",
     client: "Commercial SaaS Client (Confidential)",
     badge: "AI DEAL ENGINE",
     category: "AI & CRM Infrastructure",
     status: "Confidential Enterprise CRM",
-    previewImage: "/assets/projects/c17_crm_preview.svg",
+    previewImage: "/assets/projects/deal_engine_preview.svg",
     video: "/assets/videos/case_study_2.mp4",
     description:
       "Production-ready customer relationship & lead management CRM in active commercial operation. Features AI-powered automated lead qualification, customer lifecycle stage tracking, multi-stage sales pipelines, and automated webhook triggers, running securely on a private VPS network.",
