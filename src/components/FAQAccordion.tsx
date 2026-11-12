@@ -1,34 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
-
-const faqs = [
-  {
-    q: "What are your typical project timelines from architecture to deployment?",
-    a: "Technical discovery takes 1 week. Complete production systems (AI models, pipelines, and full-stack interfaces) typically take 4 to 8 weeks depending on model complexity, integrations, and compliance benchmarks.",
-  },
-  {
-    q: "Who owns the intellectual property and model checkpoints?",
-    a: "You own 100% of all intellectual property, source code, dataset transformations, prompts, and trained model checkpoints from day one. Everything is deployed directly to your private cloud infrastructure.",
-  },
-  {
-    q: "What is your pricing and engagement model?",
-    a: "We operate exclusively on fixed-scope milestone deliverables or monthly dedicated engineering retainers. You receive clear cost boundaries with zero surprise billing.",
-  },
-  {
-    q: "How do you handle confidential enterprise data and NDAs?",
-    a: "We execute mutual non-disclosure agreements before inspecting any project material. All training and inference environments operate within isolated VPCs, with no data ever shared with third-party public training corpora.",
-  },
-  {
-    q: "What post-launch maintenance is included?",
-    a: "Every deployment includes 30 days of comprehensive post-launch telemetry monitoring, bug fixes, and performance tuning, with optional SLA-backed retainer packages for continuous model retraining.",
-  },
-  {
-    q: "Can Cortelo work alongside our internal engineering team?",
-    a: "Yes. We frequently embed with enterprise engineering teams as specialized AI architects, handling model development and pipeline hardening while holding weekly architecture synchronization sessions.",
-  },
-];
+import { ChevronDown, ExternalLink } from "lucide-react";
+import { AGENCY_FAQS, FOUNDER_DATA } from "@/lib/agencyData";
 
 export default function FAQAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -39,12 +13,14 @@ export default function FAQAccordion() {
 
   return (
     <div className="space-y-4">
-      {faqs.map((faq, index) => {
+      {AGENCY_FAQS.map((faq, index) => {
         const isOpen = openIndex === index;
         return (
           <div
             key={index}
-            className="glass-panel rounded-2xl border border-cortelo-border overflow-hidden transition-all"
+            className={`glass-panel rounded-2xl border transition-all ${
+              isOpen ? "border-cortelo-mint/40 bg-[#0F131D]/90" : "border-cortelo-border bg-[#0F131D]/60"
+            }`}
           >
             <button
               onClick={() => toggle(index)}
@@ -61,7 +37,20 @@ export default function FAQAccordion() {
             </button>
             {isOpen && (
               <div className="px-6 pb-6 text-sm text-cortelo-muted leading-relaxed font-light border-t border-cortelo-border/50 pt-4 animate-in fade-in duration-200">
-                {faq.a}
+                <p>{faq.a}</p>
+                {index === 2 && (
+                  <div className="mt-3 pt-3 border-t border-cortelo-border/40 flex items-center gap-3">
+                    <a
+                      href={FOUNDER_DATA.portfolioUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-cortelo-mint hover:underline font-semibold"
+                    >
+                      <span>Explore Live Portfolio (devhunzila.site)</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -70,4 +59,3 @@ export default function FAQAccordion() {
     </div>
   );
 }
-

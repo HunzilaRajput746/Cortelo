@@ -1,0 +1,99 @@
+<svg width='800' height='450' viewBox='0 0 800 450' fill='none' xmlns='http://www.w3.org/2000/svg'>
+  <rect width='800' height='450' rx='16' fill='#0B0F19'/>
+  <rect x='1' y='1' width='798' height='448' rx='15' stroke='rgba(255,255,255,0.08)'/>
+  
+  <!-- Top Bar -->
+  <rect x='0' y='0' width='800' height='48' rx='16 16 0 0' fill='#07090E'/>
+  <circle cx='24' cy='24' r='5' fill='#EF4444'/>
+  <circle cx='40' cy='24' r='5' fill='#F59E0B'/>
+  <circle cx='56' cy='24' r='5' fill='#10B981'/>
+  <rect x='100' y='12' width='360' height='24' rx='6' fill='#161C2B'/>
+  <text x='115' y='28' font-family='monospace' font-size='11' fill='#8C94A6'>https://dashboard.revenue.inc (Tailscale VPS)</text>
+  <rect x='670' y='12' width='110' height='24' rx='12' fill='rgba(45,212,167,0.15)' stroke='rgba(45,212,167,0.4)'/>
+  <circle cx='682' cy='24' r='3.5' fill='#2DD4A7'/>
+  <text x='692' y='28' font-family='monospace' font-size='10' font-weight='bold' fill='#2DD4A7'>LIVE PROD</text>
+
+  <!-- Left Sidebar -->
+  <rect x='16' y='64' width='160' height='370' rx='10' fill='#0F131D' stroke='rgba(255,255,255,0.05)'/>
+  <text x='32' y='96' font-family='sans-serif' font-weight='800' font-size='14' fill='#F2F0EA'>REVENUE.INC</text>
+  <rect x='28' y='115' width='136' height='28' rx='6' fill='rgba(45,212,167,0.1)' stroke='rgba(45,212,167,0.3)'/>
+  <text x='40' y='133' font-family='monospace' font-size='11' fill='#2DD4A7'>📊 Sales Analytics</text>
+  <text x='40' y='165' font-family='monospace' font-size='11' fill='#8C94A6'>🎯 Deal Kanban</text>
+  <text x='40' y='195' font-family='monospace' font-size='11' fill='#8C94A6'>📞 Call Tracking</text>
+  <text x='40' y='225' font-family='monospace' font-size='11' fill='#8C94A6'>🤖 AI Workflows</text>
+  <text x='40' y='255' font-family='monospace' font-size='11' fill='#8C94A6'>⚡ Sprint Board</text>
+  <text x='40' y='285' font-family='monospace' font-size='11' fill='#8C94A6'>📜 SOP Engine</text>
+  
+  <rect x='28' y='360' width='136' height='58' rx='8' fill='#161C2B'/>
+  <text x='36' y='380' font-family='monospace' font-size='9' fill='#8C94A6'>INFRASTRUCTURE</text>
+  <text x='36' y='396' font-family='monospace' font-size='10' font-weight='bold' fill='#2DD4A7'>Tailscale Mesh VPS</text>
+  <text x='36' y='410' font-family='monospace' font-size='9' fill='#8C94A6'>Latency: 28ms P99</text>
+
+  <!-- Metric Cards Row -->
+  <g transform='translate(192, 64)'>
+    <!-- Card 1 -->
+    <rect x='0' y='0' width='188' height='80' rx='10' fill='#0F131D' stroke='rgba(255,255,255,0.06)'/>
+    <text x='16' y='24' font-family='monospace' font-size='10' fill='#8C94A6'>CLOSED TCV (YTD)</text>
+    <text x='16' y='52' font-family='sans-serif' font-weight='800' font-size='22' fill='#F2F0EA'>,480,250</text>
+    <text x='16' y='70' font-family='monospace' font-size='10' fill='#2DD4A7'>▲ +34.2% vs last Q</text>
+
+    <!-- Card 2 -->
+    <rect x='200' y='0' width='188' height='80' rx='10' fill='#0F131D' stroke='rgba(255,255,255,0.06)'/>
+    <text x='216' y='24' font-family='monospace' font-size='10' fill='#8C94A6'>SIGNED MRR</text>
+    <text x='216' y='52' font-family='sans-serif' font-weight='800' font-size='22' fill='#2DD4A7'>,800</text>
+    <text x='216' y='70' font-family='monospace' font-size='10' fill='#8C94A6'>42 Active Contracts</text>
+
+    <!-- Card 3 -->
+    <rect x='400' y='0' width='188' height='80' rx='10' fill='#0F131D' stroke='rgba(255,255,255,0.06)'/>
+    <text x='416' y='24' font-family='monospace' font-size='10' fill='#8C94A6'>CALL CONVERSION</text>
+    <text x='416' y='52' font-family='sans-serif' font-weight='800' font-size='22' fill='#38BDF8'>28.4%</text>
+    <text x='416' y='70' font-family='monospace' font-size='10' fill='#2DD4A7'>▲ +6.1% AI Qualification</text>
+  </g>
+
+  <!-- Interactive Chart Area -->
+  <g transform='translate(192, 160)'>
+    <rect x='0' y='0' width='588' height='150' rx='10' fill='#0F131D' stroke='rgba(255,255,255,0.06)'/>
+    <text x='20' y='28' font-family='sans-serif' font-weight='700' font-size='13' fill='#F2F0EA'>Real-Time Revenue Velocity &amp; Sprint Velocity</text>
+    <text x='480' y='28' font-family='monospace' font-size='10' fill='#2DD4A7'>● Live Stream</text>
+    
+    <!-- Chart Grid Lines -->
+    <line x1='20' y1='60' x2='568' y2='60' stroke='rgba(255,255,255,0.04)'/>
+    <line x1='20' y1='95' x2='568' y2='95' stroke='rgba(255,255,255,0.04)'/>
+    <line x1='20' y1='130' x2='568' y2='130' stroke='rgba(255,255,255,0.04)'/>
+
+    <!-- Glowing Vector Curve -->
+    <path d='M 30 120 Q 100 110, 160 85 T 300 70 T 420 50 T 560 38' fill='none' stroke='#2DD4A7' stroke-width='3'/>
+    <path d='M 30 120 Q 100 110, 160 85 T 300 70 T 420 50 T 560 38 L 560 140 L 30 140 Z' fill='url(#gradMint)' opacity='0.2'/>
+  </g>
+
+  <!-- Kanban Snapshot Row -->
+  <g transform='translate(192, 324)'>
+    <rect x='0' y='0' width='188' height='110' rx='8' fill='#161C2B' stroke='rgba(255,255,255,0.05)'/>
+    <text x='12' y='20' font-family='monospace' font-size='10' font-weight='bold' fill='#8C94A6'>SPRINT IN PROGRESS (4)</text>
+    <rect x='10' y='32' width='168' height='32' rx='5' fill='#0F131D'/>
+    <text x='18' y='52' font-family='sans-serif' font-size='10' fill='#F2F0EA'>AI Lead Scoring Hook v2</text>
+    <rect x='10' y='70' width='168' height='32' rx='5' fill='#0F131D'/>
+    <text x='18' y='90' font-family='sans-serif' font-size='10' fill='#F2F0EA'>Stripe Webhook Sync</text>
+
+    <rect x='200' y='0' width='188' height='110' rx='8' fill='#161C2B' stroke='rgba(255,255,255,0.05)'/>
+    <text x='212' y='20' font-family='monospace' font-size='10' font-weight='bold' fill='#8C94A6'>NEEDS CODE REVIEW (2)</text>
+    <rect x='210' y='32' width='168' height='32' rx='5' fill='#0F131D'/>
+    <text x='218' y='52' font-family='sans-serif' font-size='10' fill='#F2F0EA'>Tailscale ACL Rule Update</text>
+    <rect x='210' y='70' width='168' height='32' rx='5' fill='#0F131D'/>
+    <text x='218' y='90' font-family='sans-serif' font-size='10' fill='#F2F0EA'>Kanban Drag-Drop Fix</text>
+
+    <rect x='400' y='0' width='188' height='110' rx='8' fill='#161C2B' stroke='rgba(255,255,255,0.05)'/>
+    <text x='412' y='20' font-family='monospace' font-size='10' font-weight='bold' fill='#2DD4A7'>DEPLOYED LIVE (18)</text>
+    <rect x='410' y='32' width='168' height='32' rx='5' fill='#0F131D' stroke='rgba(45,212,167,0.3)'/>
+    <text x='418' y='52' font-family='sans-serif' font-size='10' fill='#2DD4A7'>✓ Revenue Velocity Chart</text>
+    <rect x='410' y='70' width='168' height='32' rx='5' fill='#0F131D' stroke='rgba(45,212,167,0.3)'/>
+    <text x='418' y='90' font-family='sans-serif' font-size='10' fill='#2DD4A7'>✓ Sentry Error Tracking</text>
+  </g>
+
+  <defs>
+    <linearGradient id='gradMint' x1='0' y1='0' x2='0' y2='1'>
+      <stop offset='0%' stop-color='#2DD4A7' stop-opacity='0.8'/>
+      <stop offset='100%' stop-color='#2DD4A7' stop-opacity='0'/>
+    </linearGradient>
+  </defs>
+</svg>

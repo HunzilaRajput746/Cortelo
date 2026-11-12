@@ -14,3 +14,4 @@ for url in urls:
             print(url, 'spline scenes:', set(spline[:5]))
     except Exception as e:
         print(url, 'error:', e)
+

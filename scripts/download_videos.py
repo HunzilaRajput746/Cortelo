@@ -20,3 +20,4 @@ for url, dest in video_urls:
         print(f"Saved {dest} ({os.path.getsize(dest)} bytes)")
     except Exception as e:
         print(f"Error downloading {url}: {e}")
+

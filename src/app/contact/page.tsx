@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, Clock, ShieldCheck, MapPin } from "lucide-react";
+import { Mail, Clock, ShieldCheck, MapPin, MessageSquare, ExternalLink, Award, User } from "lucide-react";
+import { FOUNDER_DATA } from "@/lib/agencyData";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -9,8 +10,8 @@ export default function ContactPage() {
     name: "",
     email: "",
     company: "",
-    service: "AI Automation & Agents",
-    budget: "$25,000 – $50,000",
+    service: "Custom CRM & Revenue Architecture (Revenue.inc Style)",
+    budget: "$25,000 – $50,000 (Full Production Deployment)",
     message: "",
   });
 
@@ -21,47 +22,58 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen pt-36 pb-24 px-6 relative z-10">
-      <div className="max-w-[1360px] mx-auto space-y-16">
+      <div className="max-w-[1440px] mx-auto space-y-16">
         
         <div className="max-w-3xl space-y-4">
-          <span className="text-xs font-mono text-cortelo-mint tracking-widest uppercase">
-            05 &bull; Direct Contact
-          </span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cortelo-mint/40 bg-cortelo-mint/10 text-xs font-mono text-cortelo-mint font-semibold uppercase">
+            <span>Direct Founder Access &bull; 06 Contact</span>
+          </div>
           <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-cortelo-text">
             Initiate Architecture Briefing.
           </h1>
           <p className="text-base text-cortelo-muted leading-relaxed font-light">
-            We reply within 1 business day. Every inquiry is personally reviewed by founders Hunzila Nisar and Mahreen Hashir.
+            We respond within 24 hours. Every inquiry is personally reviewed by founders <strong>Hunzila Nisar</strong> and <strong>Mahreen Hashir</strong>. Mutual NDA enforced.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
-          {/* Form Column */}
-          <div className="lg:col-span-7 glass-panel rounded-2xl p-8 md:p-12 border border-cortelo-border">
+          {/* Form Column (7 cols) */}
+          <div className="lg:col-span-7 glass-panel rounded-2xl p-8 md:p-12 border border-cortelo-mint/40 bg-[#0F131D]/90 shadow-xl">
             {submitted ? (
               <div className="p-10 rounded-xl border border-cortelo-mint/50 bg-cortelo-surface/80 text-center space-y-4">
-                <div className="w-12 h-12 mx-auto rounded-full bg-cortelo-mint/20 text-cortelo-mint flex items-center justify-center font-bold text-xl">
+                <div className="w-14 h-14 mx-auto rounded-full bg-cortelo-mint/20 text-cortelo-mint flex items-center justify-center font-bold text-2xl shadow-[0_0_20px_rgba(45,212,167,0.3)]">
                   ✓
                 </div>
                 <h3 className="text-2xl font-bold uppercase text-cortelo-text">
                   Briefing Received
                 </h3>
                 <p className="text-sm text-cortelo-muted max-w-md mx-auto font-light leading-relaxed">
-                  Thank you, <strong>{formData.name}</strong>. Your project briefing has been delivered directly to Hunzila Nisar and Mahreen Hashir. We will respond with an architectural assessment within 24 hours.
+                  Thank you, <strong>{formData.name}</strong>. Your project specifications have been delivered directly to Hunzila Nisar &amp; team. We will respond with an architectural assessment within 24 hours.
                 </p>
+                <div className="pt-4 border-t border-cortelo-border">
+                  <a
+                    href={FOUNDER_DATA.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-xs font-mono font-semibold hover:bg-emerald-500/30 transition-all"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    <span>Chat on WhatsApp (+92 318 6326746)</span>
+                  </a>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-xs font-mono text-cortelo-muted mb-2 uppercase">
-                      Your Name *
+                      Your Name / Principal *
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="Alex Mercer"
+                      placeholder="e.g. Alex Mercer"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full h-12 px-4 rounded-lg bg-cortelo-surface border border-cortelo-border text-sm text-cortelo-text focus:border-cortelo-mint outline-none transition-colors"
@@ -89,7 +101,7 @@ export default function ContactPage() {
                     </label>
                     <input
                       type="text"
-                      placeholder="Acme Corp"
+                      placeholder="Acme Systems Corp"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       className="w-full h-12 px-4 rounded-lg bg-cortelo-surface border border-cortelo-border text-sm text-cortelo-text focus:border-cortelo-mint outline-none transition-colors"
@@ -104,18 +116,19 @@ export default function ContactPage() {
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                       className="w-full h-12 px-4 rounded-lg bg-cortelo-surface border border-cortelo-border text-sm text-cortelo-text focus:border-cortelo-mint outline-none transition-colors"
                     >
-                      <option>AI Automation & Agents</option>
-                      <option>Custom Machine Learning Core</option>
-                      <option>Generative AI & LLM Systems</option>
-                      <option>Full-Stack Web & Mobile</option>
-                      <option>Data Pipelines & MLOps</option>
+                      <option>Custom CRM & Revenue Architecture (Revenue.inc Style)</option>
+                      <option>Autonomous AI Agents & Multi-Agent Swarms</option>
+                      <option>Workflow Automation & Self-Hosted n8n VPS</option>
+                      <option>Full-Stack Web & Next.js 15 Platform Engineering</option>
+                      <option>Classic AI, Deep Learning & Computer Vision</option>
+                      <option>Growth Marketing & High-Ticket Funnel Strategy</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-mono text-cortelo-muted mb-2 uppercase">
-                    Estimated Project Scope / Investment
+                    Target Scope / Investment Range
                   </label>
                   <select
                     value={formData.budget}
@@ -139,13 +152,13 @@ export default function ContactPage() {
                     placeholder="Describe your current bottleneck, target metrics, or system requirements..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full p-4 rounded-lg bg-cortelo-surface border border-cortelo-border text-sm text-cortelo-text focus:border-cortelo-mint outline-none transition-colors"
+                    className="w-full p-4 rounded-lg bg-cortelo-surface border border-cortelo-border text-xs font-mono text-cortelo-text focus:border-cortelo-mint outline-none transition-colors"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full h-14 rounded-full bg-cortelo-mint text-black font-bold text-sm tracking-wide uppercase hover:opacity-90 active:scale-[0.99] transition-all shadow-[0_0_24px_rgba(45,212,167,0.3)]"
+                  className="w-full h-14 rounded-full bg-cortelo-mint text-black font-bold text-xs tracking-wider uppercase hover:opacity-90 active:scale-[0.99] transition-all shadow-[0_0_24px_rgba(45,212,167,0.35)]"
                 >
                   Submit Briefing Direct to Founders
                 </button>
@@ -153,60 +166,94 @@ export default function ContactPage() {
             )}
           </div>
 
-          {/* Details Column */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="glass-panel rounded-2xl p-8 border border-cortelo-border space-y-6">
-              <h3 className="text-xl font-bold uppercase text-cortelo-text">
-                Direct Communication Channels
-              </h3>
+          {/* Details & Direct Contact Channels Column (5 cols) */}
+          <div className="lg:col-span-5 space-y-6">
+            
+            {/* Quick Founder Channels Box */}
+            <div className="glass-panel rounded-2xl p-8 border border-cortelo-mint/40 bg-[#0F131D]/90 space-y-5">
+              <span className="text-xs font-mono uppercase tracking-wider text-cortelo-mint font-semibold">
+                Priority Communication Channels
+              </span>
               
-              <div className="space-y-4 text-xs font-mono text-cortelo-muted">
-                <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-cortelo-mint shrink-0" />
-                  <div>
-                    <div className="text-cortelo-text font-bold">General Inquiries</div>
-                    <a href="mailto:hello@cortelo.ai" className="hover:text-cortelo-mint underline">
-                      hello@cortelo.ai
-                    </a>
+              <div className="space-y-4 text-xs font-mono">
+                <a
+                  href={FOUNDER_DATA.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl border border-emerald-500/40 bg-emerald-500/10 flex items-center justify-between hover:bg-emerald-500/20 transition-all text-emerald-400 group"
+                >
+                  <div className="flex items-center gap-3">
+                    <MessageSquare className="w-5 h-5" />
+                    <div>
+                      <div className="font-bold text-cortelo-text">Direct WhatsApp</div>
+                      <div className="text-[11px] text-emerald-400">+92 318 6326746</div>
+                    </div>
                   </div>
-                </div>
+                  <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </a>
 
-                <div className="flex items-start gap-3">
-                  <ShieldCheck className="w-5 h-5 text-cortelo-mint shrink-0" />
-                  <div>
-                    <div className="text-cortelo-text font-bold">Security Reporting</div>
-                    <a href="mailto:security@cortelo.ai" className="hover:text-cortelo-mint underline">
-                      security@cortelo.ai
-                    </a>
+                <a
+                  href={`mailto:${FOUNDER_DATA.email}`}
+                  className="p-4 rounded-xl border border-cortelo-border bg-cortelo-surface flex items-center justify-between hover:border-cortelo-mint transition-all text-cortelo-muted hover:text-cortelo-text group"
+                >
+                  <div className="flex items-center gap-3">
+                    <Mail className="w-5 h-5 text-cortelo-mint" />
+                    <div>
+                      <div className="font-bold text-cortelo-text">Direct Founder Email</div>
+                      <div className="text-[11px] text-cortelo-muted">{FOUNDER_DATA.email}</div>
+                    </div>
                   </div>
-                </div>
+                  <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </a>
 
-                <div className="flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-cortelo-mint shrink-0" />
-                  <div>
-                    <div className="text-cortelo-text font-bold">Response Expectation</div>
-                    <div>Within 1 business day &bull; PKT (UTC+5)</div>
+                <a
+                  href={FOUNDER_DATA.portfolioUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl border border-cortelo-border bg-cortelo-surface flex items-center justify-between hover:border-cortelo-mint transition-all text-cortelo-muted hover:text-cortelo-text group"
+                >
+                  <div className="flex items-center gap-3">
+                    <User className="w-5 h-5 text-cortelo-mint" />
+                    <div>
+                      <div className="font-bold text-cortelo-text">Hunzila Nisar Portfolio</div>
+                      <div className="text-[11px] text-cortelo-muted">devhunzila.site</div>
+                    </div>
                   </div>
-                </div>
+                  <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </a>
 
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-cortelo-mint shrink-0" />
-                  <div>
-                    <div className="text-cortelo-text font-bold">Global Remote Studio</div>
-                    <div>Serving enterprise clients across US, EU, and APAC</div>
+                <a
+                  href={FOUNDER_DATA.fiverrUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl border border-green-500/30 bg-green-500/5 flex items-center justify-between hover:border-green-400 transition-all text-green-400 group"
+                >
+                  <div className="flex items-center gap-3">
+                    <Award className="w-5 h-5 text-green-400" />
+                    <div>
+                      <div className="font-bold text-cortelo-text">Fiverr Pro Services</div>
+                      <div className="text-[11px] text-green-400">Top Rated Seller Profile</div>
+                    </div>
                   </div>
-                </div>
+                  <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </a>
               </div>
             </div>
 
-            <div className="glass-panel rounded-2xl p-8 border border-cortelo-border space-y-4">
+            {/* Response Time & NDA Box */}
+            <div className="glass-panel rounded-2xl p-8 border border-cortelo-border space-y-4 bg-[#0F131D]/80">
+              <div className="flex items-center gap-2 text-xs font-mono text-cortelo-mint">
+                <Clock className="w-4 h-4" />
+                <span>Response SLA: Within 24 Hours</span>
+              </div>
               <h4 className="text-sm font-bold uppercase text-cortelo-text">
-                Mutual Non-Disclosure (NDA)
+                Mutual Non-Disclosure Agreement
               </h4>
               <p className="text-xs text-cortelo-muted leading-relaxed font-light">
-                We execute bilateral NDAs before reviewing proprietary datasets, internal source code, or architecture diagrams.
+                We sign and enforce bilateral NDAs before reviewing any proprietary datasets, CRM architectures, or enterprise codebases.
               </p>
             </div>
+
           </div>
 
         </div>
@@ -215,4 +262,3 @@ export default function ContactPage() {
     </main>
   );
 }
-

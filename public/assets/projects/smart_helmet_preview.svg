@@ -1,0 +1,31 @@
+<svg width='800' height='450' viewBox='0 0 800 450' fill='none' xmlns='http://www.w3.org/2000/svg'>
+  <rect width='800' height='450' rx='16' fill='#0B0F19'/>
+  <rect x='1' y='1' width='798' height='448' rx='15' stroke='rgba(255,255,255,0.08)'/>
+  <rect x='0' y='0' width='800' height='48' rx='16 16 0 0' fill='#07090E'/>
+  <circle cx='24' cy='24' r='5' fill='#EF4444'/><circle cx='40' cy='24' r='5' fill='#F59E0B'/><circle cx='56' cy='24' r='5' fill='#10B981'/>
+  <rect x='100' y='12' width='380' height='24' rx='6' fill='#161C2B'/>
+  <text x='115' y='28' font-family='monospace' font-size='11' fill='#8C94A6'>IoT Telemetry: ESP32 GPS + Crash Detection</text>
+  <rect x='670' y='12' width='110' height='24' rx='12' fill='rgba(16,185,129,0.15)' stroke='rgba(16,185,129,0.4)'/>
+  <circle cx='682' cy='24' r='3.5' fill='#10B981'/>
+  <text x='692' y='28' font-family='monospace' font-size='10' font-weight='bold' fill='#10B981'>A+ GRADE FYP</text>
+  <g transform='translate(40, 75)'>
+    <text x='0' y='20' font-family='sans-serif' font-weight='800' font-size='20' fill='#F2F0EA'>SMART HELMET &amp; CRASH SYSTEM</text>
+    <text x='0' y='42' font-family='monospace' font-size='11' fill='#8C94A6'>ESP32 • MPU6050 Accelerometer • NEO-6M GPS • Leaflet.js • Face-API (90% Acc)</text>
+    <rect x='0' y='65' width='440' height='270' rx='10' fill='#0F131D' stroke='rgba(255,255,255,0.06)'/>
+    <rect x='12' y='12' width='416' height='246' rx='8' fill='#161C2B'/>
+    <text x='24' y='36' font-family='monospace' font-size='11' fill='#2DD4A7'>📍 Real-Time Leaflet GPS Route Map (30.1575° N, 71.5249° E)</text>
+    <circle cx='180' cy='140' r='10' fill='rgba(45,212,167,0.3)'/><circle cx='180' cy='140' r='4' fill='#2DD4A7'/>
+    <path d='M 60 200 Q 120 160, 180 140 T 320 100 T 380 70' fill='none' stroke='#2DD4A7' stroke-width='3' stroke-dasharray='6 3'/>
+    <g transform='translate(460, 65)'>
+      <rect x='0' y='0' width='260' height='80' rx='8' fill='#0F131D' stroke='rgba(255,255,255,0.06)'/>
+      <text x='16' y='24' font-family='monospace' font-size='10' fill='#8C94A6'>CRASH DETECTION ALERT</text>
+      <text x='16' y='52' font-family='sans-serif' font-weight='800' font-size='18' fill='#10B981'>95% Alert Reliability</text>
+      <rect x='0' y='95' width='260' height='80' rx='8' fill='#0F131D' stroke='rgba(255,255,255,0.06)'/>
+      <text x='16' y='119' font-family='monospace' font-size='10' fill='#8C94A6'>FACIAL RECOGNITION</text>
+      <text x='16' y='147' font-family='sans-serif' font-weight='800' font-size='18' fill='#38BDF8'>Face-API 90% Acc</text>
+      <rect x='0' y='190' width='260' height='80' rx='8' fill='#0F131D' stroke='rgba(255,255,255,0.06)'/>
+      <text x='16' y='214' font-family='monospace' font-size='10' fill='#8C94A6'>ACADEMIC HONORS</text>
+      <text x='16' y='242' font-family='sans-serif' font-weight='800' font-size='18' fill='#F59E0B'>A+ Grade FYP</text>
+    </g>
+  </g>
+</svg>

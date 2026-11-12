@@ -25,3 +25,4 @@ card3 = img.crop((585, 420, 695, 520))
 card3.save('public/assets/images/card_telemetry.png')
 
 print("All visual cards extracted successfully!")
+
