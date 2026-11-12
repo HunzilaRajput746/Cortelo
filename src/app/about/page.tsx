@@ -12,7 +12,7 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen pt-36 pb-24 px-6 relative z-10">
       <div className="max-w-[1360px] mx-auto space-y-20">
-        
+
         {/* Header */}
         <div className="max-w-3xl space-y-4">
           <span className="text-xs font-mono text-cortelo-mint tracking-widest uppercase">
@@ -28,7 +28,7 @@ export default function AboutPage() {
 
         {/* Founders Spotlight Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          
+
           {/* Hunzila Nisar */}
           <div className="glass-panel rounded-2xl p-8 md:p-10 border border-cortelo-border space-y-6">
             <div className="flex flex-col sm:flex-row items-center gap-6">
@@ -156,3 +156,4 @@ export default function AboutPage() {
     </main>
   );
 }
+

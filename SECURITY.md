@@ -17,3 +17,4 @@ All production builds adhere to OWASP Application Security Verification Standard
 - **Rate Limiting**: Redis-backed progressive rate limiting per IP and authenticated session.
 - **Data Isolation**: Multi-tenant database queries strictly scoped by verified session identities.
 - **Session Security**: HttpOnly, Secure, SameSite=Lax cookies with rotating IDs.
+

@@ -1,362 +1,443 @@
-import React from "react";
-import Link from "next/link";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
-import WorkCarousel from "@/components/WorkCarousel";
+import Link from "next/link";
+import { ChevronLeft, ChevronRight, ArrowUpRight, ShieldCheck, Cpu, Terminal, Play, Sparkles } from "lucide-react";
 import ServiceTabs from "@/components/ServiceTabs";
 import FAQAccordion from "@/components/FAQAccordion";
 
 export default function HomePage() {
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [showVideoPrism, setShowVideoPrism] = useState(false);
+
+  const caseStudies = [
+    {
+      id: "wave",
+      title: "Automated Regulatory Extraction",
+      client: "Global Fintech Tier-1",
+      video: "/assets/videos/case_study_1.mp4",
+      image: "/assets/images/card_wave.png",
+      accuracy: "99.8%",
+      latency: "P99 Latency < 42ms",
+      desc: "Deterministic legal text parser achieving zero hallucination under high regulatory scrutiny.",
+    },
+    {
+      id: "quadrupod",
+      title: "Autonomous Refactor Harness",
+      client: "Developer Infrastructure",
+      video: "/assets/videos/case_study_2.mp4",
+      image: "/assets/images/card_quadrupod.png",
+      accuracy: "99.8%",
+      latency: "P99 Latency < 42ms",
+      desc: "Self-healing microservice orchestration cluster generating verified pull requests.",
+    },
+    {
+      id: "neural-ui",
+      title: "Enterprise AI Telemetry Bus",
+      client: "Enterprise Logistics",
+      video: "/assets/videos/case_study_3.mp4",
+      image: "/assets/images/card_telemetry.png",
+      accuracy: "99.8%",
+      latency: "Client: Enterprise AI",
+      desc: "Real-time edge event streaming backbone managing 4.8M concurrent agent events.",
+    },
+  ];
+
+  const handlePrev = () => {
+    setCarouselIndex((prev) => (prev === 0 ? caseStudies.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCarouselIndex((prev) => (prev === caseStudies.length - 1 ? 0 : prev + 1));
+  };
+
   return (
-    <main className="relative z-10">
-      {/* HERO SECTION */}
-      <section className="min-h-screen pt-36 pb-24 md:pt-44 md:pb-32 flex flex-col justify-center px-6">
-        <div className="max-w-[1360px] mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Kinetic Typography */}
-            <div className="lg:col-span-7 space-y-8">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-cortelo-border bg-cortelo-surface/60 text-xs font-mono text-cortelo-muted">
-                <span className="w-1.5 h-1.5 rounded-full bg-cortelo-mint animate-pulse" />
-                <span>INDEPENDENT AI & SOFTWARE PRACTICE</span>
+    <div className="relative z-10 w-full overflow-hidden">
+      
+      {/* Sleek Vertical Section Indicator Rail (Right Screen Edge matching Mockup) */}
+      <div className="hidden xl:flex fixed right-4 top-1/2 -translate-y-1/2 z-30 flex-col items-center gap-3">
+        <div className="w-[3px] h-12 rounded-full bg-cortelo-mint shadow-[0_0_12px_#2DD4A7]" />
+        <div className="w-[2px] h-6 rounded-full bg-cortelo-border/60" />
+        <div className="w-[2px] h-6 rounded-full bg-cortelo-border/40" />
+      </div>
+
+      {/* ======================================================== */}
+      {/* 1. EXACT MOCKUP HERO SCREEN (Viewport Sized 100vh) */}
+      {/* ======================================================== */}
+      <section className="relative min-h-screen pt-28 pb-8 px-6 sm:px-10 flex flex-col justify-between max-w-[1440px] mx-auto">
+        
+        {/* Main Hero Row: Headline on Left, 3D Iridescent Crystal on Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-auto">
+          
+          {/* Left: Giant Kinetic Typography */}
+          <div className="lg:col-span-7 space-y-4">
+            <div className="space-y-1 select-none">
+              {/* CORTELO with connected stylized ribbon typography */}
+              <div className="text-5xl sm:text-7xl xl:text-[88px] font-black tracking-[-0.04em] uppercase text-cortelo-text leading-[0.92]">
+                CORTELO
               </div>
-
-              <h1 className="text-5xl sm:text-7xl xl:text-8xl font-black tracking-[-0.04em] leading-[0.95] uppercase text-cortelo-text">
-                Systems of<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cortelo-text via-cortelo-text to-cortelo-mint">
-                  Intelligence.
-                </span>
-              </h1>
-
-              <p className="text-lg sm:text-xl text-cortelo-muted max-w-xl font-light leading-relaxed">
-                Cortelo designs, trains, and ships bespoke artificial intelligence architectures, autonomous agents, and resilient enterprise software platforms from model to interface.
-              </p>
-
-              <div className="flex flex-wrap items-center gap-4 pt-4">
-                <Link
-                  href="/contact"
-                  className="px-8 py-4 rounded-full bg-cortelo-mint text-black font-bold text-sm uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all shadow-[0_0_30px_rgba(45,212,167,0.4)]"
-                >
-                  Commission Architecture
-                </Link>
-                <Link
-                  href="/work"
-                  className="px-8 py-4 rounded-full border border-cortelo-border hover:border-cortelo-mint text-cortelo-text font-semibold text-sm uppercase tracking-wider transition-all"
-                >
-                  Inspect Selected Work
-                </Link>
+              <div className="text-5xl sm:text-7xl xl:text-[88px] font-black tracking-[-0.04em] text-cortelo-text leading-[0.92]">
+                Systems of
               </div>
-
-              {/* Coordinate Telemetry Row */}
-              <div className="grid grid-cols-3 gap-6 pt-10 border-t border-cortelo-border text-xs font-mono">
-                <div>
-                  <div className="text-cortelo-muted">CORE LATENCY</div>
-                  <div className="text-xl font-bold text-cortelo-text mt-1">P99 &lt; 42ms</div>
-                </div>
-                <div>
-                  <div className="text-cortelo-muted">VERIFIED ACCURACY</div>
-                  <div className="text-xl font-bold text-cortelo-mint mt-1">99.8%</div>
-                </div>
-                <div>
-                  <div className="text-cortelo-muted">IP OWNERSHIP</div>
-                  <div className="text-xl font-bold text-cortelo-text mt-1">100% Client</div>
-                </div>
+              <div className="text-5xl sm:text-7xl xl:text-[88px] font-black tracking-[-0.04em] text-cortelo-text leading-[0.92]">
+                Intelligence
               </div>
             </div>
 
-            {/* Central Refractive 3D Visual */}
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-[460px] aspect-square flex items-center justify-center">
-                <div className="absolute inset-0 rounded-full bg-cortelo-mint/15 filter blur-[80px]" />
+            <p className="text-sm sm:text-base text-cortelo-muted max-w-lg font-light leading-relaxed pt-2">
+              Engineering bespoke autonomous agents, neural architectures, and resilient enterprise software.
+            </p>
 
-                <div className="relative z-10 w-full h-full rounded-2xl glass-panel p-6 flex flex-col justify-between overflow-hidden shadow-2xl animate-float border border-cortelo-borderHover">
-                  <div className="flex items-center justify-between text-xs font-mono text-cortelo-muted">
-                    <span>CORTELO &bull; CORE 01</span>
-                    <span className="text-cortelo-mint">NEURAL BUS</span>
+            <div className="flex items-center gap-4 pt-3">
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-cortelo-mint hover:underline"
+              >
+                Explore Engineered Disciplines &rarr;
+              </Link>
+            </div>
+          </div>
+
+          {/* Right: The Giant 3D Iridescent Refractive Glass Crystal Centerpiece */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
+            <div className="relative w-[320px] sm:w-[420px] aspect-square flex items-center justify-center">
+              
+              {/* Ambient Dispersion Glow behind crystal */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cortelo-mint/25 via-cyan-400/20 to-purple-600/25 filter blur-[75px] pointer-events-none" />
+
+              {/* Exact 3D Crystal Prism from Mockup with gentle floating animation */}
+              <div className="relative z-10 w-full h-full flex items-center justify-center animate-float group cursor-pointer"
+                   onClick={() => setShowVideoPrism(!showVideoPrism)}
+                   title="Click to toggle between 4K Crystal Prism and 60FPS Video Loop"
+              >
+                {!showVideoPrism ? (
+                  <Image
+                    src="/assets/images/crystal_prism_transparent.png"
+                    alt="Cortelo 3D Refractive Crystal"
+                    width={420}
+                    height={420}
+                    priority
+                    className="w-full h-auto object-contain filter drop-shadow-[0_20px_50px_rgba(45,212,167,0.3)] transition-transform duration-700 group-hover:scale-105"
+                  />
+                ) : (
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-contain filter drop-shadow-[0_20px_50px_rgba(45,212,167,0.3)] rounded-3xl"
+                  >
+                    <source src="/assets/videos/prism_loop.mp4" type="video/mp4" />
+                  </video>
+                )}
+              </div>
+
+            </div>
+
+            {/* Subtle Interactive 3D Mode Toggle Pill */}
+            <button
+              onClick={() => setShowVideoPrism(!showVideoPrism)}
+              className="mt-2 text-[10px] font-mono text-cortelo-muted hover:text-cortelo-mint px-3 py-1 rounded-full border border-cortelo-border/50 bg-[#0B0F19]/40 backdrop-blur-sm transition-colors flex items-center gap-1.5"
+            >
+              <Sparkles className="w-3 h-3 text-cortelo-mint" />
+              <span>{showVideoPrism ? "View Static 4K Crystal" : "View 60FPS Kinetic Loop"}</span>
+            </button>
+          </div>
+
+        </div>
+
+        {/* Bottom Upper-Fold: Case Study Carousel + Studio Leadership Preview */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6 border-t border-cortelo-border/60">
+          
+          {/* Left Column (8 cols): Case Study Carousel */}
+          <div className="lg:col-span-8 space-y-3">
+            <div className="flex items-center justify-between text-xs font-mono text-cortelo-muted">
+              <span className="tracking-wider uppercase">Case study carousel</span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handlePrev}
+                  aria-label="Previous Slide"
+                  className="w-7 h-7 rounded-full border border-cortelo-border bg-[#0B0F19]/80 flex items-center justify-center hover:border-cortelo-mint hover:text-cortelo-mint transition-colors active:scale-95"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  aria-label="Next Slide"
+                  className="w-7 h-7 rounded-full border border-cortelo-border bg-[#0B0F19]/80 flex items-center justify-center hover:border-cortelo-mint hover:text-cortelo-mint transition-colors active:scale-95"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Carousel Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {caseStudies.map((study, idx) => (
+                <Link
+                  key={study.id}
+                  href={`/work`}
+                  className="glass-panel rounded-xl p-3.5 border border-cortelo-border hover:border-cortelo-mint/60 transition-all flex flex-col justify-between group overflow-hidden bg-[#0B0F19]/50"
+                >
+                  {/* Card Visual with Looping Video */}
+                  <div className="h-28 rounded-lg bg-[#07090E] relative overflow-hidden mb-3 border border-cortelo-border/50">
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500"
+                    >
+                      <source src={study.video} type="video/mp4" />
+                    </video>
                   </div>
 
-                  <svg className="w-full h-64 my-auto" viewBox="0 0 300 300" fill="none">
-                    <defs>
-                      <linearGradient id="prismGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#2DD4A7" stopOpacity="0.9" />
-                        <stop offset="50%" stopColor="#00D2FF" stopOpacity="0.6" />
-                        <stop offset="100%" stopColor="#9D00FF" stopOpacity="0.3" />
-                      </linearGradient>
-                      <linearGradient id="facetGrad" x1="100%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.4" />
-                        <stop offset="100%" stopColor="#2DD4A7" stopOpacity="0.1" />
-                      </linearGradient>
-                    </defs>
-
-                    <polygon
-                      points="150,30 250,90 220,230 80,230 50,90"
-                      stroke="url(#prismGrad)"
-                      strokeWidth="2.5"
-                      fill="none"
-                    />
-                    <polygon
-                      points="150,30 180,120 150,210 120,120"
-                      stroke="#2DD4A7"
-                      strokeWidth="1.5"
-                      fill="url(#facetGrad)"
-                    />
-                    <line x1="150" y1="30" x2="220" y2="230" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
-                    <line x1="150" y1="30" x2="80" y2="230" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
-                    <line x1="50" y1="90" x2="180" y2="120" stroke="rgba(45,212,167,0.5)" strokeWidth="1" />
-                    <line x1="250" y1="90" x2="120" y2="120" stroke="rgba(45,212,167,0.5)" strokeWidth="1" />
-                    <circle cx="150" cy="150" r="14" fill="#2DD4A7" className="animate-ping" opacity="0.3" />
-                    <circle cx="150" cy="150" r="8" fill="#F2F0EA" />
-                  </svg>
-
-                  <div className="flex items-center justify-between text-xs font-mono text-cortelo-muted pt-4 border-t border-cortelo-border">
-                    <span>ARCHITECTURE &bull; MODEL-TO-INTERFACE</span>
-                    <span className="text-cortelo-text font-semibold">LIVE STREAM</span>
+                  <div className="space-y-1 text-[11px] font-mono">
+                    <div className="flex justify-between items-center text-cortelo-muted">
+                      <span>Precision: <strong className="text-cortelo-text">{study.accuracy}</strong></span>
+                    </div>
+                    <div className="text-cortelo-mint font-semibold truncate">
+                      {study.latency}
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* TECH STRIP */}
-      <section className="py-10 border-y border-cortelo-border bg-cortelo-surface/40">
-        <div className="max-w-[1360px] mx-auto px-6">
-          <div className="flex flex-wrap items-center justify-between gap-6 opacity-60 text-xs font-mono font-semibold tracking-wider">
-            <span>PYTORCH</span>
-            <span>LANGCHAIN</span>
-            <span>NEXT.JS APP ROUTER</span>
-            <span>POSTGRESQL</span>
-            <span>DOCKER</span>
-            <span>AMAZON WEB SERVICES</span>
-            <span>GOOGLE CLOUD</span>
-          </div>
-        </div>
-      </section>
-
-      {/* SERVICES SECTION */}
-      <section id="systems" className="py-28 px-6">
-        <div className="max-w-[1360px] mx-auto">
-          <ServiceTabs />
-        </div>
-      </section>
-
-      {/* WORK / SELECTED REELS */}
-      <section id="work" className="py-28 px-6 border-y border-cortelo-border bg-cortelo-surface/20">
-        <div className="max-w-[1360px] mx-auto">
-          <WorkCarousel />
-        </div>
-      </section>
-
-      {/* HOW WE WORK (4 Structured Stages) */}
-      <section id="process" className="py-28 px-6 border-b border-cortelo-border">
-        <div className="max-w-[1360px] mx-auto">
-          <div className="mb-16">
-            <span className="text-xs font-mono uppercase tracking-wider text-cortelo-mint font-semibold">
-              Delivery Framework &bull; 03
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-cortelo-text mt-2 uppercase">
-              Transparent, Milestone-Driven Execution.
-            </h2>
-            <p className="text-sm text-cortelo-muted mt-2 max-w-lg font-light">
-              No endless discovery retainers. Every build follows four structured milestones with verified acceptance tests.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="p-8 rounded-2xl glass-panel border border-cortelo-border flex flex-col justify-between">
-              <div>
-                <div className="text-xs font-mono text-cortelo-mint font-bold mb-4">MILESTONE 01</div>
-                <h3 className="text-lg font-bold text-cortelo-text mb-2 uppercase">Technical Discovery</h3>
-                <p className="text-xs text-cortelo-muted leading-relaxed font-light">
-                  Data pipeline auditing, schema mapping, model selection benchmarks, and precise latency budget definitions.
-                </p>
-              </div>
-              <div className="mt-8 pt-4 border-t border-cortelo-border text-[11px] font-mono text-cortelo-muted">
-                Week 1 &bull; Architectural Blueprint
-              </div>
-            </div>
-
-            <div className="p-8 rounded-2xl glass-panel border border-cortelo-border flex flex-col justify-between">
-              <div>
-                <div className="text-xs font-mono text-cortelo-mint font-bold mb-4">MILESTONE 02</div>
-                <h3 className="text-lg font-bold text-cortelo-text mb-2 uppercase">Core Engine & Training</h3>
-                <p className="text-xs text-cortelo-muted leading-relaxed font-light">
-                  Model training, fine-tuning, vector indexing, deterministic guardrail setup, and automated evaluation benchmark runs.
-                </p>
-              </div>
-              <div className="mt-8 pt-4 border-t border-cortelo-border text-[11px] font-mono text-cortelo-muted">
-                Weeks 2–3 &bull; Staging Benchmarks
-              </div>
-            </div>
-
-            <div className="p-8 rounded-2xl glass-panel border border-cortelo-border flex flex-col justify-between">
-              <div>
-                <div className="text-xs font-mono text-cortelo-mint font-bold mb-4">MILESTONE 03</div>
-                <h3 className="text-lg font-bold text-cortelo-text mb-2 uppercase">Platform Integration</h3>
-                <p className="text-xs text-cortelo-muted leading-relaxed font-light">
-                  Next.js / React Native interface integration, OWASP ASVS L2 security hardening, SSRF guards, and client portal deployment.
-                </p>
-              </div>
-              <div className="mt-8 pt-4 border-t border-cortelo-border text-[11px] font-mono text-cortelo-muted">
-                Weeks 4–5 &bull; Full Integration
-              </div>
-            </div>
-
-            <div className="p-8 rounded-2xl glass-panel border border-cortelo-border flex flex-col justify-between">
-              <div>
-                <div className="text-xs font-mono text-cortelo-mint font-bold mb-4">MILESTONE 04</div>
-                <h3 className="text-lg font-bold text-cortelo-text mb-2 uppercase">Handover & Telemetry</h3>
-                <p className="text-xs text-cortelo-muted leading-relaxed font-light">
-                  Production deployment on your private tenant, Prometheus/Sentry monitoring setup, documentation, and full IP handover.
-                </p>
-              </div>
-              <div className="mt-8 pt-4 border-t border-cortelo-border text-[11px] font-mono text-cortelo-muted">
-                Week 6 &bull; 100% IP Handover
-              </div>
+                </Link>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* FOUNDERS & STUDIO LEADERSHIP */}
-      <section id="founders" className="py-28 px-6">
-        <div className="max-w-[1360px] mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-20">
-            <span className="text-xs font-mono text-cortelo-mint tracking-widest uppercase">
-              04 &bull; Studio Leadership
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-black tracking-tight uppercase text-cortelo-text mt-2">
-              The Principals Behind Cortelo.
-            </h2>
-            <p className="text-sm text-cortelo-muted mt-3 font-light">
-              Senior software engineers who build, architect, and take personal responsibility for every deployment.
-            </p>
-          </div>
+          {/* Right Column (4 cols): Studio Leadership Preview */}
+          <div className="lg:col-span-4 space-y-3">
+            <div className="text-xs font-mono text-cortelo-muted tracking-wider uppercase">
+              Studio leadership preview
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Founder 1: Hunzila Nisar */}
-            <div className="glass-panel rounded-2xl p-8 relative overflow-hidden group hover:border-cortelo-mint transition-all">
-              <div className="flex flex-col sm:flex-row items-center gap-6">
-                <div className="w-32 h-32 rounded-2xl overflow-hidden border border-cortelo-border shrink-0 shadow-xl relative">
+            <div className="grid grid-cols-2 gap-4">
+              {/* Hunzila Nisar (Founder & Lead Architect) */}
+              <Link
+                href="/about"
+                className="glass-panel rounded-xl p-3 border border-cortelo-border flex flex-col items-center text-center space-y-2 group hover:border-cortelo-mint/60 transition-all bg-[#0B0F19]/50"
+              >
+                <div className="w-20 h-20 rounded-xl overflow-hidden border border-cortelo-border relative shadow-lg bg-[#07090E]">
                   <Image
                     src="/assets/team/hunzila_nisar.jpg"
-                    alt="Hunzila Nisar"
-                    width={128}
-                    height={128}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    alt="Hunzila Nisar - Founder & Lead Architect"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className="text-center sm:text-left">
-                  <span className="text-xs font-mono text-cortelo-mint tracking-wider uppercase font-semibold">
-                    Founder & Lead AI Architect
-                  </span>
-                  <h3 className="text-2xl font-black uppercase text-cortelo-text mt-1">
+                <div>
+                  <div className="text-xs font-bold uppercase text-cortelo-text leading-tight group-hover:text-cortelo-mint transition-colors">
                     Hunzila Nisar
-                  </h3>
-                  <p className="text-xs text-cortelo-muted mt-2 leading-relaxed font-light">
-                    Specializing in autonomous multi-agent orchestration, neural pipeline latency optimization, and enterprise full-stack system architecture.
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2 justify-center sm:justify-start text-[11px] font-mono text-cortelo-muted">
-                    <span className="px-2.5 py-0.5 rounded bg-cortelo-surface border border-cortelo-border">
-                      Agentic Systems
-                    </span>
-                    <span className="px-2.5 py-0.5 rounded bg-cortelo-surface border border-cortelo-border">
-                      PyTorch
-                    </span>
-                    <span className="px-2.5 py-0.5 rounded bg-cortelo-surface border border-cortelo-border">
-                      Next.js 15
-                    </span>
+                  </div>
+                  <div className="text-[10px] font-mono text-cortelo-muted leading-tight mt-0.5">
+                    Founder & Lead Architect
                   </div>
                 </div>
-              </div>
-            </div>
+              </Link>
 
-            {/* Founder 2: Mahreen Hashir */}
-            <div className="glass-panel rounded-2xl p-8 relative overflow-hidden group hover:border-cortelo-mint transition-all">
-              <div className="flex flex-col sm:flex-row items-center gap-6">
-                <div className="w-32 h-32 rounded-2xl overflow-hidden border border-cortelo-border shrink-0 shadow-xl relative">
+              {/* Mahreen Hashir (Co-Founder & Head of Systems) */}
+              <Link
+                href="/about"
+                className="glass-panel rounded-xl p-3 border border-cortelo-border flex flex-col items-center text-center space-y-2 group hover:border-cortelo-mint/60 transition-all bg-[#0B0F19]/50"
+              >
+                <div className="w-20 h-20 rounded-xl overflow-hidden border border-cortelo-border relative shadow-lg bg-[#07090E]">
                   <Image
                     src="/assets/team/mahreen_hashir.jpg"
-                    alt="Mahreen Hashir"
-                    width={128}
-                    height={128}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    alt="Mahreen Hashir - Co-Founder & Head of Systems"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className="text-center sm:text-left">
-                  <span className="text-xs font-mono text-cortelo-mint tracking-wider uppercase font-semibold">
-                    Co-Founder & Head of Systems
-                  </span>
-                  <h3 className="text-2xl font-black uppercase text-cortelo-text mt-1">
+                <div>
+                  <div className="text-xs font-bold uppercase text-cortelo-text leading-tight group-hover:text-cortelo-mint transition-colors">
                     Mahreen Hashir
-                  </h3>
-                  <p className="text-xs text-cortelo-muted mt-2 leading-relaxed font-light">
-                    Directing model evaluation benches, zero-hallucination deterministic guardrails, high-volume MLOps, and enterprise security perimeters.
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2 justify-center sm:justify-start text-[11px] font-mono text-cortelo-muted">
-                    <span className="px-2.5 py-0.5 rounded bg-cortelo-surface border border-cortelo-border">
-                      Deterministic Eval
-                    </span>
-                    <span className="px-2.5 py-0.5 rounded bg-cortelo-surface border border-cortelo-border">
-                      MLOps & Cloud
-                    </span>
-                    <span className="px-2.5 py-0.5 rounded bg-cortelo-surface border border-cortelo-border">
-                      ASVS L2
-                    </span>
+                  </div>
+                  <div className="text-[10px] font-mono text-cortelo-muted leading-tight mt-0.5">
+                    Co-Founder & Head of Systems
                   </div>
                 </div>
+              </Link>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* ======================================================== */}
+      {/* 2. SERVICES SECTION (Interactive 5-Discipline System) */}
+      {/* ======================================================== */}
+      <section id="systems" className="py-28 px-6 sm:px-10 max-w-[1440px] mx-auto border-t border-cortelo-border/60">
+        <ServiceTabs />
+      </section>
+
+      {/* ======================================================== */}
+      {/* 3. CASE STUDIES & WORK SHOWCASE */}
+      {/* ======================================================== */}
+      <section id="work" className="py-28 px-6 sm:px-10 max-w-[1440px] mx-auto border-t border-cortelo-border/60">
+        <div className="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+          <div>
+            <span className="text-xs font-mono uppercase tracking-wider text-cortelo-mint font-semibold">
+              Selected Work &bull; 02
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-cortelo-text mt-2 uppercase">
+              Production Systems In The Wild.
+            </h2>
+            <p className="text-sm text-cortelo-muted mt-2 max-w-lg font-light">
+              High-throughput architectures battle-tested under enterprise production constraints.
+            </p>
+          </div>
+          <Link
+            href="/work"
+            className="px-6 py-2.5 rounded-full border border-cortelo-border hover:border-cortelo-mint text-xs font-mono tracking-wider text-cortelo-text uppercase transition-colors"
+          >
+            All Case Studies &rarr;
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {caseStudies.map((study) => (
+            <div
+              key={study.id}
+              className="glass-panel rounded-2xl p-6 border border-cortelo-border hover:border-cortelo-mint/60 transition-all flex flex-col justify-between group"
+            >
+              <div>
+                <div className="h-48 rounded-xl bg-[#07090E] relative overflow-hidden mb-6 border border-cortelo-border/50">
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500"
+                  >
+                    <source src={study.video} type="video/mp4" />
+                  </video>
+                </div>
+                <div className="text-xs font-mono text-cortelo-mint mb-2">{study.client}</div>
+                <h3 className="text-xl font-bold text-cortelo-text mb-3 uppercase">{study.title}</h3>
+                <p className="text-xs text-cortelo-muted leading-relaxed font-light">{study.desc}</p>
+              </div>
+
+              <div className="mt-8 pt-4 border-t border-cortelo-border/60 flex items-center justify-between text-xs font-mono">
+                <span className="text-cortelo-muted">Precision: <strong className="text-cortelo-text">{study.accuracy}</strong></span>
+                <span className="text-cortelo-mint font-bold">{study.latency}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ======================================================== */}
+      {/* 4. PROCESS & VERIFICATION PIPELINE */}
+      {/* ======================================================== */}
+      <section id="studio" className="py-28 px-6 sm:px-10 max-w-[1440px] mx-auto border-t border-cortelo-border/60">
+        <div className="mb-16">
+          <span className="text-xs font-mono uppercase tracking-wider text-cortelo-mint font-semibold">
+            Delivery Framework &bull; 03
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-cortelo-text mt-2 uppercase">
+            Transparent, Milestone-Driven Execution.
+          </h2>
+          <p className="text-sm text-cortelo-muted mt-2 max-w-lg font-light">
+            No endless discovery retainers. Every build follows four structured milestones with verified acceptance tests.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="p-8 rounded-2xl glass-panel border border-cortelo-border flex flex-col justify-between">
+            <div>
+              <div className="text-xs font-mono text-cortelo-mint font-bold mb-4">MILESTONE 01</div>
+              <h3 className="text-lg font-bold text-cortelo-text mb-2 uppercase">Technical Discovery</h3>
+              <p className="text-xs text-cortelo-muted leading-relaxed font-light">
+                Data pipeline auditing, schema mapping, model selection benchmarks, and precise latency budget definitions.
+              </p>
+            </div>
+            <div className="mt-8 pt-4 border-t border-cortelo-border text-[11px] font-mono text-cortelo-muted">
+              Week 1 &bull; Architectural Blueprint
+            </div>
+          </div>
+
+          <div className="p-8 rounded-2xl glass-panel border border-cortelo-border flex flex-col justify-between">
+            <div>
+              <div className="text-xs font-mono text-cortelo-mint font-bold mb-4">MILESTONE 02</div>
+              <h3 className="text-lg font-bold text-cortelo-text mb-2 uppercase">Core Engine & Training</h3>
+              <p className="text-xs text-cortelo-muted leading-relaxed font-light">
+                Model training, fine-tuning, vector indexing, deterministic guardrail setup, and automated evaluation benchmark runs.
+              </p>
+            </div>
+            <div className="mt-8 pt-4 border-t border-cortelo-border text-[11px] font-mono text-cortelo-muted">
+              Weeks 2–3 &bull; Staging Benchmarks
+            </div>
+          </div>
+
+          <div className="p-8 rounded-2xl glass-panel border border-cortelo-border flex flex-col justify-between">
+            <div>
+              <div className="text-xs font-mono text-cortelo-mint font-bold mb-4">MILESTONE 03</div>
+              <h3 className="text-lg font-bold text-cortelo-text mb-2 uppercase">Platform Integration</h3>
+              <p className="text-xs text-cortelo-muted leading-relaxed font-light">
+                Next.js / React Native interface integration, OWASP ASVS L2 security hardening, SSRF guards, and client portal deployment.
+              </p>
+            </div>
+            <div className="mt-8 pt-4 border-t border-cortelo-border text-[11px] font-mono text-cortelo-muted">
+              Weeks 4–5 &bull; Full Integration
+            </div>
+          </div>
+
+          <div className="p-8 rounded-2xl glass-panel border border-cortelo-border flex flex-col justify-between">
+            <div>
+              <div className="text-xs font-mono text-cortelo-mint font-bold mb-4">MILESTONE 04</div>
+              <h3 className="text-lg font-bold text-cortelo-text mb-2 uppercase">Handover & Telemetry</h3>
+              <p className="text-xs text-cortelo-muted leading-relaxed font-light">
+                Production deployment on your private tenant, Prometheus/Sentry monitoring setup, documentation, and full IP handover.
+              </p>
+            </div>
+            <div className="mt-8 pt-4 border-t border-cortelo-border text-[11px] font-mono text-cortelo-muted">
+              Week 6 &bull; 100% IP Handover
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================================== */}
+      {/* 5. ARCHITECTURAL SECURITY & COMPLIANCE */}
+      {/* ======================================================== */}
+      <section className="py-24 px-6 sm:px-10 max-w-[1440px] mx-auto border-t border-cortelo-border/60">
+        <div className="glass-panel rounded-3xl p-8 sm:p-14 border border-cortelo-border relative overflow-hidden bg-gradient-to-br from-[#0B0F19]/80 via-[#07090E] to-[#0B0F19]/80">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-8 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cortelo-mint/30 bg-cortelo-mint/10 text-cortelo-mint text-xs font-mono">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>OWASP ASVS Level 2 Hardened Architecture</span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-black text-cortelo-text uppercase tracking-tight">
+                Zero-Retention Private Model Enclaves.
+              </h2>
+              <p className="text-xs sm:text-sm text-cortelo-muted max-w-xl font-light leading-relaxed">
+                Client data never crosses insecure inference boundaries. We deploy models directly inside your VPC (AWS, GCP, Azure, or on-premise clusters) with end-to-end cryptographic mutual TLS and automated vulnerability scans.
+              </p>
+            </div>
+            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4">
+              <div className="p-4 rounded-xl border border-cortelo-border bg-[#07090E]/80 text-xs font-mono space-y-1">
+                <div className="text-cortelo-mint font-semibold">SSRF & Prompt Injection Defense</div>
+                <div className="text-cortelo-muted">Deterministic regex and AST semantic AST token sandboxing.</div>
+              </div>
+              <div className="p-4 rounded-xl border border-cortelo-border bg-[#07090E]/80 text-xs font-mono space-y-1">
+                <div className="text-cortelo-mint font-semibold">Cryptographic IP Ownership</div>
+                <div className="text-cortelo-muted">Full source repository transfer, zero vendor locks.</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ SECTION */}
-      <section className="py-28 px-6 border-y border-cortelo-border bg-cortelo-surface/20">
-        <div className="max-w-[860px] mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs font-mono uppercase tracking-wider text-cortelo-mint font-semibold">
-              Terms & Assurance
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-cortelo-text mt-2 uppercase">
-              Frequently Asked Questions.
-            </h2>
-          </div>
-          <FAQAccordion />
-        </div>
+      {/* ======================================================== */}
+      {/* 6. FAQ & BRIEFING */}
+      {/* ======================================================== */}
+      <section className="py-24 px-6 sm:px-10 max-w-[1440px] mx-auto border-t border-cortelo-border/60">
+        <FAQAccordion />
       </section>
 
-      {/* FINAL CTA BANNER */}
-      <section className="py-32 px-6">
-        <div className="max-w-[1360px] mx-auto text-center">
-          <div className="max-w-2xl mx-auto space-y-6">
-            <span className="text-xs font-mono text-cortelo-mint tracking-widest uppercase">
-              Start an Engagement
-            </span>
-            <h2 className="text-4xl sm:text-6xl font-black tracking-tight uppercase text-cortelo-text">
-              Let&apos;s Engineer Your Advantage.
-            </h2>
-            <p className="text-base text-cortelo-muted leading-relaxed font-light">
-              Schedule an architectural discovery session directly with Hunzila Nisar and Mahreen Hashir.
-            </p>
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/contact"
-                className="px-10 py-4 rounded-full bg-cortelo-mint text-black font-bold text-sm uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all shadow-[0_0_30px_rgba(45,212,167,0.4)]"
-              >
-                Initiate Project
-              </Link>
-              <a
-                href="mailto:hello@cortelo.ai"
-                className="text-xs font-mono text-cortelo-muted hover:text-white underline"
-              >
-                hello@cortelo.ai
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+    </div>
   );
 }

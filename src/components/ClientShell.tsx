@@ -4,17 +4,26 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ProjectDrawer from "./ProjectDrawer";
-import FluidCanvas from "./FluidCanvas";
+import AmbientVideoBackground from "./AmbientVideoBackground";
 
 export default function ClientShell({ children }: { children: React.ReactNode }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
     <>
-      <FluidCanvas />
+      {/* Real Fullscreen Ambient Video Loop */}
+      <AmbientVideoBackground />
+
+      {/* Top Floating Glass Navigation matching Mockup */}
       <Navbar onOpenDrawer={() => setDrawerOpen(true)} />
+
+      {/* Slide-out Project Briefing / NDA Drawer */}
       <ProjectDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
-      {children}
+
+      {/* Main Page Surface */}
+      <main className="relative z-10">{children}</main>
+
+      {/* Obsidian Brand Footer */}
       <Footer />
     </>
   );

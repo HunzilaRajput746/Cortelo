@@ -25,3 +25,4 @@ export default function BrandLogo({ className = "w-7 h-7", showWordmark = true }
     </div>
   );
 }
+

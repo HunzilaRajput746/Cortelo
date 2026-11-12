@@ -265,3 +265,4 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     </main>
   );
 }
+
