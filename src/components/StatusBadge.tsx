@@ -2,12 +2,13 @@ import React from "react";
 
 interface StatusBadgeProps {
   label: string;
-  variant?: "mint" | "cyan" | "rose" | "purple";
+  variant?: "flame" | "mint" | "cyan" | "rose" | "purple";
 }
 
-export default function StatusBadge({ label, variant = "mint" }: StatusBadgeProps) {
+export default function StatusBadge({ label, variant = "flame" }: StatusBadgeProps) {
   const styles = {
-    mint: "border-cortelo-mint/40 bg-cortelo-mint/10 text-cortelo-mint",
+    flame: "border-[#FF4533]/40 bg-[#FF4533]/10 text-[#FF4533]",
+    mint: "border-[#FF4533]/40 bg-[#FF4533]/10 text-[#FF4533]",
     cyan: "border-cyan-400/40 bg-cyan-400/10 text-cyan-400",
     rose: "border-rose-400/40 bg-rose-400/10 text-rose-400",
     purple: "border-purple-400/40 bg-purple-400/10 text-purple-400",

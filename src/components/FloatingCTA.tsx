@@ -22,7 +22,7 @@ export default function FloatingCTA() {
     <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-30 sm:hidden">
       <button
         onClick={() => openDrawer("Mobile Discovery Call")}
-        className="flex items-center gap-2 px-6 py-3 rounded-full bg-cortelo-mint text-[#07090E] font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(45,212,167,0.4)] cursor-pointer"
+        className="btn-conversion-primary flex items-center gap-2 px-6 py-3 rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(255,69,51,0.4)] cursor-pointer"
       >
         <span>Book a 15-min call</span>
         <ArrowRight className="w-4 h-4" />
