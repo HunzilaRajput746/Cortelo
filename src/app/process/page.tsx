@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { CheckCircle2, Shield, Lock, Terminal, Activity, FileCode } from "lucide-react";
+import { Lock, Terminal, Activity, FileCode, Shield } from "lucide-react";
 
 export const metadata = {
   title: "Engineering Process — Cortelo",
@@ -32,7 +32,7 @@ const stages = [
     duration: "Weeks 4–5",
     deliverables: "Next.js 15 Platform • ASVS L2 Security • SSRF Guard",
     description:
-      "Client-facing application interface, server actions with strict type safety, private VPC connection, and OWASP ASVS L2 hardening against injection and privilege escalation.",
+      "Client-facing application interface, server actions with strict type safety, private VPS connection, and OWASP ASVS L2 hardening against injection and privilege escalation.",
     icon: FileCode,
   },
   {
@@ -48,16 +48,18 @@ const stages = [
 
 export default function ProcessPage() {
   return (
-    <main className="min-h-screen pt-36 pb-24 px-6 relative z-10">
+    <main className="min-h-screen pt-36 pb-24 px-6 relative z-10 bg-[#000000]">
       <div className="max-w-[1360px] mx-auto space-y-16">
         <div className="max-w-3xl space-y-4">
-          <span className="text-xs font-mono text-cortelo-mint tracking-widest uppercase">
-            03 &bull; Engineering Framework
-          </span>
-          <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-cortelo-text">
-            How We Build & Deploy.
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono text-white/90 font-semibold uppercase tracking-wider">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF4533]" />
+            <span>03 &bull; Engineering Framework</span>
+          </div>
+          <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-[#FCFCFA]">
+            How We Build &amp;{" "}
+            <span className="font-serif italic font-normal text-white lowercase">Deploy</span>.
           </h1>
-          <p className="text-base text-cortelo-muted leading-relaxed font-light">
+          <p className="text-base text-white/60 leading-relaxed font-light">
             We avoid vague consulting loops. Every project runs on strict milestones, transparent code repositories, and verifiable production benchmarks.
           </p>
         </div>
@@ -69,29 +71,29 @@ export default function ProcessPage() {
             return (
               <div
                 key={stage.step}
-                className="glass-panel rounded-2xl p-8 border border-cortelo-border flex flex-col justify-between space-y-6"
+                className="rounded-3xl p-8 border border-white/10 bg-[#0D0D0D] flex flex-col justify-between space-y-6 shadow-sm hover:border-[#FF4533]/50 transition-all duration-300"
               >
                 <div className="space-y-4">
                   <div className="flex justify-between items-center text-xs font-mono">
-                    <span className="text-cortelo-mint font-bold">STAGE {stage.step}</span>
-                    <span className="px-3 py-1 rounded-full border border-cortelo-border bg-cortelo-surface text-cortelo-muted">
+                    <span className="text-[#FF4533] font-bold">STAGE {stage.step}</span>
+                    <span className="px-3 py-1 rounded-full border border-white/10 bg-[#141414] text-white/60">
                       {stage.duration}
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Icon className="w-6 h-6 text-cortelo-mint shrink-0" />
-                    <h2 className="text-2xl font-bold uppercase text-cortelo-text">
+                    <Icon className="w-6 h-6 text-[#FF4533] shrink-0" />
+                    <h2 className="text-2xl font-bold uppercase text-[#FCFCFA]">
                       {stage.title}
                     </h2>
                   </div>
-                  <p className="text-sm text-cortelo-muted leading-relaxed font-light">
+                  <p className="text-sm text-white/60 leading-relaxed font-light">
                     {stage.description}
                   </p>
                 </div>
 
-                <div className="pt-6 border-t border-cortelo-border flex items-center justify-between text-xs font-mono">
-                  <span className="text-cortelo-muted">DELIVERABLES</span>
-                  <span className="text-cortelo-text font-semibold">{stage.deliverables}</span>
+                <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+                  <span className="text-white/40">DELIVERABLES</span>
+                  <span className="text-white/80 font-semibold">{stage.deliverables}</span>
                 </div>
               </div>
             );
@@ -99,22 +101,22 @@ export default function ProcessPage() {
         </div>
 
         {/* Security Standard Callout */}
-        <div className="p-10 rounded-2xl glass-panel border border-cortelo-mint/40 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="p-10 rounded-3xl border border-white/10 bg-[#0D0D0D] flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs font-mono text-cortelo-mint uppercase">
+            <div className="flex items-center gap-2 text-xs font-mono text-[#FF4533] uppercase">
               <Lock className="w-4 h-4" />
               <span>OWASP ASVS Level 2 Target Standard</span>
             </div>
-            <h3 className="text-xl font-bold uppercase text-cortelo-text">
-              Zero Trust Architecture & Security Hardening
+            <h3 className="text-xl font-bold uppercase text-[#FCFCFA]">
+              Zero Trust Architecture &amp; Security Hardening
             </h3>
-            <p className="text-xs text-cortelo-muted max-w-2xl font-light">
+            <p className="text-xs text-white/60 max-w-2xl font-light">
               Every route and API call verifies authentication, rate limits (Redis-backed), SSRF guards, input sanitization via Zod, and data isolation. No shared public endpoints.
             </p>
           </div>
           <Link
             href="/contact"
-            className="px-8 py-3.5 rounded-full bg-cortelo-mint text-black font-bold text-xs uppercase tracking-wider hover:opacity-90 shrink-0 shadow-[0_0_20px_rgba(45,212,167,0.3)]"
+            className="btn-conversion-primary px-8 py-3.5 rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white font-bold text-xs uppercase tracking-wider shrink-0 shadow-[0_0_20px_rgba(255,69,51,0.35)] transition-all"
           >
             Initiate Architecture Sprint
           </Link>
@@ -123,4 +125,3 @@ export default function ProcessPage() {
     </main>
   );
 }
-

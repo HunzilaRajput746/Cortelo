@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CheckCircle2, ShieldAlert, Cpu, Network, Sparkles, Layout, Database, Smartphone } from "lucide-react";
+import { ArrowLeft, CheckCircle2, ShieldAlert } from "lucide-react";
 
 const serviceDetails: Record<
   string,
@@ -151,76 +151,77 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   }
 
   return (
-    <main className="min-h-screen pt-36 pb-24 px-6 relative z-10">
+    <main className="min-h-screen pt-36 pb-24 px-6 relative z-10 bg-[#000000]">
       <div className="max-w-[1100px] mx-auto space-y-16">
         
         {/* Navigation Back */}
         <div>
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-xs font-mono text-cortelo-muted hover:text-cortelo-mint transition-colors uppercase"
+            className="inline-flex items-center gap-2 text-xs font-mono text-white/50 hover:text-white transition-colors uppercase"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>All Systems & Services</span>
+            <span>All Systems &amp; Services</span>
           </Link>
         </div>
 
         {/* Hero */}
         <div className="space-y-4">
-          <span className="text-xs font-mono text-cortelo-mint tracking-widest uppercase">
+          <span className="px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono uppercase tracking-wider text-white/90 font-semibold inline-flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF4533]" />
             {service.tagline}
           </span>
-          <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-cortelo-text">
+          <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-[#FCFCFA]">
             {service.title}
           </h1>
-          <p className="text-base sm:text-lg text-cortelo-muted max-w-3xl leading-relaxed font-light">
+          <p className="text-base sm:text-lg text-white/60 max-w-3xl leading-relaxed font-light">
             {service.description}
           </p>
         </div>
 
         {/* Metric Badges */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 p-6 rounded-2xl glass-panel border border-cortelo-border text-xs font-mono">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 p-6 rounded-3xl border border-white/10 bg-[#0D0D0D] text-xs font-mono shadow-sm">
           <div>
-            <span className="text-cortelo-muted block">DELIVERY TIMELINE</span>
-            <span className="text-lg font-bold text-cortelo-text">{service.timeline}</span>
+            <span className="text-white/40 block">DELIVERY TIMELINE</span>
+            <span className="text-lg font-bold text-[#FCFCFA]">{service.timeline}</span>
           </div>
           <div>
-            <span className="text-cortelo-muted block">TARGET BENCHMARK</span>
-            <span className="text-lg font-bold text-cortelo-mint">{service.benchmark}</span>
+            <span className="text-white/40 block">TARGET BENCHMARK</span>
+            <span className="text-lg font-bold text-[#FF4533]">{service.benchmark}</span>
           </div>
           <div className="col-span-2 md:col-span-1">
-            <span className="text-cortelo-muted block">IP ASSIGNMENT</span>
-            <span className="text-lg font-bold text-cortelo-text">100% Client Ownership</span>
+            <span className="text-white/40 block">IP ASSIGNMENT</span>
+            <span className="text-lg font-bold text-[#FCFCFA]">100% Client Ownership</span>
           </div>
         </div>
 
         {/* Problems & Deliverables */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           
-          <div className="glass-panel p-8 rounded-2xl border border-cortelo-border space-y-6">
-            <h2 className="text-xl font-bold uppercase text-cortelo-text flex items-center gap-2">
-              <ShieldAlert className="w-5 h-5 text-red-400" />
+          <div className="p-8 rounded-3xl border border-white/10 bg-[#0D0D0D] space-y-6 shadow-sm">
+            <h2 className="text-xl font-bold uppercase text-[#FCFCFA] flex items-center gap-2">
+              <ShieldAlert className="w-5 h-5 text-white/60" />
               <span>Challenges Solved</span>
             </h2>
             <ul className="space-y-4">
               {service.problems.map((prob, i) => (
-                <li key={i} className="text-xs text-cortelo-muted leading-relaxed font-light flex items-start gap-2.5">
-                  <span className="text-red-400 font-mono mt-0.5">&bull;</span>
+                <li key={i} className="text-xs text-white/60 leading-relaxed font-light flex items-start gap-2.5">
+                  <span className="text-[#FF4533] font-mono mt-0.5">&bull;</span>
                   <span>{prob}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="glass-panel p-8 rounded-2xl border border-cortelo-border space-y-6">
-            <h2 className="text-xl font-bold uppercase text-cortelo-text flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-cortelo-mint" />
+          <div className="p-8 rounded-3xl border border-white/10 bg-[#0D0D0D] space-y-6 shadow-sm">
+            <h2 className="text-xl font-bold uppercase text-[#FCFCFA] flex items-center gap-2">
+              <CheckCircle2 className="w-5 h-5 text-[#FF4533]" />
               <span>What We Deliver</span>
             </h2>
             <ul className="space-y-4">
               {service.deliverables.map((deliv, i) => (
-                <li key={i} className="text-xs text-cortelo-text leading-relaxed font-light flex items-start gap-2.5">
-                  <span className="text-cortelo-mint font-mono mt-0.5">✓</span>
+                <li key={i} className="text-xs text-[#FCFCFA] leading-relaxed font-light flex items-start gap-2.5">
+                  <span className="text-[#FF4533] font-mono mt-0.5">✓</span>
                   <span>{deliv}</span>
                 </li>
               ))}
@@ -230,15 +231,15 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </div>
 
         {/* Tech Stack */}
-        <div className="glass-panel p-8 rounded-2xl border border-cortelo-border space-y-4">
-          <h3 className="text-xs font-mono text-cortelo-muted uppercase tracking-wider">
+        <div className="p-8 rounded-3xl border border-white/10 bg-[#0D0D0D] space-y-4 shadow-sm">
+          <h3 className="text-xs font-mono text-white/50 uppercase tracking-wider">
             Verified Production Technologies
           </h3>
           <div className="flex flex-wrap gap-2.5">
             {service.stack.map((item, i) => (
               <span
                 key={i}
-                className="px-3.5 py-1.5 rounded-full border border-cortelo-border bg-cortelo-surface text-xs font-mono text-cortelo-text"
+                className="px-3.5 py-1.5 rounded-full border border-white/10 bg-[#141414] text-xs font-mono text-white/80"
               >
                 {item}
               </span>
@@ -247,16 +248,16 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </div>
 
         {/* Action */}
-        <div className="pt-8 border-t border-cortelo-border text-center space-y-4">
-          <h3 className="text-2xl font-bold uppercase text-cortelo-text">
+        <div className="pt-8 border-t border-white/10 text-center space-y-4">
+          <h3 className="text-2xl font-bold uppercase text-[#FCFCFA]">
             Ready to Implement This Architecture?
           </h3>
           <div>
             <Link
               href="/contact"
-              className="inline-block px-10 py-4 rounded-full bg-cortelo-mint text-black font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all shadow-[0_0_24px_rgba(45,212,167,0.3)]"
+              className="btn-conversion-primary inline-block px-10 py-4 rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_24px_rgba(255,69,51,0.35)]"
             >
-              Consult with Hunzila & Mahreen
+              Consult with Hunzila &amp; Mahreen
             </Link>
           </div>
         </div>
@@ -265,4 +266,3 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     </main>
   );
 }
-

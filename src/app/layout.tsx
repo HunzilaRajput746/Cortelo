@@ -65,7 +65,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark scroll-smooth">
-      <body className={`${plusJakarta.variable} ${geistMono.variable} antialiased selection:bg-[#2DD4A7]/30 selection:text-white`}>
+      <body className={`${plusJakarta.variable} ${geistMono.variable} antialiased selection:bg-[#FF4533]/30 selection:text-white bg-[#000000] text-[#FCFCFA]`}>
         <ClientShell><JsonLd />{children}</ClientShell>
       </body>
     </html>
