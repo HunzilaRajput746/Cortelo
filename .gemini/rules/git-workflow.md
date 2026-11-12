@@ -15,7 +15,7 @@
 - Personal Portfolio: `https://devhunzila.site`
 - Fiverr: `https://fiverr.com/huzaifae3742`
 - GitHub: `https://github.com/HunzilaRajput746`
-- WhatsApp: `+92 318 6326746`
+- Contact: `hello@cortelo.ai` / Contact Form (Phone number private)
 - Live Production Platforms Built & Deployed:
   - Revenue.inc CRM (`https://dashboard.revenue.inc`)
   - C17 CRM (`https://dashboard.c17.ai`)
