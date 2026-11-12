@@ -235,7 +235,7 @@ export default function AboutPage() {
               className="px-6 py-3.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 text-xs font-mono transition-all flex items-center gap-2"
             >
               <MessageSquare className="w-3.5 h-3.5" />
-              <span>WhatsApp Direct (+92 318 6326746)</span>
+              <span>Initiate Direct Inquiry</span>
             </a>
           </div>
         </div>

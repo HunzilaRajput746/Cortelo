@@ -23,7 +23,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen pt-36 pb-24 px-6 relative z-10">
       <div className="max-w-[1440px] mx-auto space-y-16">
-        
+
         <div className="max-w-3xl space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cortelo-mint/40 bg-cortelo-mint/10 text-xs font-mono text-cortelo-mint font-semibold uppercase">
             <span>Direct Founder Access &bull; 06 Contact</span>
@@ -37,7 +37,7 @@ export default function ContactPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          
+
           {/* Form Column (7 cols) */}
           <div className="lg:col-span-7 glass-panel rounded-2xl p-8 md:p-12 border border-cortelo-mint/40 bg-[#0F131D]/90 shadow-xl">
             {submitted ? (
@@ -59,7 +59,7 @@ export default function ContactPage() {
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-xs font-mono font-semibold hover:bg-emerald-500/30 transition-all"
                   >
                     <MessageSquare className="w-4 h-4" />
-                    <span>Chat on WhatsApp (+92 318 6326746)</span>
+                    <span>Initiate Project Briefing</span>
                   </a>
                 </div>
               </div>
@@ -168,13 +168,13 @@ export default function ContactPage() {
 
           {/* Details & Direct Contact Channels Column (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
-            
+
             {/* Quick Founder Channels Box */}
             <div className="glass-panel rounded-2xl p-8 border border-cortelo-mint/40 bg-[#0F131D]/90 space-y-5">
               <span className="text-xs font-mono uppercase tracking-wider text-cortelo-mint font-semibold">
                 Priority Communication Channels
               </span>
-              
+
               <div className="space-y-4 text-xs font-mono">
                 <a
                   href={FOUNDER_DATA.whatsappUrl}
@@ -185,8 +185,8 @@ export default function ContactPage() {
                   <div className="flex items-center gap-3">
                     <MessageSquare className="w-5 h-5" />
                     <div>
-                      <div className="font-bold text-cortelo-text">Direct WhatsApp</div>
-                      <div className="text-[11px] text-emerald-400">+92 318 6326746</div>
+                      <div className="font-bold text-cortelo-text">Direct Inquiry</div>
+                      <div className="text-[11px] text-emerald-400">Available on Request</div>
                     </div>
                   </div>
                   <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
