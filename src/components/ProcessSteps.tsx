@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Search, Cpu, Rocket } from "lucide-react";
+import { Search, Cpu, Rocket } from "lucide-react";
 import { useAgencyShell } from "./ClientShell";
 
 export default function ProcessSteps() {
@@ -32,18 +32,19 @@ export default function ProcessSteps() {
   ];
 
   return (
-    <section id="process" className="py-24 px-6 sm:px-10 max-w-[1440px] mx-auto border-t border-cortelo-border">
+    <section id="process" className="py-24 px-6 sm:px-10 max-w-[1440px] mx-auto border-t border-white/10">
       
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-        <span className="px-3.5 py-1 rounded-full border border-cortelo-mint/40 bg-cortelo-mint/10 text-xs font-mono text-cortelo-mint font-semibold uppercase">
+        <span className="px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono text-white/90 font-semibold uppercase tracking-wider inline-flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#FF4533]" />
           Process
         </span>
-        <h2 className="text-3xl sm:text-5xl font-black uppercase text-cortelo-text tracking-tight">
+        <h2 className="text-3xl sm:text-5xl font-black uppercase text-[#FCFCFA] tracking-tight">
           Our simple 3-step process to{" "}
-          <span className="text-cortelo-mint italic">skyrocket</span> your business.
+          <span className="font-serif italic font-normal text-white lowercase">skyrocket</span> your business.
         </h2>
-        <p className="text-sm text-cortelo-muted leading-relaxed font-light">
+        <p className="text-sm text-white/60 leading-relaxed font-light">
           Transparent, milestone-driven execution with zero ambiguous retainer fees.
         </p>
       </div>
@@ -55,34 +56,34 @@ export default function ProcessSteps() {
           return (
             <div
               key={step.num}
-              className="glass-panel rounded-3xl p-8 sm:p-10 border border-cortelo-border hover:border-cortelo-mint transition-all flex flex-col justify-between bg-[#0F131D]/80 group"
+              className="rounded-3xl p-8 sm:p-10 border border-white/10 hover:border-[#FF4533]/50 transition-all duration-300 flex flex-col justify-between bg-[#0D0D0D] group shadow-sm hover:shadow-[0_0_30px_rgba(255,69,51,0.12)]"
             >
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-2xl bg-cortelo-mint/10 border border-cortelo-mint/30 flex items-center justify-center text-cortelo-mint group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-2xl bg-[#FF4533]/10 border border-[#FF4533]/30 flex items-center justify-center text-[#FF4533] group-hover:scale-110 group-hover:bg-[#FF4533] group-hover:text-white transition-all duration-300">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <span className="text-2xl font-black font-mono text-cortelo-muted/40 group-hover:text-cortelo-mint transition-colors">
+                  <span className="text-2xl font-black font-mono text-white/20 group-hover:text-[#FF4533] transition-colors">
                     {step.num}
                   </span>
                 </div>
 
                 <div>
-                  <span className="text-[10px] font-mono text-cortelo-mint uppercase tracking-wider font-semibold block mb-1">
+                  <span className="text-[10px] font-mono text-[#FF4533] uppercase tracking-wider font-semibold block mb-1">
                     {step.tag}
                   </span>
-                  <h3 className="text-xl font-bold uppercase text-cortelo-text mb-3">
+                  <h3 className="text-xl font-bold uppercase text-[#FCFCFA] mb-3 group-hover:text-white transition-colors">
                     {step.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-cortelo-muted leading-relaxed font-light">
+                  <p className="text-xs sm:text-sm text-white/60 leading-relaxed font-light">
                     {step.description}
                   </p>
                 </div>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-cortelo-border/60 flex items-center justify-between text-xs font-mono text-cortelo-muted">
+              <div className="pt-6 mt-6 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/50">
                 <span>Verified Acceptance</span>
-                <span className="text-cortelo-mint">&rarr;</span>
+                <span className="text-[#FF4533]">&rarr;</span>
               </div>
             </div>
           );
@@ -92,7 +93,7 @@ export default function ProcessSteps() {
       <div className="text-center pt-12">
         <button
           onClick={() => openDrawer()}
-          className="px-8 py-3.5 rounded-full bg-cortelo-mint text-black font-bold text-xs uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all shadow-[0_0_25px_rgba(45,212,167,0.35)]"
+          className="btn-conversion-primary px-8 py-3.5 rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white font-bold text-xs uppercase tracking-wider active:scale-95 transition-all shadow-[0_0_25px_rgba(255,69,51,0.35)] cursor-pointer"
         >
           Start Milestone 01 Discovery
         </button>
