@@ -58,11 +58,10 @@ export default function ServiceTabs() {
             <button
               key={d.id}
               onClick={() => setActiveTab(index)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono font-semibold transition-all whitespace-nowrap ${
-                isActive
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono font-semibold transition-all whitespace-nowrap ${isActive
                   ? "bg-cortelo-mint text-black shadow-[0_0_20px_rgba(45,212,167,0.3)]"
                   : "text-cortelo-muted hover:text-cortelo-text hover:bg-white/5"
-              }`}
+                }`}
             >
               <TabIcon className="w-3.5 h-3.5" />
               <span>{d.num}</span>
@@ -74,7 +73,7 @@ export default function ServiceTabs() {
 
       {/* Active Tab Pane Card */}
       <div className="p-8 md:p-12 rounded-2xl glass-panel relative border border-cortelo-border space-y-8 bg-gradient-to-br from-[#0F131D] to-[#07090E]">
-        
+
         {/* Top Header Row */}
         <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 pb-6 border-b border-cortelo-border">
           <div className="space-y-1">
@@ -103,7 +102,7 @@ export default function ServiceTabs() {
 
         {/* 2-Column: Deliverables + Tech Stack */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
-          
+
           {/* Deliverables Checklist */}
           <div className="space-y-3">
             <h4 className="text-xs font-mono uppercase tracking-wider text-cortelo-text font-bold">
