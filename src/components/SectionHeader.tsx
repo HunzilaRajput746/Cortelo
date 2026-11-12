@@ -17,15 +17,20 @@ export default function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div className={`space-y-4 mb-16 ${centered ? "text-center max-w-3xl mx-auto" : "max-w-2xl"}`}>
-      <span className="px-3.5 py-1 rounded-full border border-cortelo-mint/40 bg-cortelo-mint/10 text-xs font-mono text-cortelo-mint font-semibold uppercase tracking-wider">
+      <span className="px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono text-white/90 font-semibold uppercase tracking-wider inline-flex items-center gap-2">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#FF4533]" />
         {badge}
       </span>
-      <h2 className="text-3xl sm:text-5xl font-black uppercase text-cortelo-text tracking-tight">
+      <h2 className="text-3xl sm:text-5xl font-black uppercase text-[#FCFCFA] tracking-tight">
         {title}{" "}
-        {highlight && <span className="text-cortelo-mint italic font-serif lowercase">{highlight}</span>}
+        {highlight && (
+          <span className="font-serif italic font-normal text-white lowercase">
+            {highlight}
+          </span>
+        )}
       </h2>
       {description && (
-        <p className="text-sm sm:text-base text-cortelo-muted leading-relaxed font-light">
+        <p className="text-sm sm:text-base text-white/60 leading-relaxed font-light">
           {description}
         </p>
       )}
