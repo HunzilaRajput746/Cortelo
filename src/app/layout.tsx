@@ -1,3 +1,4 @@
+import JsonLd from "@/components/JsonLd";
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -65,7 +66,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body className={`${plusJakarta.variable} ${geistMono.variable} antialiased selection:bg-[#2DD4A7]/30 selection:text-white`}>
-        <ClientShell>{children}</ClientShell>
+        <ClientShell><JsonLd />{children}</ClientShell>
       </body>
     </html>
   );
