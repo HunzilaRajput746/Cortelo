@@ -87,16 +87,14 @@ export default function ProjectDrawer({ isOpen, onClose, initialScope = "" }: Pr
                 </p>
                 <div className="pt-4 border-t border-cortelo-border space-y-2">
                   <p className="text-[11px] font-mono text-cortelo-muted">
-                    Need instant response? Contact Hunzila directly on WhatsApp:
+                    Need instant response? Contact Hunzila directly:
                   </p>
                   <a
-                    href={FOUNDER_DATA.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={`mailto:${FOUNDER_DATA.email}`}
                     className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-mono text-xs font-semibold hover:bg-emerald-500/30 transition-all"
                   >
-                    <MessageSquare className="w-3.5 h-3.5" />
-                    <span>Chat on WhatsApp (+92 318 6326746)</span>
+                    <Mail className="w-3.5 h-3.5" />
+                    <span>Email: {FOUNDER_DATA.email}</span>
                   </a>
                 </div>
               </div>
@@ -197,7 +195,7 @@ export default function ProjectDrawer({ isOpen, onClose, initialScope = "" }: Pr
                   className="px-3.5 py-1.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-all flex items-center gap-1.5"
                 >
                   <MessageSquare className="w-3 h-3" />
-                  <span>WhatsApp: +92 318 6326746</span>
+                  <span>Direct Inquiry Channel</span>
                 </a>
                 <a
                   href={`mailto:${FOUNDER_DATA.email}`}

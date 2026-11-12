@@ -49,7 +49,7 @@ export default function FinalCTA() {
               className="btn-secondary w-full sm:w-auto px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 border-cortelo-mint/30 hover:border-cortelo-mint text-cortelo-text hover:text-cortelo-mint"
             >
               <MessageSquare className="w-4 h-4 text-cortelo-mint" />
-              <span>Direct WhatsApp (+92 318 6326746)</span>
+              <span>Initiate Project Briefing</span>
             </a>
           </div>
 

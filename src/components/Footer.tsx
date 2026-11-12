@@ -156,7 +156,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-full border border-emerald-500/40 bg-emerald-500/10 flex items-center justify-center text-emerald-400 hover:bg-emerald-500/20 transition-all"
-                title="WhatsApp Direct (+92 318 6326746)"
+                title="Direct Project Inquiry"
               >
                 <MessageSquare className="w-3.5 h-3.5" />
               </a>
@@ -250,7 +250,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-emerald-400 transition-colors flex items-center gap-1"
                 >
-                  <span>WhatsApp: {FOUNDER_DATA.phone}</span>
+                  <span>Direct Inquiry Channel</span>
                 </a>
               </li>
               <li>

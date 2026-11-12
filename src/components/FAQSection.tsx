@@ -93,14 +93,12 @@ export default function FAQSection() {
           Have an architecture question not answered here?
         </p>
         <p className="text-sm text-cortelo-text">
-          Reach out directly to Hunzila Nisar on WhatsApp:{" "}
+          Reach out directly to Hunzila Nisar via{" "}
           <a
             href={FOUNDER_DATA.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
             className="text-cortelo-mint font-semibold hover:underline"
           >
-            {FOUNDER_DATA.phone}
+            Direct Project Briefing
           </a>{" "}
           or email{" "}
           <a

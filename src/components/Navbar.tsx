@@ -135,7 +135,7 @@ export default function Navbar({ onOpenDrawer, onOpenFounderModal }: NavbarProps
             rel="noopener noreferrer"
             className="py-2 text-emerald-400 flex items-center justify-between border-b border-cortelo-border/40"
           >
-            <span>Direct WhatsApp (+92 318 6326746)</span>
+            <span>Direct Project Inquiry</span>
             <MessageSquare className="w-3.5 h-3.5" />
           </a>
 

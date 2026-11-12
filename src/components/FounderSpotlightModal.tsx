@@ -157,9 +157,9 @@ export default function FounderSpotlightModal({
                 className="p-3 rounded-xl border border-cortelo-border bg-cortelo-surface hover:border-emerald-400 hover:bg-emerald-400/5 transition-all text-center group"
               >
                 <MessageSquare className="w-5 h-5 mx-auto mb-1.5 text-emerald-400 group-hover:scale-110 transition-transform" />
-                <div className="text-xs font-bold text-cortelo-text">WhatsApp</div>
+                <div className="text-xs font-bold text-cortelo-text">Direct Inquiry</div>
                 <div className="text-[10px] font-mono text-cortelo-muted mt-0.5">
-                  +92 318 6326746
+                  Available on Request
                 </div>
               </a>
 
