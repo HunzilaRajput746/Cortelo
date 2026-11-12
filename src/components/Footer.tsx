@@ -1,41 +1,101 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import BrandLogo from "./BrandLogo";
 import { FOUNDER_DATA } from "@/lib/agencyData";
-import { ExternalLink, MessageSquare, Mail, Award } from "lucide-react";
+import { ExternalLink, MessageSquare, Mail, Award, Check, ArrowRight } from "lucide-react";
 import { useAgencyShell } from "./ClientShell";
 
 export default function Footer() {
   const { openFounderModal } = useAgencyShell();
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim() && email.includes("@")) {
+      setSubscribed(true);
+      setEmail("");
+    }
+  };
 
   return (
-    <footer className="py-20 border-t border-cortelo-border bg-cortelo-obsidian text-xs font-mono text-cortelo-muted relative z-10">
+    <footer className="py-20 border-t border-cortelo-border bg-[#07090E] text-xs font-mono text-cortelo-muted relative z-10">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10">
-        
-        {/* Top 4-Column Grid */}
+
+        {/* Newsletter Section (Conversion Style) */}
+        <div className="glass-panel rounded-3xl p-8 sm:p-12 border border-cortelo-border mb-16 bg-[#0B0F19]/80 backdrop-blur-xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div className="space-y-3">
+              <span className="px-3 py-1 rounded-full border border-cortelo-mint/40 bg-cortelo-mint/10 text-[11px] font-mono text-cortelo-mint font-semibold uppercase">
+                Newsletter
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-bold uppercase text-cortelo-text tracking-tight font-sans">
+                Join our <span className="text-cortelo-mint italic font-serif lowercase">newsletter</span>.
+              </h3>
+              <p className="text-xs sm:text-sm text-cortelo-muted max-w-md font-sans font-light leading-relaxed">
+                Sign up to our mailing list below and be the first to know about new engineering updates, AI benchmarks, and case studies. Don&apos;t worry, we hate spam too.
+              </p>
+            </div>
+
+            <form onSubmit={handleSubscribe} className="space-y-3">
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email address"
+                  required
+                  className="w-full px-5 py-3.5 rounded-2xl bg-[#131926] border border-cortelo-border text-sm text-cortelo-text placeholder:text-cortelo-muted/50 focus:outline-none focus:border-cortelo-mint transition-colors font-sans"
+                />
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-cortelo-mint text-[#07090E] font-bold text-xs uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-[0_0_20px_rgba(45,212,167,0.3)] font-sans"
+                >
+                  {subscribed ? (
+                    <>
+                      <Check className="w-4 h-4" /> Subscribed
+                    </>
+                  ) : (
+                    <>
+                      <span>Subscribe</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </>
+                  )}
+                </button>
+              </div>
+              {subscribed && (
+                <p className="text-xs text-cortelo-mint font-mono animate-in fade-in">
+                  ✓ Thank you for subscribing! You will receive our latest architecture benchmarks.
+                </p>
+              )}
+            </form>
+          </div>
+        </div>
+
+        {/* 4-Column Footer Navigation Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
-          
+
           {/* Brand Info & Mission */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
               <BrandLogo className="w-7 h-7" />
-              <span className="text-base font-black uppercase text-cortelo-text tracking-wider">
+              <span className="text-base font-black uppercase text-cortelo-text tracking-wider font-sans">
                 CORTELO
               </span>
             </div>
-            
+
             <p className="text-xs text-cortelo-muted leading-relaxed max-w-sm font-sans font-light">
-              Cortelo is an independent artificial intelligence and software engineering studio. We architect bespoke autonomous agents, custom enterprise CRMs (Revenue.inc &amp; C17 CRM), self-hosted automation infrastructure, and resilient full-stack platforms.
+              Cortelo is an independent artificial intelligence and software engineering studio. We architect bespoke autonomous agents, proprietary enterprise CRMs, self-hosted automation infrastructure, and resilient full-stack platforms.
             </p>
 
             <div className="pt-2 text-[11px] text-cortelo-muted space-y-1">
               <div>
-                Founded &amp; Directed by{" "}
+                Directed by{" "}
                 <button
                   onClick={openFounderModal}
-                  className="text-cortelo-mint hover:underline font-bold"
+                  className="text-cortelo-mint hover:underline font-bold cursor-pointer"
                 >
                   Hunzila Nisar
                 </button>{" "}
@@ -51,7 +111,7 @@ export default function Footer() {
                 href={FOUNDER_DATA.portfolioUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full border border-cortelo-border bg-cortelo-surface flex items-center justify-center text-cortelo-muted hover:text-cortelo-mint hover:border-cortelo-mint transition-all"
+                className="w-8 h-8 rounded-full border border-cortelo-border bg-[#0F131D] flex items-center justify-center text-cortelo-muted hover:text-cortelo-mint hover:border-cortelo-mint transition-all"
                 title="Founder Portfolio: devhunzila.site"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -61,7 +121,7 @@ export default function Footer() {
                 href={FOUNDER_DATA.fiverrUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full border border-cortelo-border bg-cortelo-surface flex items-center justify-center text-green-400 hover:border-green-400 transition-all"
+                className="w-8 h-8 rounded-full border border-cortelo-border bg-[#0F131D] flex items-center justify-center text-green-400 hover:border-green-400 transition-all"
                 title="Fiverr Profile & Services"
               >
                 <Award className="w-3.5 h-3.5" />
@@ -71,7 +131,7 @@ export default function Footer() {
                 href={FOUNDER_DATA.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full border border-cortelo-border bg-cortelo-surface flex items-center justify-center text-cortelo-muted hover:text-white hover:border-white transition-all"
+                className="w-8 h-8 rounded-full border border-cortelo-border bg-[#0F131D] flex items-center justify-center text-cortelo-muted hover:text-white hover:border-white transition-all"
                 title="GitHub @HunzilaRajput746"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -83,7 +143,7 @@ export default function Footer() {
                 href={FOUNDER_DATA.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full border border-cortelo-border bg-cortelo-surface flex items-center justify-center text-cortelo-muted hover:text-cyan-400 hover:border-cyan-400 transition-all"
+                className="w-8 h-8 rounded-full border border-cortelo-border bg-[#0F131D] flex items-center justify-center text-cortelo-muted hover:text-cyan-400 hover:border-cyan-400 transition-all"
                 title="LinkedIn Profile"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -103,54 +163,25 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Systems & CRMs */}
+          {/* Proprietary Systems & Services */}
           <div>
             <div className="text-cortelo-text uppercase tracking-widest font-bold mb-4 text-[11px]">
-              CRMs &amp; Systems
+              Services &amp; Architecture
             </div>
-            <ul className="space-y-2.5">
-              <li>
-                <a
-                  href="https://dashboard.revenue.inc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-cortelo-mint transition-colors flex items-center gap-1.5"
-                >
-                  <span>Revenue.inc CRM</span>
-                  <span className="text-[9px] px-1.5 py-0.5 rounded border border-cortelo-mint/40 text-cortelo-mint">
-                    PROD
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://dashboard.c17.ai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-cortelo-mint transition-colors flex items-center gap-1.5"
-                >
-                  <span>C17 CRM Platform</span>
-                  <span className="text-[9px] px-1.5 py-0.5 rounded border border-cyan-400/40 text-cyan-400">
-                    LIVE
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://n8n.devhunzila.site"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-cortelo-mint transition-colors flex items-center gap-1.5"
-                >
-                  <span>Self-Hosted n8n VPS</span>
-                  <span className="text-[9px] px-1.5 py-0.5 rounded border border-rose-400/40 text-rose-400">
-                    ENGINE
-                  </span>
-                </a>
-              </li>
+            <ul className="space-y-2.5 font-sans">
               <li>
                 <Link href="/services/ai-automation" className="hover:text-cortelo-mint transition-colors">
                   Autonomous AI Agents
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/enterprise-crm" className="hover:text-cortelo-mint transition-colors">
+                  Custom Enterprise CRMs
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/cloud-infrastructure" className="hover:text-cortelo-mint transition-colors">
+                  Self-Hosted VPS &amp; n8n
                 </Link>
               </li>
               <li>
@@ -158,33 +189,24 @@ export default function Footer() {
                   Full-Stack Next.js 15
                 </Link>
               </li>
+              <li>
+                <Link href="/#results" className="hover:text-cortelo-mint transition-colors">
+                  Client Results &amp; Metrics
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Studio & Credentials */}
+          {/* Studio & Founder */}
           <div>
             <div className="text-cortelo-text uppercase tracking-widest font-bold mb-4 text-[11px]">
-              Studio &amp; Founder
+              Information
             </div>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2.5 font-sans">
               <li>
-                <a
-                  href="https://devhunzila.site"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cortelo-mint hover:underline font-bold flex items-center gap-1"
-                >
-                  <span>devhunzila.site</span>
-                  <ExternalLink className="w-2.5 h-2.5" />
-                </a>
-              </li>
-              <li>
-                <button
-                  onClick={openFounderModal}
-                  className="hover:text-cortelo-mint transition-colors text-left"
-                >
-                  Hunzila Nisar Credentials
-                </button>
+                <Link href="/about" className="hover:text-cortelo-mint transition-colors">
+                  About Cortelo
+                </Link>
               </li>
               <li>
                 <Link href="/work" className="hover:text-cortelo-mint transition-colors">
@@ -193,23 +215,34 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/process" className="hover:text-cortelo-mint transition-colors">
-                  Engineering Process &amp; SLAs
+                  Engineering Process
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-cortelo-mint transition-colors">
-                  About &amp; Studio Leadership
+                <Link href="/#team" className="hover:text-cortelo-mint transition-colors">
+                  Engineering Team
                 </Link>
+              </li>
+              <li>
+                <a
+                  href={FOUNDER_DATA.portfolioUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cortelo-mint hover:underline font-bold flex items-center gap-1"
+                >
+                  <span>Founder Portfolio</span>
+                  <ExternalLink className="w-2.5 h-2.5" />
+                </a>
               </li>
             </ul>
           </div>
 
-          {/* Direct Channels */}
+          {/* Contact */}
           <div>
             <div className="text-cortelo-text uppercase tracking-widest font-bold mb-4 text-[11px]">
-              Initiate Contact
+              Contact
             </div>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2.5 font-sans">
               <li>
                 <a
                   href={FOUNDER_DATA.whatsappUrl}
@@ -217,7 +250,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-emerald-400 transition-colors flex items-center gap-1"
                 >
-                  <span>WhatsApp: +92 318 6326746</span>
+                  <span>WhatsApp: {FOUNDER_DATA.phone}</span>
                 </a>
               </li>
               <li>
@@ -243,13 +276,13 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-green-400 transition-colors flex items-center gap-1"
                 >
-                  <span>Hire on Fiverr</span>
+                  <span>Order on Fiverr</span>
                   <ExternalLink className="w-2.5 h-2.5" />
                 </a>
               </li>
               <li>
-                <Link href="/contact" className="text-cortelo-mint hover:underline">
-                  Initiate Architectural Briefing &rarr;
+                <Link href="/contact" className="text-cortelo-mint hover:underline font-semibold">
+                  Book 15-min Call &rarr;
                 </Link>
               </li>
             </ul>
@@ -260,11 +293,11 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-cortelo-border flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px]">
           <div>
-            &copy; 2026 Cortelo Systems. Directed by Hunzila Nisar &amp; Mahreen Hashir. 100% intellectual property transfer upon delivery.
+            &copy; 2026 Cortelo Systems Inc. Directed by Hunzila Nisar &amp; Mahreen Hashir. All rights reserved.
           </div>
           <div className="flex items-center gap-4">
             <span>PKT (UTC+5) &bull; Global Remote Delivery</span>
-            <span className="text-cortelo-mint">OWASP ASVS L2 Standard</span>
+            <span className="text-cortelo-mint">100% IP Code Transfer</span>
           </div>
         </div>
 
