@@ -47,8 +47,8 @@ write_and_commit(
   tagline: "Autonomous AI & Intelligent Systems Studio",
   url: "https://cortelo.ai",
   contact: {
-    phone: "+92 318 6326746",
-    whatsapp: "https://wa.me/923186326746",
+    phone: "Available upon inquiry",
+    whatsapp: "/contact",
     email: "hunzilanisar746@gmail.com",
     agencyEmail: "hello@cortelo.ai",
     fiverr: "https://fiverr.com/huzaifae3742",
@@ -849,7 +849,7 @@ readme_content = """# Cortelo Systems — Autonomous AI & Software Engineering S
 - **Hunzila Nisar** — Founder & Lead AI Systems Architect
   - Portfolio: [devhunzila.site](https://devhunzila.site)
   - LinkedIn: [Hunzila Nisar](https://linkedin.com/in/hunzila-nisar-ai)
-  - WhatsApp: `+92 318 6326746`
+  - Contact: hello@cortelo.ai / Contact Form
   - Distinction: BSc in Artificial Intelligence (A+ Grade), NAVTTC AI Certification
 - **Mahreen Hashir** — Co-Founder & Head of Systems (ASVS L2 Security & MLOps)
 - **Umar Attique** — Senior AI Systems Engineer (RAG & Model Fine-Tuning)

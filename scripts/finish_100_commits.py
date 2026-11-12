@@ -51,7 +51,7 @@ readme_content = """# Cortelo Systems — Autonomous AI & Software Engineering S
 - **Hunzila Nisar** — Founder & Lead AI Systems Architect
   - Portfolio: [devhunzila.site](https://devhunzila.site)
   - LinkedIn: [Hunzila Nisar](https://linkedin.com/in/hunzila-nisar-ai)
-  - WhatsApp: `+92 318 6326746`
+  - Contact: hello@cortelo.ai / Contact Form
   - Distinction: BSc in Artificial Intelligence (A+ Grade), NAVTTC AI Certification
 - **Mahreen Hashir** — Co-Founder & Head of Systems (ASVS L2 Security & MLOps)
 - **Umar Attique** — Senior AI Systems Engineer (RAG & Model Fine-Tuning)
@@ -254,10 +254,10 @@ if "Strict Acceptance Testing" not in process_content:
 with open("src/app/contact/page.tsx", "r", encoding="utf-8") as f:
     contact_content = f.read()
 
-if "Direct WhatsApp Line (+92 318 6326746)" not in contact_content:
+if "Direct Project Briefing" not in contact_content:
     contact_content = contact_content.replace(
         "Initiate Briefing",
-        "Initiate Briefing or Direct WhatsApp Line (+92 318 6326746)"
+        "Initiate Briefing or Direct Channel"
     )
     write_and_commit("src/app/contact/page.tsx", contact_content, "feat(contact): streamline Contact page with direct WhatsApp and booking options")
 
