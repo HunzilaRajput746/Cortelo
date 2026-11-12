@@ -29,7 +29,7 @@ export default function FounderSpotlightModal({
 
       {/* Modal Dialog */}
       <div className="relative z-10 w-full max-w-3xl max-h-[90vh] glass-panel rounded-2xl border border-cortelo-mint/40 shadow-[0_0_60px_rgba(45,212,167,0.2)] overflow-hidden flex flex-col bg-[#0B0F19]/95 text-cortelo-text animate-in zoom-in-95 duration-200">
-        
+
         {/* Header */}
         <div className="flex items-center justify-between px-6 sm:px-8 py-5 border-b border-cortelo-border/70 bg-[#07090E]/80">
           <div className="flex items-center gap-2">
@@ -50,7 +50,7 @@ export default function FounderSpotlightModal({
 
         {/* Content Body */}
         <div className="p-6 sm:p-8 overflow-y-auto space-y-6">
-          
+
           {/* Top Profile Banner */}
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-6 border-b border-cortelo-border/60">
             <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-cortelo-mint/50 relative shrink-0 shadow-[0_0_30px_rgba(45,212,167,0.3)]">
@@ -107,7 +107,7 @@ export default function FounderSpotlightModal({
               Direct Contact &amp; Verified Channels
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              
+
               <a
                 href={FOUNDER_DATA.portfolioUrl}
                 target="_blank"

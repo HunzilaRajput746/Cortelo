@@ -33,11 +33,10 @@ export default function FAQSection() {
           return (
             <div
               key={index}
-              className={`glass-panel rounded-2xl border transition-all duration-300 ${
-                isOpen
+              className={`glass-panel rounded-2xl border transition-all duration-300 ${isOpen
                   ? "border-cortelo-mint/40 bg-[#0B0F19]/90 shadow-[0_0_20px_rgba(45,212,167,0.06)]"
                   : "border-cortelo-border/70 bg-[#0B0F19]/60 hover:border-cortelo-mint/30"
-              }`}
+                }`}
             >
               <button
                 onClick={() => toggle(index)}
@@ -48,11 +47,10 @@ export default function FAQSection() {
                   {faq.q}
                 </span>
                 <div
-                  className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 border transition-all duration-300 ${
-                    isOpen
+                  className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 border transition-all duration-300 ${isOpen
                       ? "bg-cortelo-mint text-[#07090E] border-cortelo-mint"
                       : "bg-white/[0.03] text-cortelo-muted border-cortelo-border group-hover:border-cortelo-mint/40 group-hover:text-cortelo-text"
-                  }`}
+                    }`}
                 >
                   {isOpen ? (
                     <Minus className="w-4 h-4 stroke-[2.5]" />
@@ -65,7 +63,7 @@ export default function FAQSection() {
               {isOpen && (
                 <div className="px-6 sm:px-7 pb-6 sm:pb-7 text-sm text-cortelo-muted leading-relaxed font-light border-t border-cortelo-border/40 pt-4 animate-in fade-in duration-200 space-y-3">
                   <p>{faq.a}</p>
-                  
+
                   {/* Additional Founder link for credibility */}
                   {index === 2 && (
                     <div className="pt-2 flex flex-wrap items-center gap-4">

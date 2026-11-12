@@ -94,9 +94,9 @@ export default function ClientShell({ children }: { children: React.ReactNode })
 
       {/* 6. Footer */}
       <Footer />
-        <WhatsAppFloat />
-        <BackToTop />
-        <CookieNotice />
+      <WhatsAppFloat />
+      <BackToTop />
+      <CookieNotice />
     </ShellContext.Provider>
   );
 }

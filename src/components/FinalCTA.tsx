@@ -11,7 +11,7 @@ export default function FinalCTA() {
   return (
     <section className="py-24 px-6 sm:px-10 max-w-[1440px] mx-auto">
       <div className="relative rounded-3xl p-8 sm:p-14 lg:p-20 border border-cortelo-mint/40 bg-gradient-to-b from-[#0F1626] to-[#07090E] overflow-hidden text-center shadow-[0_0_80px_rgba(45,212,167,0.12)]">
-        
+
         {/* Glow Effects */}
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-cortelo-mint/15 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute -bottom-32 left-1/2 -translate-x-1/2 w-80 h-80 bg-blue-500/10 rounded-full blur-[90px] pointer-events-none" />
