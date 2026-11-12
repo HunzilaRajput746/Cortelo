@@ -54,31 +54,32 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
   };
 
   return (
-    <div className="glass-panel rounded-2xl p-8 sm:p-12 border border-cortelo-mint/30 bg-gradient-to-br from-[#0B0F19] to-[#07090E] relative overflow-hidden shadow-2xl">
+    <div className="rounded-3xl p-8 sm:p-12 border border-white/10 bg-[#0D0D0D] relative overflow-hidden shadow-2xl">
 
       {/* Decorative gradient radial */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cortelo-mint/5 rounded-full filter blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#FF4533]/5 rounded-full filter blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 space-y-8">
 
         {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 pb-6 border-b border-cortelo-border">
+        <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 pb-6 border-b border-white/10">
           <div>
-            <span className="text-xs font-mono uppercase tracking-wider text-cortelo-mint font-semibold">
+            <span className="px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono uppercase tracking-wider text-white/90 font-semibold inline-flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF4533]" />
               Interactive Scope Architect &bull; 05
             </span>
-            <h3 className="text-2xl sm:text-4xl font-black uppercase text-cortelo-text mt-1">
+            <h3 className="text-2xl sm:text-4xl font-black uppercase text-[#FCFCFA] mt-4">
               Configure Your System Blueprint.
             </h3>
           </div>
-          <p className="text-xs font-mono text-cortelo-muted">
+          <p className="text-xs font-mono text-white/50">
             Select modules &bull; 100% IP Handover &bull; Verified SLAs
           </p>
         </div>
 
         {/* Step 1: Core System Modules */}
         <div className="space-y-3">
-          <label className="text-xs font-mono uppercase tracking-wider text-cortelo-muted block">
+          <label className="text-xs font-mono uppercase tracking-wider text-white/50 block">
             Step 1: Select Target Architectural Modules
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -89,20 +90,22 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
                 <button
                   key={item.id}
                   onClick={() => togglePillar(item.label)}
-                  className={`p-4 rounded-xl border text-left flex items-center justify-between gap-3 transition-all ${active
-                      ? "border-cortelo-mint bg-cortelo-mint/10 text-cortelo-text shadow-[0_0_15px_rgba(45,212,167,0.2)]"
-                      : "border-cortelo-border bg-cortelo-surface/80 text-cortelo-muted hover:border-cortelo-border/80 hover:text-cortelo-text"
-                    }`}
+                  className={`p-4 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
+                    active
+                      ? "border-[#FF4533] bg-[#FF4533]/10 text-white shadow-[0_0_15px_rgba(255,69,51,0.2)]"
+                      : "border-white/10 bg-[#141414] text-white/60 hover:border-white/20 hover:text-white"
+                  }`}
                 >
                   <div className="flex items-center gap-3">
-                    <Icon className={`w-4 h-4 ${active ? "text-cortelo-mint" : "text-cortelo-muted"}`} />
+                    <Icon className={`w-4 h-4 ${active ? "text-[#FF4533]" : "text-white/40"}`} />
                     <span className="text-xs font-mono font-medium">{item.label}</span>
                   </div>
                   <div
-                    className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${active
-                        ? "border-cortelo-mint bg-cortelo-mint text-black"
-                        : "border-cortelo-border"
-                      }`}
+                    className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${
+                      active
+                        ? "border-[#FF4533] bg-[#FF4533] text-white"
+                        : "border-white/10"
+                    }`}
                   >
                     {active && <Check className="w-3 h-3 stroke-[3]" />}
                   </div>
@@ -117,7 +120,7 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
 
           {/* Target Timeline */}
           <div className="space-y-3">
-            <label className="text-xs font-mono uppercase tracking-wider text-cortelo-muted block">
+            <label className="text-xs font-mono uppercase tracking-wider text-white/50 block">
               Step 2: Deployment Horizon
             </label>
             <div className="space-y-2">
@@ -125,13 +128,14 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
                 <button
                   key={time}
                   onClick={() => setSelectedTimeline(time)}
-                  className={`w-full p-3 rounded-xl border text-left text-xs font-mono transition-all flex items-center justify-between ${selectedTimeline === time
-                      ? "border-cortelo-mint bg-cortelo-mint/10 text-cortelo-text"
-                      : "border-cortelo-border bg-cortelo-surface/60 text-cortelo-muted hover:border-cortelo-border/80"
-                    }`}
+                  className={`w-full p-3 rounded-xl border text-left text-xs font-mono transition-all flex items-center justify-between cursor-pointer ${
+                    selectedTimeline === time
+                      ? "border-[#FF4533] bg-[#FF4533]/10 text-white"
+                      : "border-white/10 bg-[#141414] text-white/60 hover:border-white/20"
+                  }`}
                 >
                   <span>{time}</span>
-                  {selectedTimeline === time && <Check className="w-3.5 h-3.5 text-cortelo-mint" />}
+                  {selectedTimeline === time && <Check className="w-3.5 h-3.5 text-[#FF4533]" />}
                 </button>
               ))}
             </div>
@@ -139,7 +143,7 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
 
           {/* Infrastructure Preference */}
           <div className="space-y-3">
-            <label className="text-xs font-mono uppercase tracking-wider text-cortelo-muted block">
+            <label className="text-xs font-mono uppercase tracking-wider text-white/50 block">
               Step 3: Private Infrastructure Topology
             </label>
             <div className="space-y-2">
@@ -147,13 +151,14 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
                 <button
                   key={opt}
                   onClick={() => setSelectedHosting(opt)}
-                  className={`w-full p-3 rounded-xl border text-left text-xs font-mono transition-all flex items-center justify-between ${selectedHosting === opt
-                      ? "border-cortelo-mint bg-cortelo-mint/10 text-cortelo-text"
-                      : "border-cortelo-border bg-cortelo-surface/60 text-cortelo-muted hover:border-cortelo-border/80"
-                    }`}
+                  className={`w-full p-3 rounded-xl border text-left text-xs font-mono transition-all flex items-center justify-between cursor-pointer ${
+                    selectedHosting === opt
+                      ? "border-[#FF4533] bg-[#FF4533]/10 text-white"
+                      : "border-white/10 bg-[#141414] text-white/60 hover:border-white/20"
+                  }`}
                 >
                   <span>{opt}</span>
-                  {selectedHosting === opt && <Check className="w-3.5 h-3.5 text-cortelo-mint" />}
+                  {selectedHosting === opt && <Check className="w-3.5 h-3.5 text-[#FF4533]" />}
                 </button>
               ))}
             </div>
@@ -162,22 +167,22 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
         </div>
 
         {/* Output Banner & Action */}
-        <div className="p-6 rounded-xl border border-cortelo-border bg-[#07090E]/90 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="p-6 rounded-2xl border border-white/10 bg-[#141414] flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center md:text-left">
-            <div className="text-xs font-mono text-cortelo-mint font-semibold uppercase">
+            <div className="text-xs font-mono text-[#FF4533] font-semibold uppercase">
               Blueprint Generated ({selectedPillars.length} Modules Selected)
             </div>
-            <div className="text-sm font-semibold text-cortelo-text">
+            <div className="text-sm font-semibold text-[#FCFCFA]">
               Target Handover: {selectedTimeline.split(" ")[0]} {selectedTimeline.split(" ")[1]} {selectedTimeline.split(" ")[2]} &bull; {selectedHosting}
             </div>
-            <div className="text-[11px] font-mono text-cortelo-muted">
+            <div className="text-[11px] font-mono text-white/50">
               Mutual NDA Enforced &bull; Direct Founder Assessment by Hunzila Nisar within 24h
             </div>
           </div>
 
           <button
             onClick={handleLaunchBrief}
-            className="w-full md:w-auto px-8 py-3.5 rounded-full bg-cortelo-mint text-black font-bold text-xs uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all shadow-[0_0_25px_rgba(45,212,167,0.4)] flex items-center justify-center gap-2"
+            className="btn-conversion-primary w-full md:w-auto px-8 py-3.5 rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white font-bold text-xs uppercase tracking-wider active:scale-95 transition-all shadow-[0_0_25px_rgba(255,69,51,0.4)] flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>Lock Configuration &amp; Initiate Brief</span>
             <ArrowRight className="w-4 h-4" />
@@ -189,4 +194,3 @@ export default function SystemEstimator({ onOpenDrawerWithConfig }: SystemEstima
     </div>
   );
 }
-
