@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg: #000000;
-  --surface: #0D0D0D;
-  --surface2: #141414;
-  --surface3: #1C1C1C;
-  --text: #FCFCFA;
-  --text-muted: rgba(255, 255, 255, 0.56);
-  --border: rgba(255, 255, 255, 0.10);
-  --border-hover: rgba(255, 69, 51, 0.40);
-  --flame: #FF4533;
-  --flame-hover: #FF220E;
-  --mint: #FF4533;
-  --emerald: #FF220E;
-  --glass: rgba(13, 13, 13, 0.85);
+  --bg: #080b12;
+  --surface: #101520;
+  --surface2: #161d2b;
+  --surface3: #202a3a;
+  --text: #f5f7fb;
+  --text-muted: rgba(221, 229, 241, 0.62);
+  --border: rgba(194, 211, 235, 0.14);
+  --border-hover: rgba(139, 240, 212, 0.48);
+  --flame: #ff765f;
+  --flame-hover: #ff5b4b;
+  --mint: #8bf0d4;
+  --emerald: #55d9bb;
+  --glass: rgba(16, 21, 32, 0.88);
   --font-serif: 'Instrument Serif', Georgia, serif;
 }
 
@@ -40,18 +40,18 @@ body {
 /* Exact Conversion Button Styles */
 .btn-primary,
 .btn-conversion-primary {
-  background-color: #FF4533;
-  color: #FFFFFF;
-  border-radius: 12px;
+  background-color: var(--mint);
+  color: #081018;
+  border-radius: 10px;
   font-weight: 600;
-  box-shadow: 0px 0px 0px 1px rgba(255, 69, 51, 0.25), 0 0 25px rgba(255, 69, 51, 0.35);
+  box-shadow: 0 12px 30px rgba(139, 240, 212, 0.14);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-primary:hover,
 .btn-conversion-primary:hover {
-  background-color: #FF220E;
-  box-shadow: 0px 0px 0px 1px rgba(255, 69, 51, 0.45), 0 0 35px rgba(255, 69, 51, 0.55);
+  background-color: #b6ffe9;
+  box-shadow: 0 14px 34px rgba(139, 240, 212, 0.22);
   transform: translateY(-1px);
 }
 
@@ -62,7 +62,7 @@ body {
 
 .btn-secondary,
 .btn-conversion-secondary {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.045);
   color: #FFFFFF;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
@@ -85,7 +85,7 @@ body {
 
 /* Conversion Glass Card */
 .glass-panel {
-  background: rgba(13, 13, 13, 0.85);
+  background: var(--glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border);
@@ -98,14 +98,14 @@ body {
 
 /* Rotating Conic Gradient Animations (Conversion Style) */
 .conic-flame-orb {
-  background: conic-gradient(red 0deg, #ff001a 54.8deg, #00a6ff 106.7deg, #4797ff 162deg, #04f 252deg, #ff8000 306deg, red 360deg);
+  background: conic-gradient(from 220deg, #203b72, #8bf0d4, #ff765f, #25335e, #203b72);
   filter: blur(80px);
   border-radius: 500px;
   will-change: transform;
 }
 
 .conic-warm-orb {
-  background: conic-gradient(#ffd9ad 0deg, #139ce5 180deg, #fd864d 360deg);
+  background: conic-gradient(#8bf0d4 0deg, #3e6ee8 180deg, #ff765f 360deg);
   filter: blur(75px);
   border-radius: 500px;
   will-change: transform;
@@ -116,30 +116,56 @@ body {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: var(--bg);
 }
+
 ::-webkit-scrollbar-thumb {
   background: #1c1c1c;
   border-radius: 9999px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF4533;
+  background: var(--mint);
 }
 
 /* Accessibility Focus Ring */
 *:focus-visible {
-  outline: 2px solid #FF4533;
+  outline: 2px solid var(--mint);
   outline-offset: 2px;
 }
 
 /* Glow Helpers */
 .neon-mint-glow,
 .neon-flame-glow {
-  box-shadow: 0 0 30px rgba(255, 69, 51, 0.3);
+  box-shadow: 0 0 30px rgba(139, 240, 212, 0.2);
 }
 
 .text-glow-mint,
 .text-glow-flame {
-  text-shadow: 0 0 20px rgba(255, 69, 51, 0.4);
+  text-shadow: 0 0 20px rgba(139, 240, 212, 0.25);
+}
+
+/* Legacy utility classes are kept in components for compatibility while the visual system
+   is controlled from one palette. */
+[class*="text-[#FF4533]"] { color: var(--mint) !important; }
+[class*="text-[#FF220E]"] { color: var(--flame) !important; }
+[class*="bg-[#FF4533]"] { background-color: var(--mint) !important; }
+[class*="bg-[#FF220E]"] { background-color: var(--flame) !important; }
+[class*="border-[#FF4533]"] { border-color: var(--mint) !important; }
+
+.editorial-grid {
+  background-image: linear-gradient(rgba(139, 240, 212, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 240, 212, 0.055) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

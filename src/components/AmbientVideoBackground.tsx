@@ -1,45 +1,18 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 export default function AmbientVideoBackground() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#000000]">
-      {/* 1. Conversion Signature Rotating Conic Gradient Orbs */}
-      <div className="absolute -top-[200px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] pointer-events-none opacity-45">
-        <div className="w-full h-full conic-flame-orb animate-conic-slow" />
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#080b12]">
+      <div className="absolute inset-0 editorial-grid opacity-40" />
+      <div className="absolute -top-[240px] left-1/2 -translate-x-1/2 w-[760px] h-[560px] rounded-full bg-[#263c7a]/25 blur-[120px]">
       </div>
-
-      <div className="absolute -top-[100px] left-1/2 -translate-x-1/2 w-[550px] h-[550px] pointer-events-none opacity-30 mix-blend-screen">
-        <div className="w-full h-full conic-warm-orb animate-conic-reverse" />
+      <div className="absolute top-[48%] -left-[240px] w-[520px] h-[520px] rounded-full bg-[#2c9588]/10 blur-[120px]">
       </div>
-
-      {/* 2. Mid-page Ambient Accent Orb */}
-      <div className="absolute top-[45%] -left-[150px] w-[500px] h-[500px] pointer-events-none opacity-20">
-        <div className="w-full h-full conic-flame-orb animate-conic-slow" />
+      <div className="absolute top-[72%] -right-[220px] w-[500px] h-[500px] rounded-full bg-[#b84d48]/10 blur-[120px]">
       </div>
-
-      <div className="absolute top-[75%] -right-[150px] w-[550px] h-[550px] pointer-events-none opacity-25">
-        <div className="w-full h-full conic-warm-orb animate-conic-reverse" />
-      </div>
-
-      {/* 3. Deep Radial Vignette Overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,#000000_90%)] pointer-events-none opacity-90" />
-
-      {/* 4. Fine Grain Noise Texture */}
-      <div
-        className="absolute inset-0 opacity-[0.025] pointer-events-none"
-        style={{
-          backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px)`,
-          backgroundSize: "28px 28px",
-        }}
-      />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,#080b12_92%)]" />
     </div>
   );
 }
