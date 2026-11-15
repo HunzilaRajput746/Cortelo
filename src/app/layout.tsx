@@ -1,22 +1,7 @@
 import JsonLd from "@/components/JsonLd";
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientShell from "@/components/ClientShell";
-
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://cortelo.ai"),
@@ -65,7 +50,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark scroll-smooth">
-      <body className={`${plusJakarta.variable} ${geistMono.variable} antialiased selection:bg-[#FF4533]/30 selection:text-white bg-[#000000] text-[#FCFCFA]`}>
+      <body className="antialiased selection:bg-[#FF4533]/30 selection:text-white bg-[#000000] text-[#FCFCFA]">
         <ClientShell><JsonLd />{children}</ClientShell>
       </body>
     </html>
