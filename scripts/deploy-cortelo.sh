@@ -30,5 +30,15 @@ else
 fi
 
 pm2 save
-curl --fail --silent --show-error --max-time 15 "http://127.0.0.1:$PORT/" >/dev/null
-echo "Cortelo deployed successfully on port $PORT."
+
+for attempt in $(seq 1 30); do
+  if curl --fail --silent --show-error --max-time 5 "http://127.0.0.1:$PORT/" >/dev/null; then
+    echo "Cortelo deployed successfully on port $PORT."
+    exit 0
+  fi
+  sleep 1
+done
+
+echo "Cortelo did not become healthy on port $PORT." >&2
+pm2 logs cortelo --lines 40 --nostream >&2 || true
+exit 1
