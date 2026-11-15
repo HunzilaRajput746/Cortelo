@@ -10,7 +10,7 @@ export default function ComparisonTable() {
   const comparisons = [
     {
       other: "Slow, ticketing-queue communication",
-      cortelo: "Constant, proactive founder communication (WhatsApp / Slack)",
+      cortelo: "Direct, proactive founder communication by email",
     },
     {
       other: "Single channel approach & brittle Zapier scripts",
@@ -36,7 +36,7 @@ export default function ComparisonTable() {
 
   return (
     <section className="py-24 px-6 sm:px-10 max-w-[1440px] mx-auto border-t border-white/10">
-      
+
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
         <span className="px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono text-white/90 font-semibold uppercase tracking-wider inline-flex items-center gap-2">
@@ -54,7 +54,7 @@ export default function ComparisonTable() {
 
       {/* 2-Column Side-by-Side Comparison Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-        
+
         {/* Left Column: Other Agencies */}
         <div className="rounded-3xl p-8 sm:p-10 border border-white/10 bg-[#0D0D0D] space-y-6">
           <div className="flex items-center gap-3 pb-6 border-b border-white/10">
@@ -85,7 +85,7 @@ export default function ComparisonTable() {
 
         {/* Right Column: Cortelo (Highlighted with Electric Flame Border) */}
         <div className="rounded-3xl p-8 sm:p-10 border-2 border-[#FF4533] bg-[#0D0D0D] space-y-6 shadow-[0_0_50px_rgba(255,69,51,0.15)] relative">
-          
+
           <div className="flex items-center justify-between pb-6 border-b border-white/10">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-[#FF4533] text-white flex items-center justify-center shadow-[0_0_15px_rgba(255,69,51,0.35)]">

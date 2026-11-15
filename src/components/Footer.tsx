@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import BrandLogo from "./BrandLogo";
 import { FOUNDER_DATA } from "@/lib/agencyData";
-import { ExternalLink, MessageSquare, Award, Check, ArrowRight } from "lucide-react";
+import { ExternalLink, Award, Check, ArrowRight } from "lucide-react";
 import { useAgencyShell } from "./ClientShell";
 
 export default function Footer() {
@@ -25,7 +25,7 @@ export default function Footer() {
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10">
 
         {/* Newsletter Section (Conversion Style) */}
-        <div className="rounded-3xl p-8 sm:p-12 border border-white/10 mb-16 bg-[#0D0D0D]">
+        <div className="py-8 sm:py-12 border-y border-white/10 mb-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-3">
               <span className="px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-[11px] font-mono text-white/90 font-semibold uppercase tracking-wider inline-flex items-center gap-2">
@@ -152,15 +152,6 @@ export default function Footer() {
                 </svg>
               </a>
 
-              <a
-                href={FOUNDER_DATA.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full border border-white/10 bg-[#141414] flex items-center justify-center text-white/60 hover:text-[#FF4533] hover:border-[#FF4533] transition-all"
-                title="Direct Project Inquiry"
-              >
-                <MessageSquare className="w-3.5 h-3.5" />
-              </a>
             </div>
           </div>
 
@@ -220,7 +211,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/#team" className="hover:text-white transition-colors">
+                <Link href="/team" className="hover:text-white transition-colors">
                   Engineering Team
                 </Link>
               </li>
@@ -244,16 +235,6 @@ export default function Footer() {
               Contact
             </div>
             <ul className="space-y-2.5 font-sans">
-              <li>
-                <a
-                  href={FOUNDER_DATA.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#FF4533] transition-colors flex items-center gap-1"
-                >
-                  <span>Direct Inquiry Channel</span>
-                </a>
-              </li>
               <li>
                 <a
                   href={`mailto:${FOUNDER_DATA.email}`}

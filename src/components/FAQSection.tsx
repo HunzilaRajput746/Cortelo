@@ -94,20 +94,14 @@ export default function FAQSection() {
           Have an architecture question not answered here?
         </p>
         <p className="text-sm text-[#FCFCFA]">
-          Reach out directly to Hunzila Nisar via{" "}
-          <a
-            href={FOUNDER_DATA.whatsappUrl}
-            className="text-[#FF4533] font-semibold hover:underline"
-          >
-            Direct Project Briefing
-          </a>{" "}
-          or email{" "}
+          Reach out directly to Hunzila Nisar through{" "}
           <a
             href={`mailto:${FOUNDER_DATA.email}`}
             className="text-[#FF4533] font-semibold hover:underline"
           >
-            {FOUNDER_DATA.email}
-          </a>
+            email
+          </a>{" "}
+          at {FOUNDER_DATA.email}
         </p>
       </div>
     </section>

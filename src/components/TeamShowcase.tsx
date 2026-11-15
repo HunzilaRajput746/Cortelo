@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Globe, Sparkles, MessageSquare } from "lucide-react";
+import { Globe, Sparkles } from "lucide-react";
 import { AGENCY_TEAM_ROSTER, FOUNDER_DATA } from "@/lib/agencyData";
 import { useAgencyShell } from "./ClientShell";
 
@@ -179,12 +179,10 @@ export default function TeamShowcase() {
         </p>
         <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
           <a
-            href={FOUNDER_DATA.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-conversion-primary px-6 py-3.5 rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white font-bold text-xs uppercase tracking-wider inline-flex items-center gap-2 shadow-[0_0_20px_rgba(255,69,51,0.35)]"
+            href={`mailto:${FOUNDER_DATA.email}`}
+            className="text-sm text-[#d7a47a] hover:text-white transition-colors"
           >
-            <MessageSquare className="w-4 h-4" /> Chat Directly on WhatsApp
+            Email the studio <span aria-hidden="true">→</span>
           </a>
           <button
             onClick={openFounderModal}

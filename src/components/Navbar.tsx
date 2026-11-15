@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { User, MessageSquare } from "lucide-react";
+import { User } from "lucide-react";
 import { FOUNDER_DATA } from "@/lib/agencyData";
 
 interface NavbarProps {
@@ -20,7 +20,7 @@ export default function Navbar({ onOpenDrawer, onOpenFounderModal }: NavbarProps
     { label: "Services", href: "/#services" },
     { label: "Results", href: "/#results" },
     { label: "Process", href: "/#process" },
-    { label: "Team", href: "/#team" },
+    { label: "Team", href: "/team" },
     { label: "FAQs", href: "/#faq" },
   ];
 
@@ -68,18 +68,6 @@ export default function Navbar({ onOpenDrawer, onOpenFounderModal }: NavbarProps
             <span className="sm:hidden">Founder</span>
           </button>
 
-          {/* Direct WhatsApp CTA */}
-          <a
-            href={FOUNDER_DATA.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:flex items-center gap-1.5 px-3.5 py-2.5 text-white/60 hover:text-[#d7a47a] text-xs font-mono transition-colors"
-            title="Chat directly with founder on WhatsApp"
-          >
-            <MessageSquare className="w-3.5 h-3.5 text-[#8bf0d4]" />
-            <span className="hidden md:inline">WhatsApp</span>
-          </a>
-
           {/* Book a call Pill */}
           <button
             onClick={onOpenDrawer}
@@ -125,13 +113,10 @@ export default function Navbar({ onOpenDrawer, onOpenFounderModal }: NavbarProps
               <span>Founder Portfolio (devhunzila.site)</span>
             </button>
             <a
-              href={FOUNDER_DATA.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-2.5 rounded-xl bg-[#FF4533] text-white font-bold flex items-center justify-center gap-2"
+              href={`mailto:${FOUNDER_DATA.email}`}
+              className="w-full py-2.5 text-[#d7a47a] font-bold flex items-center justify-center gap-2"
             >
-              <MessageSquare className="w-4 h-4" />
-              <span>WhatsApp Direct</span>
+              <span>Email the studio</span>
             </a>
           </div>
         </div>

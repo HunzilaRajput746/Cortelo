@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, createContext, useContext } from "react";
-import WhatsAppFloat from "./WhatsAppFloat";
 import BackToTop from "./BackToTop";
 import CookieNotice from "./CookieNotice";
 import Navbar from "./Navbar";
@@ -94,7 +93,6 @@ export default function ClientShell({ children }: { children: React.ReactNode })
 
       {/* 6. Footer */}
       <Footer />
-      <WhatsAppFloat />
       <BackToTop />
       <CookieNotice />
     </ShellContext.Provider>

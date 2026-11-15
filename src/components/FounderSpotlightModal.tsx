@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { FOUNDER_DATA } from "@/lib/agencyData";
-import { X, ExternalLink, Award, Code2, Globe, MessageSquare, CheckCircle } from "lucide-react";
+import { X, ExternalLink, Award, Code2, Globe, CheckCircle } from "lucide-react";
 
 interface FounderSpotlightModalProps {
   isOpen: boolean;
@@ -147,19 +147,6 @@ export default function FounderSpotlightModal({
                 <div className="text-[10px] font-mono text-white/50 mt-0.5 flex items-center justify-center gap-1">
                   <span>@HunzilaRajput746</span>
                   <ExternalLink className="w-2.5 h-2.5" />
-                </div>
-              </a>
-
-              <a
-                href={FOUNDER_DATA.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-xl border border-white/10 bg-[#141414] hover:border-[#FF4533] transition-all text-center group"
-              >
-                <MessageSquare className="w-5 h-5 mx-auto mb-1.5 text-[#FF4533] group-hover:scale-110 transition-transform" />
-                <div className="text-xs font-bold text-white">Direct Inquiry</div>
-                <div className="text-[10px] font-mono text-white/50 mt-0.5">
-                  Available on Request
                 </div>
               </a>
 

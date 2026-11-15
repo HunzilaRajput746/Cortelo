@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import BrandLogo from "./BrandLogo";
-import { MessageSquare, Mail, Shield, Lock } from "lucide-react";
+import { Mail, Shield, Lock } from "lucide-react";
 import { FOUNDER_DATA } from "@/lib/agencyData";
 
 interface ProjectDrawerProps {
@@ -188,15 +188,6 @@ export default function ProjectDrawer({ isOpen, onClose, initialScope = "" }: Pr
                 Direct Channels &bull; Immediate Contact:
               </span>
               <div className="flex flex-wrap gap-2 text-xs font-mono">
-                <a
-                  href={FOUNDER_DATA.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-white/80 hover:text-[#FF4533] hover:border-[#FF4533]/40 transition-all flex items-center gap-1.5"
-                >
-                  <MessageSquare className="w-3 h-3 text-[#FF4533]" />
-                  <span>Direct Inquiry Channel</span>
-                </a>
                 <a
                   href={`mailto:${FOUNDER_DATA.email}`}
                   className="px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-white/80 hover:text-white transition-all flex items-center gap-1.5"

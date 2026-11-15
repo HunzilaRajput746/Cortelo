@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Shield, Terminal, Code2, ExternalLink, MessageSquare, CheckCircle } from "lucide-react";
+import { Shield, Terminal, Code2, ExternalLink, CheckCircle } from "lucide-react";
 import { FOUNDER_DATA } from "@/lib/agencyData";
 import { useAgencyShell } from "@/components/ClientShell";
 import TeamsSection from "@/components/TeamsSection";
@@ -101,15 +101,6 @@ export default function AboutPage() {
               >
                 Inspect Credentials
               </button>
-              <a
-                href={FOUNDER_DATA.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/80 hover:text-[#FF4533] hover:border-[#FF4533]/40 text-xs font-mono transition-all flex items-center gap-1.5"
-              >
-                <MessageSquare className="w-3 h-3 text-[#FF4533]" />
-                <span>WhatsApp</span>
-              </a>
             </div>
           </div>
 
@@ -230,13 +221,10 @@ export default function AboutPage() {
               Initiate Project Briefing
             </button>
             <a
-              href={FOUNDER_DATA.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3.5 rounded-full border border-white/10 bg-white/5 text-white/80 hover:text-[#FF4533] hover:border-[#FF4533]/40 text-xs font-mono transition-all flex items-center gap-2"
+              href={`mailto:${FOUNDER_DATA.email}`}
+              className="px-6 py-3.5 text-[#d7a47a] hover:text-white text-xs font-mono transition-colors"
             >
-              <MessageSquare className="w-3.5 h-3.5 text-[#FF4533]" />
-              <span>Initiate Direct Inquiry</span>
+              Email the studio
             </a>
           </div>
         </div>

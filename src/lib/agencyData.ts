@@ -55,7 +55,6 @@ export interface TeamMember {
   specialties: string[];
   linkedinUrl?: string;
   portfolioUrl?: string;
-  whatsappUrl?: string;
 }
 
 export interface TestimonialItem {
@@ -75,7 +74,6 @@ export const FOUNDER_DATA = {
   fiverrUrl: "https://fiverr.com/huzaifae3742",
   githubUrl: "https://github.com/HunzilaRajput746",
   linkedinUrl: "https://linkedin.com/in/hunzila-nisar-ai",
-  whatsappUrl: "/contact",
   phone: "Available upon inquiry",
   email: "hunzilanisar746@gmail.com",
   agencyEmail: "hello@cortelo.ai",
@@ -102,7 +100,6 @@ export const AGENCY_TEAM_ROSTER: TeamMember[] = [
     specialties: ["Multi-Agent Swarms", "Custom CRMs", "LangGraph", "PyTorch", "Next.js"],
     linkedinUrl: "https://linkedin.com/in/hunzila-nisar-ai",
     portfolioUrl: "https://devhunzila.site",
-    whatsappUrl: "/contact",
   },
   {
     id: "mahreen-hashir",

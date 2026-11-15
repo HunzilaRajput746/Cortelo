@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, MessageSquare, ShieldCheck, Cpu, Code2, Zap } from "lucide-react";
+import { ArrowRight, ShieldCheck, Cpu, Code2, Zap } from "lucide-react";
 import { FOUNDER_DATA } from "@/lib/agencyData";
 import { useAgencyShell } from "./ClientShell";
 
@@ -44,13 +44,13 @@ export default function FinalCTA() {
             </button>
 
             <a
-              href={FOUNDER_DATA.whatsappUrl}
+              href={FOUNDER_DATA.portfolioUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 rounded-full border border-white/10 hover:border-white/20 bg-white/5 text-white hover:text-[#FF4533] transition-colors"
+              className="w-full sm:w-auto px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 text-[#d7a47a] hover:text-white transition-colors"
             >
-              <MessageSquare className="w-4 h-4 text-[#FF4533]" />
-              <span>Initiate Project Briefing</span>
+              <span>View founder portfolio</span>
+              <ArrowRight className="w-4 h-4" />
             </a>
           </div>
 

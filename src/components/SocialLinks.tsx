@@ -1,6 +1,6 @@
 import React from "react";
 import { FOUNDER_DATA } from "@/lib/agencyData";
-import { ExternalLink, Award, MessageSquare } from "lucide-react";
+import { ExternalLink, Award } from "lucide-react";
 
 export default function SocialLinks() {
   return (
@@ -22,15 +22,6 @@ export default function SocialLinks() {
         title="Fiverr Services"
       >
         <Award className="w-4 h-4" />
-      </a>
-      <a
-        href={FOUNDER_DATA.whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="w-9 h-9 rounded-full border border-emerald-500/40 bg-emerald-500/10 flex items-center justify-center text-emerald-400 hover:bg-emerald-500/20 transition-all"
-        title="Direct WhatsApp"
-      >
-        <MessageSquare className="w-4 h-4" />
       </a>
     </div>
   );

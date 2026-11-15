@@ -37,7 +37,7 @@ export default function AuditRequestModal({ isOpen, onClose }: AuditModalProps) 
           <div className="p-6 rounded-2xl bg-[#FF4533]/10 border border-[#FF4533]/30 text-center space-y-2">
             <Check className="w-8 h-8 text-[#FF4533] mx-auto" />
             <p className="text-sm font-bold text-[#FCFCFA]">Audit Request Received</p>
-            <p className="text-xs text-white/60">We will respond within 4 business hours via WhatsApp or email.</p>
+            <p className="text-xs text-white/60">We will respond within 4 business hours via email.</p>
           </div>
         ) : (
           <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">

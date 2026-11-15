@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, Clock, MessageSquare, ExternalLink, Award, User } from "lucide-react";
+import { Mail, Clock, ExternalLink, Award, User } from "lucide-react";
 import { FOUNDER_DATA } from "@/lib/agencyData";
 
 export default function ContactPage() {
@@ -55,13 +55,10 @@ export default function ContactPage() {
                 </p>
                 <div className="pt-4 border-t border-white/10">
                   <a
-                    href={FOUNDER_DATA.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white text-xs font-mono font-semibold transition-all shadow-[0_0_20px_rgba(255,69,51,0.35)]"
+                    href={`mailto:${FOUNDER_DATA.email}`}
+                    className="inline-flex items-center gap-2 px-6 py-3 text-[#d7a47a] hover:text-white text-xs font-mono font-semibold transition-colors"
                   >
-                    <MessageSquare className="w-4 h-4" />
-                    <span>Initiate Project Briefing</span>
+                    Email the studio
                   </a>
                 </div>
               </div>
@@ -178,22 +175,6 @@ export default function ContactPage() {
               </span>
 
               <div className="space-y-4 text-xs font-mono">
-                <a
-                  href={FOUNDER_DATA.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 rounded-xl border border-white/10 bg-[#141414] flex items-center justify-between hover:border-[#FF4533] transition-all text-white group"
-                >
-                  <div className="flex items-center gap-3">
-                    <MessageSquare className="w-5 h-5 text-[#FF4533]" />
-                    <div>
-                      <div className="font-bold text-[#FCFCFA]">Direct Inquiry</div>
-                      <div className="text-[11px] text-white/50">Available on Request</div>
-                    </div>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-white/40 group-hover:translate-x-0.5 group-hover:text-white transition-all" />
-                </a>
-
                 <a
                   href={`mailto:${FOUNDER_DATA.email}`}
                   className="p-4 rounded-xl border border-white/10 bg-[#141414] flex items-center justify-between hover:border-[#FF4533] transition-all text-white/60 hover:text-white group"
