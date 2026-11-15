@@ -17,7 +17,7 @@ else
 fi
 
 git fetch --prune origin "$BRANCH"
-git checkout -B "$BRANCH" "origin/$BRANCH"
+git checkout -B "$BRANCH" "origin/$BRANCH" --force
 
 # Keep ignored runtime media such as the hero videos in place.
 npm ci
