@@ -25,28 +25,24 @@ export default function Navbar({ onOpenDrawer, onOpenFounderModal }: NavbarProps
   ];
 
   return (
-    <header className="fixed top-5 left-0 right-0 z-40 max-w-[1440px] mx-auto px-4 sm:px-8 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-40 max-w-[1440px] mx-auto px-6 sm:px-10 pointer-events-none">
       <div className="flex items-center justify-between pointer-events-auto">
 
         {/* Left: Brand Mark */}
         <div className="flex items-center gap-3">
           <Link
             href="/"
-            className="flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl border border-white/10 bg-[#101520]/90 backdrop-blur-md text-[#f5f7fb] font-black text-sm tracking-wider uppercase hover:border-[#8bf0d4]/60 hover:text-[#8bf0d4] transition-all shadow-lg group"
+            className="flex items-center gap-2 py-6 text-[#f5f7fb] font-black text-sm tracking-[0.2em] uppercase hover:text-[#d7a47a] transition-colors group"
           >
-            <span className="w-2 h-2 rounded-full bg-[#8bf0d4] shadow-[0_0_8px_#8bf0d4] group-hover:scale-125 transition-transform" />
             <span>CORTELO</span>
           </Link>
 
           {/* Operational Status (Desktop) */}
-          <div className="hidden xl:flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-white/10 bg-[#101520]/60 backdrop-blur-md text-[11px] font-mono text-white/50">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#8bf0d4]" />
-            <span>AI SYSTEMS STUDIO &bull; PKT (UTC+5)</span>
-          </div>
+          <span className="hidden xl:block text-[10px] uppercase tracking-[0.18em] text-white/35">Independent AI studio</span>
         </div>
 
         {/* Center: Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-7 px-7 py-3 rounded-xl border border-white/10 bg-[#101520]/90 backdrop-blur-md text-xs font-medium tracking-wide">
+        <nav className="hidden lg:flex items-center gap-7 text-xs font-medium tracking-wide">
           {navItems.map((item) => (
             <Link
               key={item.label}
@@ -64,7 +60,7 @@ export default function Navbar({ onOpenDrawer, onOpenFounderModal }: NavbarProps
           {/* Founder Portfolio Button */}
           <button
             onClick={onOpenFounderModal}
-            className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-xl border border-white/10 bg-[#101520]/90 backdrop-blur-md text-white/90 hover:border-[#8bf0d4] hover:text-[#8bf0d4] text-xs font-mono transition-all shadow-md group cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 text-white/70 hover:text-[#d7a47a] text-xs font-mono transition-colors group cursor-pointer"
             title="Inspect Founder Hunzila Nisar's Verified Portfolio & Credentials"
           >
             <User className="w-3.5 h-3.5 text-[#8bf0d4] group-hover:scale-110 transition-transform" />
@@ -77,7 +73,7 @@ export default function Navbar({ onOpenDrawer, onOpenFounderModal }: NavbarProps
             href={FOUNDER_DATA.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-white/10 bg-white/5 text-white/80 hover:text-[#8bf0d4] hover:border-[#8bf0d4]/40 text-xs font-mono transition-all"
+            className="hidden sm:flex items-center gap-1.5 px-3.5 py-2.5 text-white/60 hover:text-[#d7a47a] text-xs font-mono transition-colors"
             title="Chat directly with founder on WhatsApp"
           >
             <MessageSquare className="w-3.5 h-3.5 text-[#8bf0d4]" />

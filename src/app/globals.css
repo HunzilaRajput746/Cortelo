@@ -5,19 +5,19 @@
 @tailwind utilities;
 
 :root {
-  --bg: #080b12;
-  --surface: #101520;
-  --surface2: #161d2b;
-  --surface3: #202a3a;
-  --text: #f5f7fb;
-  --text-muted: rgba(221, 229, 241, 0.62);
-  --border: rgba(194, 211, 235, 0.14);
-  --border-hover: rgba(139, 240, 212, 0.48);
-  --flame: #ff765f;
-  --flame-hover: #ff5b4b;
-  --mint: #8bf0d4;
-  --emerald: #55d9bb;
-  --glass: rgba(16, 21, 32, 0.88);
+  --bg: #090b0d;
+  --surface: #121416;
+  --surface2: #1a1b1b;
+  --surface3: #252525;
+  --text: #f7f5f0;
+  --text-muted: rgba(230, 226, 216, 0.62);
+  --border: rgba(247, 245, 240, 0.14);
+  --border-hover: rgba(215, 164, 122, 0.55);
+  --flame: #d7a47a;
+  --flame-hover: #ebbd96;
+  --mint: #d7a47a;
+  --emerald: #c58f67;
+  --glass: rgba(18, 20, 22, 0.9);
   --font-serif: 'Instrument Serif', Georgia, serif;
 }
 
@@ -44,14 +44,14 @@ body {
   color: #081018;
   border-radius: 10px;
   font-weight: 600;
-  box-shadow: 0 12px 30px rgba(139, 240, 212, 0.14);
+  box-shadow: none;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-primary:hover,
 .btn-conversion-primary:hover {
   background-color: #b6ffe9;
-  box-shadow: 0 14px 34px rgba(139, 240, 212, 0.22);
+  box-shadow: none;
   transform: translateY(-1px);
 }
 
@@ -154,12 +154,6 @@ body {
 [class*="bg-[#FF4533]"] { background-color: var(--mint) !important; }
 [class*="bg-[#FF220E]"] { background-color: var(--flame) !important; }
 [class*="border-[#FF4533]"] { border-color: var(--mint) !important; }
-
-.editorial-grid {
-  background-image: linear-gradient(rgba(139, 240, 212, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139, 240, 212, 0.055) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
