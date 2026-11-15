@@ -53,7 +53,13 @@ export default function FounderSpotlightModal({
 
           {/* Top Profile Banner */}
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-6 border-b border-white/10">
-            <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-[#FF4533]/50 relative shrink-0 shadow-[0_0_30px_rgba(255,69,51,0.25)]">
+            <a
+              href={FOUNDER_DATA.portfolioUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Hunzila Nisar portfolio"
+              className="interactive-media group w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border border-[#d7a47a]/50 relative shrink-0 block"
+            >
               <Image
                 src="/assets/team/hunzila_nisar.jpg"
                 alt="Hunzila Nisar - Founder of Cortelo"
@@ -61,7 +67,10 @@ export default function FounderSpotlightModal({
                 className="object-cover"
                 priority
               />
-            </div>
+              <span className="absolute inset-x-2 bottom-2 text-center text-[9px] font-mono uppercase tracking-wider text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                View portfolio
+              </span>
+            </a>
 
             <div className="text-center sm:text-left space-y-1.5 flex-1">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.04] text-[10px] font-mono text-white/90 font-semibold uppercase">
@@ -69,7 +78,9 @@ export default function FounderSpotlightModal({
                 BSc Artificial Intelligence &bull; A+ Honors
               </div>
               <h2 className="text-3xl font-black uppercase text-[#FCFCFA] tracking-tight">
-                {FOUNDER_DATA.name}
+                <a href={FOUNDER_DATA.portfolioUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#d7a47a]">
+                  {FOUNDER_DATA.name}
+                </a>
               </h2>
               <p className="text-xs font-mono text-[#FF4533] font-medium">
                 {FOUNDER_DATA.title}

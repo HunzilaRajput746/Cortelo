@@ -34,10 +34,8 @@ export default function TeamShowcase() {
           return (
             <div
               key={member.id}
-              className={`rounded-3xl p-5 sm:p-6 border transition-all duration-300 flex flex-col justify-between group bg-[#0D0D0D] ${
-                isFounder
-                  ? "border-[#FF4533]/60 shadow-[0_0_30px_rgba(255,69,51,0.18)] relative"
-                  : "border-white/10 hover:border-[#FF4533]/50 shadow-sm hover:shadow-[0_0_30px_rgba(255,69,51,0.12)]"
+              className={`editorial-card p-5 sm:p-6 border-y transition-all duration-300 flex flex-col justify-between group ${
+                isFounder ? "border-[#d7a47a]/50 relative" : "border-white/10"
               }`}
             >
               {isFounder && (
@@ -48,7 +46,16 @@ export default function TeamShowcase() {
 
               <div>
                 {/* Avatar with smooth zoom */}
-                <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#141414] border border-white/10 mb-5">
+                <div className="interactive-media relative aspect-square w-full rounded-2xl overflow-hidden bg-[#141414] mb-5">
+                  {isFounder && member.portfolioUrl && (
+                    <a
+                      href={member.portfolioUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Open Hunzila Nisar portfolio"
+                      className="absolute inset-0 z-10"
+                    />
+                  )}
                   <Image
                     src={member.avatar}
                     alt={member.name}
@@ -57,6 +64,11 @@ export default function TeamShowcase() {
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                  {isFounder && (
+                    <span className="absolute bottom-4 right-4 z-20 text-[10px] font-mono uppercase tracking-wider text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                      Open portfolio &rarr;
+                    </span>
+                  )}
                   
                   {/* Badge in image corner */}
                   <div className="absolute bottom-3 left-3">
@@ -75,7 +87,13 @@ export default function TeamShowcase() {
                 {/* Name & Title */}
                 <div className="space-y-1 mb-3">
                   <h3 className="text-lg font-bold text-[#FCFCFA] flex items-center justify-between">
-                    <span>{member.name}</span>
+                    {isFounder && member.portfolioUrl ? (
+                      <a href={member.portfolioUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#d7a47a]">
+                        {member.name}
+                      </a>
+                    ) : (
+                      <span>{member.name}</span>
+                    )}
                     {isFounder && (
                       <span className="text-xs font-mono text-[#FF4533] font-normal">
                         Founder
@@ -170,7 +188,7 @@ export default function TeamShowcase() {
       </div>
 
       {/* Roster Callout Box */}
-      <div className="mt-16 rounded-3xl p-8 sm:p-10 border border-white/10 bg-[#0D0D0D] max-w-4xl mx-auto text-center space-y-4 shadow-sm">
+      <div className="editorial-card mt-16 p-8 sm:p-10 border-y border-white/10 max-w-4xl mx-auto text-center space-y-4">
         <h4 className="text-xl sm:text-2xl font-bold uppercase text-[#FCFCFA]">
           Direct Founder-Led Execution & Senior Engineering
         </h4>

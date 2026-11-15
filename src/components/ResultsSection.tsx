@@ -35,7 +35,7 @@ export default function ResultsSection() {
           <div
             key={p.id}
             onClick={() => openProjectModal(p)}
-            className="rounded-3xl p-7 sm:p-8 border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between bg-[#0D0D0D] group cursor-pointer"
+            className="editorial-card p-7 sm:p-8 border-y border-white/10 flex flex-col justify-between group cursor-pointer"
           >
             <div>
               {/* Category & Badge */}
@@ -47,7 +47,7 @@ export default function ResultsSection() {
               </div>
 
               {/* Mockup Visual */}
-              <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 mb-6 bg-[#000000]">
+              <div className="interactive-media relative aspect-[16/10] rounded-2xl overflow-hidden mb-6 bg-[#000000]">
                 <Image
                   src={p.previewImage}
                   alt={p.title}
@@ -96,7 +96,7 @@ export default function ResultsSection() {
             <div
               key={p.id}
               onClick={() => openProjectModal(p)}
-              className="rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between bg-[#0D0D0D] group cursor-pointer"
+              className="editorial-card p-6 border-y border-white/10 flex flex-col justify-between group cursor-pointer"
             >
               <div>
                 <div className="flex items-center justify-between mb-4 text-[11px] font-mono">

@@ -48,6 +48,46 @@ main [class*="rounded-3xl"][class*="border-white/10"] {
   box-shadow: none;
 }
 
+.editorial-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  transition: transform 280ms ease, border-color 280ms ease, background-color 280ms ease;
+}
+
+.editorial-card:hover {
+  border-color: rgba(215, 164, 122, 0.42) !important;
+  transform: translateY(-4px);
+}
+
+a {
+  transition: color 220ms ease, opacity 220ms ease, transform 220ms ease;
+}
+
+a:hover {
+  color: var(--flame);
+}
+
+a img {
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), filter 500ms ease;
+}
+
+a:hover img {
+  transform: scale(1.035);
+}
+
+.interactive-media {
+  overflow: hidden;
+}
+
+.interactive-media img {
+  transition: transform 650ms cubic-bezier(0.16, 1, 0.3, 1), filter 650ms ease;
+}
+
+.interactive-media:hover img {
+  transform: scale(1.045);
+  filter: saturate(1.08);
+}
+
 @media (max-width: 640px) {
   main section {
     max-width: 100%;
@@ -171,7 +211,7 @@ main [class*="rounded-3xl"][class*="border-white/10"] {
 /* Glow Helpers */
 .neon-mint-glow,
 .neon-flame-glow {
-  box-shadow: 0 0 30px rgba(139, 240, 212, 0.2);
+  box-shadow: none;
 }
 
 .text-glow-mint,
@@ -186,6 +226,7 @@ main [class*="rounded-3xl"][class*="border-white/10"] {
 [class*="bg-[#FF4533]"] { background-color: var(--mint) !important; }
 [class*="bg-[#FF220E]"] { background-color: var(--flame) !important; }
 [class*="border-[#FF4533]"] { border-color: var(--mint) !important; }
+[class*="shadow-[0_0_"] { box-shadow: none !important; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
