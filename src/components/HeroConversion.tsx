@@ -11,7 +11,7 @@ export default function HeroConversion() {
 
   return (
     <section className="relative min-h-[820px] pt-40 pb-24 px-6 sm:px-10 max-w-[1440px] mx-auto flex flex-col justify-end">
-      <div className="absolute inset-x-6 sm:inset-x-10 top-28 bottom-10 -z-10 overflow-hidden rounded-[2rem] border border-white/10">
+      <div className="absolute inset-0 -z-10 overflow-hidden">
         <video
           className="absolute inset-0 h-full w-full object-cover opacity-75"
           autoPlay
@@ -21,13 +21,13 @@ export default function HeroConversion() {
           poster="/assets/images/hero_ambient.mp4.jpg"
           aria-hidden="true"
         >
-          <source src="/assets/videos/prism_loop.mp4" type="video/mp4" />
+          <source src="/assets/videos/hero_ambient.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,9,11,0.9)_0%,rgba(7,9,11,0.45)_52%,rgba(7,9,11,0.1)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(7,9,11,0.92)_0%,transparent_45%)]" />
       </div>
 
-      <div className="relative max-w-4xl py-10 sm:py-16">
+      <div className="relative max-w-4xl py-10 sm:py-16 animate-hero-in">
         <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-[0.22em] text-white/60 mb-7">
           <span className="h-px w-10 bg-[#d7a47a]" />
           Cortelo / Independent AI studio
