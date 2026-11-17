@@ -1,127 +1,136 @@
 import React from "react";
-import Link from "next/link";
-import { Lock, Terminal, Activity, FileCode, Shield } from "lucide-react";
+import type { Metadata } from "next";
+import { Activity, FileCode, Shield, Terminal } from "lucide-react";
+import BookButton from "@/components/BookButton";
+import ProcessSteps from "@/components/ProcessSteps";
 
-export const metadata = {
-  title: "Engineering Process — Cortelo",
-  description: "The 4-stage delivery framework, security benchmarks, and IP transfer at Cortelo.",
+export const metadata: Metadata = {
+  title: "Process — Cortelo",
+  description: "How a Cortelo project runs: discovery, build, integration and handover, with fixed scope and weekly demos.",
 };
 
 const stages = [
   {
     step: "01",
-    title: "Technical Discovery & Feasibility",
+    title: "Discovery and blueprint",
     duration: "Week 1",
-    deliverables: "Architectural Blueprint • Latency Budget • ROI Model",
+    deliverables: ["Architecture blueprint", "Fixed scope and price", "Model and stack choice"],
     description:
-      "We audit your internal data pipelines, verify schema readiness, calculate latency requirements, and select the optimal model families (open-weight fine-tunes vs. proprietary models).",
+      "We look at your data, your tools and the people who will use the system, then choose between open-weight and hosted models and write down exactly what gets built.",
     icon: Terminal,
   },
   {
     step: "02",
-    title: "Neural Engine & Guardrail Build",
-    duration: "Weeks 2–3",
-    deliverables: "Staging Pipeline • Evaluation Benchmark • Guardrails",
+    title: "Core engine and guardrails",
+    duration: "Weeks 2 to 3",
+    deliverables: ["Staging pipeline", "Evaluation benchmark", "Output validation"],
     description:
-      "Model training, vector indexing, deterministic Zod schema validation, and rigorous evaluation benches to guarantee zero hallucinations and deterministic tool calling.",
+      "Models, vector search, agents and automations come together on a staging server, with schema validation and an evaluation suite that measures them on your real tasks.",
     icon: Activity,
   },
   {
     step: "03",
-    title: "Full-Stack Interface Integration",
-    duration: "Weeks 4–5",
-    deliverables: "Next.js 15 Platform • ASVS L2 Security • SSRF Guard",
+    title: "Interface and integration",
+    duration: "Weeks 4 to 5",
+    deliverables: ["Web or mobile app", "Integrations with your tools", "Security review"],
     description:
-      "Client-facing application interface, server actions with strict type safety, private VPS connection, and OWASP ASVS L2 hardening against injection and privilege escalation.",
+      "The interface your team uses, connected to your CRM, database and channels, hardened against the OWASP ASVS Level 2 checklist before anyone outside the team sees it.",
     icon: FileCode,
   },
   {
     step: "04",
-    title: "Deployment & Complete IP Handover",
-    duration: "Week 6+",
-    deliverables: "100% IP Handover • Cloud Tenant Deploy • Telemetry",
+    title: "Launch and handover",
+    duration: "Week 6 onward",
+    deliverables: ["Production deployment", "Monitoring and alerts", "Code, docs and IP transfer"],
     description:
-      "Direct deployment to your private cloud infrastructure (AWS/GCP), Prometheus/Grafana/Sentry observability setup, documentation transfer, and 30-day warranty monitoring.",
+      "We deploy to infrastructure you control, wire in monitoring, hand over the code and documentation, and stay on for 30 days of warranty support.",
     icon: Shield,
   },
 ];
 
+const PRINCIPLES = [
+  ["Fixed scope, fixed price", "You know the cost before we write code. Changes are priced before they are made."],
+  ["Weekly demos", "Every week you see working software on a staging link, not slides."],
+  ["Your repository from day one", "The code lives in your accounts the whole time, so nothing is held back."],
+  ["30 days of warranty", "After launch we fix anything that doesn't work as agreed, at no charge."],
+];
+
 export default function ProcessPage() {
   return (
-    <main className="min-h-screen pt-36 pb-24 px-6 relative z-10 bg-[#000000]">
-      <div className="max-w-[1360px] mx-auto space-y-16">
-        <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono text-white/90 font-semibold uppercase tracking-wider">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF4533]" />
-            <span>03 &bull; Engineering Framework</span>
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-[#FCFCFA]">
-            How We Build &amp;{" "}
-            <span className="font-serif italic font-normal text-white lowercase">Deploy</span>.
+    <div className="relative z-10">
+      <section className="pt-40 pb-10">
+        <div className="wrap" data-enter>
+          <p className="eyebrow mb-6">Process</p>
+          <h1 className="display max-w-[960px] text-[44px] sm:text-[64px] lg:text-[80px]">
+            Six weeks from first call to <span className="serif-accent text-[var(--accent)]">production.</span>
           </h1>
-          <p className="text-base text-white/60 leading-relaxed font-light">
-            We avoid vague consulting loops. Every project runs on strict milestones, transparent code repositories, and verifiable production benchmarks.
-          </p>
+          <p className="lede mt-7 max-w-[580px]">Four stages, a written scope, weekly demos and a full handover at the end.</p>
         </div>
+      </section>
 
-        {/* 4 Stages Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {stages.map((stage) => {
-            const Icon = stage.icon;
-            return (
-              <div
-                key={stage.step}
-                className="rounded-3xl p-8 border border-white/10 bg-[#0D0D0D] flex flex-col justify-between space-y-6 shadow-sm hover:border-[#FF4533]/50 transition-all duration-300"
-              >
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center text-xs font-mono">
-                    <span className="text-[#FF4533] font-bold">STAGE {stage.step}</span>
-                    <span className="px-3 py-1 rounded-full border border-white/10 bg-[#141414] text-white/60">
-                      {stage.duration}
+      <ProcessSteps />
+
+      <section aria-labelledby="stages-h" className="py-24">
+        <div className="wrap">
+          <h2 id="stages-h" className="h2 mb-12">
+            Stage by stage. <span className="soft">What happens and what you receive.</span>
+          </h2>
+          <ol className="grid gap-4 md:grid-cols-2">
+            {stages.map((s) => {
+              const Icon = s.icon;
+              return (
+                <li key={s.step} className="card card-link group p-8">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-m)] border border-[var(--line)] bg-[var(--surface2)] text-[var(--accent)] transition-transform duration-500 group-hover:scale-110">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <span className="font-mono text-[13px] text-[var(--text-faint)]">
+                      {s.step} · {s.duration}
                     </span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Icon className="w-6 h-6 text-[#FF4533] shrink-0" />
-                    <h2 className="text-2xl font-bold uppercase text-[#FCFCFA]">
-                      {stage.title}
-                    </h2>
-                  </div>
-                  <p className="text-sm text-white/60 leading-relaxed font-light">
-                    {stage.description}
-                  </p>
-                </div>
+                  <h3 className="mt-8 text-[24px] font-medium tracking-[-0.025em]">{s.title}</h3>
+                  <p className="mt-3 text-[15px] leading-relaxed text-[var(--text-muted)]">{s.description}</p>
+                  <ul className="mt-6 flex flex-wrap gap-2 border-t border-[var(--line)] pt-6">
+                    {s.deliverables.map((d) => (
+                      <li key={d} className="rounded-full border border-[var(--line-strong)] px-3 py-1.5 text-[13px] text-[var(--text-muted)]">
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </section>
 
-                <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs font-mono">
-                  <span className="text-white/40">DELIVERABLES</span>
-                  <span className="text-white/80 font-semibold">{stage.deliverables}</span>
-                </div>
+      <section aria-labelledby="principles-h" className="pb-24">
+        <div className="wrap">
+          <h2 id="principles-h" className="h2 mb-12">
+            How we work with you.
+          </h2>
+          <div className="grid gap-x-10 gap-y-8 border-t border-[var(--line)] pt-10 md:grid-cols-2 lg:grid-cols-4">
+            {PRINCIPLES.map(([t, b]) => (
+              <div key={t}>
+                <h3 className="text-[18px] font-medium">{t}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-[var(--text-muted)]">{b}</p>
               </div>
-            );
-          })}
-        </div>
-
-        {/* Security Standard Callout */}
-        <div className="p-10 rounded-3xl border border-white/10 bg-[#0D0D0D] flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs font-mono text-[#FF4533] uppercase">
-              <Lock className="w-4 h-4" />
-              <span>OWASP ASVS Level 2 Target Standard</span>
-            </div>
-            <h3 className="text-xl font-bold uppercase text-[#FCFCFA]">
-              Zero Trust Architecture &amp; Security Hardening
-            </h3>
-            <p className="text-xs text-white/60 max-w-2xl font-light">
-              Every route and API call verifies authentication, rate limits (Redis-backed), SSRF guards, input sanitization via Zod, and data isolation. No shared public endpoints.
-            </p>
+            ))}
           </div>
-          <Link
-            href="/contact"
-            className="btn-conversion-primary px-8 py-3.5 rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white font-bold text-xs uppercase tracking-wider shrink-0 shadow-[0_0_20px_rgba(255,69,51,0.35)] transition-all"
-          >
-            Initiate Architecture Sprint
-          </Link>
         </div>
-      </div>
-    </main>
+      </section>
+
+      <section className="pb-28">
+        <div className="wrap">
+          <div className="flex flex-col gap-6 rounded-[var(--radius-l)] border border-[var(--line)] bg-[linear-gradient(135deg,rgba(95,212,192,0.08),transparent_60%)] p-8 md:flex-row md:items-center md:justify-between md:p-12">
+            <div>
+              <h2 className="text-[30px] font-medium tracking-[-0.03em]">Start with week one.</h2>
+              <p className="mt-2 max-w-[520px] text-[15px] text-[var(--text-muted)]">Book the discovery call and we will send the blueprint within two working days.</p>
+            </div>
+            <BookButton scope="Process: discovery week" label="Book the discovery call" className="shrink-0 !min-h-[54px] !px-7" />
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
