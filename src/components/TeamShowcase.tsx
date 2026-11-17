@@ -56,11 +56,15 @@ export function FounderCard({ member, onOpen }: { member: TeamMember; onOpen?: (
             ))}
           </ul>
 
-          <div className="mt-auto flex flex-wrap items-center gap-3 pt-8">
-            {onOpen && (
-              <button onClick={onOpen} className="btn btn-primary !min-h-[44px]">
+          <div className="mt-auto flex items-center gap-2 pt-8">
+            {onOpen ? (
+              <button onClick={onOpen} className="btn btn-primary !min-h-[44px] !px-4">
                 Read the profile <ArrowUpRight className="h-4 w-4" />
               </button>
+            ) : (
+              <Link href="/team" className="btn btn-primary !min-h-[44px] !px-4">
+                Read the profile <ArrowUpRight className="h-4 w-4" />
+              </Link>
             )}
             {member.portfolioUrl && (
               <a
