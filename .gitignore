@@ -14,3 +14,4 @@ dist
 # design tooling state
 .taste-skill
 shots
+tsconfig.tsbuildinfo
