@@ -14,11 +14,21 @@ const nextConfig = {
       "app-development": "mobile-apps",
       "data-mlops": "data-dashboards",
     };
-    return Object.entries(moved).map(([from, to]) => ({
+    const services = Object.entries(moved).map(([from, to]) => ({
       source: `/services/${from}`,
       destination: `/services/${to}`,
       permanent: true,
     }));
+
+    // one public address: www and the old subdomain both land on cortelo.tech, same path
+    const hosts = ["www.cortelo.tech", "cortelo.devhunzila.site"].map((host) => ({
+      source: "/:path*",
+      has: [{ type: "host", value: host }],
+      destination: "https://cortelo.tech/:path*",
+      permanent: true,
+    }));
+
+    return [...hosts, ...services];
   },
 };
 
