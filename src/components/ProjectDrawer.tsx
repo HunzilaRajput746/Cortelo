@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import BrandLogo from "./BrandLogo";
-import { Mail, Shield, Lock } from "lucide-react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, CalendarPlus, Check, Download, Mail, X } from "lucide-react";
 import { FOUNDER_DATA } from "@/lib/agencyData";
+import { BOOKING, googleCalendarLink, icsFor, type BookingDay } from "@/lib/booking";
+import { Field, Honeypot, Input, Select, SERVICE_OPTIONS, Textarea, formValues, usePost } from "./forms";
 
 interface ProjectDrawerProps {
   isOpen: boolean;
@@ -11,209 +12,372 @@ interface ProjectDrawerProps {
   initialScope?: string;
 }
 
-export default function ProjectDrawer({ isOpen, onClose, initialScope = "" }: ProjectDrawerProps) {
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    discipline: "Custom CRM & Revenue Architecture (Revenue.inc Style)",
-    scope: initialScope,
-  });
+type Tab = "call" | "brief";
 
-  useEffect(() => {
-    if (initialScope) {
-      setFormData((prev) => ({ ...prev, scope: initialScope }));
-    }
-  }, [initialScope]);
+export const BUDGETS = ["Under $2,000", "$2,000 – $5,000", "$5,000 – $15,000", "$15,000 – $50,000", "$50,000+", "Not sure yet"];
+export const TIMELINES = ["As soon as possible", "Within a month", "In 1 to 3 months", "Just exploring"];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
+/** Works out which service a scope string such as "Inquiry regarding: X" points at. */
+function serviceFromScope(scope: string) {
+  return SERVICE_OPTIONS.find((s) => scope.toLowerCase().includes(s.toLowerCase())) ?? "";
+}
+
+function useLocalZone() {
+  const [zone, setZone] = useState("UTC");
+  useEffect(() => setZone(Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"), []);
+  return zone;
+}
+
+const fmtDay = (date: string, zone: string) =>
+  new Intl.DateTimeFormat("en-GB", { timeZone: zone, weekday: "short", day: "numeric", month: "short" }).format(
+    new Date(`${date}T12:00:00+05:00`),
+  );
+const fmtTime = (iso: string, zone: string) =>
+  new Intl.DateTimeFormat("en-GB", { timeZone: zone, hour: "2-digit", minute: "2-digit" }).format(new Date(iso));
+const fmtFull = (iso: string, zone: string) =>
+  new Intl.DateTimeFormat("en-GB", {
+    timeZone: zone,
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(iso));
+
+/* -------------------------------------------------------------------------- */
+
+function BookCall({ scope }: { scope: string }) {
+  const zone = useLocalZone();
+  const [days, setDays] = useState<BookingDay[] | null>(null);
+  const [loadError, setLoadError] = useState(false);
+  const [day, setDay] = useState(0);
+  const [slot, setSlot] = useState("");
+  const [step, setStep] = useState<1 | 2>(1);
+  const [done, setDone] = useState<{ id: string; slotStart: string } | null>(null);
+  const { send, busy, errors, failure } = usePost<{ ok: boolean; id: string; slotStart: string }>("/api/bookings");
+
+  const load = () => {
+    setLoadError(false);
+    fetch("/api/bookings", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((d) => {
+        setDays(d.days);
+        setDay(0);
+      })
+      .catch(() => setLoadError(true));
   };
+  useEffect(load, []);
+
+  // a taken slot sends the visitor back to pick again with fresh times
+  useEffect(() => {
+    if (errors.slotStart) {
+      setStep(1);
+      setSlot("");
+      load();
+    }
+  }, [errors.slotStart]);
+
+  async function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const v = formValues(e.currentTarget);
+    const res = await send({ ...v, slotStart: slot, timeZone: zone });
+    if (res?.ok) setDone({ id: res.id, slotStart: res.slotStart ?? slot });
+  }
+
+  if (done) {
+    const title = "Cortelo discovery call";
+    const details = "30-minute call with Hunzila Nisar and Mahreen Hashir. A meeting link will follow by email.";
+    const ics = icsFor({ id: done.id, start: done.slotStart, title, description: details, organizerEmail: FOUNDER_DATA.agencyEmail });
+    return (
+      <div className="animate-member-in space-y-6" role="status">
+        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-ink)]">
+          <Check className="h-6 w-6" />
+        </span>
+        <div>
+          <h3 className="text-[26px] font-medium tracking-[-0.03em]">Your call is booked.</h3>
+          <p className="mt-2 text-[15px] leading-relaxed text-[var(--text-muted)]">
+            {fmtFull(done.slotStart, zone)} your time ({fmtTime(done.slotStart, BOOKING.studioTimeZone)} in Pakistan). We will
+            email a meeting link before the call.
+          </p>
+        </div>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <a href={googleCalendarLink(done.slotStart, title, details)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+            <CalendarPlus className="h-4 w-4" /> Add to Google Calendar
+          </a>
+          <a href={`data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}`} download="cortelo-call.ics" className="btn btn-ghost">
+            <Download className="h-4 w-4" /> Download invite
+          </a>
+        </div>
+        <p className="font-mono text-[12px] text-[var(--text-faint)]">Reference {done.id}</p>
+      </div>
+    );
+  }
+
+  if (step === 1) {
+    const current = days?.[day];
+    return (
+      <div className="space-y-6">
+        <div>
+          <h3 className="text-[22px] font-medium tracking-[-0.02em]">Pick a day and time</h3>
+          <p className="mt-1 text-[14px] text-[var(--text-muted)]">
+            {BOOKING.durationMinutes}-minute video call with a founder. Times are shown in your time zone ({zone}).
+          </p>
+        </div>
+
+        {loadError && (
+          <p className="text-[14px] text-[#ff8a7a]">
+            We couldn&apos;t load the calendar.{" "}
+            <button onClick={load} className="link-draw">
+              Try again
+            </button>
+          </p>
+        )}
+        {!days && !loadError && <div className="h-40 animate-pulse rounded-[var(--radius-m)] bg-[var(--surface2)]" />}
+        {days && days.length === 0 && (
+          <p className="text-[15px] text-[var(--text-muted)]">
+            Every slot in the next two weeks is taken. Send a brief instead and we will find a time.
+          </p>
+        )}
+
+        {days && days.length > 0 && (
+          <>
+            <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-2" role="listbox" aria-label="Day">
+              {days.map((d, i) => (
+                <button
+                  key={d.date}
+                  role="option"
+                  aria-selected={i === day}
+                  onClick={() => {
+                    setDay(i);
+                    setSlot("");
+                  }}
+                  className={`shrink-0 rounded-[var(--radius-s)] border px-4 py-3 text-left text-[14px] transition-[border-color,background-color,transform] duration-200 hover:-translate-y-0.5 ${
+                    i === day
+                      ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--text)]"
+                      : "border-[var(--line-strong)] text-[var(--text-muted)] hover:border-[var(--text-faint)]"
+                  }`}
+                >
+                  {fmtDay(d.date, zone)}
+                  <span className="block text-[12px] text-[var(--text-faint)]">{d.slots.length} open</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-3 gap-2 sm:grid-cols-4" role="listbox" aria-label="Time">
+              {current?.slots.map((s) => (
+                <button
+                  key={s}
+                  role="option"
+                  aria-selected={s === slot}
+                  onClick={() => setSlot(s)}
+                  className={`h-11 rounded-[var(--radius-s)] border text-[14px] transition-[border-color,background-color,color] duration-200 ${
+                    s === slot
+                      ? "border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)]"
+                      : "border-[var(--line-strong)] text-[var(--text-muted)] hover:border-[var(--accent)] hover:text-[var(--text)]"
+                  }`}
+                >
+                  {fmtTime(s, zone)}
+                </button>
+              ))}
+            </div>
+
+            {errors.slotStart && <p className="text-[14px] text-[#ff8a7a]">{errors.slotStart}</p>}
+
+            <button disabled={!slot} onClick={() => setStep(2)} className="btn btn-primary w-full disabled:pointer-events-none disabled:opacity-40">
+              {slot ? `Continue with ${fmtTime(slot, zone)}` : "Choose a time"} <ArrowRight className="h-4 w-4" />
+            </button>
+          </>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={submit} noValidate className="relative space-y-5">
+      <button type="button" onClick={() => setStep(1)} className="link-draw text-[14px] !text-[var(--text-muted)]">
+        <ArrowLeft className="h-4 w-4" /> {fmtFull(slot, zone)}
+      </button>
+      <Honeypot />
+      <Field label="Your name" name="name" error={errors.name}>
+        <Input name="name" autoComplete="name" required invalid={!!errors.name} />
+      </Field>
+      <Field label="Work email" name="email" error={errors.email}>
+        <Input name="email" type="email" autoComplete="email" required invalid={!!errors.email} />
+      </Field>
+      <Field label="Company" name="company" optional>
+        <Input name="company" autoComplete="organization" />
+      </Field>
+      <Field label="What do you want to talk about?" name="service" optional>
+        <Select name="service" options={SERVICE_OPTIONS} placeholder="Choose a service" defaultValue={serviceFromScope(scope)} />
+      </Field>
+      <Field label="Anything we should read first?" name="message" optional>
+        <Textarea name="message" rows={3} defaultValue={scope && !serviceFromScope(scope) ? scope : ""} />
+      </Field>
+      {failure && <p className="text-[14px] text-[#ff8a7a]">{failure}</p>}
+      <button type="submit" disabled={busy} className="btn btn-primary w-full disabled:opacity-60">
+        {busy ? "Booking…" : "Confirm the call"} {!busy && <ArrowRight className="h-4 w-4" />}
+      </button>
+    </form>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+
+export function SendBrief({ scope = "", kind = "brief" }: { scope?: string; kind?: "brief" | "contact" }) {
+  const { send, busy, errors, failure } = usePost("/api/inquiries");
+  const [doneName, setDoneName] = useState("");
+
+  async function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const v = formValues(e.currentTarget);
+    const res = await send({ ...v, kind, page: window.location.pathname });
+    if (res?.ok) setDoneName(v.name);
+  }
+
+  if (doneName) {
+    return (
+      <div className="animate-member-in space-y-5" role="status">
+        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-ink)]">
+          <Check className="h-6 w-6" />
+        </span>
+        <h3 className="text-[26px] font-medium tracking-[-0.03em]">Thanks, {doneName.split(" ")[0]}.</h3>
+        <p className="text-[15px] leading-relaxed text-[var(--text-muted)]">
+          Your message reached the founders. Expect a reply within one working day.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={submit} noValidate className="relative space-y-5">
+      <Honeypot />
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Field label="Your name" name="name" error={errors.name}>
+          <Input name="name" autoComplete="name" required invalid={!!errors.name} />
+        </Field>
+        <Field label="Work email" name="email" error={errors.email}>
+          <Input name="email" type="email" autoComplete="email" required invalid={!!errors.email} />
+        </Field>
+      </div>
+      <Field label="Company" name="company" optional>
+        <Input name="company" autoComplete="organization" />
+      </Field>
+      <Field label="Service" name="service" optional>
+        <Select name="service" options={SERVICE_OPTIONS} placeholder="Choose a service" defaultValue={serviceFromScope(scope)} />
+      </Field>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Field label="Budget" name="budget" optional>
+          <Select name="budget" options={BUDGETS} placeholder="Choose a range" />
+        </Field>
+        <Field label="Timeline" name="timeline" optional>
+          <Select name="timeline" options={TIMELINES} placeholder="Choose one" />
+        </Field>
+      </div>
+      <Field label="What should it do?" name="message" error={errors.message}>
+        <Textarea
+          name="message"
+          rows={5}
+          required
+          invalid={!!errors.message}
+          defaultValue={scope && !serviceFromScope(scope) ? scope : ""}
+          placeholder="The problem, who uses it, and the tools it has to work with."
+        />
+      </Field>
+      {failure && <p className="text-[14px] text-[#ff8a7a]">{failure}</p>}
+      <button type="submit" disabled={busy} className="btn btn-primary w-full disabled:opacity-60">
+        {busy ? "Sending…" : kind === "brief" ? "Send the brief" : "Send the message"} {!busy && <ArrowRight className="h-4 w-4" />}
+      </button>
+    </form>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+
+export default function ProjectDrawer({ isOpen, onClose, initialScope = "" }: ProjectDrawerProps) {
+  const [tab, setTab] = useState<Tab>("call");
+  const [openCount, setOpenCount] = useState(0);
+  const panel = useRef<HTMLElement>(null);
+  const closeRef = useRef(onClose);
+  closeRef.current = onClose;
+
+  // every opening starts fresh on the call tab
+  useEffect(() => {
+    if (!isOpen) return;
+    setTab("call");
+    setOpenCount((n) => n + 1);
+    const prev = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = "hidden";
+    const t = setTimeout(() => panel.current?.focus(), 30);
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeRef.current();
+    window.addEventListener("keydown", onKey);
+    return () => {
+      clearTimeout(t);
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+      prev?.focus?.();
+    };
+  }, [isOpen]);
+
+  const scope = useMemo(() => initialScope.replace(/^Inquiry regarding:\s*/i, ""), [initialScope]);
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end">
-      {/* Backdrop */}
-      <div
-        onClick={onClose}
-        className="fixed inset-0 bg-black/85 backdrop-blur-md transition-opacity"
-        aria-hidden="true"
-      />
-
-      {/* Drawer Surface */}
+    <div className="fixed inset-0 z-[70] flex justify-end">
+      <div onClick={onClose} className="enter-fade absolute inset-0 bg-black/70 backdrop-blur-sm" aria-hidden="true" />
       <aside
-        className="relative z-10 w-full max-w-xl p-8 md:p-12 overflow-y-auto h-full flex flex-col justify-between border-l border-white/10 shadow-[0_0_80px_rgba(0,0,0,0.9)] bg-[#0D0D0D] animate-in slide-in-from-right duration-300"
-        aria-label="Project Briefing Drawer"
+        ref={panel}
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="drawer-title"
+        className="drawer-in relative z-10 flex h-full w-full max-w-[560px] flex-col overflow-y-auto border-l border-[var(--line)] bg-[var(--surface)] outline-none"
       >
-        <div>
-          {/* Header */}
-          <div className="flex items-center justify-between pb-6 border-b border-white/10">
-            <BrandLogo />
-            <button
-              onClick={onClose}
-              className="text-xs font-mono px-3 py-1.5 rounded-full border border-white/10 hover:border-white/30 text-white/60 hover:text-white transition-all cursor-pointer"
-            >
-              CLOSE &times;
-            </button>
-          </div>
+        <div className="flex items-center justify-between border-b border-[var(--line)] px-6 py-5 sm:px-8">
+          <h2 id="drawer-title" className="text-[18px] font-medium">
+            Talk to Cortelo
+          </h2>
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-white/5 hover:text-[var(--text)]"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
 
-          <div className="py-8 space-y-6">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/10 bg-white/[0.04] text-[10px] font-mono text-white/90 font-semibold uppercase">
-                <Lock className="w-3 h-3 text-[#FF4533]" />
-                Mutual NDA Protected &bull; Founder Direct
-              </div>
-              <h3 className="text-2xl font-black mt-2 uppercase text-[#FCFCFA] tracking-tight">
-                Initiate Architecture Briefing.
-              </h3>
-              <p className="text-xs text-white/60 mt-2 leading-relaxed font-light">
-                Evaluated personally by agency founder <strong>Hunzila Nisar</strong> and co-founder <strong>Mahreen Hashir</strong>. We assess architectural feasibility, VPS topologies, and latency budgets within 24 hours.
-              </p>
-            </div>
-
-            {submitted ? (
-              <div className="p-8 rounded-2xl border border-[#FF4533]/50 bg-[#141414] text-center space-y-4">
-                <div className="w-12 h-12 mx-auto rounded-full bg-[#FF4533]/20 text-[#FF4533] flex items-center justify-center font-bold text-xl shadow-[0_0_20px_rgba(255,69,51,0.3)]">
-                  ✓
-                </div>
-                <h4 className="text-xl font-bold uppercase text-[#FCFCFA]">
-                  Specification Received
-                </h4>
-                <p className="text-xs font-mono text-white/60 leading-relaxed">
-                  Thank you, <strong>{formData.name}</strong>. Your project specifications have been delivered directly to <strong>Hunzila Nisar</strong> and team. Expect a response with an architectural blueprint within 24 hours.
-                </p>
-                <div className="pt-4 border-t border-white/10 space-y-2">
-                  <p className="text-[11px] font-mono text-white/50">
-                    Need instant response? Contact Hunzila directly:
-                  </p>
-                  <a
-                    href={`mailto:${FOUNDER_DATA.email}`}
-                    className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 text-white border border-white/10 font-mono text-xs font-semibold hover:border-[#FF4533] hover:text-[#FF4533] transition-all"
-                  >
-                    <Mail className="w-3.5 h-3.5 text-[#FF4533]" />
-                    <span>Email: {FOUNDER_DATA.email}</span>
-                  </a>
-                </div>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-mono text-white/60 mb-1.5 uppercase">
-                    Your Name / Principal *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="e.g. Alex Mercer"
-                    className="w-full h-11 px-4 rounded-lg bg-[#141414] border border-white/10 text-sm text-white focus:border-[#FF4533] outline-none transition-colors"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-mono text-white/60 mb-1.5 uppercase">
-                      Corporate Email *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="alex@enterprise.com"
-                      className="w-full h-11 px-4 rounded-lg bg-[#141414] border border-white/10 text-sm text-white focus:border-[#FF4533] outline-none transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-mono text-white/60 mb-1.5 uppercase">
-                      Company / Organization
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      placeholder="Acme Systems Corp"
-                      className="w-full h-11 px-4 rounded-lg bg-[#141414] border border-white/10 text-sm text-white focus:border-[#FF4533] outline-none transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-mono text-white/60 mb-1.5 uppercase">
-                    Primary Service Discipline
-                  </label>
-                  <select
-                    value={formData.discipline}
-                    onChange={(e) => setFormData({ ...formData, discipline: e.target.value })}
-                    className="w-full h-11 px-4 rounded-lg bg-[#141414] border border-white/10 text-sm text-white focus:border-[#FF4533] outline-none transition-colors"
-                  >
-                    <option>Custom CRM & Revenue Architecture (Revenue.inc Style)</option>
-                    <option>Autonomous AI Agents & Multi-Agent Swarms</option>
-                    <option>Workflow Automation & Self-Hosted n8n VPS</option>
-                    <option>Full-Stack Web & Next.js 15 Platform Engineering</option>
-                    <option>Classic AI, Deep Learning & Computer Vision</option>
-                    <option>Growth Marketing & High-Ticket Funnel Strategy</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-mono text-white/60 mb-1.5 uppercase">
-                    Challenge & Latency Objectives
-                  </label>
-                  <textarea
-                    rows={4}
-                    value={formData.scope}
-                    onChange={(e) => setFormData({ ...formData, scope: e.target.value })}
-                    placeholder="Describe your current system bottleneck, desired integrations, or custom CRM requirements..."
-                    className="w-full p-4 rounded-lg bg-[#141414] border border-white/10 text-xs font-mono text-white focus:border-[#FF4533] outline-none transition-colors"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="btn-conversion-primary w-full h-12 rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white font-bold text-xs tracking-wider uppercase active:scale-[0.99] transition-all shadow-[0_0_24px_rgba(255,69,51,0.35)] mt-2 cursor-pointer"
-                >
-                  Submit Brief Directly to Hunzila &amp; Team
-                </button>
-              </form>
-            )}
-
-            {/* Direct Quick Channels */}
-            <div className="pt-4 border-t border-white/10 space-y-3">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-white/40 block">
-                Direct Channels &bull; Immediate Contact:
-              </span>
-              <div className="flex flex-wrap gap-2 text-xs font-mono">
-                <a
-                  href={`mailto:${FOUNDER_DATA.email}`}
-                  className="px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-white/80 hover:text-white transition-all flex items-center gap-1.5"
-                >
-                  <Mail className="w-3 h-3 text-[#FF4533]" />
-                  <span>{FOUNDER_DATA.email}</span>
-                </a>
-                <a
-                  href={FOUNDER_DATA.portfolioUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-white/80 hover:text-[#FF4533] hover:border-[#FF4533]/40 transition-all flex items-center gap-1.5"
-                >
-                  <span>devhunzila.site</span>
-                </a>
-              </div>
-            </div>
+        <div className="px-6 pt-6 sm:px-8">
+          <div className="grid grid-cols-2 rounded-[var(--radius-s)] border border-[var(--line)] p-1" role="tablist">
+            {(
+              [
+                ["call", "Book a call"],
+                ["brief", "Send a brief"],
+              ] as [Tab, string][]
+            ).map(([id, label]) => (
+              <button
+                key={id}
+                role="tab"
+                aria-selected={tab === id}
+                onClick={() => setTab(id)}
+                className={`h-10 rounded-[8px] text-[14px] transition-colors ${
+                  tab === id ? "bg-[var(--surface3)] text-[var(--text)]" : "text-[var(--text-muted)] hover:text-[var(--text)]"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
           </div>
         </div>
 
-        <div className="pt-6 border-t border-white/10 text-xs font-mono text-white/50 flex justify-between items-center">
-          <span className="flex items-center gap-1.5">
-            <Shield className="w-3.5 h-3.5 text-[#FF4533]" />
-            100% IP Handover
-          </span>
-          <span>PKT (UTC+5) &bull; Global Remote Delivery</span>
+        <div className="flex-1 px-6 py-8 sm:px-8" key={`${tab}-${openCount}`}>
+          {tab === "call" ? <BookCall scope={scope} /> : <SendBrief scope={scope} />}
+        </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[var(--line)] px-6 py-5 text-[13px] text-[var(--text-faint)] sm:px-8">
+          <span>Every call is with Hunzila Nisar or Mahreen Hashir.</span>
+          <a href={`mailto:${FOUNDER_DATA.agencyEmail}`} className="link-draw !text-[var(--text-muted)]">
+            <Mail className="h-3.5 w-3.5" /> {FOUNDER_DATA.agencyEmail}
+          </a>
         </div>
       </aside>
     </div>
