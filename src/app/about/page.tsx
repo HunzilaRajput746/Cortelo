@@ -1,235 +1,122 @@
-"use client";
-
 import React from "react";
-import Image from "next/image";
-import { Shield, Terminal, Code2, ExternalLink, CheckCircle } from "lucide-react";
-import { FOUNDER_DATA } from "@/lib/agencyData";
-import { useAgencyShell } from "@/components/ClientShell";
-import TeamsSection from "@/components/TeamsSection";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { AGENCY_PROJECTS, AGENCY_SERVICES, AGENCY_TEAM_ROSTER, FOUNDER_IDS } from "@/lib/agencyData";
+import { FounderCard } from "@/components/TeamShowcase";
+import BookButton from "@/components/BookButton";
+import VideoGround from "@/components/VideoGround";
+
+export const metadata: Metadata = {
+  title: "About — Cortelo",
+  description:
+    "Cortelo is an AI systems and software studio founded by Hunzila Nisar and Mahreen Hashir. We build software clients own outright.",
+};
+
+const VALUES = [
+  {
+    title: "You own everything",
+    body: "Code, models, prompts, configs and documentation move to your accounts. No per-seat fees, no lock-in.",
+  },
+  {
+    title: "Founders on every project",
+    body: "Hunzila or Mahreen is on your first call and stays on the project until the handover. Nothing is passed to a junior team.",
+  },
+  {
+    title: "Measured, not promised",
+    body: "Every AI system ships with an evaluation suite on your real tasks, so quality is a number you can check.",
+  },
+  {
+    title: "Private by default",
+    body: "We prefer infrastructure you control: your servers, your cloud, private networks. Your data stays yours.",
+  },
+];
 
 export default function AboutPage() {
-  const { openDrawer, openFounderModal } = useAgencyShell();
+  const founders = AGENCY_TEAM_ROSTER.filter((m) => FOUNDER_IDS.includes(m.id));
+  const facts = [
+    [String(AGENCY_SERVICES.length), "Services under one roof"],
+    [String(AGENCY_PROJECTS.length), "Production systems shipped"],
+    [String(AGENCY_TEAM_ROSTER.length), "People on the team"],
+    ["100%", "Code and IP handed over"],
+  ];
 
   return (
-    <main className="min-h-screen pt-36 pb-24 px-6 relative z-10 bg-[#000000]">
-      <div className="max-w-[1440px] mx-auto space-y-24">
-
-        {/* Header */}
-        <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono text-white/90 font-semibold uppercase tracking-wider">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF4533]" />
-            <span>Studio Leadership &bull; 04 About</span>
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-[#FCFCFA]">
-            Intelligence,{" "}
-            <span className="font-serif italic font-normal text-white lowercase">Engineered</span>.
+    <div className="relative z-10">
+      <section className="relative isolate overflow-hidden pt-40 pb-24">
+        <VideoGround slot="statement" className="absolute inset-0 -z-20" opacity={0.3} lazy={false} />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,9,10,0.5)_0%,var(--bg)_100%)]" />
+        <div className="wrap" data-enter>
+          <p className="eyebrow mb-6">About</p>
+          <h1 className="display max-w-[980px] text-[44px] sm:text-[64px] lg:text-[80px]">
+            A studio that builds AI <span className="serif-accent text-[var(--accent)]">you own.</span>
           </h1>
-          <p className="text-base text-white/60 leading-relaxed font-light">
-            Cortelo was founded on a simple premise: enterprise AI does not need more Twitter demos or marketing hype. It needs resilient, predictable software engineering that operates seamlessly on Monday morning.
+          <p className="lede mt-7 max-w-[620px]">
+            Cortelo started with a simple idea: businesses don&apos;t need more AI demos, they need reliable software that works
+            on Monday morning and belongs to them. We design it, build it, host it where you choose and hand you every line.
           </p>
         </div>
+      </section>
 
-        {/* Founders Spotlight Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-
-          {/* Hunzila Nisar */}
-          <div className="rounded-3xl p-8 md:p-10 border border-[#FF4533]/50 space-y-6 bg-[#0D0D0D] shadow-[0_0_40px_rgba(255,69,51,0.12)]">
-            <div className="flex flex-col sm:flex-row items-center gap-6">
-              <div className="w-32 h-32 rounded-2xl overflow-hidden border-2 border-[#FF4533]/50 shrink-0 shadow-2xl relative">
-                <Image
-                  src="/assets/team/hunzila_nisar.jpg"
-                  alt="Hunzila Nisar - Founder & Lead AI Architect"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="text-center sm:text-left space-y-1">
-                <span className="text-xs font-mono text-[#FF4533] uppercase tracking-wider font-semibold">
-                  Founder &amp; Lead AI Architect
-                </span>
-                <h2 className="text-3xl font-black uppercase text-[#FCFCFA]">
-                  Hunzila Nisar
-                </h2>
-                <p className="text-xs font-mono text-white/60">
-                  BSc in Artificial Intelligence (A+ Grade Honors)
-                </p>
-                <p className="text-xs font-mono text-white/50">
-                  Blizon Software House &bull; EnlivenAI Solutions &bull; BuiltinSoft
-                </p>
-              </div>
+      <section className="pb-24">
+        <div className="wrap grid grid-cols-2 gap-4 lg:grid-cols-4">
+          {facts.map(([v, l]) => (
+            <div key={l} className="card p-6">
+              <p className="text-[40px] font-medium tracking-[-0.04em] text-[var(--text)]">{v}</p>
+              <p className="mt-1 text-[14px] text-[var(--text-faint)]">{l}</p>
             </div>
-
-            <p className="text-sm text-white/60 leading-relaxed font-light">
-              Hunzila leads the engineering practice at Cortelo. He delivers end-to-end production client systems, including live commercial enterprise CRMs and self-hosted n8n automation infrastructure running on private Tailscale VPS meshes. Certified with highest distinction (A+ Grade) by NAVTTC in Machine Learning &amp; Deep Learning.
-            </p>
-
-            {/* Distinctions Checklist */}
-            <div className="space-y-2 pt-2 border-t border-white/10">
-              <div className="text-[11px] font-mono uppercase text-white/50">
-                Key Accomplishments:
-              </div>
-              <ul className="space-y-1.5 text-xs font-mono text-white/70">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#FF4533]" />
-                  <span>Lead Architect of Enterprise Revenue CRM Platforms</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#FF4533]" />
-                  <span>Smart Helmet IoT Crash Detection System (A+ Grade FYP)</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#FF4533]" />
-                  <span>Self-Hosted n8n Automation Engine (n8n.devhunzila.site)</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="pt-4 border-t border-white/10 flex flex-wrap gap-2.5">
-              <a
-                href={FOUNDER_DATA.portfolioUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-conversion-primary px-4 py-2 rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white font-mono font-bold text-xs flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,69,51,0.3)] transition-all"
-              >
-                <span>devhunzila.site</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
-              <button
-                onClick={openFounderModal}
-                className="px-4 py-2 rounded-full border border-white/10 bg-[#141414] hover:border-white/30 text-xs font-mono text-white transition-all cursor-pointer"
-              >
-                Inspect Credentials
-              </button>
-            </div>
-          </div>
-
-          {/* Mahreen Hashir */}
-          <div className="rounded-3xl p-8 md:p-10 border border-white/10 space-y-6 bg-[#0D0D0D] shadow-xl">
-            <div className="flex flex-col sm:flex-row items-center gap-6">
-              <div className="w-32 h-32 rounded-2xl overflow-hidden border border-white/10 shrink-0 shadow-2xl relative bg-[#141414]">
-                <Image
-                  src="/assets/team/mahreen_hashir.jpg"
-                  alt="Mahreen Hashir - Co-Founder & Head of Systems"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="text-center sm:text-left space-y-1">
-                <span className="text-xs font-mono text-purple-400 uppercase tracking-wider font-semibold">
-                  Co-Founder &amp; Head of Systems
-                </span>
-                <h2 className="text-3xl font-black uppercase text-[#FCFCFA]">
-                  Mahreen Hashir
-                </h2>
-                <p className="text-xs font-mono text-white/60">
-                  Model Evaluation &bull; Continuous MLOps &bull; Security
-                </p>
-                <p className="text-xs font-mono text-white/50">
-                  OWASP ASVS L2 &bull; Deterministic Verification Benches
-                </p>
-              </div>
-            </div>
-
-            <p className="text-sm text-white/60 leading-relaxed font-light">
-              Mahreen directs system reliability, deterministic verification guardrails, and enterprise security perimeters at Cortelo. She oversees continuous model retraining pipelines, dataset drift evaluation benches, and compliance with OWASP ASVS Level 2 security standards across all client deployments.
-            </p>
-
-            <div className="space-y-2 pt-2 border-t border-white/10">
-              <div className="text-[11px] font-mono uppercase text-white/50">
-                Governance &amp; Quality Focus:
-              </div>
-              <ul className="space-y-1.5 text-xs font-mono text-white/70">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-purple-400" />
-                  <span>Deterministic Zod / Pydantic schema validation</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-purple-400" />
-                  <span>Zero-drift continuous model evaluation loops</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-purple-400" />
-                  <span>100% intellectual property transfer governance</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="pt-4 border-t border-white/10">
-              <button
-                onClick={() => openDrawer("Direct engagement request with Mahreen Hashir")}
-                className="px-6 py-2.5 rounded-full bg-[#141414] border border-white/10 hover:border-purple-400 hover:text-purple-300 text-xs font-mono transition-all text-white cursor-pointer"
-              >
-                Engage Systems Governance &rarr;
-              </button>
-            </div>
-          </div>
-
+          ))}
         </div>
+      </section>
 
-        {/* Specialized Teams Section */}
-        <div className="pt-8 border-t border-white/10">
-          <TeamsSection onInitiateProject={(div) => openDrawer(`Inquiry for ${div}`)} />
-        </div>
-
-        {/* Studio Principles */}
-        <div className="space-y-8 pt-8 border-t border-white/10">
-          <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-[#FCFCFA]">
-            Studio Engineering Principles
+      <section aria-labelledby="founders-h" className="pb-24">
+        <div className="wrap">
+          <h2 id="founders-h" className="h2 mb-12">
+            Founded by two engineers. <span className="soft">Still on every project.</span>
           </h2>
+          <div className="grid gap-5 lg:grid-cols-2">
+            {founders.map((f) => (
+              <FounderCard key={f.id} member={f} />
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="rounded-3xl p-6 border border-white/10 space-y-3 bg-[#0D0D0D]">
-              <Terminal className="w-6 h-6 text-[#FF4533]" />
-              <h3 className="text-lg font-bold uppercase text-[#FCFCFA]">1. Zero Vibe-Coding</h3>
-              <p className="text-xs text-white/60 leading-relaxed font-light">
-                Every line of code is structured, strictly typed, and verified against tests. No generic templates, no unexplained gradients, no ungrounded outputs.
+      <section aria-labelledby="values-h" className="pb-24">
+        <div className="wrap">
+          <h2 id="values-h" className="h2 mb-12">
+            What we hold to.
+          </h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            {VALUES.map((v, i) => (
+              <div key={v.title} className="card p-8">
+                <span className="font-mono text-[13px] text-[var(--accent)]">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-5 text-[22px] font-medium tracking-[-0.02em]">{v.title}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-[var(--text-muted)]">{v.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-28">
+        <div className="wrap">
+          <div className="flex flex-col gap-6 rounded-[var(--radius-l)] border border-[var(--line)] bg-[linear-gradient(135deg,rgba(95,212,192,0.08),transparent_60%)] p-8 md:flex-row md:items-center md:justify-between md:p-12">
+            <div>
+              <h2 className="text-[30px] font-medium tracking-[-0.03em]">Meet the people behind it.</h2>
+              <p className="mt-2 max-w-[520px] text-[15px] text-[var(--text-muted)]">
+                Or skip ahead and book a call with the founders.
               </p>
             </div>
-
-            <div className="rounded-3xl p-6 border border-white/10 space-y-3 bg-[#0D0D0D]">
-              <Shield className="w-6 h-6 text-[#FF4533]" />
-              <h3 className="text-lg font-bold uppercase text-[#FCFCFA]">2. 100% IP Handover</h3>
-              <p className="text-xs text-white/60 leading-relaxed font-light">
-                We believe you must own your intelligence assets. We transfer full, unencumbered rights to all code, checkpoints, and infrastructure upon final milestone acceptance.
-              </p>
-            </div>
-
-            <div className="rounded-3xl p-6 border border-white/10 space-y-3 bg-[#0D0D0D]">
-              <Code2 className="w-6 h-6 text-[#FF4533]" />
-              <h3 className="text-lg font-bold uppercase text-[#FCFCFA]">3. Deterministic Proofs</h3>
-              <p className="text-xs text-white/60 leading-relaxed font-light">
-                AI systems cannot be probabilistic gambles. We wrap LLMs in deterministic Zod schemas, finite-state harnesses, and regression test suites.
-              </p>
+            <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
+              <Link href="/team" className="btn btn-ghost !min-h-[54px] !px-7">
+                The team <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              <BookButton label="Book a call" className="!min-h-[54px] !px-7" />
             </div>
           </div>
         </div>
-
-        {/* Bottom CTA */}
-        <div className="pt-12 border-t border-white/10 text-center space-y-4">
-          <h3 className="text-2xl font-bold uppercase text-[#FCFCFA]">
-            Ready to Build With Hunzila &amp; Team?
-          </h3>
-          <p className="text-xs font-mono text-white/60 max-w-md mx-auto">
-            Schedule an architectural discovery session with our founding team.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <button
-              onClick={() => openDrawer()}
-              className="btn-conversion-primary px-8 py-3.5 rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(255,69,51,0.35)] cursor-pointer"
-            >
-              Initiate Project Briefing
-            </button>
-            <a
-              href={`mailto:${FOUNDER_DATA.email}`}
-              className="px-6 py-3.5 text-[#d7a47a] hover:text-white text-xs font-mono transition-colors"
-            >
-              Email the studio
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </main>
+      </section>
+    </div>
   );
 }
