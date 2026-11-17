@@ -16,14 +16,14 @@ const STEPS: { num: string; when: string; title: string; body: string; slot: Vid
   },
   {
     num: "02",
-    when: "Weeks 2 to 4",
+    when: "Weeks 2 to 5",
     title: "We build it in the open",
     body: "Weekly demos on a staging link. The CRM, the agents, the automations and the interface come together in your own repository from day one.",
     slot: "processBuild",
   },
   {
     num: "03",
-    when: "Week 5 onward",
+    when: "Week 6 onward",
     title: "We ship it and hand you the keys",
     body: "Deployed to a server you control, with monitoring and alerts wired in. Code, models, configs and docs move to your accounts.",
     slot: "processHandover",
@@ -64,7 +64,7 @@ export default function ProcessSteps() {
             <div>
               <p className="eyebrow mb-6">Process</p>
               <h2 id="process-h" className="h2 mb-12">
-                Five weeks from first call <span className="soft">to running in production.</span>
+                Six weeks from first call <span className="soft">to running in production.</span>
               </h2>
               <ol className="space-y-2">
                 {STEPS.map((s, i) => {
@@ -115,7 +115,7 @@ export default function ProcessSteps() {
         <div className="wrap">
           <p className="eyebrow mb-6">Process</p>
           <h2 className="h2 mb-10">
-            Five weeks from first call <span className="soft">to running in production.</span>
+            Six weeks from first call <span className="soft">to running in production.</span>
           </h2>
           <ol className="space-y-10">
             {STEPS.map((s) => (
