@@ -1,49 +1,52 @@
 import React from "react";
 import Link from "next/link";
-import ServiceTabs from "@/components/ServiceTabs";
+import { ArrowRight } from "lucide-react";
+import { ServiceGroups } from "@/components/ServicesGrid";
+import { AGENCY_SERVICES } from "@/lib/agencyData";
 
 export const metadata = {
-  title: "Systems & Services — Cortelo",
-  description: "Enterprise AI automation, custom machine learning, generative AI, full-stack software, and MLOps pipelines.",
+  title: "Services — Cortelo",
+  description:
+    "AI voice agents, RAG assistants, private LLMs, MCP integrations, custom ML and deep learning models, face recognition, document AI, CRMs, web and mobile apps, automation and data dashboards.",
 };
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen pt-36 pb-24 px-6 relative z-10 bg-[#000000]">
-      <div className="max-w-[1360px] mx-auto space-y-16">
-        <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono text-white/90 font-semibold uppercase tracking-wider">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF4533]" />
-            <span>01 &bull; Core Disciplines</span>
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-[#FCFCFA]">
-            Production AI Architecture &amp;{" "}
-            <span className="font-serif italic font-normal text-white lowercase">Systems</span>.
+    <div className="relative z-10">
+      <section className="pt-40 pb-16">
+        <div className="wrap" data-enter>
+          <p className="eyebrow mb-6">Services</p>
+          <h1 className="display max-w-[920px] text-[44px] sm:text-[64px] lg:text-[80px]">
+            {AGENCY_SERVICES.length} services, <span className="serif-accent text-[var(--accent)]">one studio</span> that ships them.
           </h1>
-          <p className="text-base text-white/60 leading-relaxed font-light">
-            Every engagement is led directly by senior architects Hunzila Nisar and Mahreen Hashir. We deliver fixed-scope sprints with measurable SLAs and 100% intellectual property transfer.
+          <p className="lede mt-7 max-w-[580px]">
+            From AI voice agents and face recognition to custom models, private LLMs and the apps around them. Select any
+            service to start a conversation about it.
           </p>
         </div>
+      </section>
 
-        <ServiceTabs />
+      <section aria-label="Service catalogue" className="pb-24">
+        <div className="wrap">
+          <ServiceGroups detailed />
+        </div>
+      </section>
 
-        <div className="p-12 rounded-3xl border border-white/10 bg-[#0D0D0D] text-center space-y-6 shadow-xl">
-          <h2 className="text-2xl sm:text-4xl font-bold uppercase text-[#FCFCFA]">
-            Need a Custom Architecture Audit?
-          </h2>
-          <p className="text-sm text-white/60 max-w-xl mx-auto font-light">
-            We evaluate your existing infrastructure, model selection, latency bottlenecks, and training datasets before committing a single line of code.
-          </p>
-          <div>
-            <Link
-              href="/contact"
-              className="btn-conversion-primary inline-block px-8 py-3.5 rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(255,69,51,0.35)]"
-            >
-              Request Architecture Audit
+      <section aria-labelledby="audit-h" className="pb-28">
+        <div className="wrap">
+          <div className="flex flex-col gap-6 rounded-[var(--radius-l)] border border-[var(--line)] p-8 md:flex-row md:items-center md:justify-between md:p-12">
+            <div>
+              <h2 id="audit-h" className="text-[28px] font-medium tracking-[-0.03em]">Not sure which one you need?</h2>
+              <p className="mt-2 max-w-[520px] text-[15px] text-[var(--text-muted)]">
+                Tell us the problem. We will tell you which of these fits, what it costs and how long it takes.
+              </p>
+            </div>
+            <Link href="/contact" className="btn btn-primary shrink-0">
+              Describe your problem <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
-      </div>
-    </main>
+      </section>
+    </div>
   );
 }
