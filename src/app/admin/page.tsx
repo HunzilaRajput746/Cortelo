@@ -69,7 +69,24 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
   const admin = await currentAdmin();
   if (!admin) return <Login error={error} reset={reset === "1"} />;
 
-  const [{ items: bookings, source }, { items: inquiries }] = await Promise.all([listBookings(), listInquiries()]);
+  let bookings: Awaited<ReturnType<typeof listBookings>>;
+  let inquiries: Awaited<ReturnType<typeof listInquiries>>;
+  try {
+    [bookings, inquiries] = await Promise.all([listBookings(), listInquiries()]);
+  } catch (err) {
+    console.error("[admin]", err);
+    return (
+      <section className="pt-40 pb-32">
+        <div className="wrap max-w-[560px]">
+          <h1 className="text-[34px] font-medium tracking-[-0.03em]">Can&apos;t reach the database</h1>
+          <p className="mt-4 text-[15px] leading-relaxed text-[var(--text-muted)]">
+            Supabase didn&apos;t answer, so calls and messages can&apos;t be shown. Check the Supabase project is running and the keys
+            in the server&apos;s .env are right, then reload.
+          </p>
+        </div>
+      </section>
+    );
+  }
   const now = Date.now();
   const upcoming = bookings
     .filter((b) => b.status !== "cancelled" && new Date(b.slotStart).getTime() > now - 3_600_000)
@@ -85,7 +102,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
             <p className="eyebrow mb-4">Studio admin</p>
             <h1 className="text-[40px] font-medium tracking-[-0.035em]">Calls and messages</h1>
             <p className="mt-2 text-[13px] text-[var(--text-faint)]">
-              Signed in{admin !== "admin" ? ` as ${admin}` : ""} · data from {source === "supabase" ? "Supabase" : "the server file store"}
+              Signed in{admin !== "admin" ? ` as ${admin}` : ""} · data from Supabase
             </p>
           </div>
           <form method="post" action="/api/admin/logout">
