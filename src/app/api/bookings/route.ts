@@ -1,21 +1,31 @@
 import { NextResponse } from "next/server";
-import { BOOKING, isOfferedSlot, upcomingDays } from "@/lib/booking";
-import { newId, saveBookingIfFree, takenSlots, type BookingRecord } from "@/lib/server/store";
-import { checkContact, clean, clientIp, isBot, rateLimited } from "@/lib/server/guard";
+import { BOOKING, REQUEST_MAX_DAYS_AHEAD, SLOT_BOOKING_ENABLED, isOfferedSlot, upcomingDays } from "@/lib/booking";
+import { newId, saveBookingIfFree, saveCallRequest, takenSlots, type BookingRecord } from "@/lib/server/store";
+import { checkContact, clean, clientIp, isBot, rateLimited, type FieldErrors } from "@/lib/server/guard";
 import { notifyBooking } from "@/lib/server/notify";
 
 export const dynamic = "force-dynamic";
 
-/** Open slots for the coming days. */
+/** Open slots for the coming days (only while slot booking is on). */
 export async function GET() {
+  if (!SLOT_BOOKING_ENABLED) return NextResponse.json({ enabled: false });
   const taken = new Set(await takenSlots());
   const days = upcomingDays()
     .map((d) => ({ ...d, slots: d.slots.filter((s) => !taken.has(s)) }))
     .filter((d) => d.slots.length);
-  return NextResponse.json({ days, durationMinutes: BOOKING.durationMinutes, studioTimeZone: BOOKING.studioTimeZone });
+  return NextResponse.json({ enabled: true, days, durationMinutes: BOOKING.durationMinutes, studioTimeZone: BOOKING.studioTimeZone });
 }
 
-/** Books one slot. */
+/** A preferred time must be a real moment from now up to REQUEST_MAX_DAYS_AHEAD days out. */
+function checkPreferredTime(iso: string, errors: FieldErrors) {
+  const t = Date.parse(iso);
+  const now = Date.now();
+  if (!iso || Number.isNaN(t)) errors.slotStart = "Choose a day and a time.";
+  else if (t < now) errors.slotStart = "Choose a time in the future.";
+  else if (t > now + REQUEST_MAX_DAYS_AHEAD * 86_400_000) errors.slotStart = `Choose a time within the next ${REQUEST_MAX_DAYS_AHEAD} days.`;
+}
+
+/** Books a slot, or (while slot booking is off) sends a call request with a preferred time. */
 export async function POST(req: Request) {
   if (rateLimited(clientIp(req))) {
     return NextResponse.json({ error: "Too many requests. Try again in a few minutes." }, { status: 429 });
@@ -33,13 +43,18 @@ export async function POST(req: Request) {
 
   const { name, email, errors } = checkContact(body);
   const slotStart = clean(body.slotStart, 40);
-  if (!slotStart || !isOfferedSlot(slotStart)) errors.slotStart = "Pick a time from the list.";
+  if (SLOT_BOOKING_ENABLED) {
+    if (!slotStart || !isOfferedSlot(slotStart)) errors.slotStart = "Pick a time from the list.";
+  } else {
+    checkPreferredTime(slotStart, errors);
+  }
   if (Object.keys(errors).length) return NextResponse.json({ errors }, { status: 422 });
 
   const record: BookingRecord = {
     id: newId("call"),
     createdAt: new Date().toISOString(),
-    slotStart,
+    mode: SLOT_BOOKING_ENABLED ? "slot" : "request",
+    slotStart: new Date(slotStart).toISOString(),
     durationMinutes: BOOKING.durationMinutes,
     name,
     email,
@@ -47,12 +62,16 @@ export async function POST(req: Request) {
     service: clean(body.service, 160) || undefined,
     message: clean(body.message, 3000) || undefined,
     timeZone: clean(body.timeZone, 80) || undefined,
-    status: "confirmed",
+    status: SLOT_BOOKING_ENABLED ? "confirmed" : "requested",
   };
 
-  const saved = await saveBookingIfFree(record);
-  if (!saved) {
-    return NextResponse.json({ errors: { slotStart: "Someone just took this time. Pick another one." } }, { status: 409 });
+  if (SLOT_BOOKING_ENABLED) {
+    const saved = await saveBookingIfFree(record);
+    if (!saved) {
+      return NextResponse.json({ errors: { slotStart: "Someone just took this time. Pick another one." } }, { status: 409 });
+    }
+  } else {
+    await saveCallRequest(record);
   }
 
   await notifyBooking(record);
