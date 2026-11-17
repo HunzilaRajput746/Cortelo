@@ -13,9 +13,9 @@ interface NavbarProps {
 }
 
 const NAV_ITEMS = [
-  { label: "Services", href: "/#services" },
-  { label: "Work", href: "/#results" },
-  { label: "Process", href: "/#process" },
+  { label: "Services", href: "/services" },
+  { label: "Work", href: "/work" },
+  { label: "Process", href: "/process" },
   { label: "Team", href: "/team" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -60,7 +60,7 @@ export default function Navbar({ onOpenDrawer }: NavbarProps) {
 
           <nav aria-label="Main" className="hidden lg:flex items-center gap-8 text-[14px]">
             {NAV_ITEMS.map((item) => {
-              const active = item.href === pathname;
+              const active = item.href !== "/" && (pathname === item.href || pathname.startsWith(item.href + "/"));
               return (
                 <Link
                   key={item.label}
