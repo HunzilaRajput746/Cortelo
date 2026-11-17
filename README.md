@@ -9,7 +9,7 @@
 - **Hunzila Nisar** — Founder & Lead AI Systems Architect
   - Portfolio: [devhunzila.site](https://devhunzila.site)
   - LinkedIn: [Hunzila Nisar](https://linkedin.com/in/hunzila-nisar-ai)
-  - Contact: [hello@cortelo.ai](mailto:hello@cortelo.ai) / [Initiate Briefing](https://cortelo.ai/contact)
+  - Contact: [hello@cortelo.tech](mailto:hello@cortelo.tech) / [Initiate Briefing](https://cortelo.tech/contact)
   - Distinction: BSc in Artificial Intelligence (A+ Grade), NAVTTC AI Certification
 - **Mahreen Hashir** — Co-Founder & Head of Systems (ASVS L2 Security & MLOps)
 - **Umar Attique** — Senior AI Systems Engineer (RAG & Model Fine-Tuning)
