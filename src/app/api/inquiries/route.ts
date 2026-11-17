@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { newId, saveInquiry, type InquiryRecord } from "@/lib/server/store";
+import { FOUNDER_DATA } from "@/lib/agencyData";
 import { checkContact, clean, clientIp, isBot, rateLimited } from "@/lib/server/guard";
 import { notifyInquiry } from "@/lib/server/notify";
 
@@ -39,7 +40,15 @@ export async function POST(req: Request) {
     page: clean(body.page, 200) || undefined,
   };
 
-  await saveInquiry(record);
+  try {
+    await saveInquiry(record);
+  } catch (err) {
+    console.error("[inquiries]", err);
+    return NextResponse.json(
+      { error: `We couldn't save your message right now. Please try again in a minute, or email ${FOUNDER_DATA.agencyEmail}.` },
+      { status: 503 },
+    );
+  }
   await notifyInquiry(record);
   return NextResponse.json({ ok: true, id: record.id });
 }

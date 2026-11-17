@@ -1,15 +1,29 @@
 import { NextResponse } from "next/server";
 import { BOOKING, REQUEST_MAX_DAYS_AHEAD, SLOT_BOOKING_ENABLED, isOfferedSlot, upcomingDays } from "@/lib/booking";
 import { newId, saveBookingIfFree, saveCallRequest, takenSlots, type BookingRecord } from "@/lib/server/store";
+import { FOUNDER_DATA } from "@/lib/agencyData";
 import { checkContact, clean, clientIp, isBot, rateLimited, type FieldErrors } from "@/lib/server/guard";
 import { notifyBooking } from "@/lib/server/notify";
 
 export const dynamic = "force-dynamic";
 
+/** Shown when Supabase can't save the request; nothing is kept anywhere else. */
+const unavailable = () =>
+  NextResponse.json(
+    { error: `We couldn't save this right now. Please try again in a minute, or email ${FOUNDER_DATA.agencyEmail}.` },
+    { status: 503 },
+  );
+
 /** Open slots for the coming days (only while slot booking is on). */
 export async function GET() {
   if (!SLOT_BOOKING_ENABLED) return NextResponse.json({ enabled: false });
-  const taken = new Set(await takenSlots());
+  let taken: Set<string>;
+  try {
+    taken = new Set(await takenSlots());
+  } catch (err) {
+    console.error("[bookings]", err);
+    return unavailable();
+  }
   const days = upcomingDays()
     .map((d) => ({ ...d, slots: d.slots.filter((s) => !taken.has(s)) }))
     .filter((d) => d.slots.length);
@@ -65,13 +79,18 @@ export async function POST(req: Request) {
     status: SLOT_BOOKING_ENABLED ? "confirmed" : "requested",
   };
 
-  if (SLOT_BOOKING_ENABLED) {
-    const saved = await saveBookingIfFree(record);
-    if (!saved) {
-      return NextResponse.json({ errors: { slotStart: "Someone just took this time. Pick another one." } }, { status: 409 });
+  try {
+    if (SLOT_BOOKING_ENABLED) {
+      const saved = await saveBookingIfFree(record);
+      if (!saved) {
+        return NextResponse.json({ errors: { slotStart: "Someone just took this time. Pick another one." } }, { status: 409 });
+      }
+    } else {
+      await saveCallRequest(record);
     }
-  } else {
-    await saveCallRequest(record);
+  } catch (err) {
+    console.error("[bookings]", err);
+    return unavailable();
   }
 
   await notifyBooking(record);
