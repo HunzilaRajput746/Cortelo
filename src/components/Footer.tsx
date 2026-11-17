@@ -10,12 +10,12 @@ const COLUMNS = [
   {
     title: "Services",
     links: [
+      { label: "AI voice agents", href: "/services" },
       { label: "AI agents and automation", href: "/services/ai-automation" },
       { label: "Machine learning", href: "/services/machine-learning" },
       { label: "Generative AI", href: "/services/generative-ai" },
       { label: "Web development", href: "/services/web-development" },
-      { label: "App development", href: "/services/app-development" },
-      { label: "Data and MLOps", href: "/services/data-mlops" },
+      { label: "All services", href: "/services" },
     ],
   },
   {
@@ -60,7 +60,7 @@ export default function Footer() {
               <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--text-faint)]">{col.title}</h2>
               <ul className="mt-5 space-y-1">
                 {col.links.map((l) => (
-                  <li key={l.href}>
+                  <li key={l.label}>
                     <Link href={l.href} className="link-draw py-2 text-[15px] !text-[var(--text-muted)] hover:!text-[var(--text)]">
                       {l.label}
                     </Link>
