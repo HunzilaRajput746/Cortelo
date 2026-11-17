@@ -181,10 +181,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <div>
               <h2 className="text-[30px] font-medium tracking-[-0.03em]">Ready to scope it?</h2>
               <p className="mt-2 max-w-[520px] text-[15px] text-[var(--text-muted)]">
-                Pick a time that suits you. You will leave the call with a plan and a price.
+                Tell us when suits you. You will leave the call with a plan and a price.
               </p>
             </div>
-            <BookButton scope={scope} label="Book a 30-minute call" className="shrink-0 !min-h-[54px] !px-7" />
+            <BookButton scope={scope} label="Request a call" className="shrink-0 !min-h-[54px] !px-7" />
           </div>
         </div>
       </section>
