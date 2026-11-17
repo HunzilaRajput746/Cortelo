@@ -20,8 +20,8 @@ const nextConfig = {
       permanent: true,
     }));
 
-    // one public address: www and the old subdomain both land on cortelo.tech, same path
-    const hosts = ["www.cortelo.tech", "cortelo.devhunzila.site"].map((host) => ({
+    // one public address: www lands on cortelo.tech, same path
+    const hosts = ["www.cortelo.tech"].map((host) => ({
       source: "/:path*",
       has: [{ type: "host", value: host }],
       destination: "https://cortelo.tech/:path*",
