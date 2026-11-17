@@ -2,6 +2,17 @@
  * Booking rules shared by the browser and the server.
  * The studio works on Pakistan time (UTC+5, no daylight saving).
  */
+/**
+ * Slot booking (live calendar with fixed times, double-booking guard, calendar invites)
+ * is switched off for now. Visitors send a call request with the day and time they
+ * prefer, it arrives by email, and the founders reply with a meeting link or another time.
+ * Set this to true to bring the slot calendar back; nothing else needs to change.
+ */
+export const SLOT_BOOKING_ENABLED = false;
+
+/** How far ahead a visitor may ask for a call when slot booking is off. */
+export const REQUEST_MAX_DAYS_AHEAD = 90;
+
 export const BOOKING = {
   studioTimeZone: "Asia/Karachi",
   studioOffsetMinutes: 5 * 60,

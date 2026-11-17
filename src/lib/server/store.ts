@@ -14,6 +14,9 @@ export type Collection = "bookings" | "inquiries";
 export interface BookingRecord {
   id: string;
   createdAt: string;
+  /** "request": the visitor proposed a time the founders still have to confirm */
+  mode?: "slot" | "request";
+  /** the booked slot, or for a request the time the visitor prefers */
   slotStart: string;
   durationMinutes: number;
   name: string;
@@ -22,7 +25,7 @@ export interface BookingRecord {
   service?: string;
   message?: string;
   timeZone?: string;
-  status: "confirmed" | "cancelled";
+  status: "confirmed" | "cancelled" | "requested";
 }
 
 export interface InquiryRecord {
@@ -98,6 +101,11 @@ export function saveBookingIfFree(record: BookingRecord): Promise<boolean> {
     await append("bookings", record);
     return true;
   });
+}
+
+/** Saves a call request; requests never block each other. */
+export function saveCallRequest(record: BookingRecord) {
+  return enqueue("bookings", () => append("bookings", record));
 }
 
 export async function takenSlots(): Promise<string[]> {
