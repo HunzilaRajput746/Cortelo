@@ -10,11 +10,11 @@ const COLUMNS = [
   {
     title: "Services",
     links: [
-      { label: "AI voice agents", href: "/services" },
-      { label: "AI agents and automation", href: "/services/ai-automation" },
-      { label: "Machine learning", href: "/services/machine-learning" },
-      { label: "Generative AI", href: "/services/generative-ai" },
-      { label: "Web development", href: "/services/web-development" },
+      { label: "AI voice agents", href: "/services/voice-agents" },
+      { label: "AI agents", href: "/services/ai-agents" },
+      { label: "Custom ML models", href: "/services/custom-models" },
+      { label: "Face recognition", href: "/services/face-recognition" },
+      { label: "Private LLMs", href: "/services/private-llm" },
       { label: "All services", href: "/services" },
     ],
   },
