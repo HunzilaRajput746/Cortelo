@@ -311,7 +311,6 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "CRM & Enterprise Systems",
     status: "Confidential Enterprise CRM",
     previewImage: "/assets/projects/revenue_crm_preview.svg",
-    video: "/assets/videos/case_study_1.mp4",
     description:
       "Full-stack enterprise CRM platform built and deployed end-to-end for commercial production. Features real-time sales analytics (calls tracking, closed TCV, signed MRR, conversion funnels), developer sprint Kanban board, automated SOP documentation, and AI client workflows, secured on a dedicated Tailscale private mesh VPS.",
     metrics: {
@@ -342,7 +341,6 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "AI & CRM Infrastructure",
     status: "Confidential Enterprise CRM",
     previewImage: "/assets/projects/deal_engine_preview.svg",
-    video: "/assets/videos/case_study_2.mp4",
     description:
       "Production-ready customer relationship & lead management CRM in active commercial operation. Features AI-powered automated lead qualification, customer lifecycle stage tracking, multi-stage sales pipelines, and automated webhook triggers, running securely on a private VPS network.",
     metrics: {
@@ -374,7 +372,6 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     status: "Live VPS Automation",
     liveUrl: "https://n8n.devhunzila.site",
     previewImage: "/assets/projects/n8n_engine_preview.svg",
-    video: "/assets/videos/case_study_3.mp4",
     description:
       "Enterprise workflow automation platform self-hosted and running live on an Oracle Cloud VPS server at n8n.devhunzila.site. Powers event-driven webhook processing, MongoDB database synchronization, scheduled cron triggers, and multi-agent AI execution pipelines with zero third-party subscription limits.",
     metrics: {
@@ -405,7 +402,6 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "IoT, Embedded & Vision",
     status: "A+ Research & IoT",
     previewImage: "/assets/projects/smart_helmet_preview.svg",
-    video: "/assets/videos/prism_loop.mp4",
     description:
       "Comprehensive IoT safety system integrating ESP32, NEO-6M GPS, MPU6050 accelerometer, DHT11 sensors, and Face-API facial recognition. Features a live Node.js + Leaflet GPS route tracking dashboard and achieves 95% reliable crash alerts and 90% facial detection accuracy.",
     metrics: {
@@ -436,7 +432,6 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Full-Stack Web & SaaS",
     status: "Deployed SaaS",
     previewImage: "/assets/projects/gourmetos_preview.svg",
-    video: "/assets/videos/case_study_1.mp4",
     description:
       "Full-stack restaurant operations platform featuring role-based authentication (Admin/Staff), interactive Point-of-Sale terminal, live Kitchen Display System (Kanban order flow), menu and inventory control, revenue analytics dashboard, and an AI-assisted menu pricing engine.",
     metrics: {
@@ -467,7 +462,6 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Deep Learning & Computer Vision",
     status: "A+ Research & IoT",
     previewImage: "/assets/projects/healthcare_ai_preview.svg",
-    video: "/assets/videos/case_study_2.mp4",
     description:
       "End-to-end machine learning and deep learning classification system achieving 96% accuracy on clinical diagnostic datasets. Features full exploratory data analysis (EDA), PCA feature selection, SMOTE class balancing, Random Forest, XGBoost, and custom CNN architectures with FastAPI inference endpoints.",
     metrics: {
