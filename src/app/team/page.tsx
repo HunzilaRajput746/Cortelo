@@ -1,119 +1,144 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight, ExternalLink, X } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, ExternalLink, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { AGENCY_TEAM_ROSTER, FOUNDER_DATA, type TeamMember } from "@/lib/agencyData";
+import { FounderCard, MemberCard, FOUNDER_IDS, realLink } from "@/components/TeamShowcase";
+import { useAgencyShell } from "@/components/ClientShell";
+import VideoGround from "@/components/VideoGround";
 
 export default function TeamPage() {
-  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+  const { openFounderModal, openDrawer } = useAgencyShell();
+  const [selected, setSelected] = useState<TeamMember | null>(null);
+
+  const founders = AGENCY_TEAM_ROSTER.filter((m) => FOUNDER_IDS.includes(m.id));
+  const team = AGENCY_TEAM_ROSTER.filter((m) => !FOUNDER_IDS.includes(m.id));
+
+  useEffect(() => {
+    if (!selected) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setSelected(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selected]);
 
   return (
-    <main className="relative z-10 pt-36 pb-28">
-      <section className="mx-auto max-w-[1240px] px-6 sm:px-10">
-        <div className="max-w-3xl border-b border-white/15 pb-14">
-          <p className="mb-6 text-[11px] font-mono uppercase tracking-[0.24em] text-[#d7a47a]">
-            Cortelo / The people behind the work
-          </p>
-          <h1 className="text-5xl font-semibold leading-[0.95] tracking-[-0.06em] text-[#f7f5f0] sm:text-7xl">
-            A small team with
-            <span className="font-serif italic font-normal text-[#d7a47a]"> serious range.</span>
+    <div className="relative z-10">
+      {/* Hero */}
+      <section className="relative isolate overflow-hidden pt-40 pb-20">
+        {/* client slot: /assets/videos/cortelo/founders.mp4 */}
+        <VideoGround slot="founders" className="absolute inset-0 -z-20" opacity={0.3} lazy={false} />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,9,10,0.5)_0%,var(--bg)_100%)]" />
+        <div className="wrap" data-enter>
+          <p className="eyebrow mb-6">The team</p>
+          <h1 className="display max-w-[900px] text-[44px] sm:text-[64px] lg:text-[80px]">
+            The people who build <span className="serif-accent text-[var(--accent)]">Cortelo</span> systems.
           </h1>
-          <p className="mt-8 max-w-xl text-base font-light leading-relaxed text-white/60 sm:text-lg">
-            Strategists, engineers, and makers working together from first principle to production. Click a profile to see the thinking behind each discipline.
+          <p className="lede mt-7 max-w-[560px]">
+            Two founders lead every engagement. {team.length} engineers, designers and strategists build it with them.
           </p>
-        </div>
-
-        <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-          {AGENCY_TEAM_ROSTER.map((member, index) => (
-            <button
-              key={member.id}
-              onClick={() => setSelectedMember(member)}
-              className="group text-left animate-team-in"
-              style={{ animationDelay: `${index * 55}ms` }}
-            >
-              <div className="relative aspect-[4/5] overflow-hidden bg-[#171818]">
-                <Image
-                  src={member.avatar}
-                  alt={member.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover object-top grayscale transition duration-700 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-80" />
-                <span className="absolute bottom-4 left-4 text-[10px] font-mono uppercase tracking-[0.18em] text-white/75">
-                  {member.badge}
-                </span>
-                <span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/35 text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
-                  <ArrowUpRight className="h-4 w-4" />
-                </span>
-              </div>
-              <div className="flex items-start justify-between gap-4 border-b border-white/15 py-5">
-                <div>
-                  <h2 className="text-lg font-medium text-white">{member.name}</h2>
-                  <p className="mt-1 text-xs font-mono uppercase tracking-[0.13em] text-[#d7a47a]">{member.role}</p>
-                </div>
-                <span className="pt-1 text-xs text-white/35">0{index + 1}</span>
-              </div>
-              <p className="mt-4 line-clamp-2 text-sm leading-relaxed text-white/50">{member.bio}</p>
-            </button>
-          ))}
-        </div>
-
-        <div className="mt-24 flex flex-col gap-5 border-t border-white/15 pt-8 text-sm text-white/50 sm:flex-row sm:items-center sm:justify-between">
-          <span>Want to work with the studio?</span>
-          <Link href={`mailto:${FOUNDER_DATA.email}`} className="text-[#d7a47a] transition-colors hover:text-white">
-            {FOUNDER_DATA.email} <span aria-hidden="true">→</span>
-          </Link>
         </div>
       </section>
 
-      {selectedMember && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 p-4 backdrop-blur-sm sm:items-center">
-          <button className="absolute inset-0 cursor-default" onClick={() => setSelectedMember(null)} aria-label="Close member details" />
-          <article className="relative z-10 max-h-[88vh] w-full max-w-2xl overflow-y-auto bg-[#111313] p-6 shadow-2xl sm:p-10 animate-member-in">
+      {/* Founders */}
+      <section aria-labelledby="founders-h" className="pb-24">
+        <div className="wrap">
+          <h2 id="founders-h" className="eyebrow mb-8">
+            Founders
+          </h2>
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+            {founders.map((f) => (
+              <FounderCard
+                key={f.id}
+                member={f}
+                onOpen={f.id === "hunzila-nisar" ? openFounderModal : () => setSelected(f)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team */}
+      <section aria-labelledby="crew-h" className="pb-28">
+        <div className="wrap">
+          <div className="mb-10 flex flex-col gap-4 border-t border-[var(--line)] pt-10 md:flex-row md:items-end md:justify-between">
+            <h2 id="crew-h" className="h2 !text-[34px] md:!text-[44px]">
+              Engineers, designers <span className="soft">and strategists.</span>
+            </h2>
+            <p className="text-[15px] text-[var(--text-muted)] md:max-w-[380px]">Select a profile to read what each person owns on a project.</p>
+          </div>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4">
+            {team.map((m, i) => (
+              <MemberCard key={m.id} member={m} index={i + 3} onOpen={() => setSelected(m)} />
+            ))}
+          </div>
+
+          <div className="mt-24 flex flex-col gap-6 rounded-[var(--radius-l)] border border-[var(--line)] p-8 md:flex-row md:items-center md:justify-between md:p-10">
+            <div>
+              <h2 className="text-[26px] font-medium tracking-[-0.03em]">Work with the founders directly.</h2>
+              <p className="mt-2 text-[15px] text-[var(--text-muted)]">Every first call is with Hunzila or Mahreen, never a sales rep.</p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <button onClick={() => openDrawer("Call with the founders")} className="btn btn-primary">
+                Book a call <ArrowRight className="h-4 w-4" />
+              </button>
+              <a href={`mailto:${FOUNDER_DATA.agencyEmail}`} className="btn btn-ghost">
+                Email the studio
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {selected && (
+        <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/70 p-4 backdrop-blur-sm sm:items-center" role="dialog" aria-modal="true" aria-labelledby="member-h">
+          <button className="absolute inset-0 cursor-default" onClick={() => setSelected(null)} aria-label="Close profile" />
+          <article className="animate-member-in relative z-10 max-h-[88vh] w-full max-w-2xl overflow-y-auto rounded-[var(--radius-l)] border border-[var(--line)] bg-[var(--surface)] p-6 sm:p-10">
             <button
-              onClick={() => setSelectedMember(null)}
-              className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center text-white/50 transition-colors hover:text-white"
-              aria-label="Close member details"
+              onClick={() => setSelected(null)}
+              className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-white/5 hover:text-[var(--text)]"
+              aria-label="Close profile"
             >
               <X className="h-5 w-5" />
             </button>
             <div className="flex flex-col gap-7 sm:flex-row">
-              <div className="relative h-48 w-full shrink-0 overflow-hidden bg-[#1a1b1b] sm:h-56 sm:w-44">
-                <Image src={selectedMember.avatar} alt={selectedMember.name} fill className="object-cover object-top" />
+              <div className="relative h-56 w-full shrink-0 overflow-hidden rounded-[var(--radius-m)] bg-[var(--surface2)] sm:w-44">
+                <Image src={selected.avatar} alt={selected.name} fill sizes="176px" className="object-cover object-top" />
               </div>
               <div className="pt-1">
-                <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#d7a47a]">{selectedMember.badge}</p>
-                <h2 className="mt-3 text-3xl font-medium tracking-tight text-white">{selectedMember.name}</h2>
-                <p className="mt-2 text-sm text-white/55">{selectedMember.role}</p>
-                <p className="mt-6 text-sm leading-relaxed text-white/65">{selectedMember.bio}</p>
+                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">{selected.badge}</p>
+                <h2 id="member-h" className="mt-3 text-[30px] font-medium tracking-[-0.03em]">{selected.name}</h2>
+                <p className="mt-1 text-[15px] text-[var(--text-muted)]">{selected.role}</p>
+                <p className="mt-5 text-[15px] leading-relaxed text-[var(--text-muted)]">{selected.bio}</p>
               </div>
             </div>
-            <div className="mt-9 border-t border-white/15 pt-7">
-              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40">Specialties</p>
-              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3">
-                {selectedMember.specialties.map((specialty) => (
-                  <span key={specialty} className="text-sm text-white/75">{specialty}</span>
+            <div className="mt-8 border-t border-[var(--line)] pt-6">
+              <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--text-faint)]">Specialties</h3>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {selected.specialties.map((s) => (
+                  <li key={s} className="rounded-full border border-[var(--line)] px-3 py-1.5 text-[13px] text-[var(--text-muted)]">
+                    {s}
+                  </li>
                 ))}
+              </ul>
+            </div>
+            {(selected.portfolioUrl || realLink(selected.linkedinUrl)) && (
+              <div className="mt-6 flex flex-wrap gap-6 border-t border-[var(--line)] pt-6">
+                {selected.portfolioUrl && (
+                  <a href={selected.portfolioUrl} target="_blank" rel="noopener noreferrer" className="link-draw text-[14px]">
+                    Portfolio <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                )}
+                {realLink(selected.linkedinUrl) && (
+                  <a href={realLink(selected.linkedinUrl)} target="_blank" rel="noopener noreferrer" className="link-draw text-[14px]">
+                    LinkedIn <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                )}
               </div>
-            </div>
-            <div className="mt-8 flex flex-wrap gap-6 border-t border-white/15 pt-6">
-              {selectedMember.portfolioUrl && (
-                <a href={selectedMember.portfolioUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-[#d7a47a] hover:text-white">
-                  Portfolio <ExternalLink className="h-3.5 w-3.5" />
-                </a>
-              )}
-              {selectedMember.linkedinUrl && (
-                <a href={selectedMember.linkedinUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white">
-                  LinkedIn <ExternalLink className="h-3.5 w-3.5" />
-                </a>
-              )}
-            </div>
+            )}
           </article>
         </div>
       )}
-    </main>
+    </div>
   );
 }
