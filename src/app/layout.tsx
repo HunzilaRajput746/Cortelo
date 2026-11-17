@@ -8,7 +8,7 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "sw
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cortelo.ai"),
+  metadataBase: new URL("https://cortelo.tech"),
   title: "Cortelo — AI systems and software engineering studio",
   description:
     "An independent artificial intelligence and software engineering studio. Directed by Hunzila Nisar & Mahreen Hashir. We engineer bespoke autonomous agents, neural architectures, and resilient full-stack platforms.",
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     "full-stack AI systems",
   ],
   authors: [
-    { name: "Hunzila Nisar", url: "https://cortelo.ai" },
-    { name: "Mahreen Hashir", url: "https://cortelo.ai" },
+    { name: "Hunzila Nisar", url: "https://cortelo.tech" },
+    { name: "Mahreen Hashir", url: "https://cortelo.tech" },
   ],
   icons: {
     icon: "/favicon.svg",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cortelo — Systems of Intelligence",
     description: "Bespoke AI Agents &bull; Neural Architectures &bull; Resilient Software",
-    url: "https://cortelo.ai",
+    url: "https://cortelo.tech",
     siteName: "Cortelo Studio",
     images: [
       {
