@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, CalendarPlus, Check, Download, Mail, X } from "lucide-react";
 import { FOUNDER_DATA } from "@/lib/agencyData";
-import { BOOKING, googleCalendarLink, icsFor, type BookingDay } from "@/lib/booking";
+import { BOOKING, REQUEST_MAX_DAYS_AHEAD, SLOT_BOOKING_ENABLED, googleCalendarLink, icsFor, type BookingDay } from "@/lib/booking";
 import { Field, Honeypot, Input, Select, SERVICE_OPTIONS, Textarea, formValues, usePost } from "./forms";
 
 interface ProjectDrawerProps {
@@ -46,6 +46,7 @@ const fmtFull = (iso: string, zone: string) =>
 
 /* -------------------------------------------------------------------------- */
 
+/** Slot booking with a live calendar. Kept for later: shown only when SLOT_BOOKING_ENABLED is true. */
 function BookCall({ scope }: { scope: string }) {
   const zone = useLocalZone();
   const [days, setDays] = useState<BookingDay[] | null>(null);
@@ -221,6 +222,85 @@ function BookCall({ scope }: { scope: string }) {
   );
 }
 
+/**
+ * Call request (used while slot booking is off): the visitor proposes a day and time,
+ * the request is emailed to the founders, and they reply with a meeting link or another time.
+ */
+function RequestCall({ scope }: { scope: string }) {
+  const zone = useLocalZone();
+  const [done, setDone] = useState<{ when: string } | null>(null);
+  const { send, busy, errors, failure } = usePost<{ ok: boolean; id: string; slotStart: string }>("/api/bookings");
+
+  const ymd = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  const today = new Date();
+  const minDate = ymd(today);
+  const maxDate = ymd(new Date(today.getTime() + REQUEST_MAX_DAYS_AHEAD * 86_400_000));
+
+  async function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const v = formValues(e.currentTarget);
+    // the visitor's local day and time, sent as an exact moment plus their zone
+    const at = v.date && v.time ? new Date(`${v.date}T${v.time}`) : null;
+    const slotStart = at && !Number.isNaN(at.getTime()) ? at.toISOString() : "";
+    const res = await send({ ...v, slotStart, timeZone: zone });
+    if (res?.ok) setDone({ when: fmtFull(res.slotStart ?? slotStart, zone) });
+  }
+
+  if (done) {
+    return (
+      <div className="animate-member-in space-y-5" role="status">
+        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-ink)]">
+          <Check className="h-6 w-6" />
+        </span>
+        <h3 className="text-[26px] font-medium tracking-[-0.03em]">Request sent.</h3>
+        <p className="text-[15px] leading-relaxed text-[var(--text-muted)]">
+          You asked for {done.when} your time. A founder will email you within one working day to confirm it with a meeting link,
+          or to suggest another time if that one doesn&apos;t work.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={submit} noValidate className="relative space-y-5">
+      <div>
+        <h3 className="text-[22px] font-medium tracking-[-0.02em]">When suits you?</h3>
+        <p className="mt-1 text-[14px] text-[var(--text-muted)]">
+          Pick a day and time in your time zone ({zone}). We confirm by email with a meeting link.
+        </p>
+      </div>
+      <Honeypot />
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Field label="Preferred day" name="date" error={errors.slotStart}>
+          <Input name="date" type="date" min={minDate} max={maxDate} required invalid={!!errors.slotStart} className="[color-scheme:dark]" />
+        </Field>
+        <Field label="Preferred time" name="time">
+          <Input name="time" type="time" step={900} required className="[color-scheme:dark]" />
+        </Field>
+      </div>
+      <Field label="Your name" name="name" error={errors.name}>
+        <Input name="name" autoComplete="name" required invalid={!!errors.name} />
+      </Field>
+      <Field label="Work email" name="email" error={errors.email}>
+        <Input name="email" type="email" autoComplete="email" required invalid={!!errors.email} />
+      </Field>
+      <Field label="Company" name="company" optional>
+        <Input name="company" autoComplete="organization" />
+      </Field>
+      <Field label="What do you want to talk about?" name="service" optional>
+        <Select name="service" options={SERVICE_OPTIONS} placeholder="Choose a service" defaultValue={serviceFromScope(scope)} />
+      </Field>
+      <Field label="Anything we should read first?" name="message" optional>
+        <Textarea name="message" rows={3} defaultValue={scope && !serviceFromScope(scope) ? scope : ""} />
+      </Field>
+      {failure && <p className="text-[14px] text-[#ff8a7a]">{failure}</p>}
+      <button type="submit" disabled={busy} className="btn btn-primary w-full disabled:opacity-60">
+        {busy ? "Sending…" : "Request the call"} {!busy && <ArrowRight className="h-4 w-4" />}
+      </button>
+    </form>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
 
 export function SendBrief({ scope = "", kind = "brief" }: { scope?: string; kind?: "brief" | "contact" }) {
@@ -350,7 +430,7 @@ export default function ProjectDrawer({ isOpen, onClose, initialScope = "" }: Pr
           <div className="grid grid-cols-2 rounded-[var(--radius-s)] border border-[var(--line)] p-1" role="tablist">
             {(
               [
-                ["call", "Book a call"],
+                ["call", SLOT_BOOKING_ENABLED ? "Book a call" : "Request a call"],
                 ["brief", "Send a brief"],
               ] as [Tab, string][]
             ).map(([id, label]) => (
@@ -370,7 +450,11 @@ export default function ProjectDrawer({ isOpen, onClose, initialScope = "" }: Pr
         </div>
 
         <div className="flex-1 px-6 py-8 sm:px-8" key={`${tab}-${openCount}`}>
-          {tab === "call" ? <BookCall scope={scope} /> : <SendBrief scope={scope} />}
+          {tab === "call" ? (
+            SLOT_BOOKING_ENABLED ? <BookCall scope={scope} /> : <RequestCall scope={scope} />
+          ) : (
+            <SendBrief scope={scope} />
+          )}
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[var(--line)] px-6 py-5 text-[13px] text-[var(--text-faint)] sm:px-8">
