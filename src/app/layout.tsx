@@ -1,11 +1,15 @@
 import JsonLd from "@/components/JsonLd";
 import type { Metadata } from "next";
 import "./globals.css";
+import { Geist, Geist_Mono } from "next/font/google";
 import ClientShell from "@/components/ClientShell";
+
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://cortelo.ai"),
-  title: "Cortelo — Systems of Intelligence",
+  title: "Cortelo — AI systems and software engineering studio",
   description:
     "An independent artificial intelligence and software engineering studio. Directed by Hunzila Nisar & Mahreen Hashir. We engineer bespoke autonomous agents, neural architectures, and resilient full-stack platforms.",
   keywords: [
@@ -49,8 +53,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body className="antialiased selection:bg-[#FF4533]/30 selection:text-white bg-[#000000] text-[#FCFCFA]">
+    <html lang="en" className={`dark scroll-smooth ${geist.variable} ${geistMono.variable}`}>
+      <body className="antialiased bg-[var(--bg)] text-[var(--text)]">
+        <a href="#main" className="skip-link">Skip to content</a>
         <ClientShell><JsonLd />{children}</ClientShell>
       </body>
     </html>

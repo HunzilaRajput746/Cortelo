@@ -89,7 +89,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
       />
 
       {/* Main Content Area */}
-      <main className="relative z-10">{children}</main>
+      <main id="main" className="relative z-10">{children}</main>
 
       {/* 6. Footer */}
       <Footer />

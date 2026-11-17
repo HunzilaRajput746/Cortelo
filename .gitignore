@@ -10,3 +10,7 @@ dist
 .DS_Store
 .vscode
 
+
+# design tooling state
+.taste-skill
+shots
