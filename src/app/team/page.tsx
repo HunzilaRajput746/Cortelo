@@ -1,26 +1,17 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowRight, ExternalLink, X } from "lucide-react";
-import { useEffect, useState } from "react";
-import { AGENCY_TEAM_ROSTER, FOUNDER_DATA, type TeamMember } from "@/lib/agencyData";
-import { FounderCard, MemberCard, FOUNDER_IDS, realLink } from "@/components/TeamShowcase";
+import { ArrowRight } from "lucide-react";
+import { AGENCY_TEAM_ROSTER, FOUNDER_DATA } from "@/lib/agencyData";
+import { FounderCard, MemberCard, FOUNDER_IDS } from "@/components/TeamShowcase";
 import { useAgencyShell } from "@/components/ClientShell";
 import VideoGround from "@/components/VideoGround";
 
 export default function TeamPage() {
-  const { openFounderModal, openDrawer } = useAgencyShell();
-  const [selected, setSelected] = useState<TeamMember | null>(null);
+  const { openDrawer } = useAgencyShell();
 
   const founders = AGENCY_TEAM_ROSTER.filter((m) => FOUNDER_IDS.includes(m.id));
   const team = AGENCY_TEAM_ROSTER.filter((m) => !FOUNDER_IDS.includes(m.id));
 
-  useEffect(() => {
-    if (!selected) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setSelected(null);
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [selected]);
 
   return (
     <div className="relative z-10">
@@ -48,11 +39,7 @@ export default function TeamPage() {
           </h2>
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
             {founders.map((f) => (
-              <FounderCard
-                key={f.id}
-                member={f}
-                onOpen={f.id === "hunzila-nisar" ? openFounderModal : () => setSelected(f)}
-              />
+              <FounderCard key={f.id} member={f} />
             ))}
           </div>
         </div>
@@ -65,11 +52,11 @@ export default function TeamPage() {
             <h2 id="crew-h" className="h2 !text-[34px] md:!text-[44px]">
               Engineers, designers <span className="soft">and strategists.</span>
             </h2>
-            <p className="text-[15px] text-[var(--text-muted)] md:max-w-[380px]">Select a profile to read what each person owns on a project.</p>
+            <p className="text-[15px] text-[var(--text-muted)] md:max-w-[380px]">Open a profile to see what each person owns on a project.</p>
           </div>
           <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4">
             {team.map((m, i) => (
-              <MemberCard key={m.id} member={m} index={i + 3} onOpen={() => setSelected(m)} />
+              <MemberCard key={m.id} member={m} index={i + 3} href={`/team/${m.id}`} />
             ))}
           </div>
 
@@ -90,55 +77,6 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {selected && (
-        <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/70 p-4 backdrop-blur-sm sm:items-center" role="dialog" aria-modal="true" aria-labelledby="member-h">
-          <button className="absolute inset-0 cursor-default" onClick={() => setSelected(null)} aria-label="Close profile" />
-          <article className="animate-member-in relative z-10 max-h-[88vh] w-full max-w-2xl overflow-y-auto rounded-[var(--radius-l)] border border-[var(--line)] bg-[var(--surface)] p-6 sm:p-10">
-            <button
-              onClick={() => setSelected(null)}
-              className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-white/5 hover:text-[var(--text)]"
-              aria-label="Close profile"
-            >
-              <X className="h-5 w-5" />
-            </button>
-            <div className="flex flex-col gap-7 sm:flex-row">
-              <div className="relative h-56 w-full shrink-0 overflow-hidden rounded-[var(--radius-m)] bg-[var(--surface2)] sm:w-44">
-                <Image src={selected.avatar} alt={selected.name} fill sizes="176px" className="object-cover object-top" />
-              </div>
-              <div className="pt-1">
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">{selected.badge}</p>
-                <h2 id="member-h" className="mt-3 text-[30px] font-medium tracking-[-0.03em]">{selected.name}</h2>
-                <p className="mt-1 text-[15px] text-[var(--text-muted)]">{selected.role}</p>
-                <p className="mt-5 text-[15px] leading-relaxed text-[var(--text-muted)]">{selected.bio}</p>
-              </div>
-            </div>
-            <div className="mt-8 border-t border-[var(--line)] pt-6">
-              <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--text-faint)]">Specialties</h3>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {selected.specialties.map((s) => (
-                  <li key={s} className="rounded-full border border-[var(--line)] px-3 py-1.5 text-[13px] text-[var(--text-muted)]">
-                    {s}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {(selected.portfolioUrl || realLink(selected.linkedinUrl)) && (
-              <div className="mt-6 flex flex-wrap gap-6 border-t border-[var(--line)] pt-6">
-                {selected.portfolioUrl && (
-                  <a href={selected.portfolioUrl} target="_blank" rel="noopener noreferrer" className="link-draw text-[14px]">
-                    Portfolio <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
-                )}
-                {realLink(selected.linkedinUrl) && (
-                  <a href={realLink(selected.linkedinUrl)} target="_blank" rel="noopener noreferrer" className="link-draw text-[14px]">
-                    LinkedIn <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
-                )}
-              </div>
-            )}
-          </article>
-        </div>
-      )}
     </div>
   );
 }

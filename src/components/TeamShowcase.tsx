@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Globe } from "lucide-react";
 import { AGENCY_TEAM_ROSTER, type TeamMember } from "@/lib/agencyData";
-import { useAgencyShell } from "./ClientShell";
 import VideoGround from "./VideoGround";
 import { pointerGlow } from "@/lib/usePointerGlow";
 
@@ -23,7 +22,7 @@ function LinkedInIcon() {
 }
 
 /** One founder, shown large inside a frame whose light runs round the border. */
-export function FounderCard({ member, onOpen }: { member: TeamMember; onOpen?: () => void }) {
+export function FounderCard({ member }: { member: TeamMember }) {
   const linkedin = realLink(member.linkedinUrl);
   return (
     <article className="founder-frame group h-full" onPointerMove={pointerGlow}>
@@ -57,15 +56,9 @@ export function FounderCard({ member, onOpen }: { member: TeamMember; onOpen?: (
           </ul>
 
           <div className="mt-auto flex items-center gap-2 pt-8">
-            {onOpen ? (
-              <button onClick={onOpen} className="btn btn-primary !min-h-[44px] !px-4">
-                Read the profile <ArrowUpRight className="h-4 w-4" />
-              </button>
-            ) : (
-              <Link href="/team" className="btn btn-primary !min-h-[44px] !px-4">
-                Read the profile <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            )}
+            <Link href={`/team/${member.id}`} className="btn btn-primary !min-h-[44px] !px-4">
+              Read the profile <ArrowUpRight className="h-4 w-4" />
+            </Link>
             {member.portfolioUrl && (
               <a
                 href={member.portfolioUrl}
@@ -147,7 +140,6 @@ export function MemberCard({
 }
 
 export default function TeamShowcase() {
-  const { openFounderModal } = useAgencyShell();
   const founders = AGENCY_TEAM_ROSTER.filter((m) => FOUNDER_IDS.includes(m.id));
   const team = AGENCY_TEAM_ROSTER.filter((m) => !FOUNDER_IDS.includes(m.id)).slice(0, 4);
 
@@ -169,7 +161,7 @@ export default function TeamShowcase() {
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           {founders.map((f) => (
-            <FounderCard key={f.id} member={f} onOpen={f.id === "hunzila-nisar" ? openFounderModal : undefined} />
+            <FounderCard key={f.id} member={f} />
           ))}
         </div>
 
@@ -181,7 +173,7 @@ export default function TeamShowcase() {
         </div>
         <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-4">
           {team.map((m, i) => (
-            <MemberCard key={m.id} member={m} index={i + 3} href="/team" />
+            <MemberCard key={m.id} member={m} index={i + 3} href={`/team/${m.id}`} />
           ))}
         </div>
       </div>
