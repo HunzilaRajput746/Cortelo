@@ -60,7 +60,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
   ]);
   const now = Date.now();
   const upcoming = bookings
-    .filter((b) => b.status === "confirmed" && new Date(b.slotStart).getTime() > now - 3_600_000)
+    .filter((b) => b.status !== "cancelled" && new Date(b.slotStart).getTime() > now - 3_600_000)
     .sort((a, b) => a.slotStart.localeCompare(b.slotStart));
   const past = bookings.filter((b) => !upcoming.includes(b)).sort((a, b) => b.slotStart.localeCompare(a.slotStart));
   const messages = [...inquiries].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
@@ -80,9 +80,9 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
 
         <dl className="grid grid-cols-3 gap-4">
           {[
-            ["Upcoming calls", upcoming.length],
+            ["Upcoming call requests", upcoming.length],
             ["Messages and briefs", messages.length],
-            ["All calls booked", bookings.length],
+            ["All call requests", bookings.length],
           ].map(([label, n]) => (
             <div key={label} className="card p-6">
               <dt className="text-[13px] text-[var(--text-faint)]">{label}</dt>
@@ -92,9 +92,9 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
         </dl>
 
         <div>
-          <h2 className="mb-5 text-[22px] font-medium">Upcoming calls (PKT)</h2>
+          <h2 className="mb-5 text-[22px] font-medium">Upcoming calls, preferred time in PKT</h2>
           {upcoming.length === 0 ? (
-            <p className="text-[15px] text-[var(--text-muted)]">No calls booked yet.</p>
+            <p className="text-[15px] text-[var(--text-muted)]">No call requests yet.</p>
           ) : (
             <div className="overflow-x-auto rounded-[var(--radius-l)] border border-[var(--line)]">
               <table className="w-full min-w-[760px] text-left text-[14px]">
@@ -109,7 +109,10 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                 <tbody>
                   {upcoming.map((b) => (
                     <tr key={b.id} className="border-t border-[var(--line)] align-top">
-                      <td className="px-5 py-4 whitespace-nowrap text-[var(--accent)]">{pkt(b.slotStart)}</td>
+                      <td className="px-5 py-4 whitespace-nowrap text-[var(--accent)]">
+                        {pkt(b.slotStart)}
+                        <div className="text-[12px] text-[var(--text-faint)]">{b.status === "requested" ? "Requested, reply by email" : "Booked"}</div>
+                      </td>
                       <td className="px-5 py-4">
                         {b.name}
                         <br />
