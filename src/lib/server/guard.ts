@@ -37,3 +37,11 @@ export function checkContact(body: Record<string, unknown>) {
 
 /** Bots fill the hidden "website" field; people never see it. */
 export const isBot = (body: Record<string, unknown>) => clean(body.website).length > 0;
+
+/** The public origin behind a reverse proxy (nginx passes Host and X-Forwarded-Proto). */
+export function publicOrigin(req: Request): string {
+  const url = new URL(req.url);
+  const proto = req.headers.get("x-forwarded-proto")?.split(",")[0] || url.protocol.replace(":", "");
+  const host = req.headers.get("x-forwarded-host") || req.headers.get("host") || url.host;
+  return `${proto}://${host}`;
+}
