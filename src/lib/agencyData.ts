@@ -88,6 +88,9 @@ export const FOUNDER_DATA = {
   ],
 };
 
+/** The two founders, shown first and highlighted everywhere. */
+export const FOUNDER_IDS = ["hunzila-nisar", "mahreen-hashir"];
+
 export const AGENCY_TEAM_ROSTER: TeamMember[] = [
   {
     id: "hunzila-nisar",

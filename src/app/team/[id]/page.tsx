@@ -4,10 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
-import { AGENCY_TEAM_ROSTER, FOUNDER_DATA } from "@/lib/agencyData";
+import { AGENCY_TEAM_ROSTER, FOUNDER_DATA, FOUNDER_IDS } from "@/lib/agencyData";
 import BookButton from "@/components/BookButton";
 
-const FOUNDER_IDS = ["hunzila-nisar", "mahreen-hashir"];
 const realLink = (url?: string) => (url && !/^https?:\/\/(www\.)?linkedin\.com\/?$/.test(url) ? url : undefined);
 
 /** Longer stories for the two founders; everyone else uses their roster bio. */

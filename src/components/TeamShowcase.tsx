@@ -8,7 +8,8 @@ import { AGENCY_TEAM_ROSTER, type TeamMember } from "@/lib/agencyData";
 import VideoGround from "./VideoGround";
 import { pointerGlow } from "@/lib/usePointerGlow";
 
-export const FOUNDER_IDS = ["hunzila-nisar", "mahreen-hashir"];
+export { FOUNDER_IDS } from "@/lib/agencyData";
+import { FOUNDER_IDS } from "@/lib/agencyData";
 
 /** A LinkedIn link only counts when it points at a real profile. */
 export const realLink = (url?: string) => (url && !/^https?:\/\/(www\.)?linkedin\.com\/?$/.test(url) ? url : undefined);
