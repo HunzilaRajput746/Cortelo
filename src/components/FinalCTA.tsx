@@ -1,76 +1,37 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, ShieldCheck, Cpu, Code2, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { FOUNDER_DATA } from "@/lib/agencyData";
 import { useAgencyShell } from "./ClientShell";
+import VideoGround from "./VideoGround";
 
 export default function FinalCTA() {
   const { openDrawer } = useAgencyShell();
 
   return (
-    <section className="py-24 px-6 sm:px-10 max-w-[1440px] mx-auto">
-      <div className="relative rounded-3xl p-8 sm:p-14 lg:p-20 border border-white/10 bg-[#0D0D0D] overflow-hidden text-center shadow-[0_0_60px_rgba(0,0,0,0.8)]">
+    <section aria-labelledby="cta-h" className="py-16 md:py-24">
+      <div className="wrap">
+        <div className="relative isolate overflow-hidden rounded-[var(--radius-l)] border border-[var(--line)] px-6 py-20 md:px-16 md:py-28">
+          {/* client slot: /assets/videos/cortelo/closing.mp4 */}
+          <VideoGround slot="closing" className="absolute inset-0 -z-20" opacity={0.55} />
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(7,9,10,0.35)_0%,rgba(7,9,10,0.9)_75%)]" />
 
-        {/* Ambient Conic Gradient Glows (Conversion Signature) */}
-        <div className="conic-flame-orb absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[460px] h-[460px] opacity-40 pointer-events-none" />
-        <div className="conic-warm-orb absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] opacity-30 pointer-events-none" />
-        <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#0D0D0D]/60 to-[#0D0D0D] pointer-events-none" />
-
-        {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono font-bold tracking-widest text-white/90 uppercase">
-            <span className="w-2 h-2 rounded-full bg-[#FF4533] animate-pulse" />
-            Get Started
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#FCFCFA] leading-[1.1]">
-            Ready to scale your business with{" "}
-            <span className="font-serif italic font-normal text-white lowercase">intelligent AI</span>?
-          </h2>
-
-          <p className="text-sm sm:text-lg text-white/60 max-w-2xl mx-auto font-light leading-relaxed">
-            Schedule a 15-minute architecture discovery session directly with founder Hunzila Nisar. We’ll analyze your operational bottlenecks, design your system blueprint, and deliver a working prototype in 7 days.
-          </p>
-
-          {/* Action Buttons */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={() => openDrawer("15-Min Discovery Call")}
-              className="btn-conversion-primary w-full sm:w-auto px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(255,69,51,0.4)] cursor-pointer rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white"
-            >
-              <span>Book a 15-min Discovery Call</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <a
-              href={FOUNDER_DATA.portfolioUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 text-[#d7a47a] hover:text-white transition-colors"
-            >
-              <span>View founder portfolio</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
-
-          {/* Guarantees Grid */}
-          <div className="pt-10 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
-            <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.02] border border-white/5">
-              <ShieldCheck className="w-4 h-4 text-[#FF4533] shrink-0" />
-              <span className="text-xs font-mono text-white/80">100% IP Code Transfer</span>
-            </div>
-            <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.02] border border-white/5">
-              <Cpu className="w-4 h-4 text-[#FF4533] shrink-0" />
-              <span className="text-xs font-mono text-white/80">Zero Per-Seat SaaS Taxes</span>
-            </div>
-            <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.02] border border-white/5">
-              <Code2 className="w-4 h-4 text-[#FF4533] shrink-0" />
-              <span className="text-xs font-mono text-white/80">Private VPS Self-Hosted</span>
-            </div>
-            <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.02] border border-white/5">
-              <Zap className="w-4 h-4 text-[#FF4533] shrink-0" />
-              <span className="text-xs font-mono text-white/80">7-Day Working MVP</span>
+          <div className="mx-auto max-w-[860px] text-center">
+            <p className="eyebrow mb-7 justify-center">Next step</p>
+            <h2 id="cta-h" className="display text-[40px] sm:text-[60px] lg:text-[76px]">
+              Tell us what you want <span className="serif-accent text-[var(--accent)]">running</span> by next quarter.
+            </h2>
+            <p className="lede mx-auto mt-7 max-w-[540px]">
+              A 15-minute call with a founder. You leave with a scope, a stack and a price, whether you hire us or not.
+            </p>
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+              <button onClick={() => openDrawer("15-Min Discovery Call")} className="btn btn-primary !min-h-[56px] w-full !px-8 sm:w-auto">
+                Book a 15-minute call <ArrowRight className="h-4 w-4" />
+              </button>
+              <a href={`mailto:${FOUNDER_DATA.agencyEmail}`} className="btn btn-ghost !min-h-[56px] w-full !px-8 sm:w-auto">
+                {FOUNDER_DATA.agencyEmail}
+              </a>
             </div>
           </div>
         </div>
