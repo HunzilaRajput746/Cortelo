@@ -1,125 +1,114 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
-import { AGENCY_PROJECTS } from "@/lib/agencyData";
+import Link from "next/link";
+import { AGENCY_PROJECTS, type ProjectItem } from "@/lib/agencyData";
 import { useAgencyShell } from "./ClientShell";
 import { ArrowUpRight } from "lucide-react";
 
-export default function ResultsSection() {
+function ProjectCard({ p, wide = false }: { p: ProjectItem; wide?: boolean }) {
   const { openProjectModal } = useAgencyShell();
+  const video = useRef<HTMLVideoElement>(null);
 
-  const featured = AGENCY_PROJECTS.slice(0, 3);
-  const secondary = AGENCY_PROJECTS.slice(3);
+  const play = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    video.current?.play().catch(() => {});
+  };
+  const stop = () => {
+    const v = video.current;
+    if (!v) return;
+    v.pause();
+    v.currentTime = 0;
+  };
 
   return (
-    <section id="results" className="py-24 px-6 sm:px-10 max-w-[1440px] mx-auto border-t border-white/10">
-      
-      {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-        <span className="px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono text-white/70 uppercase tracking-wider font-medium">
-          Results
-        </span>
-        <h2 className="text-3xl sm:text-5xl font-black uppercase text-[#FCFCFA] tracking-tight">
-          Results speak for{" "}
-          <span className="font-serif italic font-normal text-white lowercase">themselves</span>.
-        </h2>
-        <p className="text-sm sm:text-base text-[#999999] leading-relaxed font-light">
-          We&apos;ve engineered production systems across a number of industries and achieved measured outcomes with ambitious brands and organizations.
-        </p>
-      </div>
-
-      {/* 3 Featured Results Cards matching Conversion Template */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {featured.map((p) => (
-          <div
-            key={p.id}
-            onClick={() => openProjectModal(p)}
-            className="editorial-card p-7 sm:p-8 border-y border-white/10 flex flex-col justify-between group cursor-pointer"
+    <button
+      type="button"
+      onClick={() => openProjectModal(p)}
+      onMouseEnter={play}
+      onMouseLeave={stop}
+      onFocus={play}
+      onBlur={stop}
+      className={`card card-link group overflow-hidden text-left ${wide ? "md:col-span-2 md:grid md:grid-cols-[1.35fr_1fr]" : "flex flex-col"}`}
+    >
+      <div className={`media relative bg-[var(--surface2)] ${wide ? "aspect-[16/10] md:aspect-auto md:min-h-[440px]" : "aspect-[16/10]"}`}>
+        <Image
+          src={p.previewImage}
+          alt={p.title}
+          fill
+          sizes={wide ? "(min-width: 768px) 60vw, 100vw" : "(min-width: 768px) 45vw, 100vw"}
+          className="object-cover"
+        />
+        {p.video && (
+          <video
+            ref={video}
+            className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100"
+            muted
+            loop
+            playsInline
+            preload="none"
+            aria-hidden="true"
           >
-            <div>
-              {/* Category & Badge */}
-              <div className="flex items-center justify-between mb-6 text-xs font-mono">
-                <span className="text-[#FF4533] font-bold uppercase">{p.category}</span>
-                <span className="px-3 py-1 rounded-full text-[10px] font-bold border border-white/10 bg-white/[0.04] text-white/70">
-                  {p.badge}
-                </span>
-              </div>
-
-              {/* Mockup Visual */}
-              <div className="interactive-media relative aspect-[16/10] rounded-2xl overflow-hidden mb-6 bg-[#000000]">
-                <Image
-                  src={p.previewImage}
-                  alt={p.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-[#FF4533] group-hover:text-white transition-colors">
-                  <ArrowUpRight className="w-4 h-4" />
-                </div>
-              </div>
-
-              {/* Title */}
-              <h3 className="text-xl font-bold uppercase text-white mb-3 leading-snug">
-                {p.title}
-              </h3>
-              <p className="text-xs text-[#999999] leading-relaxed font-light mb-6 line-clamp-3">
-                {p.description}
-              </p>
-            </div>
-
-            {/* Metrics Breakdown */}
-            <div className="pt-6 border-t border-white/10 space-y-3 font-mono">
-              <div className="flex justify-between items-baseline">
-                <span className="text-xs text-[#888888] uppercase">{p.metrics.primaryLabel}</span>
-                <span className="text-2xl font-black text-white">{p.metrics.primaryValue}</span>
-              </div>
-              <div className="flex justify-between items-baseline">
-                <span className="text-xs text-[#888888] uppercase">{p.metrics.secondaryLabel}</span>
-                <span className="text-lg font-bold text-[#FF4533]">{p.metrics.secondaryValue}</span>
-              </div>
-            </div>
-
-          </div>
-        ))}
+            <source src={p.video} type="video/mp4" />
+          </video>
+        )}
+        <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/50 px-3 py-1 font-mono text-[11px] text-white/80 backdrop-blur-md">
+          {p.category}
+        </span>
+        <span className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-md transition-[background-color,color,transform] duration-300 group-hover:bg-[var(--accent)] group-hover:text-[var(--accent-ink)]">
+          <ArrowUpRight className="h-4 w-4" />
+        </span>
       </div>
 
-      {/* Secondary Project Showcase (Smart Helmet, GourmetOS, Oncology AI) */}
-      <div className="mt-12 pt-12 border-t border-white/10">
-        <div className="flex items-center justify-between mb-8 text-xs font-mono text-[#888888]">
-          <span className="uppercase tracking-wider">Additional Specialized Systems (IoT, Vision &amp; Healthcare)</span>
-          <span className="text-[#FF4533]">Verified Production Benchmarks</span>
+      <div className={`flex flex-1 flex-col gap-8 p-7 ${wide ? "md:p-10" : ""}`}>
+        <h3 className={`font-medium tracking-[-0.025em] text-[var(--text)] ${wide ? "text-[26px] md:text-[32px] leading-[1.1]" : "text-[21px] leading-snug"}`}>
+          {p.title}
+        </h3>
+        <p className={`mt-3 text-[15px] leading-relaxed text-[var(--text-muted)] ${wide ? "line-clamp-4" : "line-clamp-2"}`}>
+          {p.description}
+        </p>
+        <div className="mt-auto grid grid-cols-2 gap-4 border-t border-[var(--line)] pt-6">
+          <div>
+            <p className="text-[26px] font-medium tracking-[-0.03em] text-[var(--text)]">{p.metrics.primaryValue}</p>
+            <p className="mt-1 text-[12px] text-[var(--text-faint)]">{p.metrics.primaryLabel}</p>
+          </div>
+          <div>
+            <p className="text-[26px] font-medium tracking-[-0.03em] text-[var(--accent)]">{p.metrics.secondaryValue}</p>
+            <p className="mt-1 text-[12px] text-[var(--text-faint)]">{p.metrics.secondaryLabel}</p>
+          </div>
+        </div>
+      </div>
+    </button>
+  );
+}
+
+export default function ResultsSection() {
+  const [first, ...rest] = AGENCY_PROJECTS;
+  const shown = rest.slice(0, 4);
+
+  return (
+    <section id="results" aria-labelledby="results-h" className="py-24 md:py-32">
+      <div className="wrap">
+        <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="eyebrow mb-6">Selected work</p>
+            <h2 id="results-h" className="h2 max-w-[760px]">
+              Systems in production. <span className="soft">Numbers from the running builds.</span>
+            </h2>
+          </div>
+          <Link href="/work" className="link-draw shrink-0 text-[15px]">
+            All case studies <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {secondary.map((p) => (
-            <div
-              key={p.id}
-              onClick={() => openProjectModal(p)}
-              className="editorial-card p-6 border-y border-white/10 flex flex-col justify-between group cursor-pointer"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4 text-[11px] font-mono">
-                  <span className="text-[#FF4533] font-semibold">{p.badge}</span>
-                  <span className="text-[#888888]">{p.metrics.primaryValue}</span>
-                </div>
-                <h4 className="text-base font-bold uppercase text-white mb-2 leading-snug">
-                  {p.title}
-                </h4>
-                <p className="text-xs text-[#999999] leading-relaxed line-clamp-2">
-                  {p.description}
-                </p>
-              </div>
-
-              <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-[#888888] group-hover:text-white transition-colors">
-                <span>Inspect Technical Architecture</span>
-                <ArrowUpRight className="w-4 h-4 text-[#FF4533]" />
-              </div>
-            </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <ProjectCard p={first} wide />
+          {shown.map((p) => (
+            <ProjectCard key={p.id} p={p} />
           ))}
         </div>
       </div>
-
     </section>
   );
 }
