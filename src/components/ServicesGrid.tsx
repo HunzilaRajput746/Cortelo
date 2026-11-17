@@ -146,12 +146,15 @@ export function ServiceGroups({ detailed = false }: { detailed?: boolean }) {
             <h3 className="mt-3 text-[24px] font-medium tracking-[-0.025em] text-[var(--text)]">{g.title}</h3>
             <p className="mt-2 text-[15px] leading-relaxed text-[var(--text-muted)]">{g.line}</p>
           </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {/* 4 cards sit 2x2; 5 cards lead with one wide card so no row is left half empty */}
+          <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${g.ids.length === 4 ? "" : "xl:grid-cols-3"}`}>
             {g.ids
               .map((id) => byId[id])
               .filter(Boolean)
-              .map((s) => (
-                <ServiceCard key={s.id} s={s} detailed={detailed} />
+              .map((s, i) => (
+                <div key={s.id} className={g.ids.length === 5 && i === 0 ? "sm:col-span-2" : ""}>
+                  <ServiceCard s={s} detailed={detailed} />
+                </div>
               ))}
           </div>
         </div>
