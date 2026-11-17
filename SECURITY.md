@@ -2,9 +2,9 @@
 
 ## 1. Reporting a Vulnerability
 If you discover a security vulnerability in Cortelo infrastructure or client-facing platforms, please disclose it responsibly:
-- **Email**: `security@cortelo.ai`
+- **Email**: `security@cortelo.tech`
 - **PGP**: Available upon request
-- **Canonical security.txt**: `https://cortelo.ai/.well-known/security.txt`
+- **Canonical security.txt**: `https://cortelo.tech/.well-known/security.txt`
 
 We review all reports within 24 hours and commit to transparent remediation without legal threats against benevolent researchers.
 

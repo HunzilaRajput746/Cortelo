@@ -1,10 +1,10 @@
 export async function GET() {
-  const securityTxt = `Contact: mailto:security@cortelo.ai
+  const securityTxt = `Contact: mailto:security@cortelo.tech
 Expires: 2027-12-31T23:59:59.000Z
 Preferred-Languages: en
-Canonical: https://cortelo.ai/.well-known/security.txt
-Policy: https://cortelo.ai/legal/security
-Hiring: https://cortelo.ai/about
+Canonical: https://cortelo.tech/.well-known/security.txt
+Policy: https://cortelo.tech/legal/privacy
+Hiring: https://cortelo.tech/about
 `;
 
   return new Response(securityTxt, {
