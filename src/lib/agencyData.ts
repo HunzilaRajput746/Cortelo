@@ -577,8 +577,8 @@ export const AGENCY_SERVICES: AgencyService[] = [
   {
     id: "classic-ai-ml",
     num: "05",
-    title: "Classic AI, Deep Learning & Computer Vision",
-    tagline: "Predictive Analytics, Custom CNNs & IoT Integration",
+    title: "Predictive Analytics & IoT Systems",
+    tagline: "Forecasting models and connected hardware with on-device AI",
     description:
       "From tabular predictive modeling to real-time Computer Vision and embedded IoT systems (ESP32/Arduino). We build custom machine learning pipelines, train deep neural networks on domain-specific datasets, and optimize models for edge deployment with sub-40ms inference latency.",
     sla: "> 96% Verified Benchmark Accuracy",
@@ -616,6 +616,216 @@ export const AGENCY_SERVICES: AgencyService[] = [
       { label: "Focus", value: "High-Ticket Client Acquisition" },
       { label: "Integration", value: "Directly Synced with Custom CRM" },
       { label: "Target", value: "2x–4x Funnel Conversion Lift" },
+    ],
+  },
+  {
+    id: "voice-agents",
+    num: "07",
+    title: "AI Voice Agents",
+    tagline: "Phone agents that answer, qualify and book around the clock",
+    description:
+      "Inbound and outbound AI callers that speak naturally, answer questions from your knowledge base, qualify leads, book meetings into your calendar and log every call to your CRM, with a human handoff when a caller needs one.",
+    sla: "Live on your number in 2 to 3 weeks",
+    deliverables: [
+      "Inbound reception and outbound calling agents",
+      "Calendar booking, CRM logging and call summaries",
+      "Human handoff, call recording and transcripts",
+      "English, Urdu and multilingual voices",
+    ],
+    techStack: ["Vapi", "Retell AI", "Twilio", "ElevenLabs", "Deepgram", "OpenAI Realtime"],
+    specs: [
+      { label: "Channels", value: "Phone, WhatsApp, web widget" },
+      { label: "Integrations", value: "CRM, calendar, helpdesk" },
+      { label: "Delivery", value: "2 to 3 weeks" },
+    ],
+  },
+  {
+    id: "rag-assistants",
+    num: "08",
+    title: "RAG Assistants & AI Chatbots",
+    tagline: "Assistants that answer from your own documents and data",
+    description:
+      "Website, WhatsApp and internal chat assistants grounded in your documents, wikis and databases, with source citations, access control and an admin panel to keep the knowledge fresh.",
+    sla: "Every answer cites its source",
+    deliverables: [
+      "Document ingestion and vector search pipeline",
+      "Website, WhatsApp and Slack chat channels",
+      "Cited answers with role-based access",
+      "Admin panel for knowledge updates",
+    ],
+    techStack: ["LangChain", "LlamaIndex", "Qdrant", "pgvector", "OpenAI", "Claude"],
+    specs: [
+      { label: "Grounding", value: "Retrieval with citations" },
+      { label: "Channels", value: "Web, WhatsApp, Slack" },
+      { label: "Delivery", value: "2 to 4 weeks" },
+    ],
+  },
+  {
+    id: "private-llm",
+    num: "09",
+    title: "LLM Fine-Tuning & Private LLMs",
+    tagline: "Open models tuned on your data, running on your servers",
+    description:
+      "We fine-tune open-weight models such as Llama, Qwen and Mistral on your domain data and host them privately, so sensitive data never leaves your infrastructure and per-token API bills disappear.",
+    sla: "Your data stays on your hardware",
+    deliverables: [
+      "Dataset preparation and LoRA / QLoRA fine-tuning",
+      "Evaluation suite against your real tasks",
+      "Private GPU or CPU inference server",
+      "OpenAI-compatible API for your apps",
+    ],
+    techStack: ["Llama", "Qwen", "Mistral", "Unsloth", "vLLM", "Ollama"],
+    specs: [
+      { label: "Hosting", value: "On-premise or private cloud" },
+      { label: "Method", value: "LoRA, QLoRA, full fine-tune" },
+      { label: "Delivery", value: "3 to 6 weeks" },
+    ],
+  },
+  {
+    id: "mcp-integrations",
+    num: "10",
+    title: "MCP Servers & AI Integrations",
+    tagline: "Connect Claude, ChatGPT and your agents to your own tools",
+    description:
+      "Model Context Protocol servers and tool APIs that let AI assistants read and act on your CRM, database, files and internal systems safely, with scoped permissions and audit logs.",
+    sla: "Scoped permissions and full audit logs",
+    deliverables: [
+      "Custom MCP servers for your systems",
+      "Tool calling with scoped, revocable access",
+      "Audit logging of every AI action",
+      "Integration with Claude, ChatGPT and in-house agents",
+    ],
+    techStack: ["MCP", "TypeScript", "Python", "OAuth", "PostgreSQL", "Docker"],
+    specs: [
+      { label: "Protocol", value: "Model Context Protocol" },
+      { label: "Security", value: "OAuth and scoped tokens" },
+      { label: "Delivery", value: "1 to 3 weeks" },
+    ],
+  },
+  {
+    id: "custom-models",
+    num: "11",
+    title: "Custom ML & Deep Learning Models",
+    tagline: "Models trained on your data for prediction, classification and detection",
+    description:
+      "From data cleaning and feature engineering to training, evaluation and deployment, we build machine learning and deep learning models for your exact problem and serve them behind a fast API.",
+    sla: "Benchmarked on your held-out data",
+    deliverables: [
+      "Data audit, cleaning and feature engineering",
+      "Model training with CNNs, transformers or gradient boosting",
+      "Evaluation report on held-out data",
+      "FastAPI or ONNX deployment with monitoring",
+    ],
+    techStack: ["PyTorch", "TensorFlow", "Scikit-Learn", "XGBoost", "ONNX", "FastAPI"],
+    specs: [
+      { label: "Tasks", value: "Prediction, classification, detection" },
+      { label: "Serving", value: "API, edge or batch" },
+      { label: "Delivery", value: "3 to 8 weeks" },
+    ],
+  },
+  {
+    id: "face-recognition",
+    num: "12",
+    title: "Face Recognition & Computer Vision",
+    tagline: "Attendance, access control and video analytics from your cameras",
+    description:
+      "Face recognition for attendance and access, object detection, people counting and video analytics that run on your existing CCTV or edge devices, with dashboards and alerts.",
+    sla: "Runs on your cameras or edge devices",
+    deliverables: [
+      "Face enrolment, matching and liveness checks",
+      "Attendance and access-control dashboards",
+      "Object detection and people counting",
+      "Real-time alerts from live video streams",
+    ],
+    techStack: ["OpenCV", "YOLO", "InsightFace", "MediaPipe", "PyTorch", "Jetson"],
+    specs: [
+      { label: "Input", value: "CCTV, IP cameras, mobile" },
+      { label: "Deployment", value: "Edge device or server" },
+      { label: "Delivery", value: "3 to 6 weeks" },
+    ],
+  },
+  {
+    id: "document-ai",
+    num: "13",
+    title: "Document AI & OCR",
+    tagline: "Invoices, forms and contracts read and filed automatically",
+    description:
+      "Pipelines that read scanned and digital documents, extract the fields you need, validate them and push clean data into your ERP, CRM or spreadsheets, with a review queue for anything uncertain.",
+    sla: "Human review queue for low-confidence fields",
+    deliverables: [
+      "OCR and layout-aware field extraction",
+      "Validation rules and review queue",
+      "Export to ERP, CRM, Sheets or database",
+      "Urdu and English document support",
+    ],
+    techStack: ["Tesseract", "PaddleOCR", "LayoutLM", "GPT-4o", "Python", "n8n"],
+    specs: [
+      { label: "Documents", value: "Invoices, forms, IDs, contracts" },
+      { label: "Output", value: "Structured JSON to your systems" },
+      { label: "Delivery", value: "2 to 4 weeks" },
+    ],
+  },
+  {
+    id: "mobile-apps",
+    num: "14",
+    title: "Mobile Apps with AI",
+    tagline: "iOS and Android apps with AI features built in",
+    description:
+      "Cross-platform mobile apps with on-device and cloud AI features such as chat, voice, scanning and recommendations, published to the App Store and Google Play.",
+    sla: "One codebase for iOS and Android",
+    deliverables: [
+      "React Native or Flutter app",
+      "AI chat, voice and camera features",
+      "Push notifications, payments and auth",
+      "App Store and Google Play release",
+    ],
+    techStack: ["React Native", "Expo", "Flutter", "Firebase", "Supabase", "Stripe"],
+    specs: [
+      { label: "Platforms", value: "iOS and Android" },
+      { label: "Backend", value: "Supabase, Firebase or custom" },
+      { label: "Delivery", value: "6 to 10 weeks" },
+    ],
+  },
+  {
+    id: "data-dashboards",
+    num: "15",
+    title: "Data Engineering & Dashboards",
+    tagline: "Your scattered data in one place, with dashboards people use",
+    description:
+      "We pull data from your apps, sheets and databases into one warehouse, clean it on a schedule and build live dashboards and reports, with an AI layer that answers questions in plain language.",
+    sla: "Scheduled pipelines with failure alerts",
+    deliverables: [
+      "ETL pipelines from apps, sheets and databases",
+      "Central warehouse with clean, modelled tables",
+      "Live dashboards and scheduled reports",
+      "Ask-your-data AI assistant",
+    ],
+    techStack: ["PostgreSQL", "dbt", "Airbyte", "Metabase", "Power BI", "Python"],
+    specs: [
+      { label: "Sources", value: "Apps, sheets, databases, APIs" },
+      { label: "Output", value: "Dashboards and reports" },
+      { label: "Delivery", value: "2 to 5 weeks" },
+    ],
+  },
+  {
+    id: "ai-content",
+    num: "16",
+    title: "AI Content & SEO Automation",
+    tagline: "Content, social posts and SEO pages produced on a schedule",
+    description:
+      "Automated content systems that research, draft, review and publish blog posts, social media and product pages in your brand voice, with a human approval step and SEO tracking.",
+    sla: "Human approval before anything publishes",
+    deliverables: [
+      "Brand-voice content generation workflows",
+      "Social media scheduling and repurposing",
+      "Programmatic SEO pages",
+      "Approval queue and performance tracking",
+    ],
+    techStack: ["n8n", "OpenAI", "Claude", "WordPress", "Webflow", "Search Console"],
+    specs: [
+      { label: "Channels", value: "Blog, social, product pages" },
+      { label: "Control", value: "Human approval step" },
+      { label: "Delivery", value: "2 to 3 weeks" },
     ],
   },
 ];
