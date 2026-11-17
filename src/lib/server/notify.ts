@@ -59,7 +59,74 @@ async function settle(jobs: Promise<unknown>[]) {
   results.forEach((r) => r.status === "rejected" && console.error("[notify]", r.reason));
 }
 
+/** The visitor's preferred time in their own zone, e.g. "Tuesday 18 November, 15:00 (Europe/London)". */
+const localTime = (iso: string, zone?: string) => {
+  try {
+    return (
+      new Intl.DateTimeFormat("en-GB", {
+        timeZone: zone || "UTC",
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        hour: "2-digit",
+        minute: "2-digit",
+      }).format(new Date(iso)) + ` (${zone || "UTC"})`
+    );
+  } catch {
+    return iso;
+  }
+};
+
+/**
+ * A call request: the visitor proposed a time. The studio gets an email to reply to
+ * with a meeting link or another time; the visitor gets a short receipt. No calendar invite.
+ */
+async function notifyCallRequest(b: BookingRecord) {
+  const mail = transport();
+  const from = process.env.MAIL_FROM || process.env.SMTP_USER;
+  const pk = studioTime(b.slotStart);
+  const theirs = localTime(b.slotStart, b.timeZone);
+
+  const jobs: Promise<unknown>[] = [webhook("call-request", b)];
+  if (mail) {
+    jobs.push(
+      mail.sendMail({
+        from,
+        to: notifyTo(),
+        replyTo: b.email,
+        subject: `Call request: ${b.name} — ${pk}`,
+        text:
+          lines([
+            ["Preferred time (Pakistan)", pk],
+            ["Preferred time (client)", theirs],
+            ["Name", b.name],
+            ["Email", b.email],
+            ["Company", b.company],
+            ["Service", b.service],
+            ["Message", b.message],
+            ["Request id", b.id],
+          ]) + "\n\nReply to this email to send the meeting link or suggest another time.",
+      }),
+      mail.sendMail({
+        from,
+        to: b.email,
+        replyTo: notifyTo(),
+        subject: "We have your call request — Cortelo",
+        text: `Hi ${b.name},
+
+Thanks for asking for a call. You suggested ${theirs}.
+A founder will email you within one working day to confirm this time with a meeting link, or to suggest another time if it doesn't work.
+
+Hunzila Nisar and Mahreen Hashir
+Cortelo`,
+      }),
+    );
+  }
+  await settle(jobs);
+}
+
 export async function notifyBooking(b: BookingRecord) {
+  if (b.mode === "request") return notifyCallRequest(b);
   const mail = transport();
   const from = process.env.MAIL_FROM || process.env.SMTP_USER;
   const when = studioTime(b.slotStart);
