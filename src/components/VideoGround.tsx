@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { VIDEO_SLOTS, type VideoSlotName } from "@/lib/media";
 
 interface VideoGroundProps {
@@ -20,6 +20,8 @@ interface VideoGroundProps {
 export default function VideoGround({ slot, className = "", opacity = 1, lazy = true }: VideoGroundProps) {
   const ref = useRef<HTMLVideoElement>(null);
   const cfg = VIDEO_SLOTS[slot];
+  const fallback = "fallback" in cfg ? cfg.fallback : undefined;
+  const [standIn, setStandIn] = useState(Boolean(fallback));
 
   useEffect(() => {
     const video = ref.current;
@@ -52,7 +54,8 @@ export default function VideoGround({ slot, className = "", opacity = 1, lazy = 
       <video
         ref={ref}
         className="h-full w-full object-cover"
-        style={{ opacity }}
+        style={{ opacity, filter: standIn ? "grayscale(1) brightness(0.8)" : undefined }}
+        onLoadedData={(e) => setStandIn(!!fallback && e.currentTarget.currentSrc.endsWith(fallback))}
         muted
         loop
         playsInline
@@ -61,7 +64,7 @@ export default function VideoGround({ slot, className = "", opacity = 1, lazy = 
       >
         {/* client slot: {cfg.file} */}
         <source src={cfg.file} type="video/mp4" />
-        {"fallback" in cfg && cfg.fallback ? <source src={cfg.fallback} type="video/mp4" /> : null}
+        {fallback ? <source src={fallback} type="video/mp4" /> : null}
       </video>
     </div>
   );
