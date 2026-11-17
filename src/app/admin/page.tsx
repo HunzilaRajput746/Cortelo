@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { isAdmin, adminToken } from "@/lib/server/admin";
-import { readAll, type BookingRecord, type InquiryRecord } from "@/lib/server/store";
+import Link from "next/link";
+import { currentAdmin, signInAvailable } from "@/lib/server/admin";
+import { listBookings, listInquiries } from "@/lib/server/store";
+import { authEnabled } from "@/lib/supabase/config";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Admin — Cortelo", robots: { index: false, follow: false } };
@@ -15,31 +17,43 @@ const pkt = (iso: string) =>
     minute: "2-digit",
   }).format(new Date(iso));
 
-function Login({ error, disabled }: { error?: string; disabled: boolean }) {
+const fieldClass =
+  "mt-2 h-12 w-full rounded-[var(--radius-s)] border border-[var(--line-strong)] bg-[var(--surface)] px-4 text-[15px] outline-none focus:border-[var(--accent)]";
+
+function Login({ error, reset }: { error?: string; reset?: boolean }) {
+  const withEmail = authEnabled();
   return (
     <section className="pt-40 pb-32">
       <div className="wrap max-w-[440px]">
         <h1 className="text-[34px] font-medium tracking-[-0.03em]">Studio admin</h1>
-        {disabled ? (
+        {!signInAvailable() ? (
           <p className="mt-4 text-[15px] text-[var(--text-muted)]">
-            The admin area is off. Set <code className="font-mono text-[var(--accent)]">ADMIN_PASSWORD</code> in the
-            server&apos;s environment and restart the site to turn it on.
+            Sign-in is off. Add the Supabase settings (or <code className="font-mono text-[var(--accent)]">ADMIN_PASSWORD</code>) to
+            the server&apos;s environment and redeploy.
           </p>
         ) : (
           <form method="post" action="/api/admin/login" className="mt-8 space-y-4">
+            {reset && <p className="text-[14px] text-[var(--accent)]">Password changed. Sign in with the new one.</p>}
+            {withEmail && (
+              <label className="block">
+                <span className="text-[14px] text-[var(--text-muted)]">Email</span>
+                <input name="email" type="email" required autoComplete="username" className={fieldClass} />
+              </label>
+            )}
             <label className="block">
-              <span className="text-[14px] text-[var(--text-muted)]">Password</span>
-              <input
-                name="password"
-                type="password"
-                required
-                autoComplete="current-password"
-                className="mt-2 h-12 w-full rounded-[var(--radius-s)] border border-[var(--line-strong)] bg-[var(--surface)] px-4 text-[15px] outline-none focus:border-[var(--accent)]"
-              />
+              <span className="flex items-baseline justify-between text-[14px] text-[var(--text-muted)]">
+                Password
+                {withEmail && (
+                  <Link href="/admin/forgot" className="link-draw text-[13px]">
+                    Forgot password?
+                  </Link>
+                )}
+              </span>
+              <input name="password" type="password" required autoComplete="current-password" className={fieldClass} />
             </label>
             {error && (
               <p className="text-[14px] text-[#ff8a7a]">
-                {error === "wait" ? "Too many tries. Wait 15 minutes." : "That password is wrong."}
+                {error === "wait" ? "Too many tries. Wait 15 minutes." : withEmail ? "That email or password is wrong." : "That password is wrong."}
               </p>
             )}
             <button className="btn btn-primary w-full">Sign in</button>
@@ -50,14 +64,12 @@ function Login({ error, disabled }: { error?: string; disabled: boolean }) {
   );
 }
 
-export default async function AdminPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
-  const { error } = await searchParams;
-  if (!(await isAdmin())) return <Login error={error} disabled={!adminToken()} />;
+export default async function AdminPage({ searchParams }: { searchParams: Promise<{ error?: string; reset?: string }> }) {
+  const { error, reset } = await searchParams;
+  const admin = await currentAdmin();
+  if (!admin) return <Login error={error} reset={reset === "1"} />;
 
-  const [bookings, inquiries] = await Promise.all([
-    readAll<BookingRecord>("bookings"),
-    readAll<InquiryRecord>("inquiries"),
-  ]);
+  const [{ items: bookings, source }, { items: inquiries }] = await Promise.all([listBookings(), listInquiries()]);
   const now = Date.now();
   const upcoming = bookings
     .filter((b) => b.status !== "cancelled" && new Date(b.slotStart).getTime() > now - 3_600_000)
@@ -72,6 +84,9 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <div>
             <p className="eyebrow mb-4">Studio admin</p>
             <h1 className="text-[40px] font-medium tracking-[-0.035em]">Calls and messages</h1>
+            <p className="mt-2 text-[13px] text-[var(--text-faint)]">
+              Signed in{admin !== "admin" ? ` as ${admin}` : ""} · data from {source === "supabase" ? "Supabase" : "the server file store"}
+            </p>
           </div>
           <form method="post" action="/api/admin/logout">
             <button className="btn btn-ghost">Sign out</button>
