@@ -2,103 +2,21 @@
 
 import React from "react";
 import { AGENCY_SERVICES, type AgencyService } from "@/lib/agencyData";
-import {
-  Activity,
-  ArrowUpRight,
-  Brain,
-  Cpu,
-  Database,
-  LayoutTemplate,
-  MessagesSquare,
-  Network,
-  PenLine,
-  PhoneCall,
-  Plug,
-  ScanFace,
-  ScanText,
-  Server,
-  Smartphone,
-  TrendingUp,
-  Workflow,
-} from "lucide-react";
-import { useAgencyShell } from "./ClientShell";
+import { ArrowUpRight, Server } from "lucide-react";
+import Link from "next/link";
 import { pointerGlow } from "@/lib/usePointerGlow";
-
-const ICONS: Record<string, React.ElementType> = {
-  "ai-agents": Network,
-  "voice-agents": PhoneCall,
-  "rag-assistants": MessagesSquare,
-  "private-llm": Cpu,
-  "mcp-integrations": Plug,
-  "custom-models": Brain,
-  "face-recognition": ScanFace,
-  "document-ai": ScanText,
-  "classic-ai-ml": Activity,
-  "crm-architecture": Server,
-  "fullstack-platforms": LayoutTemplate,
-  "mobile-apps": Smartphone,
-  "workflow-automation": Workflow,
-  "data-dashboards": Database,
-  "growth-marketing": TrendingUp,
-  "ai-content": PenLine,
-};
-
-/** Short names for the cards; the full title stays in the data for detail views. */
-const SHORT: Record<string, string> = {
-  "ai-agents": "AI agents",
-  "voice-agents": "AI voice agents",
-  "rag-assistants": "RAG assistants and chatbots",
-  "private-llm": "Fine-tuned and private LLMs",
-  "mcp-integrations": "MCP servers and AI integrations",
-  "custom-models": "Custom ML and deep learning models",
-  "face-recognition": "Face recognition and computer vision",
-  "document-ai": "Document AI and OCR",
-  "classic-ai-ml": "Predictive analytics and IoT",
-  "crm-architecture": "Custom CRMs",
-  "fullstack-platforms": "Web and SaaS products",
-  "mobile-apps": "Mobile apps with AI",
-  "workflow-automation": "Automation and private hosting",
-  "data-dashboards": "Data pipelines and dashboards",
-  "growth-marketing": "Growth funnels",
-  "ai-content": "AI content and SEO",
-};
-
-const GROUPS: { title: string; line: string; ids: string[] }[] = [
-  {
-    title: "AI agents and LLMs",
-    line: "Assistants that talk, answer and act on your systems.",
-    ids: ["ai-agents", "voice-agents", "rag-assistants", "private-llm", "mcp-integrations"],
-  },
-  {
-    title: "Machine learning and vision",
-    line: "Models trained on your data, for your problem.",
-    ids: ["custom-models", "face-recognition", "document-ai", "classic-ai-ml"],
-  },
-  {
-    title: "Software products",
-    line: "The CRM, the web app and the phone app around it.",
-    ids: ["crm-architecture", "fullstack-platforms", "mobile-apps"],
-  },
-  {
-    title: "Automation, data and growth",
-    line: "The pipes, the numbers and the pipeline.",
-    ids: ["workflow-automation", "data-dashboards", "growth-marketing", "ai-content"],
-  },
-];
+import { SERVICE_GROUPS as GROUPS, SERVICE_ICONS as ICONS, SERVICE_SHORT as SHORT } from "@/lib/serviceMeta";
 
 const byId = Object.fromEntries(AGENCY_SERVICES.map((s) => [s.id, s])) as Record<string, AgencyService>;
 
 function ServiceCard({ s, detailed }: { s: AgencyService; detailed: boolean }) {
-  const { openDrawer } = useAgencyShell();
   const Icon = ICONS[s.id] ?? Server;
   const name = SHORT[s.id] ?? s.title;
 
   return (
-    <button
-      type="button"
+    <Link
+      href={`/services/${s.id}`}
       onPointerMove={pointerGlow}
-      onClick={() => openDrawer(`Inquiry regarding: ${s.title}`)}
-      aria-label={`Ask about ${name}`}
       className="card card-link card-glow group flex h-full flex-col p-6 text-left"
     >
       <div className="flex items-start justify-between">
@@ -129,7 +47,7 @@ function ServiceCard({ s, detailed }: { s: AgencyService; detailed: boolean }) {
           </span>
         ))}
       </div>
-    </button>
+    </Link>
   );
 }
 
