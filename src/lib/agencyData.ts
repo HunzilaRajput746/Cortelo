@@ -76,7 +76,7 @@ export const FOUNDER_DATA = {
   linkedinUrl: "https://linkedin.com/in/hunzila-nisar-ai",
   phone: "Available upon inquiry",
   email: "hunzilanisar746@gmail.com",
-  agencyEmail: "hello@cortelo.ai",
+  agencyEmail: "hello@cortelo.tech",
   location: "Lodhran, Punjab, Pakistan (Global Remote Delivery)",
   education: "BSc in Artificial Intelligence — The Islamia University of Bahawalpur (A+ Grade FYP)",
   distinctions: [
