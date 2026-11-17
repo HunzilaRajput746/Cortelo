@@ -15,3 +15,6 @@ dist
 .taste-skill
 shots
 tsconfig.tsbuildinfo
+
+# runtime data written by the server (leads, bookings)
+data/
