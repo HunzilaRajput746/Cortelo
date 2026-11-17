@@ -1,268 +1,193 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CheckCircle2, ShieldAlert } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
+import { AGENCY_SERVICES } from "@/lib/agencyData";
+import { SERVICE_ICONS, SERVICE_SHORT, groupOf } from "@/lib/serviceMeta";
+import BookButton from "@/components/BookButton";
 
-const serviceDetails: Record<
-  string,
-  {
-    title: string;
-    tagline: string;
-    description: string;
-    problems: string[];
-    deliverables: string[];
-    stack: string[];
-    timeline: string;
-    benchmark: string;
-  }
-> = {
-  "ai-automation": {
-    title: "AI Automation & Autonomous Agents",
-    tagline: "Multi-Agent Swarms with Deterministic Verification",
-    description:
-      "We replace brittle legacy scripts with hierarchical autonomous agent swarms. Designed with human-in-the-loop approvals, deterministic state machines, and safe API bridges to execute mission-critical enterprise workflows.",
-    problems: [
-      "Manual multi-step operations causing high operational headcount and slow throughput.",
-      "Brittle Zapier/Make automations that fail silently when third-party payloads change.",
-      "Lack of structured auditing and safety controls over autonomous tool executions.",
-    ],
-    deliverables: [
-      "Hierarchical multi-agent orchestration architecture.",
-      "Deterministic input/output guardrails with Zod validation.",
-      "Human-in-the-loop escalation UI and approval dashboard.",
-      "Complete test harness and 99.9% task completion SLA.",
-    ],
-    stack: ["LangChain", "LlamaIndex", "Temporal.io", "Python", "FastAPI", "Redis"],
-    timeline: "4 to 6 Weeks",
-    benchmark: "99.9% Task Execution Reliability",
-  },
-  "machine-learning": {
-    title: "Machine Learning & Deep Learning",
-    tagline: "Statistical Precision Trained on Proprietary Enterprise Data",
-    description:
-      "Custom classification, regression, time-series forecasting, and computer vision models trained specifically on your proprietary data. Optimized for high throughput and sub-50ms latency using NVIDIA TensorRT and Triton Inference Server.",
-    problems: [
-      "Off-the-shelf generalized models failing on domain-specific edge cases.",
-      "High inference latency and unoptimized compute bills on GPU clusters.",
-      "Lack of continuous evaluation against statistical data and concept drift.",
-    ],
-    deliverables: [
-      "Custom neural architecture and dataset preprocessing pipeline.",
-      "Quantized and pruned model checkpoints (FP16/INT8).",
-      "High-scale serving on Triton Inference Server / AWS ECS.",
-      "Automated evaluation benches with baseline regression alerts.",
-    ],
-    stack: ["PyTorch", "ONNX Runtime", "Triton", "NVIDIA TensorRT", "Weights & Biases"],
-    timeline: "6 to 8 Weeks",
-    benchmark: "> 98.5% Validation Accuracy",
-  },
-  "generative-ai": {
-    title: "Generative AI & LLM Systems",
-    tagline: "Production RAG with Zero-Hallucination Guarantees",
-    description:
-      "Enterprise Retrieval-Augmented Generation (RAG) architectures with hybrid lexical-vector search, semantic reranking, contextual chunking, and verifiable source citation back-linking. Built for compliance-heavy domains.",
-    problems: [
-      "Hallucinations and ungrounded outputs in regulatory or customer-facing touchpoints.",
-      "Slow retrieval latency across massive document archives (100k+ filings).",
-      "Skyrocketing token expenditures from unoptimized context stuffing.",
-    ],
-    deliverables: [
-      "Hybrid dense-sparse vector indexing pipeline (Qdrant / pgvector).",
-      "Contextual compression and cross-encoder reranking.",
-      "Prompt compilation, caching, and deterministic JSON-schema outputs.",
-      "Automated RAGAS regression test suite.",
-    ],
-    stack: ["Qdrant", "pgvector", "vLLM", "Hugging Face", "Next.js", "TypeScript"],
-    timeline: "4 to 6 Weeks",
-    benchmark: "0.00% Ungrounded Hallucinations",
-  },
-  "web-development": {
-    title: "Full-Stack Web Engineering",
-    tagline: "Next.js 15 App Router Platforms Built for Enterprise Scale",
-    description:
-      "Modern full-stack web platforms engineered with Next.js 15, strict TypeScript, server components, and Tailwind CSS. Built with zero-vibe-coding standards, sub-second LCP, and OWASP ASVS Level 2 security compliance.",
-    problems: [
-      "Sluggish single-page apps with poor SEO, high LCP, and layout shifts.",
-      "Spaghetti codebases with loose types, fragile dependencies, and regression bugs.",
-      "Security vulnerabilities (SSRF, CSRF, IDOR) on critical endpoints.",
-    ],
-    deliverables: [
-      "Production-ready Next.js 15 App Router platform with strict TypeScript.",
-      "Custom design system with zero template clichés.",
-      "Server actions with Zod validation and rate-limiting middleware.",
-      "CI/CD pipeline with automated linting, unit tests, and Playwright E2E.",
-    ],
-    stack: ["Next.js 15", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma/Drizzle", "Docker"],
-    timeline: "4 to 8 Weeks",
-    benchmark: "Lighthouse ≥ 98 / Mobile First",
-  },
-  "app-development": {
-    title: "Mobile App Development",
-    tagline: "Cross-Platform React Native Applications",
-    description:
-      "High-performance native mobile applications for iOS and Android powered by React Native and Expo. Seamless offline synchronization, biometric authentication, and smooth 60fps micro-interactions.",
-    problems: [
-      "Separate iOS and Android codebases doubling maintenance overhead.",
-      "Janky animations and slow startup times on cross-platform wrappers.",
-      "Complex offline state management and sync conflicts.",
-    ],
-    deliverables: [
-      "Universal React Native codebase targeting iOS and Android.",
-      "Biometric auth, push notification pipelines, and deep linking.",
-      "Offline-first SQLite/WatermelonDB storage layer.",
-      "Automated Fastlane deployment to TestFlight and Google Play.",
-    ],
-    stack: ["React Native", "Expo", "TypeScript", "Tailwind (NativeWind)", "WatermelonDB"],
-    timeline: "6 to 8 Weeks",
-    benchmark: "60fps Smooth Native Performance",
-  },
-  "data-mlops": {
-    title: "Data Pipelines & MLOps",
-    tagline: "Automated Retraining Loops, Drift Detection & Telemetry",
-    description:
-      "End-to-end data engineering and model operations. Automated model deployment CI/CD, data drift detection, continuous model retraining loops, and distributed streaming data pipelines running on isolated enterprise VPCs.",
-    problems: [
-      "Models degrading silently in production due to unseen concept drift.",
-      "Manual retraining processes requiring engineer intervention every cycle.",
-      "Lack of centralized lineage tracking for data, models, and latency metrics.",
-    ],
-    deliverables: [
-      "Automated continuous retraining pipeline triggered by drift monitors.",
-      "Model registry with semantic versioning and rollback capability.",
-      "Grafana/Prometheus dashboards tracking P99 latency and token usage.",
-      "Infrastructure as Code (Terraform) on AWS/GCP.",
-    ],
-    stack: ["Apache Kafka", "Flink", "MLflow", "Prometheus", "Grafana", "AWS SageMaker", "Docker"],
-    timeline: "4 to 6 Weeks",
-    benchmark: "Sub-50ms Bus Latency / Zero-Downtime Deploy",
-  },
-};
+const STEPS = [
+  { title: "Discovery call", body: "A 30-minute call with a founder to understand the problem, your data and the tools it must work with." },
+  { title: "Written scope", body: "Within two working days you get the plan, the stack, the timeline and a fixed price." },
+  { title: "Build in the open", body: "Weekly demos on a staging link, with the code in your repository from the first day." },
+  { title: "Launch and handover", body: "Deployed to infrastructure you control, with monitoring, documentation and every line of code." },
+];
 
 export function generateStaticParams() {
-  return Object.keys(serviceDetails).map((slug) => ({ slug }));
+  return AGENCY_SERVICES.map((s) => ({ slug: s.id }));
 }
 
-export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const service = serviceDetails[slug];
+  const s = AGENCY_SERVICES.find((x) => x.id === slug);
+  if (!s) return {};
+  return {
+    title: `${s.title} — Cortelo`,
+    description: `${s.tagline}. ${s.description.slice(0, 140)}`,
+  };
+}
 
-  if (!service) {
-    notFound();
-  }
+export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const s = AGENCY_SERVICES.find((x) => x.id === slug);
+  if (!s) notFound();
+
+  const Icon = SERVICE_ICONS[s.id];
+  const group = groupOf(s.id);
+  const related = AGENCY_SERVICES.filter((x) => group?.ids.includes(x.id) && x.id !== s.id).slice(0, 3);
+  const scope = `Inquiry regarding: ${s.title}`;
 
   return (
-    <main className="min-h-screen pt-36 pb-24 px-6 relative z-10 bg-[#000000]">
-      <div className="max-w-[1100px] mx-auto space-y-16">
-
-        {/* Navigation Back */}
-        <div>
-          <Link
-            href="/services"
-            className="inline-flex items-center gap-2 text-xs font-mono text-white/50 hover:text-white transition-colors uppercase"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>All Systems &amp; Services</span>
+    <div className="relative z-10">
+      {/* Hero */}
+      <section className="pt-36 pb-20">
+        <div className="wrap" data-enter>
+          <Link href="/services" className="link-draw mb-10 text-[14px] !text-[var(--text-muted)]">
+            <ArrowLeft className="h-4 w-4" /> All services
           </Link>
-        </div>
-
-        {/* Hero */}
-        <div className="space-y-4">
-          <span className="px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono uppercase tracking-wider text-white/90 font-semibold inline-flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF4533]" />
-            {service.tagline}
-          </span>
-          <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-[#FCFCFA]">
-            {service.title}
-          </h1>
-          <p className="text-base sm:text-lg text-white/60 max-w-3xl leading-relaxed font-light">
-            {service.description}
-          </p>
-        </div>
-
-        {/* Metric Badges */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 p-6 rounded-3xl border border-white/10 bg-[#0D0D0D] text-xs font-mono shadow-sm">
-          <div>
-            <span className="text-white/40 block">DELIVERY TIMELINE</span>
-            <span className="text-lg font-bold text-[#FCFCFA]">{service.timeline}</span>
-          </div>
-          <div>
-            <span className="text-white/40 block">TARGET BENCHMARK</span>
-            <span className="text-lg font-bold text-[#FF4533]">{service.benchmark}</span>
-          </div>
-          <div className="col-span-2 md:col-span-1">
-            <span className="text-white/40 block">IP ASSIGNMENT</span>
-            <span className="text-lg font-bold text-[#FCFCFA]">100% Client Ownership</span>
-          </div>
-        </div>
-
-        {/* Problems & Deliverables */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-
-          <div className="p-8 rounded-3xl border border-white/10 bg-[#0D0D0D] space-y-6 shadow-sm">
-            <h2 className="text-xl font-bold uppercase text-[#FCFCFA] flex items-center gap-2">
-              <ShieldAlert className="w-5 h-5 text-white/60" />
-              <span>Challenges Solved</span>
-            </h2>
-            <ul className="space-y-4">
-              {service.problems.map((prob, i) => (
-                <li key={i} className="text-xs text-white/60 leading-relaxed font-light flex items-start gap-2.5">
-                  <span className="text-[#FF4533] font-mono mt-0.5">&bull;</span>
-                  <span>{prob}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="p-8 rounded-3xl border border-white/10 bg-[#0D0D0D] space-y-6 shadow-sm">
-            <h2 className="text-xl font-bold uppercase text-[#FCFCFA] flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-[#FF4533]" />
-              <span>What We Deliver</span>
-            </h2>
-            <ul className="space-y-4">
-              {service.deliverables.map((deliv, i) => (
-                <li key={i} className="text-xs text-[#FCFCFA] leading-relaxed font-light flex items-start gap-2.5">
-                  <span className="text-[#FF4533] font-mono mt-0.5">✓</span>
-                  <span>{deliv}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-        </div>
-
-        {/* Tech Stack */}
-        <div className="p-8 rounded-3xl border border-white/10 bg-[#0D0D0D] space-y-4 shadow-sm">
-          <h3 className="text-xs font-mono text-white/50 uppercase tracking-wider">
-            Verified Production Technologies
-          </h3>
-          <div className="flex flex-wrap gap-2.5">
-            {service.stack.map((item, i) => (
-              <span
-                key={i}
-                className="px-3.5 py-1.5 rounded-full border border-white/10 bg-[#141414] text-xs font-mono text-white/80"
-              >
-                {item}
+          <div className="flex items-center gap-4">
+            {Icon && (
+              <span className="flex h-14 w-14 items-center justify-center rounded-[var(--radius-m)] border border-[var(--line)] bg-[var(--surface2)] text-[var(--accent)]">
+                <Icon className="h-6 w-6" />
               </span>
-            ))}
+            )}
+            <p className="eyebrow">{group?.title ?? "Service"}</p>
+          </div>
+          <h1 className="display mt-8 max-w-[960px] text-[42px] sm:text-[60px] lg:text-[76px]">{s.title}</h1>
+          <p className="lede mt-6 max-w-[640px] !text-[19px]">{s.tagline}.</p>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <BookButton scope={scope} label={`Book a call about ${(SERVICE_SHORT[s.id] ?? s.title).toLowerCase()}`} className="!min-h-[54px] !px-7" />
+            <a href="#scope" className="btn btn-ghost !min-h-[54px] !px-7">
+              What you get
+            </a>
           </div>
         </div>
+      </section>
 
-        {/* Action */}
-        <div className="pt-8 border-t border-white/10 text-center space-y-4">
-          <h3 className="text-2xl font-bold uppercase text-[#FCFCFA]">
-            Ready to Implement This Architecture?
-          </h3>
+      {/* Overview and facts */}
+      <section className="pb-20">
+        <div className="wrap grid gap-10 border-t border-[var(--line)] pt-14 lg:grid-cols-[1.3fr_1fr]">
           <div>
-            <Link
-              href="/contact"
-              className="btn-conversion-primary inline-block px-10 py-4 rounded-full bg-[#FF4533] hover:bg-[#FF220E] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_24px_rgba(255,69,51,0.35)]"
-            >
-              Consult with Hunzila &amp; Mahreen
-            </Link>
+            <h2 className="text-[28px] font-medium tracking-[-0.03em]">What it does for you</h2>
+            <p className="mt-5 max-w-[640px] text-[17px] leading-relaxed text-[var(--text-muted)]">{s.description}</p>
+          </div>
+          <dl className="card divide-y divide-[var(--line)] self-start">
+            {s.specs.map((sp) => (
+              <div key={sp.label} className="flex items-baseline justify-between gap-6 px-6 py-5">
+                <dt className="text-[14px] text-[var(--text-faint)]">{sp.label}</dt>
+                <dd className="text-right text-[15px] text-[var(--text)]">{sp.value}</dd>
+              </div>
+            ))}
+            <div className="px-6 py-5">
+              <dt className="text-[14px] text-[var(--text-faint)]">Our commitment</dt>
+              <dd className="mt-1 text-[15px] text-[var(--accent)]">{s.sla}</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      {/* Deliverables and stack */}
+      <section id="scope" className="scroll-mt-24 pb-24">
+        <div className="wrap grid gap-6 lg:grid-cols-2">
+          <div className="card p-8 md:p-10">
+            <h2 className="text-[24px] font-medium tracking-[-0.025em]">What you get</h2>
+            <ul className="mt-6 space-y-4">
+              {s.deliverables.map((d) => (
+                <li key={d} className="flex gap-4 text-[16px] text-[var(--text-muted)]">
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
+                    <Check className="h-3.5 w-3.5" />
+                  </span>
+                  {d}
+                </li>
+              ))}
+              <li className="flex gap-4 text-[16px] text-[var(--text-muted)]">
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
+                  <Check className="h-3.5 w-3.5" />
+                </span>
+                Full source code, documentation and handover
+              </li>
+            </ul>
+          </div>
+          <div className="card p-8 md:p-10">
+            <h2 className="text-[24px] font-medium tracking-[-0.025em]">Built with</h2>
+            <ul className="mt-6 flex flex-wrap gap-2">
+              {s.techStack.map((t) => (
+                <li
+                  key={t}
+                  className="rounded-full border border-[var(--line-strong)] px-4 py-2 font-mono text-[13px] text-[var(--text-muted)] transition-[border-color,color] duration-300 hover:border-[var(--accent)] hover:text-[var(--text)]"
+                >
+                  {t}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-8 text-[15px] leading-relaxed text-[var(--text-faint)]">
+              The stack follows your project: we pick what fits your data, your team and your hosting, and explain why.
+            </p>
           </div>
         </div>
+      </section>
 
-      </div>
-    </main>
+      {/* How it runs */}
+      <section className="pb-24">
+        <div className="wrap">
+          <h2 className="h2 mb-12">
+            How a project runs. <span className="soft">Four steps, no surprises.</span>
+          </h2>
+          <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {STEPS.map((st, i) => (
+              <li key={st.title} className="card p-7">
+                <span className="font-mono text-[13px] text-[var(--accent)]">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-6 text-[19px] font-medium">{st.title}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-[var(--text-muted)]">{st.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Related */}
+      {related.length > 0 && (
+        <section className="pb-24">
+          <div className="wrap">
+            <div className="mb-8 flex items-end justify-between gap-6 border-t border-[var(--line)] pt-12">
+              <h2 className="text-[26px] font-medium tracking-[-0.03em]">Often paired with</h2>
+              <Link href="/services" className="link-draw shrink-0 text-[15px]">
+                All services <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {related.map((r) => {
+                const RIcon = SERVICE_ICONS[r.id];
+                return (
+                  <Link key={r.id} href={`/services/${r.id}`} className="card card-link group p-7">
+                    {RIcon && <RIcon className="h-5 w-5 text-[var(--accent)]" />}
+                    <h3 className="mt-6 text-[19px] font-medium transition-colors group-hover:text-[var(--accent)]">
+                      {SERVICE_SHORT[r.id] ?? r.title}
+                    </h3>
+                    <p className="mt-2 text-[14px] leading-relaxed text-[var(--text-muted)]">{r.tagline}</p>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* CTA */}
+      <section className="pb-28">
+        <div className="wrap">
+          <div className="flex flex-col gap-6 rounded-[var(--radius-l)] border border-[var(--line)] bg-[linear-gradient(135deg,rgba(95,212,192,0.08),transparent_60%)] p-8 md:flex-row md:items-center md:justify-between md:p-12">
+            <div>
+              <h2 className="text-[30px] font-medium tracking-[-0.03em]">Ready to scope it?</h2>
+              <p className="mt-2 max-w-[520px] text-[15px] text-[var(--text-muted)]">
+                Pick a time that suits you. You will leave the call with a plan and a price.
+              </p>
+            </div>
+            <BookButton scope={scope} label="Book a 30-minute call" className="shrink-0 !min-h-[54px] !px-7" />
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
