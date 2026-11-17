@@ -1,126 +1,142 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { User } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { FOUNDER_DATA } from "@/lib/agencyData";
+import BrandLogo from "./BrandLogo";
 
 interface NavbarProps {
   onOpenDrawer: () => void;
   onOpenFounderModal: () => void;
 }
 
-export default function Navbar({ onOpenDrawer, onOpenFounderModal }: NavbarProps) {
-  const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+const NAV_ITEMS = [
+  { label: "Services", href: "/#services" },
+  { label: "Work", href: "/#results" },
+  { label: "Process", href: "/#process" },
+  { label: "Team", href: "/team" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
 
-  const navItems = [
-    { label: "About", href: "/about" },
-    { label: "Services", href: "/#services" },
-    { label: "Results", href: "/#results" },
-    { label: "Process", href: "/#process" },
-    { label: "Team", href: "/team" },
-    { label: "FAQs", href: "/#faq" },
-  ];
+export default function Navbar({ onOpenDrawer }: NavbarProps) {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 max-w-[1440px] mx-auto px-6 sm:px-10 pointer-events-none">
-      <div className="flex items-center justify-between pointer-events-auto">
-
-        {/* Left: Brand Mark */}
-        <div className="flex items-center gap-3">
-          <Link
-            href="/"
-            className="flex items-center gap-2 py-6 text-[#f5f7fb] font-black text-sm tracking-[0.2em] uppercase hover:text-[#d7a47a] transition-colors group"
-          >
-            <span>CORTELO</span>
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div
+        className={`transition-[background-color,border-color,backdrop-filter] duration-500 border-b ${
+          scrolled || open
+            ? "bg-[rgba(7,9,10,0.78)] backdrop-blur-xl border-[var(--line)]"
+            : "bg-transparent border-transparent"
+        }`}
+      >
+        <div className="wrap flex h-[72px] items-center justify-between gap-6">
+          <Link href="/" aria-label="Cortelo home" className="flex items-center">
+            <BrandLogo className="h-7 w-7" />
           </Link>
 
-          {/* Operational Status (Desktop) */}
-          <span className="hidden xl:block text-[10px] uppercase tracking-[0.18em] text-white/35">Independent AI studio</span>
-        </div>
+          <nav aria-label="Main" className="hidden lg:flex items-center gap-8 text-[14px]">
+            {NAV_ITEMS.map((item) => {
+              const active = item.href === pathname;
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`link-draw py-2 ${active ? "!text-[var(--accent)]" : "!text-[var(--text-muted)] hover:!text-[var(--text)]"}`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
 
-        {/* Center: Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-7 text-xs font-medium tracking-wide">
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="text-white/60 hover:text-white transition-colors whitespace-nowrap"
+          <div className="flex items-center gap-3">
+            <button onClick={onOpenDrawer} className="btn btn-primary hidden sm:inline-flex !min-h-[44px] !px-5">
+              Book a call
+            </button>
+            <button
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? "Close menu" : "Open menu"}
+              className="lg:hidden relative h-11 w-11 rounded-[var(--radius-s)] border border-[var(--line-strong)] flex items-center justify-center"
             >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Right: Founder Portfolio Pill & Book a call CTA */}
-        <div className="flex items-center gap-2.5 sm:gap-3">
-
-          {/* Founder Portfolio Button */}
-          <button
-            onClick={onOpenFounderModal}
-            className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 text-white/70 hover:text-[#d7a47a] text-xs font-mono transition-colors group cursor-pointer"
-            title="Inspect Founder Hunzila Nisar's Verified Portfolio & Credentials"
-          >
-            <User className="w-3.5 h-3.5 text-[#8bf0d4] group-hover:scale-110 transition-transform" />
-            <span className="hidden sm:inline">Founder Portfolio</span>
-            <span className="sm:hidden">Founder</span>
-          </button>
-
-          {/* Book a call Pill */}
-          <button
-            onClick={onOpenDrawer}
-            className="btn-conversion-primary px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider active:scale-95 transition-all cursor-pointer"
-          >
-            Book a call
-          </button>
-
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-[#FCFCFA] text-sm font-mono px-3 py-1.5 border border-white/10 rounded-full bg-[#0D0D0D]/80 cursor-pointer"
-            aria-label="Toggle Navigation"
-          >
-            {mobileMenuOpen ? "✕" : "☰"}
-          </button>
+              <span
+                className={`absolute h-px w-5 bg-[var(--text)] transition-transform duration-300 ${open ? "rotate-45" : "-translate-y-[4px]"}`}
+              />
+              <span
+                className={`absolute h-px w-5 bg-[var(--text)] transition-transform duration-300 ${open ? "-rotate-45" : "translate-y-[4px]"}`}
+              />
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden mt-3 rounded-2xl p-6 pointer-events-auto flex flex-col gap-3 text-xs font-mono text-white/60 border border-white/10 bg-[#0D0D0D]/95 backdrop-blur-2xl shadow-2xl animate-in slide-in-from-top-2">
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-white py-2 border-b border-white/10 flex items-center justify-between"
-            >
-              <span>{item.label}</span>
-              <span className="text-[#FF4533]">&rarr;</span>
-            </Link>
-          ))}
-          <div className="pt-2 flex flex-col gap-2">
+      {/* Full-screen menu on phones and tablets */}
+      <div
+        id="mobile-menu"
+        className={`lg:hidden fixed inset-x-0 top-[72px] bottom-0 bg-[var(--bg)] transition-[opacity,visibility] duration-300 ${
+          open ? "opacity-100 visible" : "opacity-0 invisible"
+        }`}
+      >
+        <nav aria-label="Mobile" className="wrap flex h-full flex-col justify-between py-10">
+          <ul className="space-y-1">
+            {NAV_ITEMS.map((item, i) => (
+              <li
+                key={item.label}
+                className={`transition-all duration-500 ${open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
+                style={{ transitionDelay: open ? `${60 + i * 45}ms` : "0ms" }}
+              >
+                <Link
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-between border-b border-[var(--line)] py-4 text-[32px] font-medium tracking-[-0.03em] text-[var(--text)] hover:text-[var(--accent)]"
+                >
+                  {item.label}
+                  <ArrowUpRight className="h-5 w-5 text-[var(--text-faint)]" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="space-y-4">
             <button
               onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenFounderModal();
+                setOpen(false);
+                onOpenDrawer();
               }}
-              className="w-full py-2.5 rounded-xl border border-white/10 bg-white/5 text-white font-medium flex items-center justify-center gap-2 cursor-pointer"
+              className="btn btn-primary w-full"
             >
-              <User className="w-4 h-4 text-[#FF4533]" />
-              <span>Founder Portfolio (devhunzila.site)</span>
+              Book a call
             </button>
-            <a
-              href={`mailto:${FOUNDER_DATA.email}`}
-              className="w-full py-2.5 text-[#d7a47a] font-bold flex items-center justify-center gap-2"
-            >
-              <span>Email the studio</span>
+            <a href={`mailto:${FOUNDER_DATA.agencyEmail}`} className="block text-center text-sm text-[var(--text-muted)]">
+              {FOUNDER_DATA.agencyEmail}
             </a>
           </div>
-        </div>
-      )}
+        </nav>
+      </div>
     </header>
   );
 }
