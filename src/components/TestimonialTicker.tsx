@@ -7,7 +7,7 @@ import { TESTIMONIALS_DATA } from "@/lib/agencyData";
 export default function TestimonialTicker() {
   return (
     <section className="py-24 px-6 sm:px-10 max-w-[1440px] mx-auto border-t border-white/10">
-      
+
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
         <span className="px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono text-white/70 uppercase tracking-wider font-medium">

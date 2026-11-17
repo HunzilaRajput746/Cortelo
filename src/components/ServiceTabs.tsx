@@ -60,11 +60,10 @@ export default function ServiceTabs() {
             <button
               key={d.id}
               onClick={() => setActiveTab(index)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                isActive
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${isActive
                   ? "bg-[#FF4533] text-white shadow-[0_0_20px_rgba(255,69,51,0.35)]"
                   : "text-white/60 hover:text-white hover:bg-white/5"
-              }`}
+                }`}
             >
               <TabIcon className="w-3.5 h-3.5" />
               <span>{d.num}</span>

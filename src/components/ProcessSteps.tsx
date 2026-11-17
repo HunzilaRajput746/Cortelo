@@ -33,7 +33,7 @@ export default function ProcessSteps() {
 
   return (
     <section id="process" className="py-24 px-6 sm:px-10 max-w-[1440px] mx-auto border-t border-white/10">
-      
+
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
         <span className="px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono text-white/90 font-semibold uppercase tracking-wider inline-flex items-center gap-2">

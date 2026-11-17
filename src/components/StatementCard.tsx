@@ -10,7 +10,7 @@ export default function StatementCard() {
   return (
     <section className="py-16 px-6 sm:px-10 max-w-[1440px] mx-auto">
       <div className="rounded-3xl p-10 sm:p-16 border border-white/10 bg-[#0D0D0D] relative overflow-hidden text-center shadow-2xl">
-        
+
         {/* Top Conic Gradient Glow (Conversion Style) */}
         <div className="absolute -top-[160px] left-1/2 -translate-x-1/2 w-[450px] h-[450px] pointer-events-none opacity-40">
           <div className="w-full h-full conic-flame-orb animate-conic-slow" />

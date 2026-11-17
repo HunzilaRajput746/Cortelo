@@ -153,7 +153,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   return (
     <main className="min-h-screen pt-36 pb-24 px-6 relative z-10 bg-[#000000]">
       <div className="max-w-[1100px] mx-auto space-y-16">
-        
+
         {/* Navigation Back */}
         <div>
           <Link
@@ -197,7 +197,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
         {/* Problems & Deliverables */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          
+
           <div className="p-8 rounded-3xl border border-white/10 bg-[#0D0D0D] space-y-6 shadow-sm">
             <h2 className="text-xl font-bold uppercase text-[#FCFCFA] flex items-center gap-2">
               <ShieldAlert className="w-5 h-5 text-white/60" />
