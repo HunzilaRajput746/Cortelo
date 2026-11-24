@@ -75,8 +75,9 @@ export const FOUNDER_DATA = {
   githubUrl: "https://github.com/HunzilaRajput746",
   linkedinUrl: "https://linkedin.com/in/hunzila-nisar-ai",
   phone: "Available upon inquiry",
-  email: "hunzilanisar746@gmail.com",
-  agencyEmail: "hello@cortelo.tech",
+  email: "hunzila@cortelo.tech",
+  agencyEmail: "contact@cortelo.tech",
+  infoEmail: "info@cortelo.tech",
   location: "Lodhran, Punjab, Pakistan (Global Remote Delivery)",
   education: "BSc in Artificial Intelligence — The Islamia University of Bahawalpur (A+ Grade FYP)",
   distinctions: [
@@ -904,7 +905,7 @@ export const AGENCY_FAQS = [
   },
   {
     q: "Can we review Hunzila Nisar's personal engineering credentials and live portfolio?",
-    a: "Yes! Hunzila Nisar's complete portfolio, verified projects, NAVTTC distinction in AI/ML, and industry experience are live at https://devhunzila.site. You can explore his work, inspect production systems, or connect directly via email (hunzilanisar746@gmail.com) or LinkedIn.",
+    a: "Yes! Hunzila Nisar's complete portfolio, verified projects, NAVTTC distinction in AI/ML, and industry experience are live at https://devhunzila.site. You can explore his work, inspect production systems, or connect directly via email (hunzila@cortelo.tech) or LinkedIn.",
   },
   {
     q: "How do your multi-agent AI systems avoid hallucinations and errors?",

@@ -6,8 +6,9 @@ export const AGENCY_CONFIG = {
   contact: {
     phone: "Available upon inquiry",
     whatsapp: "/contact",
-    email: "hunzilanisar746@gmail.com",
-    agencyEmail: "hello@cortelo.tech",
+    email: "hunzila@cortelo.tech",
+    agencyEmail: "contact@cortelo.tech",
+    infoEmail: "info@cortelo.tech",
     fiverr: "https://fiverr.com/huzaifae3742",
     portfolio: "https://devhunzila.site",
     github: "https://github.com/HunzilaRajput746",

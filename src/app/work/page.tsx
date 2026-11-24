@@ -17,7 +17,7 @@ export default function WorkPage() {
       <section className="pt-40 pb-16">
         <div className="wrap" data-enter>
           <p className="eyebrow mb-6">Work</p>
-          <h1 className="display max-w-[960px] text-[44px] sm:text-[64px] lg:text-[80px]">
+          <h1 className="display max-w-[960px] text-[36px] sm:text-[52px] lg:text-[68px]">
             Systems we built, <span className="serif-accent text-[var(--accent)]">running</span> in production.
           </h1>
           <p className="lede mt-7 max-w-[600px]">

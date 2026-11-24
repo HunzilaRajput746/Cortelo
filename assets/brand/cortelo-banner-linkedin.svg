@@ -25,11 +25,11 @@
 
   <!-- Typography -->
   <text x="320" y="210" fill="#F2F0EA" font-family="Plus Jakarta Sans, -apple-system, sans-serif" font-size="78" font-weight="800" letter-spacing="-0.04em">CORTELO</text>
-  <text x="325" y="258" fill="#A3AABB" font-family="Geist Mono, monospace" font-size="20" letter-spacing="0.25em" font-weight="600">SYSTEMS OF INTELLIGENCE &bull; APPLIED AI STUDIO</text>
+  <text x="325" y="258" fill="#A3AABB" font-family="Geist Mono, monospace" font-size="20" letter-spacing="0.25em" font-weight="600">SYSTEMS OF INTELLIGENCE &#8226; APPLIED AI STUDIO</text>
 
   <!-- Right Side Metadata -->
-  <text x="1150" y="190" fill="#F2F0EA" font-family="Geist Mono, monospace" font-size="16" font-weight="600">FOUNDER &bull; HUNZILA NISAR</text>
-  <text x="1150" y="225" fill="#A3AABB" font-family="Geist Mono, monospace" font-size="14">CO-FOUNDER &bull; MAHREEN HASHIR</text>
+  <text x="1150" y="190" fill="#F2F0EA" font-family="Geist Mono, monospace" font-size="16" font-weight="600">FOUNDER &#8226; HUNZILA NISAR</text>
+  <text x="1150" y="225" fill="#A3AABB" font-family="Geist Mono, monospace" font-size="14">CO-FOUNDER &#8226; MAHREEN HASHIR</text>
   <text x="1150" y="260" fill="#2DD4A7" font-family="Geist Mono, monospace" font-size="14">ENTERPRISE AI ARCHITECTURE</text>
 </svg>
 

@@ -19,7 +19,7 @@ export default function FinalCTA() {
 
           <div className="mx-auto max-w-[860px] text-center">
             <p className="eyebrow mb-7 justify-center">Next step</p>
-            <h2 id="cta-h" className="display text-[40px] sm:text-[60px] lg:text-[76px]">
+            <h2 id="cta-h" className="display text-[32px] sm:text-[48px] lg:text-[64px]">
               Tell us what you want <span className="serif-accent text-[var(--accent)]">running</span> by next quarter.
             </h2>
             <p className="lede mx-auto mt-7 max-w-[540px]">

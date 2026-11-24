@@ -16,7 +16,7 @@ export default function ServicesPage() {
       <section className="pt-40 pb-16">
         <div className="wrap" data-enter>
           <p className="eyebrow mb-6">Services</p>
-          <h1 className="display max-w-[920px] text-[44px] sm:text-[64px] lg:text-[80px]">
+          <h1 className="display max-w-[920px] text-[36px] sm:text-[52px] lg:text-[68px]">
             {AGENCY_SERVICES.length} services, <span className="serif-accent text-[var(--accent)]">one studio</span> that ships them.
           </h1>
           <p className="lede mt-7 max-w-[580px]">

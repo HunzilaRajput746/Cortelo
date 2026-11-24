@@ -54,7 +54,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             )}
             <p className="eyebrow">{group?.title ?? "Service"}</p>
           </div>
-          <h1 className="display mt-8 max-w-[960px] text-[42px] sm:text-[60px] lg:text-[76px]">{s.title}</h1>
+          <h1 className="display mt-8 max-w-[960px] text-[34px] sm:text-[48px] lg:text-[62px]">{s.title}</h1>
           <p className="lede mt-6 max-w-[640px] !text-[19px]">{s.tagline}.</p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <BookButton scope={scope} label="Book a call about this" className="!min-h-[54px] !px-7" />

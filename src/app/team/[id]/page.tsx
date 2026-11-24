@@ -71,7 +71,7 @@ export default async function MemberPage({ params }: { params: Promise<{ id: str
 
             <div data-enter>
               <p className="eyebrow">{isFounder ? m.title : "Cortelo team"}</p>
-              <h1 className="display mt-6 text-[44px] sm:text-[60px] lg:text-[72px]">{m.name}</h1>
+              <h1 className="display mt-6 text-[34px] sm:text-[48px] lg:text-[60px]">{m.name}</h1>
               <p className="mt-3 text-[19px] text-[var(--accent)]">{m.role}</p>
               <p className="mt-8 max-w-[600px] text-[17px] leading-relaxed text-[var(--text-muted)]">{story?.intro ?? m.bio}</p>
               {story && <p className="mt-4 max-w-[600px] text-[17px] leading-relaxed text-[var(--text-muted)]">{m.bio}</p>}

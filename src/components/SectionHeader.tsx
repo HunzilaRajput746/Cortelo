@@ -21,7 +21,7 @@ export default function SectionHeader({
         <span className="w-1.5 h-1.5 rounded-full bg-[#FF4533]" />
         {badge}
       </span>
-      <h2 className="text-3xl sm:text-5xl font-black uppercase text-[#FCFCFA] tracking-tight">
+      <h2 className="text-2xl sm:text-4xl font-bold uppercase text-[#FCFCFA] tracking-tight">
         {title}{" "}
         {highlight && (
           <span className="font-serif italic font-normal text-white lowercase">

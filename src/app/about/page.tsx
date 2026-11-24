@@ -48,7 +48,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,9,10,0.5)_0%,var(--bg)_100%)]" />
         <div className="wrap" data-enter>
           <p className="eyebrow mb-6">About</p>
-          <h1 className="display max-w-[980px] text-[44px] sm:text-[64px] lg:text-[80px]">
+          <h1 className="display max-w-[980px] text-[36px] sm:text-[52px] lg:text-[68px]">
             A studio that builds AI <span className="serif-accent text-[var(--accent)]">you own.</span>
           </h1>
           <p className="lede mt-7 max-w-[620px]">

@@ -35,7 +35,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ id: 
             <ArrowLeft className="h-4 w-4" /> All work
           </Link>
           <p className="eyebrow">{p.category}</p>
-          <h1 className="display mt-6 max-w-[1000px] text-[40px] sm:text-[58px] lg:text-[72px]">{p.title}</h1>
+          <h1 className="display mt-6 max-w-[1000px] text-[34px] sm:text-[48px] lg:text-[60px]">{p.title}</h1>
           <p className="lede mt-6 max-w-[680px] !text-[19px]">{p.subtitle}</p>
         </div>
       </section>

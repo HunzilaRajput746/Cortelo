@@ -30,7 +30,7 @@ export default function HeroConversion() {
           <p className="eyebrow mb-7">
             <span className="text-[var(--text-muted)]">AI systems and software studio</span>
           </p>
-          <h1 className="display text-[44px] sm:text-[64px] lg:text-[88px]">
+          <h1 className="display text-[38px] sm:text-[54px] lg:text-[76px]">
             AI agents, CRMs and automation{" "}
             <span className="serif-accent text-[var(--accent)]">built for</span> the teams that run on them.
           </h1>
@@ -56,7 +56,7 @@ export default function HeroConversion() {
             {FACTS.map((f) => (
               <div key={f.label}>
                 <dt className="sr-only">{f.label}</dt>
-                <dd className="text-[26px] sm:text-[34px] font-medium tracking-[-0.04em] text-[var(--text)]">{f.value}</dd>
+                <dd className="text-[22px] sm:text-[28px] font-medium tracking-[-0.04em] text-[var(--text)]">{f.value}</dd>
                 <dd className="mt-1 text-[12px] sm:text-[13px] leading-snug text-[var(--text-faint)]">{f.label}</dd>
               </div>
             ))}

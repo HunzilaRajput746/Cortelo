@@ -27,7 +27,7 @@ export default function WorkCarousel() {
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF4533]" />
             Production Deployments &bull; 02
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight uppercase text-[#FCFCFA] mt-4">
+          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight uppercase text-[#FCFCFA] mt-4">
             Verified Production{" "}
             <span className="font-serif italic font-normal text-white lowercase">Outcomes</span>.
           </h2>

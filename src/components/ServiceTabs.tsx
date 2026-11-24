@@ -41,7 +41,7 @@ export default function ServiceTabs() {
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF4533]" />
             Engineering Disciplines &bull; 01
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[#FCFCFA] mt-4 uppercase">
+          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-[#FCFCFA] mt-4 uppercase">
             Architectures Built to{" "}
             <span className="font-serif italic font-normal text-white lowercase">Deploy</span>.
           </h2>

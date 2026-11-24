@@ -61,7 +61,7 @@ export default function ProcessPage() {
       <section className="pt-40 pb-10">
         <div className="wrap" data-enter>
           <p className="eyebrow mb-6">Process</p>
-          <h1 className="display max-w-[960px] text-[44px] sm:text-[64px] lg:text-[80px]">
+          <h1 className="display max-w-[960px] text-[36px] sm:text-[52px] lg:text-[68px]">
             Six weeks from first call to <span className="serif-accent text-[var(--accent)]">production.</span>
           </h1>
           <p className="lede mt-7 max-w-[580px]">Four stages, a written scope, weekly demos and a full handover at the end.</p>

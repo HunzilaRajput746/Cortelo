@@ -38,7 +38,7 @@ export default function PrivacyPage() {
         <section className="space-y-3">
           <h2 className="text-lg font-bold uppercase text-cortelo-text">4. Inquiries & Data Rights</h2>
           <p className="text-sm leading-relaxed">
-            To request data deletion or inspect personal records, email our privacy team directly at <a href="mailto:hello@cortelo.tech" className="text-cortelo-mint underline">hello@cortelo.tech</a>.
+            To request data deletion or inspect personal records, email our privacy team directly at <a href="mailto:contact@cortelo.tech" className="text-cortelo-mint underline">contact@cortelo.tech</a>.
           </p>
         </section>
       </div>

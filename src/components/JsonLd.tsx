@@ -8,11 +8,13 @@ export default function JsonLd() {
     "name": "Cortelo Systems",
     "description": "Autonomous AI systems, enterprise CRMs, self-hosted VPS infrastructure, and high-conversion web engineering studio.",
     "url": "https://cortelo.tech",
+    "email": "contact@cortelo.tech",
     "telephone": FOUNDER_DATA.phone,
     "founder": {
       "@type": "Person",
       "name": FOUNDER_DATA.name,
       "jobTitle": FOUNDER_DATA.title,
+      "email": FOUNDER_DATA.email,
       "sameAs": [
         FOUNDER_DATA.portfolioUrl,
         FOUNDER_DATA.linkedinUrl,

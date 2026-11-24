@@ -14,7 +14,7 @@ export default function ContactPage() {
       <section className="pt-40 pb-16">
         <div className="wrap" data-enter>
           <p className="eyebrow mb-6">Contact</p>
-          <h1 className="display max-w-[900px] text-[44px] sm:text-[64px] lg:text-[80px]">
+          <h1 className="display max-w-[900px] text-[36px] sm:text-[52px] lg:text-[68px]">
             Tell us what you <span className="serif-accent text-[var(--accent)]">want built.</span>
           </h1>
           <p className="lede mt-7 max-w-[560px]">A founder reads every message and replies within one working day.</p>
@@ -48,8 +48,19 @@ export default function ContactPage() {
                 <Mail className="h-5 w-5" />
               </span>
               <span className="flex-1">
-                <span className="block text-[19px] font-medium">Email the studio</span>
+                <span className="block text-[19px] font-medium">Client Inquiries & Briefs</span>
                 <span className="mt-1 block text-[15px] text-[var(--text-muted)]">{FOUNDER_DATA.agencyEmail}</span>
+              </span>
+              <ArrowUpRight className="mt-1 h-5 w-5 text-[var(--text-faint)] transition-colors group-hover:text-[var(--accent)]" />
+            </a>
+
+            <a href={`mailto:${FOUNDER_DATA.infoEmail}`} className="card card-link group flex items-start gap-5 p-7">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[var(--radius-m)] border border-[var(--line)] bg-[var(--surface2)] text-[var(--accent)]">
+                <Mail className="h-5 w-5" />
+              </span>
+              <span className="flex-1">
+                <span className="block text-[19px] font-medium">General & Business Info</span>
+                <span className="mt-1 block text-[15px] text-[var(--text-muted)]">{FOUNDER_DATA.infoEmail}</span>
               </span>
               <ArrowUpRight className="mt-1 h-5 w-5 text-[var(--text-faint)] transition-colors group-hover:text-[var(--accent)]" />
             </a>

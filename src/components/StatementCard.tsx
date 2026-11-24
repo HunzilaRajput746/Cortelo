@@ -44,7 +44,7 @@ export default function StatementCard() {
         <h2 id="statement-h" className="eyebrow mb-10">
           How the studio works
         </h2>
-        <p ref={ref} className="max-w-[1100px] text-[32px] sm:text-[46px] lg:text-[62px] font-medium leading-[1.08] tracking-[-0.035em]">
+        <p ref={ref} className="max-w-[1100px] text-[26px] sm:text-[38px] lg:text-[50px] font-medium leading-[1.1] tracking-[-0.035em]">
           {WORDS.map((w, i) => (
             <span
               key={i}

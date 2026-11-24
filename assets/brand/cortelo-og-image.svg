@@ -19,9 +19,9 @@
 
   <text x="120" y="370" fill="#F2F0EA" font-family="Plus Jakarta Sans, -apple-system, sans-serif" font-size="72" font-weight="800" letter-spacing="-0.04em">CORTELO</text>
   <text x="120" y="430" fill="#2DD4A7" font-family="Plus Jakarta Sans, sans-serif" font-size="34" font-weight="600">Systems of Intelligence.</text>
-  <text x="120" y="480" fill="#A3AABB" font-family="Geist Mono, monospace" font-size="18" max-width="800">Bespoke AI Agents &bull; Neural Architectures &bull; Resilient Software</text>
+  <text x="120" y="480" fill="#A3AABB" font-family="Geist Mono, monospace" font-size="18" max-width="800">Bespoke AI Agents &#8226; Neural Architectures &#8226; Resilient Software</text>
 
   <!-- Founders info -->
-  <text x="120" y="580" fill="#F2F0EA" font-family="Geist Mono, monospace" font-size="15">Hunzila Nisar (Founder) &bull; Mahreen Hashir (Co-Founder)</text>
+  <text x="120" y="580" fill="#F2F0EA" font-family="Geist Mono, monospace" font-size="15">Hunzila Nisar (Founder) &#8226; Mahreen Hashir (Co-Founder)</text>
 </svg>
 
