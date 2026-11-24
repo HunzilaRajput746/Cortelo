@@ -9,16 +9,16 @@ export default function ResultsSection() {
   const shown = rest.slice(0, 4);
 
   return (
-    <section id="results" aria-labelledby="results-h" className="py-24 md:py-32">
+    <section id="results" aria-labelledby="results-h" className="py-16 md:py-22">
       <div className="wrap">
-        <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="eyebrow mb-6">Selected work</p>
+            <p className="eyebrow mb-5">Selected work</p>
             <h2 id="results-h" className="h2 max-w-[760px]">
               Systems in production. <span className="soft">Numbers from the running builds.</span>
             </h2>
           </div>
-          <Link href="/work" className="link-draw shrink-0 text-[15px]">
+          <Link href="/work" className="link-draw shrink-0 text-[13px]">
             All case studies <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>

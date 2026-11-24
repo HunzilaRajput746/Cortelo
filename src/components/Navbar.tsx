@@ -53,19 +53,19 @@ export default function Navbar({ onOpenDrawer }: NavbarProps) {
             : "bg-transparent border-transparent"
         }`}
       >
-        <div className="wrap flex h-[72px] items-center justify-between gap-6">
+        <div className="wrap flex h-[62px] items-center justify-between gap-6">
           <Link href="/" aria-label="Cortelo home" className="flex items-center">
-            <BrandLogo className="h-7 w-7" />
+            <BrandLogo className="h-6 w-6" />
           </Link>
 
-          <nav aria-label="Main" className="hidden lg:flex items-center gap-8 text-[14px]">
+          <nav aria-label="Main" className="hidden lg:flex items-center gap-7 text-[13px]">
             {NAV_ITEMS.map((item) => {
               const active = item.href !== "/" && (pathname === item.href || pathname.startsWith(item.href + "/"));
               return (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className={`link-draw py-2 ${active ? "!text-[var(--accent)]" : "!text-[var(--text-muted)] hover:!text-[var(--text)]"}`}
+                  className={`link-draw py-1.5 ${active ? "!text-[var(--accent)]" : "!text-[var(--text-muted)] hover:!text-[var(--text)]"}`}
                 >
                   {item.label}
                 </Link>
@@ -74,7 +74,7 @@ export default function Navbar({ onOpenDrawer }: NavbarProps) {
           </nav>
 
           <div className="flex items-center gap-3">
-            <button onClick={onOpenDrawer} className="btn btn-primary hidden sm:inline-flex !min-h-[44px] !px-5">
+            <button onClick={onOpenDrawer} className="btn btn-primary hidden sm:inline-flex !min-h-[38px] !px-4 text-[13px]">
               Book a call
             </button>
             <button

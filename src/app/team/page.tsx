@@ -16,16 +16,16 @@ export default function TeamPage() {
   return (
     <div className="relative z-10">
       {/* Hero */}
-      <section className="relative isolate overflow-hidden pt-40 pb-20">
+      <section className="relative isolate overflow-hidden pt-28 pb-12">
         {/* client slot: /assets/videos/cortelo/founders.mp4 */}
         <VideoGround slot="founders" className="absolute inset-0 -z-20" opacity={0.3} lazy={false} />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,9,10,0.5)_0%,var(--bg)_100%)]" />
         <div className="wrap" data-enter>
-          <p className="eyebrow mb-6">The team</p>
-          <h1 className="display max-w-[900px] text-[36px] sm:text-[52px] lg:text-[68px]">
+          <p className="eyebrow mb-5">The team</p>
+          <h1 className="display max-w-[900px] text-[28px] sm:text-[38px] lg:text-[48px]">
             The people who build <span className="serif-accent text-[var(--accent)]">Cortelo</span> systems.
           </h1>
-          <p className="lede mt-7 max-w-[560px]">
+          <p className="lede mt-4 max-w-[560px]">
             Two founders lead every engagement. {team.length} engineers, designers and strategists build it with them.
           </p>
         </div>

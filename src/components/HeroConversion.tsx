@@ -30,19 +30,19 @@ export default function HeroConversion() {
           <p className="eyebrow mb-7">
             <span className="text-[var(--text-muted)]">AI systems and software studio</span>
           </p>
-          <h1 className="display text-[38px] sm:text-[54px] lg:text-[76px]">
+          <h1 className="display text-[30px] sm:text-[42px] lg:text-[54px]">
             AI agents, CRMs and automation{" "}
             <span className="serif-accent text-[var(--accent)]">built for</span> the teams that run on them.
           </h1>
-          <p className="lede mt-7 max-w-[560px]">
+          <p className="lede mt-5 max-w-[560px]">
             Cortelo designs, builds and hosts the software your business depends on, then hands you every line
             of it.
           </p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-            <button onClick={() => openDrawer("15-Min Discovery Call")} className="btn btn-primary !min-h-[54px] !px-7">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+            <button onClick={() => openDrawer("15-Min Discovery Call")} className="btn btn-primary !min-h-[44px] !px-6 text-[13.5px]">
               Book a discovery call <ArrowRight className="h-4 w-4" />
             </button>
-            <Link href="/#results" className="btn btn-ghost !min-h-[54px] !px-7">
+            <Link href="/#results" className="btn btn-ghost !min-h-[44px] !px-6 text-[13.5px]">
               See the work
             </Link>
           </div>
@@ -50,14 +50,14 @@ export default function HeroConversion() {
       </div>
 
       {/* Facts and founders sit on the bottom line of the first screen */}
-      <div className="wrap pb-10">
-        <div className="enter-fade grid grid-cols-1 gap-6 border-t border-[var(--line)] pt-7 md:grid-cols-[1fr_auto] md:items-end">
-          <dl className="grid grid-cols-3 gap-4 sm:gap-10 max-w-[720px]">
+      <div className="wrap pb-8">
+        <div className="enter-fade grid grid-cols-1 gap-6 border-t border-[var(--line)] pt-6 md:grid-cols-[1fr_auto] md:items-end">
+          <dl className="grid grid-cols-3 gap-4 sm:gap-8 max-w-[680px]">
             {FACTS.map((f) => (
               <div key={f.label}>
                 <dt className="sr-only">{f.label}</dt>
-                <dd className="text-[22px] sm:text-[28px] font-medium tracking-[-0.04em] text-[var(--text)]">{f.value}</dd>
-                <dd className="mt-1 text-[12px] sm:text-[13px] leading-snug text-[var(--text-faint)]">{f.label}</dd>
+                <dd className="text-[18px] sm:text-[22px] font-medium tracking-[-0.04em] text-[var(--text)]">{f.value}</dd>
+                <dd className="mt-0.5 text-[11px] sm:text-[12px] leading-snug text-[var(--text-faint)]">{f.label}</dd>
               </div>
             ))}
           </dl>

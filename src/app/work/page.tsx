@@ -14,13 +14,13 @@ export default function WorkPage() {
 
   return (
     <div className="relative z-10">
-      <section className="pt-40 pb-16">
+      <section className="pt-28 pb-10">
         <div className="wrap" data-enter>
-          <p className="eyebrow mb-6">Work</p>
-          <h1 className="display max-w-[960px] text-[36px] sm:text-[52px] lg:text-[68px]">
+          <p className="eyebrow mb-5">Work</p>
+          <h1 className="display max-w-[960px] text-[28px] sm:text-[38px] lg:text-[48px]">
             Systems we built, <span className="serif-accent text-[var(--accent)]">running</span> in production.
           </h1>
-          <p className="lede mt-7 max-w-[600px]">
+          <p className="lede mt-4 max-w-[600px]">
             CRMs, AI lead scoring, self-hosted automation, an IoT safety system, a restaurant platform and medical AI. Open any
             project to see how it was built.
           </p>

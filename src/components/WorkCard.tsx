@@ -27,27 +27,27 @@ export default function WorkCard({ p, wide = false }: { p: ProjectItem; wide?: b
         </span>
       </div>
 
-      <div className={`flex flex-1 flex-col gap-8 p-7 ${wide ? "md:p-10" : ""}`}>
+      <div className={`flex flex-1 flex-col gap-6 p-5 sm:p-6 ${wide ? "md:p-8" : ""}`}>
         <div>
           <h3
             className={`font-medium tracking-[-0.025em] text-[var(--text)] transition-colors group-hover:text-[var(--accent)] ${
-              wide ? "text-[26px] md:text-[32px] leading-[1.1]" : "text-[21px] leading-snug"
+              wide ? "text-[20px] md:text-[24px] leading-[1.15]" : "text-[17px] leading-snug"
             }`}
           >
             {p.title}
           </h3>
-          <p className={`mt-3 text-[15px] leading-relaxed text-[var(--text-muted)] ${wide ? "line-clamp-4" : "line-clamp-2"}`}>
+          <p className={`mt-2.5 text-[13px] leading-relaxed text-[var(--text-muted)] ${wide ? "line-clamp-4" : "line-clamp-2"}`}>
             {p.description}
           </p>
         </div>
-        <div className="mt-auto grid grid-cols-2 gap-4 border-t border-[var(--line)] pt-6">
+        <div className="mt-auto grid grid-cols-2 gap-4 border-t border-[var(--line)] pt-5">
           <div>
-            <p className="text-[26px] font-medium tracking-[-0.03em] text-[var(--text)]">{p.metrics.primaryValue}</p>
-            <p className="mt-1 text-[12px] text-[var(--text-faint)]">{p.metrics.primaryLabel}</p>
+            <p className="text-[20px] font-medium tracking-[-0.03em] text-[var(--text)]">{p.metrics.primaryValue}</p>
+            <p className="mt-0.5 text-[11px] text-[var(--text-faint)]">{p.metrics.primaryLabel}</p>
           </div>
           <div>
-            <p className="text-[26px] font-medium tracking-[-0.03em] text-[var(--accent)]">{p.metrics.secondaryValue}</p>
-            <p className="mt-1 text-[12px] text-[var(--text-faint)]">{p.metrics.secondaryLabel}</p>
+            <p className="text-[20px] font-medium tracking-[-0.03em] text-[var(--accent)]">{p.metrics.secondaryValue}</p>
+            <p className="mt-0.5 text-[11px] text-[var(--text-faint)]">{p.metrics.secondaryLabel}</p>
           </div>
         </div>
       </div>

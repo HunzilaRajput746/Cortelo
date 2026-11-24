@@ -43,15 +43,15 @@ export default function AboutPage() {
 
   return (
     <div className="relative z-10">
-      <section className="relative isolate overflow-hidden pt-40 pb-24">
+      <section className="relative isolate overflow-hidden pt-28 pb-14">
         <VideoGround slot="statement" className="absolute inset-0 -z-20" opacity={0.3} lazy={false} />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,9,10,0.5)_0%,var(--bg)_100%)]" />
         <div className="wrap" data-enter>
-          <p className="eyebrow mb-6">About</p>
-          <h1 className="display max-w-[980px] text-[36px] sm:text-[52px] lg:text-[68px]">
+          <p className="eyebrow mb-5">About</p>
+          <h1 className="display max-w-[980px] text-[28px] sm:text-[38px] lg:text-[48px]">
             A studio that builds AI <span className="serif-accent text-[var(--accent)]">you own.</span>
           </h1>
-          <p className="lede mt-7 max-w-[620px]">
+          <p className="lede mt-4 max-w-[620px]">
             Cortelo started with a simple idea: businesses don&apos;t need more AI demos, they need reliable software that works
             on Monday morning and belongs to them. We design it, build it, host it where you choose and hand you every line.
           </p>

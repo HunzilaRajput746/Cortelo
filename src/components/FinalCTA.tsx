@@ -10,26 +10,26 @@ export default function FinalCTA() {
   const { openDrawer } = useAgencyShell();
 
   return (
-    <section aria-labelledby="cta-h" className="py-16 md:py-24">
+    <section aria-labelledby="cta-h" className="py-14 md:py-20">
       <div className="wrap">
-        <div className="relative isolate overflow-hidden rounded-[var(--radius-l)] border border-[var(--line)] px-6 py-20 md:px-16 md:py-28">
+        <div className="relative isolate overflow-hidden rounded-[var(--radius-l)] border border-[var(--line)] px-6 py-14 md:px-12 md:py-20">
           {/* client slot: /assets/videos/cortelo/closing.mp4 */}
           <VideoGround slot="closing" className="absolute inset-0 -z-20" opacity={0.55} />
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(7,9,10,0.35)_0%,rgba(7,9,10,0.9)_75%)]" />
 
-          <div className="mx-auto max-w-[860px] text-center">
-            <p className="eyebrow mb-7 justify-center">Next step</p>
-            <h2 id="cta-h" className="display text-[32px] sm:text-[48px] lg:text-[64px]">
+          <div className="mx-auto max-w-[800px] text-center">
+            <p className="eyebrow mb-5 justify-center">Next step</p>
+            <h2 id="cta-h" className="display text-[26px] sm:text-[38px] lg:text-[48px]">
               Tell us what you want <span className="serif-accent text-[var(--accent)]">running</span> by next quarter.
             </h2>
-            <p className="lede mx-auto mt-7 max-w-[540px]">
+            <p className="lede mx-auto mt-5 max-w-[500px]">
               A 15-minute call with a founder. You leave with a scope, a stack and a price, whether you hire us or not.
             </p>
-            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-              <button onClick={() => openDrawer("15-Min Discovery Call")} className="btn btn-primary !min-h-[56px] w-full !px-8 sm:w-auto">
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+              <button onClick={() => openDrawer("15-Min Discovery Call")} className="btn btn-primary !min-h-[44px] w-full !px-6 text-[13.5px] sm:w-auto">
                 Book a 15-minute call <ArrowRight className="h-4 w-4" />
               </button>
-              <a href={`mailto:${FOUNDER_DATA.agencyEmail}`} className="btn btn-ghost !min-h-[56px] w-full !px-8 sm:w-auto">
+              <a href={`mailto:${FOUNDER_DATA.agencyEmail}`} className="btn btn-ghost !min-h-[44px] w-full !px-6 text-[13.5px] sm:w-auto">
                 {FOUNDER_DATA.agencyEmail}
               </a>
             </div>

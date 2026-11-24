@@ -13,13 +13,13 @@ export const metadata = {
 export default function ServicesPage() {
   return (
     <div className="relative z-10">
-      <section className="pt-40 pb-16">
+      <section className="pt-28 pb-10">
         <div className="wrap" data-enter>
-          <p className="eyebrow mb-6">Services</p>
-          <h1 className="display max-w-[920px] text-[36px] sm:text-[52px] lg:text-[68px]">
+          <p className="eyebrow mb-5">Services</p>
+          <h1 className="display max-w-[920px] text-[28px] sm:text-[38px] lg:text-[48px]">
             {AGENCY_SERVICES.length} services, <span className="serif-accent text-[var(--accent)]">one studio</span> that ships them.
           </h1>
-          <p className="lede mt-7 max-w-[580px]">
+          <p className="lede mt-4 max-w-[580px]">
             From AI voice agents and face recognition to custom models, private LLMs and the apps around them. Select any
             service to start a conversation about it.
           </p>

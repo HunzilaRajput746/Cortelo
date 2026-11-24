@@ -43,22 +43,22 @@ export function FounderCard({ member }: { member: TeamMember }) {
           </span>
         </div>
 
-        <div className="flex flex-col p-7 sm:p-8">
-          <h3 className="text-[30px] sm:text-[34px] font-medium leading-[1.05] tracking-[-0.035em] text-[var(--text)]">{member.name}</h3>
-          <p className="mt-2 text-[15px] text-[var(--accent)]">{member.role}</p>
-          <p className="mt-5 text-[15px] leading-relaxed text-[var(--text-muted)]">{member.bio}</p>
+        <div className="flex flex-col p-6 sm:p-7">
+          <h3 className="text-[24px] sm:text-[28px] font-medium leading-[1.08] tracking-[-0.035em] text-[var(--text)]">{member.name}</h3>
+          <p className="mt-1.5 text-[13.5px] text-[var(--accent)]">{member.role}</p>
+          <p className="mt-4 text-[13px] leading-relaxed text-[var(--text-muted)]">{member.bio}</p>
 
-          <ul className="mt-6 flex flex-wrap gap-1.5">
+          <ul className="mt-5 flex flex-wrap gap-1.5">
             {member.specialties.slice(0, 5).map((s) => (
-              <li key={s} className="rounded-full border border-[var(--line)] px-2.5 py-1 font-mono text-[11px] text-[var(--text-faint)]">
+              <li key={s} className="rounded-full border border-[var(--line)] px-2.5 py-0.5 font-mono text-[10px] text-[var(--text-faint)]">
                 {s}
               </li>
             ))}
           </ul>
 
-          <div className="mt-auto flex items-center gap-2 pt-8">
-            <Link href={`/team/${member.id}`} className="btn btn-primary !min-h-[44px] !px-4">
-              Read the profile <ArrowUpRight className="h-4 w-4" />
+          <div className="mt-auto flex items-center gap-2 pt-6">
+            <Link href={`/team/${member.id}`} className="btn btn-primary !min-h-[38px] !px-3.5 text-[12.5px]">
+              Read the profile <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
             {member.portfolioUrl && (
               <a
@@ -66,9 +66,9 @@ export function FounderCard({ member }: { member: TeamMember }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${member.name} portfolio`}
-                className="btn btn-ghost !min-h-[44px] !w-11 !px-0"
+                className="btn btn-ghost !min-h-[38px] !w-9 !px-0"
               >
-                <Globe className="h-4 w-4" />
+                <Globe className="h-3.5 w-3.5" />
               </a>
             )}
             {linkedin && (
@@ -77,7 +77,7 @@ export function FounderCard({ member }: { member: TeamMember }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${member.name} on LinkedIn`}
-                className="btn btn-ghost !min-h-[44px] !w-11 !px-0"
+                className="btn btn-ghost !min-h-[38px] !w-9 !px-0"
               >
                 <LinkedInIcon />
               </a>
@@ -117,12 +117,12 @@ export function MemberCard({
           <ArrowUpRight className="h-4 w-4" />
         </span>
       </div>
-      <div className="flex items-start justify-between gap-4 pt-4">
+      <div className="flex items-start justify-between gap-3 pt-3">
         <div>
-          <h4 className="text-[17px] font-medium text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">{member.name}</h4>
-          <p className="mt-1 text-[13px] text-[var(--text-faint)]">{member.role}</p>
+          <h4 className="text-[15px] font-medium text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">{member.name}</h4>
+          <p className="mt-0.5 text-[12px] text-[var(--text-faint)]">{member.role}</p>
         </div>
-        <span className="pt-1 font-mono text-[12px] text-[var(--text-faint)]">{String(index).padStart(2, "0")}</span>
+        <span className="pt-0.5 font-mono text-[11px] text-[var(--text-faint)]">{String(index).padStart(2, "0")}</span>
       </div>
     </>
   );
@@ -145,15 +145,15 @@ export default function TeamShowcase() {
   const team = AGENCY_TEAM_ROSTER.filter((m) => !FOUNDER_IDS.includes(m.id)).slice(0, 4);
 
   return (
-    <section id="team" aria-labelledby="team-h" className="relative isolate overflow-hidden py-24 md:py-32">
+    <section id="team" aria-labelledby="team-h" className="relative isolate overflow-hidden py-16 md:py-22">
       {/* client slot: /assets/videos/cortelo/founders.mp4 */}
       <VideoGround slot="founders" className="absolute inset-x-0 top-0 h-[70%] -z-20" opacity={0.25} />
       <div className="absolute inset-x-0 top-0 h-[70%] -z-10 bg-[linear-gradient(180deg,var(--bg)_0%,rgba(7,9,10,0.6)_40%,var(--bg)_100%)]" />
 
       <div className="wrap">
-        <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="eyebrow mb-6">Founders</p>
+            <p className="eyebrow mb-5">Founders</p>
             <h2 id="team-h" className="h2 max-w-[720px]">
               Two founders on every project. <span className="soft">From the first call to the handover.</span>
             </h2>
@@ -166,13 +166,13 @@ export default function TeamShowcase() {
           ))}
         </div>
 
-        <div className="mt-20 flex items-end justify-between gap-6 border-t border-[var(--line)] pt-10">
-          <h3 className="text-[24px] font-medium tracking-[-0.025em]">The team behind the builds</h3>
-          <Link href="/team" className="link-draw shrink-0 text-[15px]">
+        <div className="mt-14 flex items-end justify-between gap-6 border-t border-[var(--line)] pt-8">
+          <h3 className="text-[19px] font-medium tracking-[-0.025em]">The team behind the builds</h3>
+          <Link href="/team" className="link-draw shrink-0 text-[13px]">
             Meet all {AGENCY_TEAM_ROSTER.length} <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>
-        <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-4">
+        <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-4">
           {team.map((m, i) => (
             <MemberCard key={m.id} member={m} index={i + 3} href={`/team/${m.id}`} />
           ))}
