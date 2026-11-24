@@ -25,4 +25,4 @@
 - Documented full 11-member specialized engineering roster:
   - Founder: Hunzila Nisar (BSc AI, A+ Grade)
   - Co-Founder: Mahreen Hashir
-  - Senior Specialists: Umar Attique, Hamdan, Bilal Tariq, Ayesha Malik, Daniyal Khan, Zainab Raza, Farhan Siddiqui, Sarah Jenkins, Alex Rivera.
+  - Senior Specialists: Umar Attique, Hamdan, Bilal Tariq, Ayesha Malik, Daniyal Khan, Zainab Raza, Farah Siddiqui, Sarah Jenkins, Alex Rivera.

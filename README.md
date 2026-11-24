@@ -18,7 +18,7 @@
 - **Ayesha Malik** — Lead Product & UX Designer
 - **Daniyal Khan** — Machine Learning & Computer Vision Specialist
 - **Zainab Raza** — Workflow Automation & n8n Specialist
-- **Farhan Siddiqui** — Performance Growth & Funnel Strategist
+- **Farah Siddiqui** — Performance Growth & Funnel Strategist
 - **Sarah Jenkins** — Enterprise QA & Verification Lead
 - **Alex Rivera** — Backend & Distributed Systems Engineer
 
