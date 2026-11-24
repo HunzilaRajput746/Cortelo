@@ -74,6 +74,7 @@ export const FOUNDER_DATA = {
   fiverrUrl: "https://fiverr.com/huzaifae3742",
   githubUrl: "https://github.com/HunzilaRajput746",
   linkedinUrl: "https://linkedin.com/in/hunzila-nisar-ai",
+  companyLinkedinUrl: "https://www.linkedin.com/company/cortelo",
   phone: "Available upon inquiry",
   email: "hunzila@cortelo.tech",
   agencyEmail: "contact@cortelo.tech",

@@ -31,10 +31,10 @@ const COLUMNS = [
 ];
 
 const SOCIAL = [
-  { label: "Portfolio", href: FOUNDER_DATA.portfolioUrl },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/cortelo" },
   { label: "GitHub", href: FOUNDER_DATA.githubUrl },
-  { label: "LinkedIn", href: FOUNDER_DATA.linkedinUrl },
-  { label: "Fiverr", href: FOUNDER_DATA.fiverrUrl },
+  { label: "Founder", href: FOUNDER_DATA.linkedinUrl },
+  { label: "Portfolio", href: FOUNDER_DATA.portfolioUrl },
 ];
 
 export default function Footer() {

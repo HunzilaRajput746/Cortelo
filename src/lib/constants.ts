@@ -12,7 +12,8 @@ export const AGENCY_CONFIG = {
     fiverr: "https://fiverr.com/huzaifae3742",
     portfolio: "https://devhunzila.site",
     github: "https://github.com/HunzilaRajput746",
-    linkedin: "https://linkedin.com/in/hunzila-nisar-ai",
+    linkedin: "https://www.linkedin.com/company/cortelo",
+    founderLinkedin: "https://linkedin.com/in/hunzila-nisar-ai",
   },
   guarantees: [
     "100% Intellectual Property Handover",
