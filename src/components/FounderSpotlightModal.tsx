@@ -61,7 +61,7 @@ export default function FounderSpotlightModal({
               className="interactive-media group w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border border-[#d7a47a]/50 relative shrink-0 block"
             >
               <Image
-                src="/assets/team/hunzila_nisar.jpg"
+                src="/assets/team/hunzila_nisar_v2.jpg"
                 alt="Hunzila Nisar - Founder of Cortelo"
                 fill
                 className="object-cover"

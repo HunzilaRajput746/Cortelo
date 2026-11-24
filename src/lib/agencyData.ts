@@ -99,7 +99,7 @@ export const AGENCY_TEAM_ROSTER: TeamMember[] = [
     name: "Hunzila Nisar",
     role: "Founder & Lead AI Architect",
     title: "Founder",
-    avatar: "/assets/team/hunzila_nisar.jpg",
+    avatar: "/assets/team/hunzila_nisar_v2.jpg",
     badge: "FOUNDER",
     bio: "AI Engineer with a BSc in Artificial Intelligence (A+ Grade). Proven industry experience building enterprise CRMs, orchestrating private VPS infrastructure, and engineering reliable autonomous multi-agent systems.",
     specialties: ["Multi-Agent Swarms", "Custom CRMs", "LangGraph", "PyTorch", "Next.js"],
@@ -225,7 +225,7 @@ export const AGENCY_TEAMS: TeamDivision[] = [
     name: "Autonomous AI & Intelligent Systems Division",
     leader: "Hunzila Nisar",
     role: "Lead AI Systems Architect",
-    avatar: "/assets/team/hunzila_nisar.jpg",
+    avatar: "/assets/team/hunzila_nisar_v2.jpg",
     capabilities: [
       "Multi-Agent Swarm Engineering",
       "Deterministic Guardrails & Zod Schemas",
