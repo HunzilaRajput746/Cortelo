@@ -2,6 +2,7 @@ import React from "react";
 
 export const metadata = {
   title: "Privacy Policy — Cortelo",
+  alternates: { canonical: "/legal/privacy" },
 };
 
 export default function PrivacyPage() {

@@ -7,6 +7,7 @@ import BookButton from "@/components/BookButton";
 export const metadata: Metadata = {
   title: "Work — Cortelo",
   description: "Case studies: CRMs, AI lead scoring, self-hosted automation, IoT safety systems, restaurant SaaS and medical AI built by Cortelo.",
+  alternates: { canonical: "/work" },
 };
 
 export default function WorkPage() {

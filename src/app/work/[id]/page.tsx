@@ -16,7 +16,11 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const p = AGENCY_PROJECTS.find((x) => x.id === id);
   if (!p) return {};
-  return { title: `${p.title} — Cortelo case study`, description: p.description.slice(0, 160) };
+  return {
+    title: `${p.title} — Cortelo case study`,
+    description: p.description.slice(0, 160),
+    alternates: { canonical: `/work/${p.id}` },
+  };
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ id: string }> }) {

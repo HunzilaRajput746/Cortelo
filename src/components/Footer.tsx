@@ -89,7 +89,7 @@ export default function Footer() {
         </p>
 
         <div className="mt-8 flex flex-col gap-4 border-t border-[var(--line)] pt-8 text-[13px] text-[var(--text-faint)] sm:flex-row sm:items-center sm:justify-between">
-          <span>&copy; {new Date().getFullYear()} Cortelo. Founded by Hunzila Nisar and Mahreen Hashir.</span>
+          <span>&copy; {new Date().getFullYear()} Cortelo. Founded by Hunzila Nisar (Hunzila Rajput) and Mahreen Hashir.</span>
           <span className="flex gap-6">
             <Link href="/legal/privacy" className="link-draw !text-[var(--text-faint)] hover:!text-[var(--text)]">
               Privacy

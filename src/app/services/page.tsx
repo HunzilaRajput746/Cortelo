@@ -8,6 +8,7 @@ export const metadata = {
   title: "Services — Cortelo",
   description:
     "AI voice agents, RAG assistants, private LLMs, MCP integrations, custom ML and deep learning models, face recognition, document AI, CRMs, web and mobile apps, automation and data dashboards.",
+  alternates: { canonical: "/services" },
 };
 
 export default function ServicesPage() {

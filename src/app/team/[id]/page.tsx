@@ -37,7 +37,18 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const m = AGENCY_TEAM_ROSTER.find((x) => x.id === id);
   if (!m) return {};
-  return { title: `${m.name}, ${m.role} — Cortelo`, description: m.bio };
+  if (m.id === "hunzila-nisar") {
+    return {
+      title: `${m.name} (${FOUNDER_DATA.alias}), ${m.role} — Cortelo`,
+      description: `${m.name} (${FOUNDER_DATA.alias} / devhunzila) — ${m.role} at Cortelo. ${m.bio}`,
+      alternates: { canonical: `/team/${m.id}` },
+    };
+  }
+  return {
+    title: `${m.name}, ${m.role} — Cortelo`,
+    description: m.bio,
+    alternates: { canonical: `/team/${m.id}` },
+  };
 }
 
 export default async function MemberPage({ params }: { params: Promise<{ id: string }> }) {
@@ -73,6 +84,11 @@ export default async function MemberPage({ params }: { params: Promise<{ id: str
               <p className="eyebrow">{isFounder ? m.title : "Cortelo team"}</p>
               <h1 className="display mt-6 text-[34px] sm:text-[48px] lg:text-[60px]">{m.name}</h1>
               <p className="mt-3 text-[19px] text-[var(--accent)]">{m.role}</p>
+              {m.id === "hunzila-nisar" && (
+                <p className="mt-1.5 font-mono text-[12px] uppercase tracking-[0.12em] text-[var(--text-faint)]">
+                  Also known as {FOUNDER_DATA.alias} &middot; devhunzila
+                </p>
+              )}
               <p className="mt-8 max-w-[600px] text-[17px] leading-relaxed text-[var(--text-muted)]">{story?.intro ?? m.bio}</p>
               {story && <p className="mt-4 max-w-[600px] text-[17px] leading-relaxed text-[var(--text-muted)]">{m.bio}</p>}
 

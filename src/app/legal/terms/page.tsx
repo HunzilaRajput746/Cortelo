@@ -2,6 +2,7 @@ import React from "react";
 
 export const metadata = {
   title: "Terms of Service — Cortelo",
+  alternates: { canonical: "/legal/terms" },
 };
 
 export default function TermsPage() {

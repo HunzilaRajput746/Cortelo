@@ -1,13 +1,18 @@
-"use client";
-
-import { ArrowRight } from "lucide-react";
-import { AGENCY_TEAM_ROSTER, FOUNDER_DATA } from "@/lib/agencyData";
-import { FounderCard, MemberCard, FOUNDER_IDS } from "@/components/TeamShowcase";
-import { useAgencyShell } from "@/components/ClientShell";
+import React from "react";
+import type { Metadata } from "next";
+import { AGENCY_TEAM_ROSTER, FOUNDER_DATA, FOUNDER_IDS } from "@/lib/agencyData";
+import { FounderCard, MemberCard } from "@/components/TeamShowcase";
+import BookButton from "@/components/BookButton";
 import VideoGround from "@/components/VideoGround";
 
+export const metadata: Metadata = {
+  title: "Team — Cortelo (Hunzila Nisar / Hunzila Rajput & Mahreen Hashir)",
+  description:
+    "Meet the founders and engineering team behind Cortelo, led by Hunzila Nisar (Hunzila Rajput, devhunzila) and Mahreen Hashir.",
+  alternates: { canonical: "/team" },
+};
+
 export default function TeamPage() {
-  const { openDrawer } = useAgencyShell();
 
   const founders = AGENCY_TEAM_ROSTER.filter((m) => FOUNDER_IDS.includes(m.id));
   const team = AGENCY_TEAM_ROSTER.filter((m) => !FOUNDER_IDS.includes(m.id));
@@ -66,9 +71,7 @@ export default function TeamPage() {
               <p className="mt-2 text-[15px] text-[var(--text-muted)]">Every first call is with Hunzila or Mahreen, never a sales rep.</p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <button onClick={() => openDrawer("Call with the founders")} className="btn btn-primary">
-                Book a call <ArrowRight className="h-4 w-4" />
-              </button>
+              <BookButton scope="Call with the founders" label="Book a call" />
               <a href={`mailto:${FOUNDER_DATA.agencyEmail}`} className="btn btn-ghost">
                 Email the studio
               </a>

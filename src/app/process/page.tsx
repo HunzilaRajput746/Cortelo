@@ -7,6 +7,7 @@ import ProcessSteps from "@/components/ProcessSteps";
 export const metadata: Metadata = {
   title: "Process — Cortelo",
   description: "How a Cortelo project runs: discovery, build, integration and handover, with fixed scope and weekly demos.",
+  alternates: { canonical: "/process" },
 };
 
 const stages = [

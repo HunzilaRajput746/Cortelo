@@ -9,34 +9,42 @@ const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://cortelo.tech"),
+  alternates: {
+    canonical: "./",
+  },
   title: "Cortelo — AI systems and software engineering studio",
   description:
-    "An independent artificial intelligence and software engineering studio. Directed by Hunzila Nisar & Mahreen Hashir. We engineer bespoke autonomous agents, neural architectures, and resilient full-stack platforms.",
+    "Cortelo (Cortelo Systems) is an AI systems, custom CRM, and full-stack software engineering studio led by Hunzila Nisar (Hunzila Rajput) & Mahreen Hashir.",
   keywords: [
+    "Cortelo",
+    "Cortelo Systems",
+    "Cortelo AI",
+    "Hunzila Nisar",
+    "Hunzila Rajput",
+    "devhunzila",
+    "Mahreen Hashir",
     "AI automation agency",
     "custom AI development",
+    "custom CRM development",
     "autonomous agents",
     "machine learning studio",
-    "Cortelo",
-    "Hunzila Nisar",
-    "Mahreen Hashir",
     "full-stack AI systems",
   ],
   authors: [
-    { name: "Hunzila Nisar", url: "https://cortelo.tech" },
-    { name: "Mahreen Hashir", url: "https://cortelo.tech" },
+    { name: "Hunzila Nisar (Hunzila Rajput)", url: "https://devhunzila.site" },
+    { name: "Mahreen Hashir", url: "https://cortelo.tech/team/mahreen-hashir" },
   ],
   icons: {
     icon: "/favicon.svg",
   },
   openGraph: {
     title: "Cortelo — Systems of Intelligence",
-    description: "Bespoke AI Agents &bull; Neural Architectures &bull; Resilient Software",
+    description: "AI systems, custom CRMs & full-stack software studio by Hunzila Nisar (Hunzila Rajput) & Mahreen Hashir.",
     url: "https://cortelo.tech",
     siteName: "Cortelo Studio",
     images: [
       {
-        url: "/assets/brand/cortelo-og-image.svg",
+        url: "/assets/brand/cortelo-og-image.png",
         width: 1200,
         height: 630,
         alt: "Cortelo Studio Systems of Intelligence",
@@ -44,6 +52,12 @@ export const metadata: Metadata = {
     ],
     locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cortelo — AI systems and software engineering studio",
+    description: "AI agents, custom CRMs & full-stack software led by Hunzila Nisar (Hunzila Rajput) & Mahreen Hashir.",
+    images: ["/assets/brand/cortelo-og-image.png"],
   },
 };
 

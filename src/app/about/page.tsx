@@ -10,7 +10,8 @@ import VideoGround from "@/components/VideoGround";
 export const metadata: Metadata = {
   title: "About — Cortelo",
   description:
-    "Cortelo is an AI systems and software studio founded by Hunzila Nisar and Mahreen Hashir. We build software clients own outright.",
+    "Cortelo is an AI systems and software studio founded by Hunzila Nisar (Hunzila Rajput) and Mahreen Hashir. We build software clients own outright.",
+  alternates: { canonical: "/about" },
 };
 
 const VALUES = [

@@ -1,6 +1,12 @@
-"use client";
-
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cortelo — AI systems, custom CRMs & software engineering studio",
+  description:
+    "Cortelo designs and builds bespoke AI agents, enterprise CRMs, workflow automation, and full-stack software with 100% IP ownership. Led by Hunzila Nisar (Hunzila Rajput) & Mahreen Hashir.",
+  alternates: { canonical: "/" },
+};
 import HeroConversion from "@/components/HeroConversion";
 import StatementCard from "@/components/StatementCard";
 import ServicesGrid from "@/components/ServicesGrid";
